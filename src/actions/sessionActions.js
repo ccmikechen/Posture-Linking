@@ -1,11 +1,10 @@
 import { AsyncStorage } from 'react-native';
 import server from '../api/server';
-import {
-  UPDATE_USERNAME,
-  UPDATE_PASSWORD,
-  UPDATE_AUTHENTICATED
-} from '../constants/actionTypes';
 import { startMainApp } from '../apps';
+
+export const UPDATE_USERNAME = 'UPDATE_USERNAME';
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+export const UPDATE_AUTHENTICATED = 'UPDATE_AUTHENTICATED';
 
 export const createAccount = (dispatch) => {
   let data = 'testdata';
