@@ -37,6 +37,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'lightblue',
     borderRadius: 20,
+    marginRight: 10,
     flex: 1
   },
   button: {
