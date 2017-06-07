@@ -4,8 +4,10 @@ import store from '../store';
 
 import HomeScreen from './HomeScreen';
 import ScanBleScreen from './ScanBleScreen';
+import CombinationScreen from './CombinationScreen';
 
 export function registerScreens() {
   Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider);
   Navigation.registerComponent('ScanBleScreen', () => ScanBleScreen, store, Provider);
+  Navigation.registerComponent('CombinationScreen', () => CombinationScreen, store, Provider);
 }
