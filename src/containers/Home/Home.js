@@ -8,6 +8,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleScan = this.handleScan.bind(this);
+    this.handleCombination = this.handleCombination.bind(this);
   }
 
   handleScan() {
@@ -17,12 +18,23 @@ class Home extends React.Component {
     });
   }
 
+  handleCombination() {
+    this.props.navigator.push({
+      screen: 'CombinationScreen',
+      title: 'Combination'
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Button
           title='scan'
           onPress={this.handleScan}
+        />
+        <Button
+          title='Combination'
+          onPress={this.handleCombination}
         />
       </View>
     );
