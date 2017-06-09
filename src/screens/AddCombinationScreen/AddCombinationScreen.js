@@ -1,11 +1,11 @@
 import React from 'react';
-import Combination from '../../containers/Combination';
+import AddCombination from '../../containers/AddCombination';
 
-class CombinationScreen extends React.Component {
+class AddCombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
       {
-        title:'新增',
+        title:'確認',
         id: 'add'
       }
     ]
@@ -21,12 +21,12 @@ class CombinationScreen extends React.Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'add') {
-        this.props.navigator.showModal({
-          screen:'AddCombinationScreen',
+        this.props.navigator.dismissModal({
+          screen:'CombinationScreen',
           title:'首頁',
           passProps: {},
           animated:true,
-          animationType: 'slide-up'
+          animationType: 'slide-down'
         });
       }
     }
@@ -34,9 +34,9 @@ class CombinationScreen extends React.Component {
 
   render() {
     return (
-      <Combination navigator={this.props.navigator} />
+      <AddCombination navigator={this.props.navigator} />
     );
   }
 }
 
-export default CombinationScreen;
+export default AddCombinationScreen;

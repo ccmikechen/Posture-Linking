@@ -14,14 +14,18 @@ class Home extends React.Component {
   handleScan() {
     this.props.navigator.push({
       screen: 'ScanBleScreen',
-      title: 'Scan'
+      title: 'Scan',
+      passProps: {},
+      animated:true,
     });
   }
 
   handleCombination() {
     this.props.navigator.push({
       screen: 'CombinationScreen',
-      title: 'Combination'
+      title: 'Combination',
+      passProps: {},
+      animated:true,
     });
   }
 
