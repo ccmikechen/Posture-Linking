@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-//import Swiper from 'react-native-swiper';
-//import ScrollableTabView from 'react-native-scrollable-tab-view';
+import { View, Text, Button, AppState, Alert } from 'react-native';
 import styles from './styles';
+import PushNotification from 'react-native-push-notification';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleScan = this.handleScan.bind(this);
     this.handleCombination = this.handleCombination.bind(this);
+    this.handleAppStateChange = this.handleAppStateChange.bind(this);
   }
 
   handleScan() {
@@ -29,6 +29,56 @@ class Home extends React.Component {
     });
   }
 
+  componentWillMount() {
+    PushNotification.configure({
+      onRegister: function(token) {
+          console.log( 'TOKEN:', token );
+      },
+      onNotification: function(notification) {
+          console.log( 'NOTIFICATION:', notification );
+          Alert.alert(notification.title, notification.message)
+      },
+      senderID: "YOUR GCM SENDER ID",
+      permissions: {
+          alert: true,
+          badge: true,
+          sound: true
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+  }
+
+  handleAppStateChange(appState) {
+    if(appState === 'background') {
+      PushNotification.localNotification({
+        foreground: true,
+        title: 'Posture Linking',
+        message: '背景傳送',
+        playSound: true
+      });
+    }
+  }
+
+  sendMessage() {
+      PushNotification.localNotification({
+        foreground: true,
+        title: 'Posture Linking',
+        message: '按鈕發送',
+        playSound: true
+      });
+
+  }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -40,6 +90,12 @@ class Home extends React.Component {
           title='Combination'
           onPress={this.handleCombination}
         />
+
+        <Button
+          title='send Notification'
+          onPress={this.sendMessage.bind(this)}
+        />
+
       </View>
     );
   }

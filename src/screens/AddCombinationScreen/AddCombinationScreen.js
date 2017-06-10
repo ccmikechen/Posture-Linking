@@ -13,7 +13,6 @@ class AddCombinationScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
