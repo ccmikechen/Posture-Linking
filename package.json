@@ -11,6 +11,7 @@
     "immutable": "^3.8.1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
+    "react-native-background-job": "^1.2.3",
     "react-native-ble-manager": "^5.0.3",
     "react-native-grid-view": "^0.4.1",
     "react-native-image-slider": "^1.1.5",

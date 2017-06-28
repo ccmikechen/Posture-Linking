@@ -3304,6 +3304,10 @@ react-devtools-core@^2.0.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-background-job@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-background-job/-/react-native-background-job-1.2.3.tgz#20fa7e9c88947519de95df4d7b7e368c0bc55941"
+
 react-native-ble-manager@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-native-ble-manager/-/react-native-ble-manager-5.0.3.tgz#5dae5ad2b9bc47881bf1191198d17330ee473c31"

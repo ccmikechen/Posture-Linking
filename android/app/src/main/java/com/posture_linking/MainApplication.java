@@ -3,6 +3,7 @@ package com.posture_linking;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -16,6 +17,7 @@ import java.util.List;
 import com.reactnativenavigation.NavigationApplication;
 
 import it.innove.BleManagerPackage;
+import com.pilloxa.backgroundjob.BackgroundJobPackage;
 
 public class MainApplication extends NavigationApplication {
   @Override
@@ -28,7 +30,8 @@ public class MainApplication extends NavigationApplication {
       // Add additional packages you require here
       // No need to add RnnPackage and MainReactPackage
       return Arrays.<ReactPackage>asList(
-          new BleManagerPackage()
+          new BleManagerPackage(),
+          new BackgroundJobPackage()
       );
   }
 

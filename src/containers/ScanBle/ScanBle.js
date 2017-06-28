@@ -22,6 +22,10 @@ import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
+import {
+  connectDevice
+} from '../../ble/bleDevices';
+
 class ScanBle extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +36,6 @@ class ScanBle extends React.Component {
     this.handleOnConnectPress = this.handleOnConnectPress.bind(this);
 
     this.bleSubscriptions = [];
-    this.connectedDevices = [];
 
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
@@ -40,8 +43,7 @@ class ScanBle extends React.Component {
   componentDidMount() {
     this.bleSubscriptions = [
       bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral),
-      bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan),
-      bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleNotification)
+      bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan)
     ];
     this.startScan();
   }
@@ -63,11 +65,6 @@ class ScanBle extends React.Component {
       subscription.remove();
     });
     this.bleSubscriptions = [];
-
-    this.connectedDevices.forEach(device => {
-      BleManager.disconnect(device);
-    });
-    this.connectedDevices = [];
   }
 
   handleDiscoverPeripheral(peripheral) {
@@ -76,20 +73,6 @@ class ScanBle extends React.Component {
 
   handleStopScan() {
     this.props.stopBleScan();
-  }
-
-  handleNotification({ peripheral, characteristic, value }) {
-    const zeros = (n) => {
-      if (n <= 0) { return ''; }
-      return '0' + zeros(n - 1);
-    }
-
-    const printArray = (arr) => (
-      arr.map(item => zeros(3 - item.toString().length) + item).join(',')
-    );
-
-    if (value.length == 19)
-      console.log(printArray(value));
   }
 
   startScan() {
@@ -112,32 +95,7 @@ class ScanBle extends React.Component {
 
   handleOnConnectPress(device) {
     return () => {
-      BleManager.connect(device.id)
-      .then(() => {
-        console.log('Connected', device.id);
-        this.connectedDevices.push(device.id);
-
-        BleManager.retrieveServices(device.id)
-        .then((info) => {
-          const serviceId = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-          const characteristic = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
-
-          console.log(info);
-
-          setTimeout(() => {
-            BleManager.startNotification(device.id, serviceId, characteristic)
-            .then(() => {
-              console.log('Start Notification');
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          }, 1000);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      connectDevice(device);
     };
   }
 
