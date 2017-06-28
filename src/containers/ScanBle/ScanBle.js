@@ -33,6 +33,8 @@ class ScanBle extends React.Component {
 
     this.bleSubscriptions = [];
     this.connectedDevices = [];
+
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
@@ -45,6 +47,18 @@ class ScanBle extends React.Component {
   }
 
   componentWillUnmount() {
+    this.clear();
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'ScanBleScreen:back') {
+        clear();
+      }
+    }
+  }
+
+  clear() {
     this.bleSubscriptions.forEach(subscription => {
       subscription.remove();
     });
@@ -64,8 +78,18 @@ class ScanBle extends React.Component {
     this.props.stopBleScan();
   }
 
-  handleNotification(peripheral, characteristic, value) {
-    console.log(peripheral, characteristic, value);
+  handleNotification({ peripheral, characteristic, value }) {
+    const zeros = (n) => {
+      if (n <= 0) { return ''; }
+      return '0' + zeros(n - 1);
+    }
+
+    const printArray = (arr) => (
+      arr.map(item => zeros(3 - item.toString().length) + item).join(',')
+    );
+
+    if (value.length == 19)
+      console.log(printArray(value));
   }
 
   startScan() {
