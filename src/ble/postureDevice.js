@@ -87,14 +87,15 @@ class PostureDataEmitter extends EventEmitter {
   checkReceivedDataAndNotify() {
     if (this.bandData && this.insoleData) {
       this.notifyPostureData();
+      this.bandData = null;
+      this.insoleData = null;
     }
   }
 
   notifyPostureData() {
     this.emit('posture:notification', {
       band: this.bandData,
-      leftInsole: this.insoleData.left,
-      rightInsole: this.insoleData.right
+      insole: this.insoleData
     });
   }
 
