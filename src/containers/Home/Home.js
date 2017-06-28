@@ -1,29 +1,47 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-//import Swiper from 'react-native-swiper';
-//import ScrollableTabView from 'react-native-scrollable-tab-view';
+import { View, Text, Button, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.handleScan = this.handleScan.bind(this);
+    this.handleButtonPress = this.handleButtonPress.bind(this);
   }
 
-  handleScan() {
-    this.props.navigator.push({
-      screen: 'ScanBleScreen',
-      title: 'Scan'
-    });
+  handleButtonPress(type) {
+    return () => {
+      switch (type) {
+        case 'scan':
+          this.props.navigator.push({
+            screen: 'ScanBleScreen',
+            title: 'Scan'
+          });
+          break;
+        case 'posture':
+          this.props.navigator.push({
+            screen: 'PostureScreen',
+            title: 'Posture'
+          });
+          break;
+      }
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          title='scan'
-          onPress={this.handleScan}
-        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleButtonPress('scan')}
+        >
+          <Text style={styles.buttonText}>Scan</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleButtonPress('posture')}
+        >
+          <Text style={styles.buttonText}>Posture</Text>
+        </TouchableOpacity>
       </View>
     );
   }

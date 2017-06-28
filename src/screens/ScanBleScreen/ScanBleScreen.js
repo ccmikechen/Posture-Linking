@@ -5,6 +5,7 @@ class ScanBleScreen extends React.Component {
   static navigatorButtons = {
       leftButtons: [
         {
+          title: 'back',
           id: 'ScanBleScreen:back'
         }
       ]
