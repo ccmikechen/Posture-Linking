@@ -5,6 +5,8 @@ import styles from './styles';
 
 import { createPostureDataEmitter } from '../../ble/postureDevice';
 
+import PostureDetector from '../../modules/PostureDetector';
+
 class PostureMonitor extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +14,8 @@ class PostureMonitor extends React.Component {
 
   componentDidMount() {
     this.postureDataEmitter = createPostureDataEmitter();
+
+    PostureDetector.show('yo man', 1);
   }
 
   componentWillUnmount() {
