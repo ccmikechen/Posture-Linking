@@ -1,6 +1,7 @@
 package com.posture_linking.modules.posture;
 
 import android.widget.Toast;
+import android.util.Log;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -18,6 +19,13 @@ public class PostureDetectorModule extends ReactContextBaseJavaModule {
 
   public PostureDetectorModule(ReactApplicationContext reactContext) {
     super(reactContext);
+
+    try {
+      String info = java.util.Arrays.toString(reactContext.getAssets().list("model"));
+      for (int i = 0; i < 100; i++) Log.i("IMPORTANT", info);
+    } catch (java.io.IOException e) {
+
+    }
 
     this.postureClassifierFactory = new PostureClassifierFactory(reactContext.getAssets());
     this.postureClassifierFactory.initAndloadFormalPostureClassifier();

@@ -15,7 +15,7 @@ import java.util.PriorityQueue;
 
 public class PostureClassifier implements Classifier {
 
-  private static final String TAG = "TensorFlowImageClassifier";
+  private static final String TAG = "PostureClassifier";
 
   private static final int MAX_RESULTS = 3;
   private static final float THRESHOLD = 0.1f;
@@ -47,10 +47,9 @@ public class PostureClassifier implements Classifier {
     c.inputName = inputName;
     c.outputName = outputName;
 
-    String actualFilename = labelFilename.split("file:///android_asset/")[1];
-    Log.i(TAG, "Reading labels from: " + actualFilename);
+    Log.i(TAG, "Reading labels from: " + labelFilename);
     BufferedReader br = null;
-    br = new BufferedReader(new InputStreamReader(assetManager.open(actualFilename)));
+    br = new BufferedReader(new InputStreamReader(assetManager.open(labelFilename)));
     String line;
     while ((line = br.readLine()) != null) {
       c.labels.add(line);
@@ -60,7 +59,7 @@ public class PostureClassifier implements Classifier {
     c.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
 
     int numClasses =
-      (int) c.inferenceInterface.graph().operation(outputName).output(0).shape().size(1);
+      (int) c.inferenceInterface.graphOperation(outputName).output(0).shape().size(0);
     Log.i(TAG, "Read " + c.labels.size() + " labels, output layer size is " + numClasses);
 
     c.inputRowSize = inputRowSize;
