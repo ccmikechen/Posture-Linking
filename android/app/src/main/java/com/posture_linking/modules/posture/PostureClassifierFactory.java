@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 
 public class PostureClassifierFactory {
 
-  private static final String FORMAL_MODEL_INPUT_NAME = "input";
+  private static final String FORMAL_MODEL_INPUT_NAME = "conv2d_1_input";
   private static final String FORMAL_MODEL_OUTPUT_NAME = "output0";
   private static final int FORMAL_MODEL_ROW_SIZE = 20;
   private static final int FORMAL_MODEL_COLUMN_SIZE = 16;

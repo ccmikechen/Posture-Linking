@@ -76,7 +76,7 @@ public class PostureClassifier implements Classifier {
 
       // Copy the input data into TensorFlow.
       inferenceInterface.feed(
-              inputName, data, new long[]{inputRowSize * inputColumnSize});
+              inputName, data, 1, 1, inputRowSize, inputColumnSize);
 
       // Run the inference call.
       inferenceInterface.run(outputNames);

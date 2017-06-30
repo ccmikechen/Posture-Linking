@@ -5,7 +5,7 @@ import styles from './styles';
 
 import { createPostureDataEmitter } from '../../ble/postureDevice';
 
-import PostureDetector from '../../modules/PostureDetector';
+import PostureRecognizer from '../../ble/PostureRecognizer';
 
 class PostureMonitor extends React.Component {
   constructor(props) {
@@ -13,13 +13,17 @@ class PostureMonitor extends React.Component {
   }
 
   componentDidMount() {
-    this.postureDataEmitter = createPostureDataEmitter();
-
-    PostureDetector.show('yo man', 1);
+    let postureDataEmitter = createPostureDataEmitter();
+    this.postureRecognizer = new PostureRecognizer(postureDataEmitter);
+    this.postureRecognizer.addListener(this.handlePostureRecognition);
   }
 
   componentWillUnmount() {
-    this.postureDataEmitter.destroy();
+    this.postureRecognizer.destroy();
+  }
+
+  handlePostureRecognition(result) {
+    console.log('Result: ', result);
   }
 
   render() {
