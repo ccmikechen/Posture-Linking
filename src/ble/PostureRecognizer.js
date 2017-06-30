@@ -33,7 +33,6 @@ class PostureRecognizer {
       ...this.normalizeAcc(data.band.acc),
       ...this.normalizeAcc(data.band.gyro)
     ];
-    console.log(normalizedData);
 
     return normalizedData;
   }
