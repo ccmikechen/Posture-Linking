@@ -8,7 +8,7 @@ public class PostureClassifierFactory {
 
   private static final String FORMAL_MODEL_INPUT_NAME = "conv2d_1_input";
   private static final String FORMAL_MODEL_OUTPUT_NAME = "output0";
-  private static final int FORMAL_MODEL_ROW_SIZE = 20;
+  private static final int FORMAL_MODEL_ROW_SIZE = 17;
   private static final int FORMAL_MODEL_COLUMN_SIZE = 16;
   private static final String FORMAL_MODEL_FILE = "model/input_graph.pb";
   private static final String FORMAL_LABEL_FILE = "model/label_strings.txt";

@@ -22,8 +22,8 @@ class PostureMonitor extends React.Component {
     this.postureRecognizer.destroy();
   }
 
-  handlePostureRecognition(result) {
-    console.log('Result: ', result);
+  handlePostureRecognition({ result, label, id }) {
+    console.log('Result: ', result, id);
   }
 
   render() {

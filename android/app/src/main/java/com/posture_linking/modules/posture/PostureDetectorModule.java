@@ -65,7 +65,9 @@ public class PostureDetectorModule extends ReactContextBaseJavaModule {
     if (results.size() > 1) {
       result += " - " + results.get(1).toString();
     }
-    
-    resultCallback.invoke(result);
+
+    String resultId = results.get(0).getId();
+
+    resultCallback.invoke(result, resultId);
   }
 }
