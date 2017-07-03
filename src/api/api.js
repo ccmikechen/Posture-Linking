@@ -17,7 +17,6 @@ function queryString(params) {
 
 export default {
   fetch(url, params = {}) {
-    console.log(`${url}${queryString(params)}`);
     return fetch(`${url}${queryString(params)}`, {
       method: 'GET'
     })

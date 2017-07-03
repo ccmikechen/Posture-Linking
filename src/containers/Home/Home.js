@@ -5,32 +5,14 @@ import {
   Text,
   Button,
   TouchableOpacity,
-  AppState,
   Alert
 } from 'react-native';
 import styles from './styles';
-import NotificationAction from '../../../lib/NotificationAction';
-import { getServiceById } from '../../../lib/helper';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
-    this.Notification = new NotificationAction();
-  }
-
-  componentDidMount() {
-    AppState.addEventListener('change', this.handleAppStateChange);
-  }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleAppStateChange);
-  }
-
-  handleAppStateChange(appState) {
-    if(appState === 'background') {
-      new NotificationAction().push('背景')
-    }
   }
 
   handleButtonPress(type) {
@@ -56,16 +38,16 @@ class Home extends React.Component {
             animated:true,
           });
           break;
-        case 'sendNotification':
-          this.sendMessage();
+        case 'buttonList':
+        this.props.navigator.push({
+          screen: 'ButtonListScreen',
+          title: 'Button List',
+          passProps: {},
+          animated:true,
+        });
           break;
       }
     }
-  }
-
-  sendMessage() {
-    let buttonTrigger = getServiceById(1);
-    buttonTrigger.trigger({combinationId: 1})
   }
 
   render() {
@@ -91,9 +73,9 @@ class Home extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={this.handleButtonPress('sendNotification')}
+          onPress={this.handleButtonPress('buttonList')}
         >
-          <Text style={styles.buttonText}>Send Notification</Text>
+          <Text style={styles.buttonText}>Button List</Text>
         </TouchableOpacity>
       </View>
     );
