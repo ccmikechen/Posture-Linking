@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "367431324641",
+    "firebase_url": "https://poselink-6bfa3.firebaseio.com",
+    "project_id": "poselink-6bfa3",
+    "storage_bucket": "poselink-6bfa3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367431324641:android:caf7a7c6bb9105a9",
+        "android_client_info": {
+          "package_name": "com.posture_linking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367431324641-cja9laejgc53cn5854qnsikatdclbr7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-Y4nO8Dku5fwVKPDwSaax-85EC3JBTBM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

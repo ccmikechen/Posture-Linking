@@ -22,11 +22,16 @@ class Home extends React.Component {
       onRegister: function(token) {
           console.log( 'TOKEN:', token );
       },
-      onNotification: function(notification) {
+      onNotification: function({ notification }) {
           console.log( 'NOTIFICATION:', notification );
-          Alert.alert(notification.title, notification.message)
+          PushNotification.localNotification({
+            foreground: false,
+            title: notification.title,
+            message: notification.message,
+            playSound: true
+          });
       },
-      senderID: "YOUR GCM SENDER ID",
+      senderID: "367431324641",
       permissions: {
           alert: true,
           badge: true,
