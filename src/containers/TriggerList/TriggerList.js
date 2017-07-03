@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Button, ListView } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { updateCombinationList } from '../../actions/combinationActions';
+import { getTriggerList } from '../../actions/combinationActions';
 
 class TriggerList extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class TriggerList extends React.Component {
   }
 
   componentWillMount () {
-    this.props.updateCombinationList();
+    this.props.getTriggerList();
   }
 
   _genDataSource(combination) {
@@ -35,18 +35,30 @@ class TriggerList extends React.Component {
     console.log(this.props);
     return (
       <View>
-        <ListView
-          dataSource={this._genDataSource(this.props.combination)}
-          renderRow={(rowData) => <Text>{rowData}</Text>}
-        />
-        <Button title='OK' onPress={this.handelOK.bind(this)}/>
-      </View>
-    );
+        {this.props.isGetTriggers ?
+          <View>
+            <ListView
+              dataSource={this._genDataSource(this.props.triggers)}
+              renderRow={(trigger) => <Text>{trigger.api_name}</Text>}
+            />
+            <Button title='OK' onPress={this.handelOK.bind(this)}/>
+          </View>
+          :
+          <View style={styles.cover}>
+            <ActivityIndicator
+              animating={true}
+              size='large'
+              color='grey'
+            />
+          </View>
+        }
+      </View>    );
   }
 }
 
 export default connect((state) => ({
-  combination: state.getIn(['combination','DataSource'])
+  triggers: state.getIn(['combination','triggers']),
+  isGetTriggers: state.getIn(['combination', 'isGetTriggers'])
 }), {
-  updateCombinationList
+  getTriggerList
 })(TriggerList);

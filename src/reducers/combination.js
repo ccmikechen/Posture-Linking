@@ -4,7 +4,9 @@ import { handleActions } from 'redux-actions';
 const InitialState = Immutable.fromJS({
   DataSource: [],
   actions: [],
-  isGetActions: false
+  triggers: [],
+  isGetActions: false,
+  isGetTriggers: false,
 });
 
 const combination = handleActions({
@@ -16,6 +18,12 @@ const combination = handleActions({
   ),
   IS_GET_ACTION_LIST: (state) => (
     state.set('isGetActions', true)
+  ),
+  UPDATE_TRIGGER_LIST: (state, { triggers }) => (
+    state.set('triggers', triggers)
+  ),
+  IS_GET_TRIGGER_LIST: (state) => (
+    state.set('isGetTriggers', true)
   )
 
 }, InitialState);
