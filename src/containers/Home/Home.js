@@ -9,37 +9,17 @@ import {
   Alert
 } from 'react-native';
 import styles from './styles';
-import PushNotification from 'react-native-push-notification';
+import NotificationAction from '../../../lib/NotificationAction';
+import { getServiceById } from '../../../lib/helper';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
+    this.Notification = new NotificationAction();
   }
 
   componentDidMount() {
-    PushNotification.configure({
-      onRegister: function(token) {
-          console.log( 'TOKEN:', token );
-      },
-      onNotification: function({ notification }) {
-          console.log( 'NOTIFICATION:', notification );
-          PushNotification.localNotification({
-            foreground: false,
-            title: notification.title,
-            message: notification.message,
-            playSound: true
-          });
-      },
-      senderID: "367431324641",
-      permissions: {
-          alert: true,
-          badge: true,
-          sound: true
-      },
-      popInitialNotification: true,
-      requestPermissions: true,
-    });
     AppState.addEventListener('change', this.handleAppStateChange);
   }
 
@@ -49,12 +29,7 @@ class Home extends React.Component {
 
   handleAppStateChange(appState) {
     if(appState === 'background') {
-      PushNotification.localNotification({
-        foreground: true,
-        title: 'Posture Linking',
-        message: '背景傳送',
-        playSound: true
-      });
+      new NotificationAction().push('背景')
     }
   }
 
@@ -89,12 +64,8 @@ class Home extends React.Component {
   }
 
   sendMessage() {
-      PushNotification.localNotification({
-        foreground: true,
-        title: 'Posture Linking',
-        message: '按鈕發送',
-        playSound: true
-      });
+    let buttonTrigger = getServiceById(1);
+    buttonTrigger.trigger({combinationId: 1})
   }
 
   render() {

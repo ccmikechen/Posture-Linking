@@ -34,9 +34,7 @@ class ScanBle extends React.Component {
     this.handleStopScan = this.handleStopScan.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.handleOnConnectPress = this.handleOnConnectPress.bind(this);
-
     this.bleSubscriptions = [];
-
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
@@ -55,7 +53,13 @@ class ScanBle extends React.Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'ScanBleScreen:back') {
-        clear();
+        this.clear();
+        this.props.navigator.pop({
+          screen: 'HomeScreen',
+          title: 'Home',
+          passProps: {},
+          navigatorStyle: {},
+        })
       }
     }
   }
