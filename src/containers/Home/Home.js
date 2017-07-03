@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import NotificationAction from '../../../lib/NotificationAction';
+import { getServiceById } from '../../../lib/helper';
 
 class Home extends React.Component {
   constructor(props) {
@@ -63,7 +64,8 @@ class Home extends React.Component {
   }
 
   sendMessage() {
-      this.Notification.push("test");
+    let buttonTrigger = getServiceById(1);
+    buttonTrigger.trigger({combinationId: 1})
   }
 
   render() {
