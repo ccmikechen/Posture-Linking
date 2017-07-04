@@ -25,6 +25,7 @@ const handleError = (response) => {
 };
 
 const parseResponse = (response) => {
+  setTimeout(() => null, 0);
   return response.json().then((json) => {
     if (!response.ok) {
       return Promise.reject(json);
