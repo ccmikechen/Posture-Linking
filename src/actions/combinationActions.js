@@ -1,13 +1,19 @@
+import poselink from '../api/poselink';
+
 export const UPDATE_COMBINATION_LIST = 'UPDATE_COMBINATION_LIST';
+export const IS_GET_COMBINATION_LIST = 'IS_GET_COMBINATION_LIST';
 export const UPDATE_ACTION_LIST = 'UPDATE_ACTION_LIST';
 export const IS_GET_ACTION_LIST = 'IS_GET_ACTION_LIST';
 export const UPDATE_TRIGGER_LIST ='UPDATE_TRIGGER_LIST';
 export const IS_GET_TRIGGER_LIST = 'IS_GET_TRIGGER_LIST';
 
 export const updateCombinationList = () => (dispatch) => {
-  let data = ['test1', 'test2', 'test3', 'test4'];
-  
-  dispatch({ type: UPDATE_COMBINATION_LIST , data});
+  poselink.getCombinations().then(data => {
+    console.log(data);
+    dispatch({ type: UPDATE_COMBINATION_LIST , data});
+    return data;
+  })
+  .then(dispatch({type: IS_GET_COMBINATION_LIST}))
 }
 
 export const getActionList = () => (dispatch) => {

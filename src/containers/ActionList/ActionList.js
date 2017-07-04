@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView,ActivityIndicator } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { getActionList } from '../../actions/combinationActions';
