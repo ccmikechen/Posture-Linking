@@ -11,9 +11,8 @@ export const updateCombinationList = () => (dispatch) => {
   poselink.getCombinations()
   .then(data => {
     dispatch({ type: UPDATE_COMBINATION_LIST , data});
-    return data;
+    dispatch({type: IS_GET_COMBINATION_LIST});
   })
-  .then(dispatch({type: IS_GET_COMBINATION_LIST}))
 }
 
 export const getActionList = () => (dispatch) => {
