@@ -67,5 +67,13 @@ export default {
         status: combination.status
       }))
     ))
+  ),
+  trigger: (serviceId, payload) => (
+    server.post('/trigger/trigger', {
+      service_id: serviceId,
+      payload: {
+        combination_id: payload.combinationId
+      }
+    })
   )
 };
