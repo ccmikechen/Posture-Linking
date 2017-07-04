@@ -23,7 +23,7 @@ class Combination extends React.Component {
 
   renderRow(combination) {
     return (
-      <View style={{backgroundColor:'#f0f12f', padding:5, marginBottom:4}}>
+      <View style={{backgroundColor:'#4edbda', padding:5, marginBottom:4}}>
         <Text>Combination ID: {combination.id}</Text>
         <Text>description: {combination.description}</Text>
         <Text>TriggerID: {combination.trigger.serviceId}</Text>

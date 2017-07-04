@@ -43,7 +43,7 @@ class ActionList extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex:1 , backgroundColor:'lightgray'}}>
         {this.props.isGetActions ?
           <View>
             <ListView

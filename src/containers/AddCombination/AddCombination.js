@@ -33,7 +33,7 @@ class AddCombination extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex:1 , backgroundColor:'lightgray'}}>
         <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
           <View style={{backgroundColor:'#76d9ae', margin:20, height:100}}>
             <Text style={{textAlign: 'center', fontSize:20, fontWeight:'bold', marginTop:40, color:'#fff'}}>Trigger</Text>
