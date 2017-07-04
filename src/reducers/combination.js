@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 
 const InitialState = Immutable.fromJS({
-  DataSource: [],
+  DataSource: {},
   actions: [],
   triggers: [],
   isGetActions: false,

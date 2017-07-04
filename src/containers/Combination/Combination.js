@@ -21,13 +21,27 @@ class Combination extends React.Component {
     return this.dataSource;
   }
 
+  renderRow(combination) {
+    return (
+      <View style={{backgroundColor:'#f0f12f', padding:5, marginBottom:4}}>
+        <Text>Combination ID: {combination.id}</Text>
+        <Text>description: {combination.description}</Text>
+        <Text>TriggerID: {combination.trigger.serviceId}</Text>
+        <Text>config: {combination.trigger.config.content}</Text>
+        <Text>ActionID: {combination.action.serviceId}</Text>
+        <Text>config: {combination.action.config.content}</Text>
+        <Text>{combination.status === 1 ? `開啟中` : `關閉中`}</Text>
+      </View>
+    )
+  }
+
   render() {
     return (
       <View>
-        {this.props.isGetCombinations?
+        {this.props.isGetCombinations ?
           <ListView
             dataSource={this._genDataSource(this.props.combinations)}
-            renderRow={(rowData) => <Text>{rowData.id}</Text>}
+            renderRow={(combination) => this.renderRow(combination)}
           />
           :
           <View style={styles.cover}>

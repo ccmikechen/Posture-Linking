@@ -8,8 +8,8 @@ export const UPDATE_TRIGGER_LIST ='UPDATE_TRIGGER_LIST';
 export const IS_GET_TRIGGER_LIST = 'IS_GET_TRIGGER_LIST';
 
 export const updateCombinationList = () => (dispatch) => {
-  poselink.getCombinations().then(data => {
-    console.log(data);
+  poselink.getCombinations()
+  .then(data => {
     dispatch({ type: UPDATE_COMBINATION_LIST , data});
     return data;
   })
