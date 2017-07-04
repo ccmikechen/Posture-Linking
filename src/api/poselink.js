@@ -68,6 +68,57 @@ export default {
       }))
     ))
   ),
+  createCombination: (data) => (
+    server.post("/combinations", {
+      ...data,
+      trigger: {
+        service_id: data.trigger.serviceId,
+        config: data.trigger.config
+      },
+      action: {
+        service_id: data.action.serviceId,
+        config: data.action.config
+      }
+    })
+  ),
+  updateCombination: (id, data) => (
+    server.patch(`/combinations/${id}`, {
+      ...data,
+      trigger: {
+        service_id: data.trigger.serviceId,
+        config: data.trigger.config
+      },
+      action: {
+        service_id: data.action.serviceId,
+        config: data.action.config
+      }
+    })
+  ),
+  removeCombination: (id) => (
+    server.delete(`/combinations/${id}`)
+  ),
+  getUserServiceConfig: (serviceId) => (
+    server.get('/user_service_configs', {
+      service_id: serviceId
+    })
+    .then(response => response.data)
+  ),
+  getUserServiceConfigs: () => (
+    server.get('/user_service_configs')
+    .then(response => response.data)
+  ),
+  createUserServiceConfig: (serviceId, config) => (
+    server.post('/user_service_configs', {
+      service_id: serviceId,
+      config
+    })
+  ),
+  updateUserServiceConfig: (serviceId, config) => (
+    server.patch('/user_service_configs', {
+      service_id: serviceId,
+      config
+    })
+  ),
   trigger: (serviceId, payload) => (
     server.post('/trigger/trigger', {
       service_id: serviceId,
