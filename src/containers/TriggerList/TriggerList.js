@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { getTriggerList } from '../../actions/combinationActions';
@@ -31,6 +31,16 @@ class TriggerList extends React.Component {
     })
   }
 
+  renderRow(trigger) {
+    return(
+      <TouchableOpacity onPress={() => console.log(trigger.id)}>
+        <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
+          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     console.log(this.props);
     return (
@@ -39,7 +49,7 @@ class TriggerList extends React.Component {
           <View>
             <ListView
               dataSource={this._genDataSource(this.props.triggers)}
-              renderRow={(trigger) => <Text>{trigger.api_name}</Text>}
+              renderRow={(trigger) => this.renderRow(trigger)}
             />
             <Button title='OK' onPress={this.handelOK.bind(this)}/>
           </View>

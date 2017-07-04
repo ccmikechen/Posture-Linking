@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView } from 'react-native';
+import { View, Text, Button, ListView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 
@@ -34,8 +34,17 @@ class AddCombination extends React.Component {
   render() {
     return (
       <View>
-        <Button title='Trigger' onPress={this.handelTrigger.bind(this)}/>
-        <Button title='Action' onPress={this.handelAction.bind(this)}/>
+        <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
+          <View style={{backgroundColor:'#76d9ae', margin:20, height:100}}>
+            <Text style={{textAlign: 'center', fontSize:20, fontWeight:'bold', marginTop:40, color:'#fff'}}>Trigger</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{marginTop:20, marginBottom:70}}></View>
+        <TouchableOpacity onPress={this.handelAction.bind(this)}>
+          <View style={{backgroundColor:'#76d9ae', margin:20, height:100}}>
+            <Text style={{textAlign: 'center', fontSize:20, marginTop:40, color:'#fff', fontWeight:'bold'}}>Action</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }

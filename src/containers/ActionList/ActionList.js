@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { getActionList } from '../../actions/combinationActions';
@@ -31,6 +31,16 @@ class ActionList extends React.Component {
     })
   }
 
+  renderRow(action) {
+    return (
+      <TouchableOpacity onPress={() => console.log(action.id)}>
+        <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
+          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{action.name}</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     return (
       <View>
@@ -38,7 +48,7 @@ class ActionList extends React.Component {
           <View>
             <ListView
               dataSource={this._genDataSource(this.props.actions)}
-              renderRow={(action) => <Text>{action.api_name}</Text>}
+              renderRow={(action) => this.renderRow(action)}
             />
             <Button title='OK' onPress={this.handelOK.bind(this)}/>
           </View>

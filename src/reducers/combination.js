@@ -3,8 +3,8 @@ import { handleActions } from 'redux-actions';
 
 const InitialState = Immutable.fromJS({
   DataSource: {},
-  actions: [],
-  triggers: [],
+  actions: {},
+  triggers: {},
   isGetActions: false,
   isGetTriggers: false,
   isGetCombinations: false,
