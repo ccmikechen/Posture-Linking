@@ -20,7 +20,7 @@ class CombinationScreen extends React.Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'add') {
-        this.props.navigator.showModal({
+        this.props.navigator.push({
           screen:'AddCombinationScreen',
           title:'首頁',
           passProps: {},

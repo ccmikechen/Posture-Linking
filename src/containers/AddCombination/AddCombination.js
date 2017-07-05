@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styles from './styles';
 import ButtonConfig from '../Configs/ButtonConfig';
 import NotificationConfig from '../Configs/NotificationConfig';
-import { setDescription } from '../../actions/combinationActions';
+import { setDescription, setActionId, setTriggerId, updateCombinationList } from '../../actions/combinationActions';
 import api from '../../api/poselink';
 
 class AddCombination extends React.Component {
@@ -13,6 +13,8 @@ class AddCombination extends React.Component {
   }
 
   componentWillMount () {
+    this.props.setTriggerId('');
+    this.props.setActionId('');
   }
 
   handelTrigger() {
@@ -51,7 +53,7 @@ class AddCombination extends React.Component {
     return (
       <View style={{flex:1}}>
         {this.props.actionId!='' ?
-          this.props.actionId== 2 ? <NotificationConfig /> : null
+          this.props.actionId== 4 ? <NotificationConfig /> : null
           :
           null
         }
@@ -96,13 +98,15 @@ class AddCombination extends React.Component {
       }
     }
 
-    api.createCombination(data).then(
-      this.props.navigator.dismissModal({
+    api.createCombination(data)
+    .then(this.props.updateCombinationList())
+    .then(
+      this.props.navigator.pop({
           screen:'CombinationScreen',
-          title:'首頁',
+          title:'',
           passProps: {},
           animated:true,
-          animationType: 'slide-down'
+          animationType: ''
         })
     )
   }
@@ -139,5 +143,5 @@ export default connect((state) => ({
   notificationConfig: state.getIn(['combination', 'notificationConfig']).toJS(),
   description: state.getIn(['combination', 'description'])
 }), {
-  setDescription
+  setDescription, setActionId, setTriggerId, updateCombinationList
 })(AddCombination);

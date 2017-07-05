@@ -41,7 +41,7 @@ const loadBackgroundProcess = async () => {
   await loadServices();
   console.log('load services');
 
-  await combinationManager.load();
+  await combinationManager.loadAllCombinaions();
   console.log('load combinations');
 };
 
