@@ -1,8 +1,8 @@
 import { AsyncStorage, Platform } from 'react-native';
 
 const API = Platform.OS == 'ios' ?
-  "https://test.bearlab.io/api" :
-  "http://test.bearlab.io:4000/api";
+  "https://t21.bearlab.io/api" :
+  "http://t21.bearlab.io:4000/api";
 
 const getToken = async () => {
   return await AsyncStorage.getItem('@session:token');
