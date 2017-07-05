@@ -6,6 +6,7 @@ import ButtonConfig from '../Configs/ButtonConfig';
 import NotificationConfig from '../Configs/NotificationConfig';
 import { setDescription, setActionId, setTriggerId, updateCombinationList } from '../../actions/combinationActions';
 import api from '../../api/poselink';
+import { getCombinationManager } from '../../../lib/CombinationManager';
 
 class AddCombination extends React.Component {
   constructor(props) {
@@ -82,6 +83,7 @@ class AddCombination extends React.Component {
   }
 
   handleOK() {
+    const combinationManager = getCombinationManager();
     let data = {
       description: this.props.description,
       status:1,
@@ -99,6 +101,9 @@ class AddCombination extends React.Component {
     }
 
     api.createCombination(data)
+    .then(combination => {
+      combinationManager.loadCombination(combination);
+    })
     .then(this.props.updateCombinationList())
     .then(
       this.props.navigator.pop({

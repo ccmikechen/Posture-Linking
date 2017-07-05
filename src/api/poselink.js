@@ -1,6 +1,19 @@
 import server from './server';
 import { AsyncStorage } from 'react-native';
 
+const parseCombination = (combination) => ({
+  id: combination.id,
+  description: combination.description,
+  trigger: {
+    serviceId: combination.trigger.service_id,
+    config: combination.trigger.config
+  },
+  action: {
+    serviceId: combination.action.service_id,
+    config: combination.action.config
+  },
+  status: combination.status
+});
 
 export default {
   createSession: ({ username, password }) => (
@@ -53,19 +66,7 @@ export default {
     server.fetch('/combinations')
     .then(response => response.data)
     .then(data => (
-      data.map(combination => ({
-        id: combination.id,
-        description: combination.description,
-        trigger: {
-          serviceId: combination.trigger.service_id,
-          config: combination.trigger.config
-        },
-        action: {
-          serviceId: combination.action.service_id,
-          config: combination.action.config
-        },
-        status: combination.status
-      }))
+      data.map(parseCombination)
     ))
   ),
   createCombination: (data) => (
@@ -80,6 +81,8 @@ export default {
         config: data.action.config
       }
     })
+    .then(response => response.data)
+    .then(parseCombination)
   ),
   updateCombination: (id, data) => (
     server.patch(`/combinations/${id}`, {
@@ -107,10 +110,11 @@ export default {
     server.get('/user_service_configs')
     .then(response => response.data)
   ),
-  createUserServiceConfig: (serviceId, config) => (
+  createUserServiceConfig: (serviceId, config, status) => (
     server.post('/user_service_configs', {
       service_id: serviceId,
-      config
+      config,
+      status
     })
   ),
   updateUserServiceConfig: (serviceId, config) => (
