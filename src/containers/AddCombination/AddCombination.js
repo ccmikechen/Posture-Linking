@@ -16,6 +16,7 @@ class AddCombination extends React.Component {
   componentWillMount () {
     this.props.setTriggerId('');
     this.props.setActionId('');
+    this.props.setDescription('');
   }
 
   handelTrigger() {

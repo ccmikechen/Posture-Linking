@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import styles from './styles';
 import { updateCombinationList } from '../../actions/combinationActions';
 import api from '../../api/poselink';
+import { getCombinationManager } from '../../../lib/CombinationManager';
+import CombinationClass from '../../../lib/Combination';
 
 class Combination extends React.Component {
   constructor(props) {
@@ -22,8 +24,13 @@ class Combination extends React.Component {
     return this.dataSource;
   }
 
-  handleRemove(id) {
-    api.removeCombination(id).then(
+  handleRemove(combination) {
+    const combinationManager = getCombinationManager();
+    api.removeCombination(combination.id)
+    .then(
+      combinationManager.removeCombination(new CombinationClass(combination))
+    )
+    .then(
       this.props.updateCombinationList()
     )
   }
@@ -41,7 +48,7 @@ class Combination extends React.Component {
           <Text>{combination.status === 1 ? `開啟中` : `關閉中`}</Text>
         </View>
         <View>
-          <Button title='刪除' onPress={()=> this.handleRemove(combination.id)}/>
+          <Button title='刪除' onPress={()=> this.handleRemove(combination)}/>
         </View>
       </View>
     )
@@ -53,7 +60,7 @@ class Combination extends React.Component {
         {this.props.isGetCombinations ?
           <ListView
             dataSource={this._genDataSource(this.props.combinations)}
-            renderRow={(combination) => this.renderRow(combination)}
+            renderRow={(combination) => this.renderRow(combination.combination)}
           />
           :
           <View style={styles.cover}>

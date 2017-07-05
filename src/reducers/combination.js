@@ -32,8 +32,8 @@ const combination = handleActions({
   IS_GET_TRIGGER_LIST: (state) => (
     state.set('isGetTriggers', true)
   ),
-  IS_GET_COMBINATION_LIST: (state) => (
-    state.set('isGetCombinations', true)
+  IS_GET_COMBINATION_LIST: (state, { select }) => (
+    state.set('isGetCombinations', select)
   ),
   GET_TRIGGER_ID: (state, { id }) => (
     state.set('triggerId', id)
