@@ -10,7 +10,7 @@ import {
 import styles from './styles';
 
 import { getCombinationManager } from '../../../lib/CombinationManager';
-import NotificationAction from '../../../lib/NotificationAction';
+import NotificationAction from '../../../lib/services/NotificationAction';
 import { getServiceByTypeName } from '../../../lib/helper';
 
 const combinationManager = getCombinationManager();

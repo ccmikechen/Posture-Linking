@@ -7,6 +7,10 @@ export const UPDATE_ACTION_LIST = 'UPDATE_ACTION_LIST';
 export const IS_GET_ACTION_LIST = 'IS_GET_ACTION_LIST';
 export const UPDATE_TRIGGER_LIST ='UPDATE_TRIGGER_LIST';
 export const IS_GET_TRIGGER_LIST = 'IS_GET_TRIGGER_LIST';
+export const GET_TRIGGER_ID = 'GET_TRIGGER_ID';
+export const GET_ACTION_ID = 'GET_ACTION_ID';
+export const SET_NOTIFY_TEXT = 'SET_NOTIFY_TEXT';
+export const SET_COMBINATION_DESCRIPTION = 'SET_COMBINATION_DESCRIPTION';
 
 export const updateCombinationList = () => (dispatch) => {
   poselink.getCombinations()
@@ -26,4 +30,20 @@ export const getTriggerList = () => (dispatch) => {
   let triggers = getTriggerService();
   dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
   dispatch({ type: IS_GET_TRIGGER_LIST });
+}
+
+export const setTriggerId = (id) => (dispatch) => {
+  dispatch({ type: GET_TRIGGER_ID, id });
+}
+
+export const setActionId = (id) => (dispatch) => {
+  dispatch({ type: GET_ACTION_ID, id });
+}
+
+export const setNotifyText = (text) => (dispatch) => {
+  dispatch({ type: SET_NOTIFY_TEXT, text });
+}
+
+export const setDescription = (text) => (dispatch) => {
+  dispatch({ type: SET_COMBINATION_DESCRIPTION, text });
 }

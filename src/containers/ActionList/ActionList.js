@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, ListView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { getActionList } from '../../actions/combinationActions';
+import { getActionList, setActionId } from '../../actions/combinationActions';
 
 class ActionList extends React.Component {
   constructor(props) {
@@ -21,7 +21,8 @@ class ActionList extends React.Component {
     return this.dataSource;
   }
 
-  handelOK() {
+  handelOK(id) {
+    this.props.setActionId(id);
     this.props.navigator.dismissModal({
       screen: 'AddCombinationScreen',
       title: 'AddCombination',
@@ -33,7 +34,7 @@ class ActionList extends React.Component {
 
   renderRow(action) {
     return (
-      <TouchableOpacity onPress={() => console.log(action.id)}>
+      <TouchableOpacity onPress={() => this.handelOK(action.id)}>
         <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
           <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{action.name}</Text>
         </View>
@@ -50,7 +51,6 @@ class ActionList extends React.Component {
               dataSource={this._genDataSource(this.props.actions)}
               renderRow={(action) => this.renderRow(action)}
             />
-            <Button title='OK' onPress={this.handelOK.bind(this)}/>
           </View>
           :
           <View style={styles.cover}>
@@ -71,5 +71,5 @@ export default connect((state) =>(
     actions: state.getIn(['combination', 'actions']),
     isGetActions : state.getIn(['combination', 'isGetActions'])
   }), {
-    getActionList
+    getActionList, setActionId
   })(ActionList);

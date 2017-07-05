@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, ListView, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { getTriggerList } from '../../actions/combinationActions';
+import { getTriggerList, setTriggerId } from '../../actions/combinationActions';
 
 class TriggerList extends React.Component {
   constructor(props) {
@@ -21,7 +21,8 @@ class TriggerList extends React.Component {
     return this.dataSource;
   }
 
-  handelOK() {
+  handelOK(id) {
+    this.props.setTriggerId(id);
     this.props.navigator.dismissModal({
       screen: 'AddCombinationScreen',
       title: 'AddCombination',
@@ -33,7 +34,7 @@ class TriggerList extends React.Component {
 
   renderRow(trigger) {
     return(
-      <TouchableOpacity onPress={() => console.log(trigger.id)}>
+      <TouchableOpacity onPress={() => this.handelOK(trigger.id)}>
         <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
           <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
         </View>
@@ -52,7 +53,7 @@ class TriggerList extends React.Component {
             />
             <Button title='OK' onPress={this.handelOK.bind(this)}/>
           </View>
-          :
+        :
           <View style={styles.cover}>
             <ActivityIndicator
               animating={true}
@@ -61,7 +62,8 @@ class TriggerList extends React.Component {
             />
           </View>
         }
-      </View>    );
+      </View>    
+    );
   }
 }
 
@@ -69,5 +71,5 @@ export default connect((state) => ({
   triggers: state.getIn(['combination','triggers']),
   isGetTriggers: state.getIn(['combination', 'isGetTriggers'])
 }), {
-  getTriggerList
+  getTriggerList, setTriggerId
 })(TriggerList);

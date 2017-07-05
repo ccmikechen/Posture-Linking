@@ -8,6 +8,12 @@ const InitialState = Immutable.fromJS({
   isGetActions: false,
   isGetTriggers: false,
   isGetCombinations: false,
+  triggerId: '',
+  actionId: '',
+  notificationConfig: {
+    notifyText: ''
+  },
+  description: ''
 });
 
 const combination = handleActions({
@@ -28,7 +34,19 @@ const combination = handleActions({
   ),
   IS_GET_COMBINATION_LIST: (state) => (
     state.set('isGetCombinations', true)
-  )
+  ),
+  GET_TRIGGER_ID: (state, { id }) => (
+    state.set('triggerId', id)
+  ),
+  GET_ACTION_ID: (state, { id }) => (
+    state.set('actionId', id)
+  ),
+  SET_NOTIFY_TEXT: (state, { text }) => (
+    state.setIn(['notificationConfig', 'notifyText'], text)
+  ),
+  SET_COMBINATION_DESCRIPTION:(state, { text }) => (
+    state.set('description', text)
+  ),
 
 }, InitialState);
 
