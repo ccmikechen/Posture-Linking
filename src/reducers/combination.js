@@ -23,19 +23,25 @@ const combination = handleActions({
   UPDATE_ACTION_LIST: (state, { actions }) => (
     state.set('actions', actions)
   ),
-  IS_GET_ACTION_LIST: (state) => (
+  IS_GETTING_ACTION_LIST: (state) => (
     state.set('isGetActions', true)
+  ),
+  IS_NOT_GETTING_ACTION_LIST: (state) => (
+    state.set('isGetActions', false)
   ),
   UPDATE_TRIGGER_LIST: (state, { triggers }) => (
     state.set('triggers', triggers)
   ),
-  IS_GET_TRIGGER_LIST: (state) => (
+  IS_GETTING_TRIGGER_LIST: (state) => (
     state.set('isGetTriggers', true)
   ),
-  IS_GET_COMBINATION_LIST: (state) => (
+  IS_NOT_GETTING_TRIGGER_LIST: (state) => (
+    state.set('isGetTriggers', false)
+  ),
+  IS_GETTING_COMBINATION_LIST: (state) => (
     state.set('isGetCombinations', true)
   ),
-  NOT_GET_COMBINATION_LIST: (state) => (
+  IS_NOT_GETTING_COMBINATION_LIST: (state) => (
     state.set('isGetCombinations', false)
   ),
   GET_TRIGGER_ID: (state, { id }) => (

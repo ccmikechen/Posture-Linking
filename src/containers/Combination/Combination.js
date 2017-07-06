@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { updateCombinationList } from '../../actions/combinationActions';
+import { updateCombinationList, notUpdateCombinationList, isUpdateCombinationList } from '../../actions/combinationActions';
 import api from '../../api/poselink';
 import { getCombinationManager } from '../../../lib/CombinationManager';
 import CombinationClass from '../../../lib/Combination';
@@ -15,6 +15,7 @@ class Combination extends React.Component {
 
   componentDidMount() {
     this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
+      this.props.notUpdateCombinationList();
        setTimeout(() => {
          this.props.updateCombinationList();
        }, 1000);
@@ -43,8 +44,12 @@ class Combination extends React.Component {
     .then(
       combinationManager.removeCombination(new CombinationClass(combination))
     )
+    .then(this.props.notUpdateCombinationList())
     .then(
-      this.props.updateCombinationList()
+      setTimeout(() => {
+        this.props.updateCombinationList()
+      }, 1000)
+      
     )
   }
 
@@ -94,5 +99,7 @@ export default connect((state) =>(
     combinations: state.getIn(['combination', 'DataSource']),
     isGetCombinations: state.getIn(['combination', 'isGetCombinations']),
   }), {
-    updateCombinationList
+    updateCombinationList,
+    notUpdateCombinationList,
+    isUpdateCombinationList
   })(Combination);
