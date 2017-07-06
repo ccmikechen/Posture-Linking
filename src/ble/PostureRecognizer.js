@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 import PostureDetector from '../modules/PostureDetector';
 
 const DATA_LIST_LENGTH = 16;
+const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
 
 const typeMap = {
@@ -49,8 +50,8 @@ class PostureRecognizer {
   handleDataNotification(data) {
     this.dataList.push(this.parseDataToArray(data));
 
-    if (this.dataList.length > DATA_LIST_LENGTH) {
-      this.dataList.shift();
+    if (this.dataList.length + 1 > DATA_LIST_LENGTH + BATCH_GAP) {
+      this.dataList = this.dataList.slice(BATCH_GAP, this.dataList.length);
 
       let flattenClone = this.flattenDataList(this.dataList);
       this.predictPosture(flattenClone);
@@ -130,4 +131,4 @@ class PostureRecognizer {
   }
 }
 
-export { PostureRecognizer as default };
+export default PostureRecognizer;

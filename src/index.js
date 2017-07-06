@@ -4,6 +4,7 @@ import {
 import { AsyncStorage } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import api from './api/poselink';
+import { initialSocket } from './api/channel';
 import { loadServices } from '../lib/helper';
 import { getCombinationManager } from '../lib/CombinationManager';
 
@@ -39,10 +40,13 @@ const loadBackgroundProcess = async () => {
   console.log('login');
 
   await loadServices();
-  console.log('load services');
+  console.log('loaded services');
 
   await combinationManager.loadAllCombinaions();
-  console.log('load combinations');
+  console.log('loaded combinations');
+
+  await initialSocket();
+  console.log('initialed socket');
 };
 
 const startApp = () => {
