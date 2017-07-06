@@ -16,6 +16,7 @@ export const GET_ACTION_ID = 'GET_ACTION_ID';
 export const SET_NOTIFY_TEXT = 'SET_NOTIFY_TEXT';
 export const SET_COMBINATION_DESCRIPTION = 'SET_COMBINATION_DESCRIPTION';
 export const ADD_COMBINATION = 'ADD_COMBINATION';
+export const CHANGE_COMBINATION_STATUS = 'CHANGE_COMBINATION_STATUS';
 
 const combinationManager = getCombinationManager();
 export const updateCombinationList = () => (dispatch) => {
@@ -61,4 +62,12 @@ export const setNotifyText = (text) => (dispatch) => {
 
 export const setDescription = (text) => (dispatch) => {
   dispatch({ type: SET_COMBINATION_DESCRIPTION, text });
+}
+
+export const setCombinationStatus = (combination, status) => (dispatch) => {
+  combination.setStatus(status)
+  dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
+  poselink.updateCombination(combination.getId(), combination.getCombination())
+  .then(combinationManager.reloadAllCombinations())
+  
 }

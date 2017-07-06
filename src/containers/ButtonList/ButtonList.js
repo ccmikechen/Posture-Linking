@@ -49,7 +49,10 @@ class ButtonList extends React.Component {
       <View style={styles.container}>
         {
           this.combinations.map(combination => (
-            this.renderButton(combination)
+            combination.getCombination().status == 1 ?
+              this.renderButton(combination)
+            :
+            null
           ))
         }
       </View>

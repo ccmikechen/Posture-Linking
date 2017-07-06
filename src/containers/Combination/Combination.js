@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter, Switch } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { updateCombinationList, notUpdateCombinationList, isUpdateCombinationList } from '../../actions/combinationActions';
+import { updateCombinationList, notUpdateCombinationList, isUpdateCombinationList, setCombinationStatus } from '../../actions/combinationActions';
 import api from '../../api/poselink';
 import { getCombinationManager } from '../../../lib/CombinationManager';
 import CombinationClass from '../../../lib/Combination';
@@ -11,6 +11,7 @@ class Combination extends React.Component {
   constructor(props) {
     super(props);
     this.emitter='';
+    this.handleStatusChange = this.handleStatusChange.bind(this);
   }
 
   componentDidMount() {
@@ -53,32 +54,50 @@ class Combination extends React.Component {
     )
   }
 
+  handleStatusChange(combination, status) {
+      this.props.setCombinationStatus(combination, status==true ? 1 : 0)
+      this.props.notUpdateCombinationList();
+      setTimeout(() => {
+        this.props.updateCombinationList();
+      },1000)
+      
+  }
+
   renderRow(combination) {
-    return (
-      <View style={{backgroundColor:'#4edbda', padding:5, marginBottom:4, flexDirection:'column'}}>
-        <View>
-          <Text>Combination ID: {combination.id}</Text>
-          <Text>description: {combination.description}</Text>
-          <Text>TriggerID: {combination.trigger.serviceId}</Text>
-          <Text>config: {combination.trigger.config.content}</Text>
-          <Text>ActionID: {combination.action.serviceId}</Text>
-          <Text>config: {combination.action.config.content}</Text>
-          <Text>{combination.status === 1 ? `開啟中` : `關閉中`}</Text>
+    let item = combination.getCombination()
+    if(combination.status === 2 ) {
+      return null;
+    }else {
+      return (
+        <View style={{flex:1, backgroundColor:'#4edbda', padding:5, marginBottom:3, flexDirection:'row'}}>
+          <View style={{flex:4}}>
+            <Text>Combination ID: {item.id}</Text>
+            <Text>description: {item.description}</Text>
+            <Text>TriggerID: {item.trigger.serviceId}</Text>
+            <Text>config: {item.trigger.config.content}</Text>
+            <Text>ActionID: {item.action.serviceId}</Text>
+            <Text>config: {item.action.config.content}</Text>
+            <Text>{item.status === 1 ? `開啟中` : `關閉中`}</Text>
+          </View>
+          <View style={{flex:1, flexDirection:'column'}}>
+            <Button title='刪除' onPress={()=> this.handleRemove(item)}/>
+             <Switch style={{marginTop:40}}
+             value={item.status ===1 ? true : false} 
+             onValueChange={(e) => this.handleStatusChange(combination, e)}
+             />
+          </View>
         </View>
-        <View>
-          <Button title='刪除' onPress={()=> this.handleRemove(combination)}/>
-        </View>
-      </View>
-    )
+      )
+    }
   }
 
   render() {
     return (
-      <View style={{flex:1, backgroundColor:'lightgray'}}>
+      <View style={{flex:1, backgroundColor:'#fff'}}>
         {this.props.isGetCombinations ?
           <ListView
             dataSource={this._genDataSource(this.props.combinations)}
-            renderRow={(combination) => this.renderRow(combination.combination)}
+            renderRow={(combination) => this.renderRow(combination)}
           />
           :
           <View style={styles.cover}>
@@ -98,8 +117,10 @@ export default connect((state) =>(
   {
     combinations: state.getIn(['combination', 'DataSource']),
     isGetCombinations: state.getIn(['combination', 'isGetCombinations']),
+    isChangeStatus : state.getIn(['combination', 'isChangeStatus'])
   }), {
     updateCombinationList,
     notUpdateCombinationList,
-    isUpdateCombinationList
+    isUpdateCombinationList,
+    setCombinationStatus
   })(Combination);

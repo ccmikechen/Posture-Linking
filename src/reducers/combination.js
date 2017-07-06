@@ -13,7 +13,8 @@ const InitialState = Immutable.fromJS({
   notificationConfig: {
     notifyText: ''
   },
-  description: ''
+  description: '',
+  isChangeStatus: false
 });
 
 const combination = handleActions({
@@ -53,9 +54,12 @@ const combination = handleActions({
   SET_NOTIFY_TEXT: (state, { text }) => (
     state.setIn(['notificationConfig', 'notifyText'], text)
   ),
-  SET_COMBINATION_DESCRIPTION:(state, { text }) => (
+  SET_COMBINATION_DESCRIPTION: (state, { text }) => (
     state.set('description', text)
   ),
+  CHANGE_COMBINATION_STATUS: (state) => {
+    return state.set('isChangeStatus', true)
+  }
 
 }, InitialState);
 
