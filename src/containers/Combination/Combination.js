@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { updateCombinationList } from '../../actions/combinationActions';
@@ -10,7 +10,20 @@ import CombinationClass from '../../../lib/Combination';
 class Combination extends React.Component {
   constructor(props) {
     super(props);
+    this.emitter='';
   }
+
+  componentDidMount() {
+    this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
+       setTimeout(() => {
+         this.props.updateCombinationList();
+       }, 1000);
+    });
+  }
+
+  componentWillUnmount(){
+    this.emitter.remove();
+  };
 
   componentWillMount () {
     this.props.updateCombinationList();
@@ -56,7 +69,7 @@ class Combination extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex:1, backgroundColor:'lightgray'}}>
         {this.props.isGetCombinations ?
           <ListView
             dataSource={this._genDataSource(this.props.combinations)}

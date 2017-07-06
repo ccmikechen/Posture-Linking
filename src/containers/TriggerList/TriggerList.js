@@ -51,7 +51,6 @@ class TriggerList extends React.Component {
               dataSource={this._genDataSource(this.props.triggers)}
               renderRow={(trigger) => this.renderRow(trigger)}
             />
-            <Button title='OK' onPress={this.handelOK.bind(this)}/>
           </View>
         :
           <View style={styles.cover}>

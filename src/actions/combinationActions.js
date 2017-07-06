@@ -4,6 +4,7 @@ import { getCombinationManager } from '../../lib/CombinationManager';
 
 export const UPDATE_COMBINATION_LIST = 'UPDATE_COMBINATION_LIST';
 export const IS_GET_COMBINATION_LIST = 'IS_GET_COMBINATION_LIST';
+export const NOT_GET_COMBINATION_LIST = 'NOT_GET_COMBINATION_LIST';
 export const UPDATE_ACTION_LIST = 'UPDATE_ACTION_LIST';
 export const IS_GET_ACTION_LIST = 'IS_GET_ACTION_LIST';
 export const UPDATE_TRIGGER_LIST ='UPDATE_TRIGGER_LIST';
@@ -16,12 +17,11 @@ export const ADD_COMBINATION = 'ADD_COMBINATION';
 
 const combinationManager = getCombinationManager();
 export const updateCombinationList = () => (dispatch) => {
-  let select = false;
-  dispatch({ type: IS_GET_COMBINATION_LIST , select});
+  dispatch({ type: NOT_GET_COMBINATION_LIST});
   let data = combinationManager.getCombinations();
-  select = true;
+  data.reverse();
   dispatch({ type: UPDATE_COMBINATION_LIST, data });
-  dispatch({ type: IS_GET_COMBINATION_LIST, select});
+  dispatch({ type: IS_GET_COMBINATION_LIST});
 }
 
 export const getActionList = () => (dispatch) => {

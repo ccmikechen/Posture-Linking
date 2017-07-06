@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { View, Text, Button, ListView, TouchableOpacity, TextInput, ScrollView, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import ButtonConfig from '../Configs/ButtonConfig';
@@ -12,6 +12,8 @@ class AddCombination extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  
 
   componentWillMount () {
     this.props.setTriggerId('');
@@ -105,7 +107,7 @@ class AddCombination extends React.Component {
     .then(combination => {
       combinationManager.loadCombination(combination);
     })
-    .then(this.props.updateCombinationList())
+    .then(DeviceEventEmitter.emit('listUpdate'))
     .then(
       this.props.navigator.pop({
           screen:'CombinationScreen',
