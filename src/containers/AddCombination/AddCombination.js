@@ -8,6 +8,7 @@ import { setDescription, setActionId, setTriggerId, updateCombinationList } from
 import api from '../../api/poselink';
 import { getCombinationManager } from '../../../lib/CombinationManager';
 import { getServiceById } from '../../../lib/helper';
+import Configs from '../Configs';
 
 class AddCombination extends React.Component {
   constructor(props) {
@@ -181,15 +182,11 @@ class AddCombination extends React.Component {
             </View>
           }
         </View>
-        {this.props.triggerId !='' ?
+        
           <View style={{flex:1, backgroundColor:'#fff', padding:10}}>
-            {this.renderTriggerConfig()}
-            {this.renderActionConfig()}
+            <Configs navigator={this.props.navigator}/>
             {this.renderOK()}
           </View>
-        :
-          null
-        }
       </ScrollView>
     );
   }

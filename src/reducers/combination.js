@@ -14,7 +14,9 @@ const InitialState = Immutable.fromJS({
     notifyText: ''
   },
   description: '',
-  isChangeStatus: false
+  isChangeStatus: false,
+  triggerConfig: {},
+  actionConfig: {}
 });
 
 const combination = handleActions({
