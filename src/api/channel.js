@@ -8,17 +8,23 @@ const getToken = async () => {
 };
 
 const configureChannel = async () => {
+  let token = await getToken();
   let socket = new Socket(SOCKET_URL, {
     logger: (kind, msg, data) => {
+    },
+    params: {
+      'guardian_token': token
     }
   });
-  let token = await getToken();
 
-  socket.connect({guardian_token: token});
+  socket.connect();
+
+  socket.onOpen(event => console.log('Socket connection opened', event));
+  socket.onError(event => console.log('Socket connection error', event));
+  socket.onClose(event => console.log('Socket connection closed', event));
+
   return socket;
 }
-
-const CHANNEL_TOPICS = ['posture:record'];
 
 let socket = null;
 let channels = {};
@@ -26,12 +32,9 @@ let channels = {};
 export const initialSocket = async () => {
   socket = await configureChannel();
   token = await getToken();
-
-  CHANNEL_TOPICS.forEach(topic => (
-    channels[topic] = socket.channel(topic, {guardian_token: token})
-  ));
 }
 
-export const getChannel = (topic) => (
-  channels[topic]
-);
+export const getChannel = async (topic) => {
+  token = await getToken();
+  return socket.channel(topic, {guardian_token: token})
+};

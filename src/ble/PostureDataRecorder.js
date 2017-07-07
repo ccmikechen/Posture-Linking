@@ -4,15 +4,18 @@ class PostureDataRecorder {
   constructor(dataEmitter) {
     this.isRecording = false;
     this.isStarted = false;
+    this.dataEmitter = dataEmitter;
+
+    getChannel('posture:record').then(this.handleChannel.bind(this));
+  }
+
+  handleChannel(channel) {
+    this.channel = channel;
+    this.channel.join();
+    console.log('joined channel');
 
     this.handleDataNotification = this.handleDataNotification.bind(this);
-    this.dataEmitter = dataEmitter;
-    dataEmitter.on('posture:notification', this.handleDataNotification);
-
-    this.channel = getChannel('posture:record');
-    this.channel.join();
-
-    this.channel.push('ping');
+    this.dataEmitter.on('posture:notification', this.handleDataNotification);
   }
 
   handleDataNotification(data) {
@@ -45,8 +48,8 @@ class PostureDataRecorder {
   }
 
   destroy() {
-    this.dataEmitter.removeListener('posture:notification', this.handleDataNotification);
     this.channel.leave();
+    console.log('leaved channel');
   }
 }
 

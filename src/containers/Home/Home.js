@@ -1,12 +1,9 @@
 import React from 'react';
 
 import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  Alert
+  View
 } from 'react-native';
+import TestButton from '../../components/TestButton';
 import styles from './styles';
 
 class Home extends React.Component {
@@ -53,30 +50,22 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.button}
+        <TestButton
           onPress={this.handleButtonPress('scan')}
-        >
-          <Text style={styles.buttonText}>Scan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
+          text='scan'
+        />
+        <TestButton
           onPress={this.handleButtonPress('posture')}
-        >
-          <Text style={styles.buttonText}>Posture</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
+          text='posture'
+        />
+        <TestButton
           onPress={this.handleButtonPress('combination')}
-        >
-          <Text style={styles.buttonText}>Combination</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
+          text='combination'
+        />
+        <TestButton
           onPress={this.handleButtonPress('buttonList')}
-        >
-          <Text style={styles.buttonText}>Button List</Text>
-        </TouchableOpacity>
+          text='buttonList'
+        />
       </View>
     );
   }

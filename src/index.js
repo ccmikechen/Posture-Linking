@@ -4,7 +4,7 @@ import {
 import { AsyncStorage } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import api from './api/poselink';
-import { initialSocket } from './api/channel';
+import { initialSocket, getChannel } from './api/channel';
 import { loadServices } from '../lib/helper';
 import { getCombinationManager } from '../lib/CombinationManager';
 
