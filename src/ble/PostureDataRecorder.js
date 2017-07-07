@@ -4,6 +4,7 @@ class PostureDataRecorder {
   constructor(dataEmitter) {
     this.isRecording = false;
     this.isStarted = false;
+    this.sequenceNumber = 0;
     this.dataEmitter = dataEmitter;
 
     getChannel('posture:record').then(this.handleChannel.bind(this));
@@ -20,22 +21,27 @@ class PostureDataRecorder {
 
   handleDataNotification(data) {
     if (this.isRecording) {
-      this.channel.push('new_data', data);
+      this.sequenceNumber++;
+      this.channel.push('new_data', {
+        data,
+        sequenceNumber: this.sequenceNumber
+      });
     }
   }
 
   start(config) {
-    if (this.isStarted) {
+    if (this.isRecording) {
       return;
     }
     this.bufferedDataList = [];
-    this.started = true;
+    this.isStarted = true;
     this.isRecording = true;
     this.channel.push('start', config);
   }
 
   stop() {
     this.isRecording = false;
+    this.sequenceNumber = 0;
   }
 
   save() {
@@ -43,7 +49,7 @@ class PostureDataRecorder {
       throw new Error('The recorder is not started');
     }
     this.stop();
-    this.started = false;
+    this.isStarted = false;
     this.channel.push('save');
   }
 

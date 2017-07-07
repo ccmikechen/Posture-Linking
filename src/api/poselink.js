@@ -101,13 +101,13 @@ export default {
     server.delete(`/combinations/${id}`)
   ),
   getUserServiceConfig: (serviceId) => (
-    server.get('/user_service_configs', {
+    server.fetch('/user_service_configs', {
       service_id: serviceId
     })
     .then(response => response.data)
   ),
   getUserServiceConfigs: () => (
-    server.get('/user_service_configs')
+    server.fetch('/user_service_configs')
     .then(response => response.data)
   ),
   createUserServiceConfig: (serviceId, config, status) => (
@@ -130,5 +130,9 @@ export default {
         combination_id: payload.combinationId
       }
     })
+  ),
+  getPostures: () => (
+    server.fetch('/posture/postures')
+    .then(response => response.data)
   )
 };
