@@ -77,7 +77,6 @@ class Combination extends React.Component {
             <Text>config: {item.trigger.config.content}</Text>
             <Text>ActionID: {item.action.serviceId}</Text>
             <Text>config: {item.action.config.content}</Text>
-            <Text>{item.status === 1 ? `開啟中` : `關閉中`}</Text>
           </View>
           <View style={{flex:1, flexDirection:'column'}}>
             <Button title='刪除' onPress={()=> this.handleRemove(item)}/>
