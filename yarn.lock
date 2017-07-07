@@ -3352,9 +3352,9 @@ react-native-maps@^0.15.0:
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.15.3.tgz#5d9e0a8e30ecc51dc755b7a3b9d6b6ed5e2dd08c"
 
-react-native-navigation@^1.1.72:
-  version "1.1.126"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.126.tgz#222f391054b2b0011bc3068632ea6e7eec85d1eb"
+react-native-navigation@^1.1.134:
+  version "1.1.134"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.134.tgz#1ede9ea29f2f52159f95cfb5255b40822d6e51a0"
   dependencies:
     lodash "4.x.x"
 

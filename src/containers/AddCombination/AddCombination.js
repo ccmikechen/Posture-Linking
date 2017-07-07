@@ -59,7 +59,9 @@ class AddCombination extends React.Component {
       screen: 'ActionListScreen',
       title: 'Action',
       passProps: {},
-      navigatorStyle: {},
+      navigatorStyle: {
+        
+      },
       animationType: 'slide-up'
     });
   }
@@ -78,7 +80,7 @@ class AddCombination extends React.Component {
 
   renderActionConfig() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, marginTop:10}}>
         {this.props.actionId!='' ?
           this.props.actionId== 4 ? <NotificationConfig /> : null
           :
@@ -91,14 +93,15 @@ class AddCombination extends React.Component {
   renderOK(){
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
-        <View style={{flex:1}}>
+        <View style={{flex:1, marginTop:10}}>
           <Text style={{fontSize:16, height:20 }}>組合描述</Text>
           <TextInput
-            style={{borderWidth:0.6, height:20, fontSize:16}}
-            maxLength={100}
+            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:20, fontSize:16}}
+            maxLength= {100}
+            autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
           />
-          <TouchableOpacity onPress={()=>this.handleOK()}>
+          <TouchableOpacity onPress={()=>this.showAlert()}>
             <View style={{marginTop:20, borderWidth:0, backgroundColor:'#59d059', height:50, alignItems:'center',  justifyContent: 'center'}}>
               <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>組合</Text>
             </View>
@@ -108,6 +111,18 @@ class AddCombination extends React.Component {
     }else{
       return (null)
     }
+  }
+
+  showAlert() {
+    Alert.alert(
+          'PostureLinking',
+          '您確定要關閉新增組合',
+          [
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.handleOK()},
+          ],
+          { cancelable: false }
+        )
   }
 
   handleOK() {

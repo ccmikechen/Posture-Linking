@@ -22,7 +22,7 @@ class CombinationScreen extends React.Component {
       if (event.id == 'add') {
         this.props.navigator.showModal({
           screen:'AddCombinationScreen',
-          title:'首頁',
+          title:'新增組合',
           passProps: {},
           animated:true,
           animationType: 'slide-up'
