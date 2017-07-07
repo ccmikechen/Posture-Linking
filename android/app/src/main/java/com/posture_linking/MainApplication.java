@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
-
 import it.innove.BleManagerPackage;
+import com.posture_linking.modules.posture.PostureDetectorPackage;
 
 public class MainApplication extends NavigationApplication {
   @Override
@@ -30,7 +30,8 @@ public class MainApplication extends NavigationApplication {
       // No need to add RnnPackage and MainReactPackage
       return Arrays.<ReactPackage>asList(
           new BleManagerPackage(),
-          new ReactNativePushNotificationPackage()
+          new ReactNativePushNotificationPackage(),
+          new PostureDetectorPackage()
       );
   }
 

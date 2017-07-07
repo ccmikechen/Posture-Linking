@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 const API = "https://t21.bearlab.io/api";
 

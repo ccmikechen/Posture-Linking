@@ -5,26 +5,22 @@ import styles from './styles';
 
 import PostureDataEmitter from '../../ble/postureDevice';
 
-import PostureRecognizer from '../../ble/PostureRecognizer';
+import PostureDataRecorder from '../../ble/PostureDataRecorder';
 
-class PostureMonitor extends React.Component {
+class PostureRecord extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
     this.postureDataEmitter = new PostureDataEmitter();
-    this.postureRecognizer = new PostureRecognizer(this.postureDataEmitter);
-    this.postureRecognizer.addListener(this.handlePostureRecognition);
+    this.postureDataRecorder = new PostureDataRecorder(this.postureDataEmitter);
   }
 
   componentWillUnmount() {
-    this.postureRecognizer.destroy();
+    console.log('record unmount');
+    this.postureDataRecorder.destroy();
     this.postureDataEmitter.destroy();
-  }
-
-  handlePostureRecognition({ result, label, id }) {
-    console.log('Result: ', result, id);
   }
 
   render() {
@@ -38,4 +34,4 @@ class PostureMonitor extends React.Component {
 
 export default connect((state) => ({
 
-}))(PostureMonitor);
+}))(PostureRecord);

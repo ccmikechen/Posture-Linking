@@ -104,6 +104,4 @@ class PostureDataEmitter extends EventEmitter {
   }
 }
 
-export const createPostureDataEmitter = () => {
-  return new PostureDataEmitter();
-};
+export default PostureDataEmitter;

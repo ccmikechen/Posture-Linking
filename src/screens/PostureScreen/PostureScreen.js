@@ -1,5 +1,5 @@
 import React from 'react';
-import PostureMonitor from '../../containers/PostureMonitor';
+import PostureMenu from '../../containers/PostureMenu';
 
 class PostureScreen extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class PostureScreen extends React.Component {
 
   render() {
     return (
-      <PostureMonitor navigator={this.props.navigator} />
+      <PostureMenu navigator={this.props.navigator} />
     );
   }
 }
