@@ -11,10 +11,10 @@ class NotificationConfig extends React.Component {
 
   render() {
     return (
-      <View style={{padding:5}}>
+      <View style={{}}>
         <Text style={{fontSize:16, backgroundColor:'#FFF' }}>通知文字設定</Text>
         <TextInput
-          style={{height:100, backgroundColor:'#FFF', borderWidth:1, fontSize:16}}
+          style={{height:100, backgroundColor:'#FFF', borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', fontSize:16}}
           multiline = {true}
           numberOfLines = {4}
           maxLength={200}

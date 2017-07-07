@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter, Switch } from 'react-native';
+import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter, Switch, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { updateCombinationList, notUpdateCombinationList, isUpdateCombinationList, setCombinationStatus } from '../../actions/combinationActions';
@@ -39,7 +39,20 @@ class Combination extends React.Component {
     return this.dataSource;
   }
 
+  showAlert(combination) {
+    Alert.alert(
+          '確認',
+          '您確定要刪除組合?',
+          [
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.handleRemove(combination)},
+          ],
+          { cancelable: false }
+        )
+  }
+
   handleRemove(combination) {
+    console.log(combination)
     const combinationManager = getCombinationManager();
     api.removeCombination(combination.id)
     .then(
@@ -77,10 +90,9 @@ class Combination extends React.Component {
             <Text>config: {item.trigger.config.content}</Text>
             <Text>ActionID: {item.action.serviceId}</Text>
             <Text>config: {item.action.config.content}</Text>
-            <Text>{item.status === 1 ? `開啟中` : `關閉中`}</Text>
           </View>
           <View style={{flex:1, flexDirection:'column'}}>
-            <Button title='刪除' onPress={()=> this.handleRemove(item)}/>
+            <Button title='刪除' onPress={()=> this.showAlert(item)}/>
              <Switch style={{marginTop:40}}
              value={item.status ===1 ? true : false} 
              onValueChange={(e) => this.handleStatusChange(combination, e)}

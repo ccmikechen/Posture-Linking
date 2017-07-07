@@ -10,8 +10,9 @@ class ButtonConfig extends React.Component {
 
   render() {
     return (
-      <View style={{height:30, padding:5, flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
-        <Text style={{flex:1, fontSize:16, borderWidth:1, textAlign:'center', backgroundColor:'#fff', }}>按鈕已新增</Text>
+      <View style={{padding:10, height:60, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'column', justifyContent:'center' }}>
+        <Text style={{flex:1, fontSize:14, backgroundColor:'#fff', }}>按鈕:</Text>
+        <Text style={{flex:1, fontSize:16, backgroundColor:'#fff', }}>按鈕按下</Text>
       </View>
     )
   }
