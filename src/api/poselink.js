@@ -134,5 +134,8 @@ export default {
   getPostures: () => (
     server.fetch('/posture/postures')
     .then(response => response.data)
+  ),
+  getLatestModel: (toFile) => (
+    server.downloadFile('/posture/model', toFile)
   )
 };

@@ -1,50 +1,29 @@
 import EventEmitter from 'events';
 import PostureDetector from '../modules/PostureDetector';
+import api from '../api/poselink';
 
 const DATA_LIST_LENGTH = 16;
 const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
 
-const typeMap = {
-   "1": "A0001",
-   "2": "A0002",
-   "3": "A0003",
-   "4": "A0004",
-   "5": "A0005",
-   "6": "A2006",
-   "7": "A0007",
-   "8": "A2008",
-   "9": "A0009",
-   "10": "B3001",
-   "11": "B1002",
-   "12": "B1003",
-   "13": "B1004",
-   "14": "B3005",
-   "15": "B3006",
-   "16": "C3001",
-   "17": "C3002",
-   "18": "D0001",
-   "19": "D0002",
-   "20": "D0003",
-   "21": "D0004",
-   "22": "D0005",
-   "23": "D0006",
-   "24": "D0007",
-   "25": "D2008",
-   "26": "D0009",
-   "27": "E0001",
-   "28": "E0002",
-   "29": "E0003",
-   "30": "E0004"
-};
-
 class PostureRecognizer {
   constructor(dataEmitter) {
+    this.setPostures = this.setPostures.bind(this);
+    this.predictPosture = this.predictPosture.bind(this);
+    this.handlePredictResult = this.handlePredictResult.bind(this);
+    this.handleDataNotification = this.handleDataNotification.bind(this);
+    this.init = this.init.bind(this);
+
+    this.dataEmitter = dataEmitter;
+  }
+
+  async init() {
+    let postures = await api.getPostures();
+    this.setPostures(postures);
+    PostureDetector.reloadModel(postures.length);
     this.eventEmitter = new EventEmitter();
     this.dataList = [];
-    this.handleDataNotification = this.handleDataNotification.bind(this);
-    this.dataEmitter = dataEmitter;
-    dataEmitter.on('posture:notification', this.handleDataNotification);
+    this.dataEmitter.on('posture:notification', this.handleDataNotification);
   }
 
   handleDataNotification(data) {
@@ -56,6 +35,14 @@ class PostureRecognizer {
       let flattenClone = this.flattenDataList(this.dataList);
       this.predictPosture(flattenClone);
     }
+  }
+
+  setPostures(postures) {
+    console.log('postures', postures);
+    this.postures = postures.reduce(({ id, name }, acc) => {
+      acc[id] = name;
+      return acc;
+    }, {});
   }
 
   parseDataToArray(data) {
@@ -72,12 +59,14 @@ class PostureRecognizer {
   }
 
   predictPosture(dataList) {
-    let result = PostureDetector.detect(dataList, (result, label) => {
-      this.eventEmitter.emit(RECOGNITION_EVENT_TITLE, {
-        result,
-        label,
-        id: typeMap[label]
-      });
+    PostureDetector.detect(dataList, this.handlePredictResult);
+  }
+
+  handlePredictResult(result, id) {
+    this.eventEmitter.emit(RECOGNITION_EVENT_TITLE, {
+      result,
+      id,
+      name: this.postures[id]
     });
   }
 

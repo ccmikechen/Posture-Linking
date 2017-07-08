@@ -1,9 +1,6 @@
 package com.posture_linking.modules.posture;
 
-import android.content.res.AssetManager;
 import android.util.Log;
-
-import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,48 +22,34 @@ public class PostureClassifier implements Classifier {
   private int inputRowSize;
   private int inputColumnSize;
 
-  private List<String> labels = new ArrayList<String>();
   private float[] outputs;
   private String[] outputNames;
 
-  private TensorFlowInferenceInterface inferenceInterface;
+  private MyTensorFlowInferenceInterface inferenceInterface;
 
   private PostureClassifier() {
   }
 
   public static Classifier create(
-          AssetManager assetManager,
+          String rootPath,
           String modelFilename,
-          String labelFilename,
           int inputRowSize,
           int inputColumnSize,
+          int numClasses,
           String inputName,
           String outputName)
           throws IOException {
     PostureClassifier c = new PostureClassifier();
     c.inputName = inputName;
     c.outputName = outputName;
-
-    Log.i(TAG, "Reading labels from: " + labelFilename);
-    BufferedReader br = null;
-    br = new BufferedReader(new InputStreamReader(assetManager.open(labelFilename)));
-    String line;
-    while ((line = br.readLine()) != null) {
-      c.labels.add(line);
-    }
-    br.close();
-
-    c.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
-
-    int numClasses =
-      (int) c.inferenceInterface.graphOperation(outputName).output(0).shape().size(0);
-    Log.i(TAG, "Read " + c.labels.size() + " labels, output layer size is " + numClasses);
+    String modelPath = rootPath + "/" + modelFilename;
+    c.inferenceInterface = new MyTensorFlowInferenceInterface(modelPath);
 
     c.inputRowSize = inputRowSize;
     c.inputColumnSize = inputColumnSize;
 
     c.outputNames = new String[]{outputName};
-    c.outputs = new float[numClasses];
+    c.outputs = new float[numClasses + 1];
 
     return c;
   }
@@ -100,7 +83,7 @@ public class PostureClassifier implements Classifier {
         if (outputs[i] > THRESHOLD) {
           pq.add(
             new Recognition(
-              "" + i, labels.size() > i ? labels.get(i) : "unknown", outputs[i]));
+              "" + i, "unknown", outputs[i]));
         }
       }
 

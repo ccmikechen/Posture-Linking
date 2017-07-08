@@ -29,8 +29,8 @@ public class PostureDetectorModule extends ReactContextBaseJavaModule {
 
     }
 
-    this.postureClassifierFactory = new PostureClassifierFactory(reactContext.getAssets());
-    this.postureClassifierFactory.initAndloadFormalPostureClassifier();
+    String rootDataDir = reactContext.getFilesDir().toString();
+    this.postureClassifierFactory = new PostureClassifierFactory(rootDataDir);
   }
 
   @Override
@@ -45,8 +45,8 @@ public class PostureDetectorModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void show(String message, int duration) {
-    Toast.makeText(getReactApplicationContext(), message, duration).show();
+  public void reloadModel(int classes) {
+    this.postureClassifierFactory.initAndloadFormalPostureClassifier(classes);
   }
 
   @ReactMethod

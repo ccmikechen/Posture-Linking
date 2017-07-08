@@ -1,6 +1,6 @@
 package com.posture_linking.modules.posture;
 
-import android.content.res.AssetManager;
+import android.os.Environment;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -10,29 +10,27 @@ public class PostureClassifierFactory {
   private static final String FORMAL_MODEL_OUTPUT_NAME = "output0";
   private static final int FORMAL_MODEL_ROW_SIZE = 17;
   private static final int FORMAL_MODEL_COLUMN_SIZE = 16;
-  private static final String FORMAL_MODEL_FILE = "model/input_graph.pb";
-  private static final String FORMAL_LABEL_FILE = "model/label_strings.txt";
+  private static final String FORMAL_MODEL_FILE = "model.pb";
 
   private Executor executor = Executors.newSingleThreadExecutor();
-  private AssetManager assetManager;
-
+  private String rootPath;
   private Classifier classifier;
 
-  public PostureClassifierFactory(AssetManager assetManager) {
-    this.assetManager = assetManager;
+  public PostureClassifierFactory(String rootPath) {
+    this.rootPath = rootPath;
   }
 
-  public void initAndloadFormalPostureClassifier() {
+  public void initAndloadFormalPostureClassifier(final int classes) {
     executor.execute(new Runnable() {
       @Override
       public void run() {
         try {
           classifier = PostureClassifier.create(
-            assetManager,
+            rootPath,
             FORMAL_MODEL_FILE,
-            FORMAL_LABEL_FILE,
             FORMAL_MODEL_ROW_SIZE,
             FORMAL_MODEL_COLUMN_SIZE,
+            classes,
             FORMAL_MODEL_INPUT_NAME,
             FORMAL_MODEL_OUTPUT_NAME);
         } catch (final Exception e) {
