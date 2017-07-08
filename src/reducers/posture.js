@@ -1,15 +1,15 @@
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 
-const intialRecordForm = {
+const initialRecordForm = Immutable.fromJS({
   height: null,
   weight: null,
   insoleSize: '7',
   posture: 1
-};
+});
 
 const InitialState = Immutable.fromJS({
-  recordForm: intialRecordForm,
+  recordForm: initialRecordForm.toJS(),
   isRecording: false,
   postureTypes: []
 });
@@ -37,7 +37,7 @@ const posture = handleActions({
     state.set('postureTypes', postures)
   ),
   CLEAR_SELECTED_RECORD_FORM: (state) => (
-    state.setIn('recordForm', initialRecordForm)
+    state.set('recordForm', initialRecordForm)
   )
 }, InitialState);
 
