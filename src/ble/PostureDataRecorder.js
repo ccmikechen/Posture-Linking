@@ -33,7 +33,6 @@ class PostureDataRecorder {
     if (this.isRecording) {
       return;
     }
-    this.bufferedDataList = [];
     this.isStarted = true;
     this.isRecording = true;
     this.channel.push('start', config);
@@ -41,16 +40,21 @@ class PostureDataRecorder {
 
   stop() {
     this.isRecording = false;
-    this.sequenceNumber = 0;
   }
 
   save() {
     if (!this.isStarted) {
       throw new Error('The recorder is not started');
     }
-    this.stop();
-    this.isStarted = false;
     this.channel.push('save');
+    this.reset();
+  }
+
+  reset() {
+    this.sequenceNumber = 0;
+    this.stop();
+    this.channel.push('stop');
+    this.isStarted = false;
   }
 
   destroy() {

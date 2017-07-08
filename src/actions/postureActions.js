@@ -7,6 +7,7 @@ export const UPDATE_SELECTED_RECORD_POSTURE = 'UPDATE_SELECTED_RECORD_POSTURE';
 export const UPDATE_RECORD_STARTED = 'UPDATE_RECORD_STARTED';
 export const UPDATE_RECORD_STOPED = 'UPDATE_RECORD_STOPED';
 export const UPDATE_POSTURE_TYPES = 'UPDATE_POSTURE_TYPES';
+export const CLEAR_SELECTED_RECORD_FORM = 'CLEAR_SELECTED_RECORD_FORM';
 
 export const updateSelectedRecordHeight = (value) => (dispatch) => {
   dispatch({ type: UPDATE_SELECTED_RECORD_HEIGHT, value });
@@ -37,4 +38,8 @@ export const loadPostureTypes = () => (dispatch) => {
   .then(postures => {
     dispatch({ type: UPDATE_POSTURE_TYPES, postures })
   })
+}
+
+export const clearRecordForm = () => (dispatch) => {
+  dispatch({ type: CLEAR_SELECTED_RECORD_FORM });
 }

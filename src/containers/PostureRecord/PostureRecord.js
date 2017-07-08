@@ -16,7 +16,8 @@ import {
   updateSelectedRecordPosture,
   startRecording,
   stopRecording,
-  loadPostureTypes
+  loadPostureTypes,
+  clearRecordForm
 } from '../../actions/postureActions';
 
 import PostureDataEmitter from '../../ble/postureDevice';
@@ -32,6 +33,8 @@ class PostureRecord extends React.Component {
     this.handlePostureTypeChange = this.handlePostureTypeChange.bind(this);
     this.handleStartButtonPress = this.handleStartButtonPress.bind(this);
     this.handleStopButtonPress = this.handleStopButtonPress.bind(this);
+    this.saveRecord = this.saveRecord.bind(this);
+    this.cancelRecord = this.cancelRecord.bind(this);
   }
 
   componentWillMount() {
@@ -46,6 +49,7 @@ class PostureRecord extends React.Component {
   componentWillUnmount() {
     this.postureDataRecorder.destroy();
     this.postureDataEmitter.destroy();
+    this.props.clearRecordForm();
   }
 
   startRecording() {
@@ -58,7 +62,24 @@ class PostureRecord extends React.Component {
   }
 
   stopRecording() {
+    this.postureDataRecorder.stop();
+
+    Alert.alert('Posture Record', 'Save record?', [
+      { text: 'Yes', onPress: this.saveRecord },
+      { text: 'No', onPress: this.cancelRecord }
+    ], {
+      cancelable: false
+    });
+  }
+
+  saveRecord() {
     this.postureDataRecorder.save();
+    console.log('saved');
+  }
+
+  cancelRecord() {
+    this.postureDataRecorder.reset();
+    console.log('canceled');
   }
 
   handleHeightChange(height) {
@@ -108,7 +129,7 @@ class PostureRecord extends React.Component {
       postureTypes
     } = this.props;
     let buttonStyle = isRecording? styles.stopButton : styles.startButton;
-    let isButtonEnabled = height && height
+
     return (
       <View style={styles.container}>
         <View style={styles.option}>
@@ -149,8 +170,8 @@ class PostureRecord extends React.Component {
                 onValueChange={this.handleInsoleSizeChange}
                 enabled={!isRecording}
               >
-                <Picker.Item label="6" value={6} />
-                <Picker.Item label="7" value={7} />
+                <Picker.Item label="6" value="6" />
+                <Picker.Item label="7" value="7" />
               </Picker>
             </View>
           </View>
@@ -206,5 +227,6 @@ export default connect((state) => ({
   updateSelectedRecordPosture,
   startRecording,
   stopRecording,
-  loadPostureTypes
+  loadPostureTypes,
+  clearRecordForm
 })(PostureRecord);
