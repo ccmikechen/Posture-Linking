@@ -3,6 +3,7 @@ package com.posture_linking;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
 import it.innove.BleManagerPackage;
+import com.rnfs.RNFSPackage;
 import com.posture_linking.modules.posture.PostureDetectorPackage;
 
 public class MainApplication extends NavigationApplication {
@@ -31,7 +33,8 @@ public class MainApplication extends NavigationApplication {
       return Arrays.<ReactPackage>asList(
           new BleManagerPackage(),
           new ReactNativePushNotificationPackage(),
-          new PostureDetectorPackage()
+          new PostureDetectorPackage(),
+          new RNFSPackage()
       );
   }
 

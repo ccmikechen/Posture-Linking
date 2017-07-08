@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import TestButton from '../../components/TestButton';
 import styles from './styles';
+import api from '../../api/poselink';
 
 class PostureMenu extends React.Component {
   constructor(props) {
@@ -27,8 +28,18 @@ class PostureMenu extends React.Component {
             title: 'Ponitor Record'
           });
           break;
+        case 'update':
+          this.updateModel();
+          break;
       }
     }
+  }
+
+  updateModel() {
+    console.log('start updating');
+    api.getLatestModel('model.pb').then(result => {
+      console.log(result);
+    });
   }
 
   render() {
@@ -45,6 +56,10 @@ class PostureMenu extends React.Component {
         <TestButton
           onPress={this.handleButtonPress('record')}
           text='record'
+        />
+        <TestButton
+          onPress={this.handleButtonPress('update')}
+          text='update'
         />
       </View>
     );

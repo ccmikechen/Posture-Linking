@@ -15,7 +15,9 @@ class PostureMonitor extends React.Component {
   componentDidMount() {
     this.postureDataEmitter = new PostureDataEmitter();
     this.postureRecognizer = new PostureRecognizer(this.postureDataEmitter);
-    this.postureRecognizer.addListener(this.handlePostureRecognition);
+    this.postureRecognizer.init().then(() => {
+      this.postureRecognizer.addListener(this.handlePostureRecognition);
+    })
   }
 
   componentWillUnmount() {
@@ -23,8 +25,8 @@ class PostureMonitor extends React.Component {
     this.postureDataEmitter.destroy();
   }
 
-  handlePostureRecognition({ result, label, id }) {
-    console.log('Result: ', result, id);
+  handlePostureRecognition({ result, name }) {
+    console.log('Result: ', result, name);
   }
 
   render() {

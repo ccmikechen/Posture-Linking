@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import RNFS from 'react-native-fs';
 
 const API = "https://t21.bearlab.io/api";
 
@@ -84,5 +85,19 @@ export default {
       headers
     })
     .then(parseResponse);
+  },
+
+  downloadFile: async (url, toFile) => {
+    console.log(`${RNFS.DocumentDirectoryPath}/${toFile}`);
+    const headers = await getHeaders();
+    const options = {
+      fromUrl: `${API}${url}`,
+      toFile: `${RNFS.DocumentDirectoryPath}/${toFile}`,
+      headers,
+      background: false
+    };
+
+    let job = RNFS.downloadFile(options);
+    return await job.promise;
   }
 };
