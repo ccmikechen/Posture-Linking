@@ -49,11 +49,11 @@ class Configs extends React.Component {
 
   renderTrggerSetting() {
     let trigger = getServiceById(this.props.triggerId);
-    if(isEmpty(this.props.triggerConfig)) {
+    if(this.props.triggerConfig.size ==0) {
       return (
         <View>
           <Text style={{fontSize:16}}>{trigger.name}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
             <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
               <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>詳細設定</Text>
             </View>
@@ -68,19 +68,30 @@ class Configs extends React.Component {
       return (
         <View>
           <TouchableOpacity>
-            <Text style={{fontSize:16}}>{trigger.name}</Text>
             <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
+              <Text style={{fontSize:16}}>{trigger.name}</Text>
               <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>{this.props.triggerConfig}</Text>
             </View>
           </TouchableOpacity>
-
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'column', justifyContent:'center' }}>
-              <Text style={{fontSize:20, backgroundColor:'#fff', color: '#b2b6b2', textAlign:'center'}}>於是Action</Text>
-            </View>
+           <TouchableOpacity onPress={() => this.handelAction()}>
+              <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
+                <Text style={{fontSize:20, backgroundColor:'#fff', color: '#2aa5ce', textAlign:'center'}}>於是Action</Text>
+              </View>
+            </TouchableOpacity>
         </View>
       )
     }
-    
+  }
+
+  handleTriggerSetting() {
+    this.props.navigator.push({
+      screen: 'TriggerSettingScreen',
+      title: 'TriggerSetting',
+      passProps: {},
+      navigatorStyle: {
+      },
+      animationType: 'slide-up'
+    });
   }
 
   render() {

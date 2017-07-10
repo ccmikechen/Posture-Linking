@@ -12,6 +12,9 @@ class Combination extends React.Component {
     super(props);
     this.emitter='';
     this.handleStatusChange = this.handleStatusChange.bind(this);
+    this.state = {
+      combinations : this.props.dataSource
+    }
   }
 
   componentDidMount() {
@@ -69,15 +72,11 @@ class Combination extends React.Component {
 
   handleStatusChange(combination, status) {
       this.props.setCombinationStatus(combination, status==true ? 1 : 0)
-      this.props.notUpdateCombinationList();
-      setTimeout(() => {
-        this.props.updateCombinationList();
-      },1000)
-      
   }
 
   renderRow(combination) {
     let item = combination.getCombination()
+    let status = item.status;
     if(combination.status === 2 ) {
       return null;
     }else {

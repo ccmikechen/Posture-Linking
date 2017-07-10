@@ -66,8 +66,13 @@ export const setDescription = (text) => (dispatch) => {
 
 export const setCombinationStatus = (combination, status) => (dispatch) => {
   combination.setStatus(status)
-  dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
   poselink.updateCombination(combination.getId(), combination.getCombination())
-  .then(combinationManager.reloadAllCombinations())
+  .then(combinationManager.reloadAllCombinations()
+  .then((none) => {
+    let data = combinationManager.getCombinations();
+    dispatch({ type: UPDATE_COMBINATION_LIST, data });
+    return none
+  }))
+  
   
 }

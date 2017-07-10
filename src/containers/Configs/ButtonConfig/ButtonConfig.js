@@ -8,11 +8,18 @@ class ButtonConfig extends React.Component {
     super(props);
   }
 
+  handleSelectConfig() {
+    
+  }
+
   render() {
     return (
-      <View style={{padding:10, height:60, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'column', justifyContent:'center' }}>
-        <Text style={{flex:1, fontSize:14, backgroundColor:'#fff', }}>按鈕:</Text>
-        <Text style={{flex:1, fontSize:16, backgroundColor:'#fff', }}>按鈕按下</Text>
+      <View style={{padding:20}}>
+        <TouchableOpacity>
+          <View style={{height:60, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
+            <Text style={{textAlign:'center', flex:1, fontSize:16, backgroundColor:'#fff', }}>當我按下按鈕</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }
