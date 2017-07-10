@@ -48,11 +48,11 @@ class Combination extends React.Component {
             {text: '確定', onPress: () => this.handleRemove(combination)},
           ],
           { cancelable: false }
-        )
+    );
   }
 
   handleRemove(combination) {
-    console.log(combination)
+    console.log(combination);
     const combinationManager = getCombinationManager();
     api.removeCombination(combination.id)
     .then(
@@ -61,23 +61,21 @@ class Combination extends React.Component {
     .then(this.props.notUpdateCombinationList())
     .then(
       setTimeout(() => {
-        this.props.updateCombinationList()
+        this.props.updateCombinationList();
       }, 1000)
-      
-    )
+    );
   }
 
   handleStatusChange(combination, status) {
-      this.props.setCombinationStatus(combination, status==true ? 1 : 0)
+    this.props.setCombinationStatus(combination, status==true ? 1 : 0);
       this.props.notUpdateCombinationList();
       setTimeout(() => {
         this.props.updateCombinationList();
-      },1000)
-      
+      },1000);
   }
 
   renderRow(combination) {
-    let item = combination.getCombination()
+    let item = combination.getCombination();
     if(combination.status === 2 ) {
       return null;
     }else {
@@ -99,7 +97,7 @@ class Combination extends React.Component {
              />
           </View>
         </View>
-      )
+      );
     }
   }
 
