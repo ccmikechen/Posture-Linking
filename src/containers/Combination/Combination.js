@@ -2,9 +2,13 @@ import React from 'react';
 import { View, Text, Button, ListView, ActivityIndicator, DeviceEventEmitter, Switch, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { updateCombinationList, notUpdateCombinationList, isUpdateCombinationList, setCombinationStatus } from '../../actions/combinationActions';
-import api from '../../api/poselink';
-import { getCombinationManager } from '../../../lib/CombinationManager';
+import {
+  updateCombinationList,
+  notUpdateCombinationList,
+  isUpdateCombinationList,
+  setCombinationStatus
+} from '../../actions/combinationActions';
+
 import CombinationClass from '../../../lib/Combination';
 
 class Combination extends React.Component {
@@ -14,7 +18,7 @@ class Combination extends React.Component {
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.state = {
       combinations : this.props.dataSource
-    }
+    };
   }
 
   componentDidMount() {
@@ -55,6 +59,7 @@ class Combination extends React.Component {
   }
 
   handleRemove(combination) {
+/*
     console.log(combination);
     const combinationManager = getCombinationManager();
     api.removeCombination(combination.id)
@@ -67,6 +72,7 @@ class Combination extends React.Component {
         this.props.updateCombinationList();
       }, 1000)
     );
+ */
   }
 
   handleStatusChange(combination, status) {
@@ -74,8 +80,7 @@ class Combination extends React.Component {
   }
 
   renderRow(combination) {
-    let item = combination.getCombination()
-    let status = item.status;
+    let item = combination;
 
     if(combination.status === 2 ) {
       return null;
@@ -93,7 +98,7 @@ class Combination extends React.Component {
           <View style={{flex:1, flexDirection:'column'}}>
             <Button title='刪除' onPress={()=> this.showAlert(item)}/>
              <Switch style={{marginTop:40}}
-             value={item.status ===1 ? true : false} 
+             value={item.status ===1 ? true : false}
              onValueChange={(e) => this.handleStatusChange(combination, e)}
              />
           </View>
@@ -126,7 +131,7 @@ class Combination extends React.Component {
 
 export default connect((state) =>(
   {
-    combinations: state.getIn(['combination', 'DataSource']),
+    combinations: state.getIn(['combination', 'combinations']).toJS(),
     isGetCombinations: state.getIn(['combination', 'isGetCombinations']),
     isChangeStatus : state.getIn(['combination', 'isChangeStatus'])
   }), {

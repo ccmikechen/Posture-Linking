@@ -2,9 +2,9 @@ import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 
 const InitialState = Immutable.fromJS({
-  DataSource: {},
-  actions: {},
-  triggers: {},
+  combinations: [],
+  actions: [],
+  triggers: [],
   isGetActions: false,
   isGetTriggers: false,
   isGetCombinations: false,
@@ -20,7 +20,15 @@ const InitialState = Immutable.fromJS({
 
 const combination = handleActions({
   UPDATE_COMBINATION_LIST: (state, { data }) => {
-    return state.set('DataSource', data)
+    let combinations = Immutable.fromJS(data.map(combination => ({
+      id: combination.id,
+      status: combination.status,
+      description: combination.description,
+      trigger: combination.trigger,
+      action: combination.action
+    })));
+
+    return state.set('combinations', combinations);
   },
   UPDATE_ACTION_LIST: (state, { actions }) => (
     state.set('actions', actions)
@@ -58,8 +66,16 @@ const combination = handleActions({
   SET_COMBINATION_DESCRIPTION: (state, { text }) => (
     state.set('description', text)
   ),
-  
+  SET_COMBINATION_STATUS: (state, { id, status }) => {
+    let newCombinations = state.get('combinations').map(combination => {
+      if (combination.get('id') == id) {
+        return combination.set('status', status);
+      }
+      return combination;
+    });
 
+    return state.set('combinations', newCombinations);
+  }
 }, InitialState);
 
 export default combination;

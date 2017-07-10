@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -8,12 +8,11 @@ import {
   Alert
 } from 'react-native';
 import styles from './styles';
+import {
+  updateCombinationList
+} from '../../actions/combinationActions';
 
-import { getCombinationManager } from '../../../lib/CombinationManager';
-import NotificationAction from '../../../lib/services/NotificationAction';
 import { getServiceByTypeName } from '../../../lib/helper';
-
-const combinationManager = getCombinationManager();
 
 class ButtonList extends React.Component {
   constructor(props) {
@@ -23,9 +22,7 @@ class ButtonList extends React.Component {
   }
 
   componentWillMount() {
-    this.combinations = combinationManager.getCombinations().filter(combination => {
-      return combination.getTrigger().serviceId == this.buttonTrigger.id;
-    });
+    this.props.updateCombinationList();
   }
 
   handleButtonPress(combinationId) {
@@ -36,10 +33,10 @@ class ButtonList extends React.Component {
     return (
       <TouchableOpacity
         style={styles.button}
-        onPress={() => this.handleButtonPress(combination.getId())}
-        key={combination.getId()}
+        onPress={() => this.handleButtonPress(combination.id)}
+        key={combination.id}
       >
-        <Text style={styles.buttonText}>Combination {combination.getId()}</Text>
+        <Text style={styles.buttonText}>Combination {combination.id}</Text>
       </TouchableOpacity>
     );
   }
@@ -48,11 +45,10 @@ class ButtonList extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.combinations.map(combination => (
-            combination.getCombination().status == 1 ?
-              this.renderButton(combination)
-            :
-            null
+          this.props.combinations.map(combination => (
+            (combination.trigger.serviceId == this.buttonTrigger.id)
+              && (combination.status == 1) ?
+              this.renderButton(combination) : null
           ))
         }
       </View>
@@ -60,4 +56,8 @@ class ButtonList extends React.Component {
   }
 }
 
-export default ButtonList;
+export default connect((state) => ({
+  combinations: state.getIn(['combination', 'combinations']).toJS()
+}), {
+  updateCombinationList
+})(ButtonList);
