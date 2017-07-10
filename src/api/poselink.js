@@ -21,53 +21,53 @@ export default {
       username,
       password
     })
-    .then(response => {
-      let token = response.meta.token;
-      AsyncStorage.setItem('@session:token', token);
-      return token;
-    })
+      .then(response => {
+        let token = response.meta.token;
+        AsyncStorage.setItem('@session:token', token);
+        return token;
+      })
   ),
   destroySession: () => (
     server.delete('/sessions')
-    .then(response => {
-      if (response.ok) {
-        AsyncStorage.setItem('@session:token', '');
-      }
-      return response;
-    })
+      .then(response => {
+        if (response.ok) {
+          AsyncStorage.setItem('@session:token', '');
+        }
+        return response;
+      })
   ),
   refreshSession: () => {
     return server.post('/sessions/refresh')
-    .then(response => {
-      let token = response.meta.token;
-      AsyncStorage.setItem('@session:token', token);
-      return token;
-    });
+      .then(response => {
+        let token = response.meta.token;
+        AsyncStorage.setItem('@session:token', token);
+        return token;
+      });
   },
   createUser: (data) => (
     server.post('/users', {
       ...data
     })
-    .then(response => {
-      let token = response.meta.token;
-      AsyncStorage.setItem('@session:token', token);
-      return token;
-    })
+      .then(response => {
+        let token = response.meta.token;
+        AsyncStorage.setItem('@session:token', token);
+        return token;
+      })
   ),
   getCurrentUser: () => (
     server.fetch('/sessions/user')
-    .then(response => response.data)
+      .then(response => response.data)
   ),
   getServices: () => (
     server.fetch('/services')
-    .then(response => response.data)
+      .then(response => response.data)
   ),
   getCombinations: () => (
     server.fetch('/combinations')
-    .then(response => response.data)
-    .then(data => (
-      data.map(parseCombination)
-    ))
+      .then(response => response.data)
+      .then(data => (
+        data.map(parseCombination)
+      ))
   ),
   createCombination: (data) => (
     server.post("/combinations", {
@@ -81,8 +81,8 @@ export default {
         config: data.action.config
       }
     })
-    .then(response => response.data)
-    .then(parseCombination)
+      .then(response => response.data)
+      .then(parseCombination)
   ),
   updateCombination: (id, data) => (
     server.patch(`/combinations/${id}`, {
@@ -97,6 +97,12 @@ export default {
       }
     })
   ),
+  updateCombinationStatus: (id, status) => (
+    server.patch(`/combination/status`, {
+      id,
+      status
+    })
+  ),
   removeCombination: (id) => (
     server.delete(`/combinations/${id}`)
   ),
@@ -104,11 +110,11 @@ export default {
     server.fetch('/user_service_configs', {
       service_id: serviceId
     })
-    .then(response => response.data)
+      .then(response => response.data)
   ),
   getUserServiceConfigs: () => (
     server.fetch('/user_service_configs')
-    .then(response => response.data)
+      .then(response => response.data)
   ),
   createUserServiceConfig: (serviceId, config, status) => (
     server.post('/user_service_configs', {
@@ -133,7 +139,7 @@ export default {
   ),
   getPostures: () => (
     server.fetch('/posture/postures')
-    .then(response => response.data)
+      .then(response => response.data)
   ),
   getLatestModel: (toFile) => (
     server.downloadFile('/posture/model', toFile)

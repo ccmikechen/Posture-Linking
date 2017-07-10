@@ -24,7 +24,7 @@ const configureChannel = async () => {
   socket.onClose(event => console.log('Socket connection closed', event));
 
   return socket;
-}
+};
 
 let socket = null;
 let channels = {};
@@ -32,9 +32,9 @@ let channels = {};
 export const initialSocket = async () => {
   socket = await configureChannel();
   token = await getToken();
-}
+};
 
 export const getChannel = async (topic) => {
   token = await getToken();
-  return socket.channel(topic, {guardian_token: token})
+  return socket.channel(topic, {guardian_token: token});
 };

@@ -24,55 +24,53 @@ export const updateCombinationList = () => (dispatch) => {
   let data = combinationManager.getCombinations();
   dispatch({ type: UPDATE_COMBINATION_LIST, data });
   dispatch({ type: IS_GETTING_COMBINATION_LIST});
-}
+};
 
 export const notUpdateCombinationList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
-}
+};
 
 export const isUpdateCombinationList = () => (dispatch) => {
   dispatch({ type: IS_GETTING_COMBINATION_LIST});
-}
+};
 
 export const getActionList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_ACTION_LIST });
   let actions = getActionService();
   dispatch({ type: UPDATE_ACTION_LIST, actions });
   dispatch({ type: IS_GETTING_ACTION_LIST });
-}
+};
 
 export const getTriggerList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_TRIGGER_LIST });
   let triggers = getTriggerService();
   dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
   dispatch({ type: IS_GETTING_TRIGGER_LIST });
-}
+};
 
 export const setTriggerId = (id) => (dispatch) => {
   dispatch({ type: GET_TRIGGER_ID, id });
-}
+};
 
 export const setActionId = (id) => (dispatch) => {
   dispatch({ type: GET_ACTION_ID, id });
-}
+};
 
 export const setNotifyText = (text) => (dispatch) => {
   dispatch({ type: SET_NOTIFY_TEXT, text });
-}
+};
 
 export const setDescription = (text) => (dispatch) => {
   dispatch({ type: SET_COMBINATION_DESCRIPTION, text });
-}
+};
 
 export const setCombinationStatus = (combination, status) => (dispatch) => {
   combination.setStatus(status)
-  poselink.updateCombination(combination.getId(), combination.getCombination())
+  poselink.updateCombinationStatus(combination.getId(), status)
   .then(combinationManager.reloadAllCombinations()
   .then((none) => {
     let data = combinationManager.getCombinations();
     dispatch({ type: UPDATE_COMBINATION_LIST, data });
     return none
-  }))
-  
-  
-}
+  }));
+};
