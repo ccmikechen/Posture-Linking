@@ -136,7 +136,7 @@ class Configs extends React.Component {
           </TouchableOpacity>
            <TouchableOpacity onPress={() => this.handleActionSetting()}>
               <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
-                <Text style={{fontSize:16}}>{trigger.name}</Text>
+                <Text style={{fontSize:16}}>{action.name}</Text>
                 <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.actionConfig.text}</Text>
               </View>
             </TouchableOpacity>
@@ -148,7 +148,7 @@ class Configs extends React.Component {
   render() {
     return (
       <View>
-        {this.props.triggerId =='' ? this.renderNew() : this.actionId == '' ? this.renderTrggerSetting() : this.renderActionSetting()}
+        {this.props.triggerId =='' ? this.renderNew() : this.props.actionId == '' ? this.renderTrggerSetting() : this.renderActionSetting()}
       </View>
     )
   }

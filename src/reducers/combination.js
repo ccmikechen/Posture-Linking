@@ -14,7 +14,14 @@ const InitialState = Immutable.fromJS({
   triggerConfig: {},
   actionConfig: {},
   selectedTriggerConfig: '',
-  selectedActionConfig: ''
+  selectedActionConfig: '',
+  eventList : [],
+  selectedEvent: [],
+  isGettingEvents: false,
+  isGettingEvent: false,
+  selectedOption:[],
+  isGetTriggerConfig: false,
+  isGetActionConfig: false
 });
 
 const combination = handleActions({
@@ -95,7 +102,34 @@ const combination = handleActions({
     });
     
     return state.set('combinations', newCombinations);
-  }
+  },
+  GET_EVENTS: (state, { events }) => (
+    state.set('eventList', events)
+  ),
+  GET_EVENT: (state, { event }) => (
+    state.set('selectedEvent', event)
+  ),
+  IS_GETTING_EVENTS: (state) => (
+    state.set('isGettingEvents', true)
+  ),
+  IS_NOT_GETTING_EVENTS: (state) => (
+    state.set('isGettingEvents', false)
+  ),
+  IS_GETTING_EVENT: (state) => (
+    state.set('isGettingEvent', true)
+  ),
+  IS_NOT_GETTING_EVENT: (state) => (
+    state.set('isGettingEvent', false)
+  ),
+  SELECT_OPTION: (state, { option }) => (
+    state.set('selectedOption', option)
+  ),
+  IS_GETTING_TRIGGER_CONFIG: (state) => (
+    state.set('isGetTriggerConfig', true)
+  ),
+  IS_GETTING_ACTION_CONFIG: (state) => (
+    state.set('isGetActionConfig', true)
+  )
 }, InitialState);
 
 export default combination;

@@ -81,9 +81,9 @@ class Combination extends React.Component {
             <Text>Combination ID: {combination.id}</Text>
             <Text>description: {combination.description}</Text>
             <Text>TriggerID: {combination.trigger.serviceId}</Text>
-            <Text>config: {combination.trigger.config.content}</Text>
+            <Text>config: {combination.trigger.config.time}</Text>
             <Text>ActionID: {combination.action.serviceId}</Text>
-            <Text>config: {combination.action.config.content}</Text>
+            <Text>config: {combination.action.config.message}</Text>
           </View>
           <View style={{flex:1, flexDirection:'column'}}>
             <Button title='刪除' onPress={()=> this.showAlert(combination)}/>

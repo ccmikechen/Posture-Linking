@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, Button, ListView, TouchableOpacity, TextInput, ScrollView, DeviceEventEmitter, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import ButtonConfig from '../Configs/ButtonConfig';
-import NotificationConfig from '../Configs/NotificationConfig';
 import { setDescription,
   setActionId,
   setTriggerId,
@@ -76,7 +74,7 @@ class AddCombination extends React.Component {
         <View style={{flex:1, marginTop:10}}>
           <Text style={{fontSize:16, height:20 }}>組合描述</Text>
           <TextInput
-            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:20, fontSize:16}}
+            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:40, fontSize:25}}
             maxLength= {100}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
@@ -96,7 +94,7 @@ class AddCombination extends React.Component {
   showAlert() {
     Alert.alert(
           'PostureLinking',
-          '您確定要關閉新增組合',
+          '您確定要新增組合',
           [
             {text: '取消', onPress: () => null},
             {text: '確定', onPress: () => this.handleOK()},
@@ -111,30 +109,17 @@ class AddCombination extends React.Component {
       status:1,
       trigger: {
         serviceId: this.props.triggerId,
+        eventId: this.props.selectedTriggerConfig,
         config: this.props.triggerConfig
       },
       action :{
         serviceId: this.props.actionId,
+        eventId: this.props.selectedActionConfig,
         config: this.props.actionConfig
       }
     }
-
-    let data2 = {
-      description: 'test',
-      status:1,
-      trigger: {
-        serviceId: 1,
-        config: {}
-      },
-      action :{
-        serviceId: 4,
-        config: {
-          content:'test123123123123123'
-        }
-      }
-    }
-
-    this.props.createCombination(data2)
+    
+    this.props.createCombination(data)
     .then(DeviceEventEmitter.emit('listUpdate'))
     .then(
       this.props.navigator.dismissModal({
@@ -157,22 +142,23 @@ class AddCombination extends React.Component {
               <Text style={{textAlign: 'center', fontSize:20, fontWeight:'bold', color:'#fff'}}>{triggerName}</Text>
             </View>
           </TouchableOpacity>
-          {this.props.triggerId !='' ?
-          <TouchableOpacity onPress={this.handelAction.bind(this)}>
-            <View style={{backgroundColor:'#369fd3', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
-            </View>
-          </TouchableOpacity>
+          {this.props.isGetTriggerConfig ?
+            <TouchableOpacity onPress={this.handelAction.bind(this)}>
+              <View style={{backgroundColor:'#369fd3', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
+                <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
+              </View>
+            </TouchableOpacity>
           :
             <View style={{backgroundColor:'#b2b4b5', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
               <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
             </View>
           }
         </View>
-        
           <View style={{flex:1, backgroundColor:'#fff', padding:10}}>
             <Configs navigator={this.props.navigator}/>
-            {this.renderOK()}
+            {(this.props.isGetTriggerConfig && this.props.isGetActionConfig) == true ? 
+              this.renderOK() : null
+            }
           </View>
       </ScrollView>
     );
@@ -182,7 +168,13 @@ class AddCombination extends React.Component {
 export default connect((state) => ({
   triggerId: state.getIn(['combination', 'triggerId']),
   actionId: state.getIn(['combination', 'actionId']),
-  description: state.getIn(['combination', 'description'])
+  description: state.getIn(['combination', 'description']),
+  triggerConfig: state.getIn(['combination', 'triggerConfig']),
+  actionConfig: state.getIn(['combination', 'triggerConfig']),
+  selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
+  selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
+  isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
+  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig']),
 }), {
   setDescription,
   setActionId,

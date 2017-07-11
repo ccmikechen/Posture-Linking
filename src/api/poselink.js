@@ -6,11 +6,13 @@ const parseCombination = (combination) => ({
   description: combination.description,
   trigger: {
     serviceId: combination.trigger.service_id,
-    config: combination.trigger.config
+    config: combination.trigger.config,
+    eventId: combination.trigger.event_id
   },
   action: {
     serviceId: combination.action.service_id,
-    config: combination.action.config
+    config: combination.action.config,
+    eventId: combination.action.event_id
   },
   status: combination.status
 });
@@ -74,11 +76,13 @@ export default {
       ...data,
       trigger: {
         service_id: data.trigger.serviceId,
-        config: data.trigger.config
+        config: data.trigger.config,
+        event_id: data.trigger.eventId
       },
       action: {
         service_id: data.action.serviceId,
-        config: data.action.config
+        config: data.action.config,
+        event_id: data.action.eventId
       }
     })
       .then(response => response.data)
