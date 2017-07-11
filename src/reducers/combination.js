@@ -10,12 +10,11 @@ const InitialState = Immutable.fromJS({
   isGetCombinations: false,
   triggerId: '',
   actionId: '',
-  notificationConfig: {
-    notifyText: ''
-  },
   description: '',
   triggerConfig: {},
-  actionConfig: {}
+  actionConfig: {},
+  selectedTriggerConfig: '',
+  selectedActionConfig: ''
 });
 
 const combination = handleActions({
@@ -60,11 +59,20 @@ const combination = handleActions({
   GET_ACTION_ID: (state, { id }) => (
     state.set('actionId', id)
   ),
-  SET_NOTIFY_TEXT: (state, { text }) => (
-    state.setIn(['notificationConfig', 'notifyText'], text)
-  ),
   SET_COMBINATION_DESCRIPTION: (state, { text }) => (
     state.set('description', text)
+  ),
+  SET_TRIGGER_CONFIG: (state, { config }) => (
+    state.set('triggerConfig', config)
+  ),
+  SET_ACTION_CONFIG: (state, { config }) => (
+    state.set('actionConfig', config)
+  ),
+  SET_SELECTED_TRIGGER_CONFIG: (state, { id }) => (
+    state.set('selectedTriggerConfig', id)
+  ),
+  SET_SELECTED_ACTION_CONFIG: (state, { id }) => (
+    state.set('selectedActionConfig', id)
   ),
   SET_COMBINATION_STATUS: (state, { id, status }) => {
     let newCombinations = state.get('combinations').map(combination => {
@@ -74,6 +82,18 @@ const combination = handleActions({
       return combination;
     });
 
+    return state.set('combinations', newCombinations);
+  },
+  CREATE_COMBINATION: (state, { combination }) => {
+    let newCombinations = state.get('combinations').push(combination);
+
+    return state.set('combinations', newCombinations);
+  },
+  REMOVE_COMBINATION: (state, { id }) => {
+    let newCombinations = state.get('combinations').filter(combination => {
+      return combination.toJS().id != id;
+    });
+    
     return state.set('combinations', newCombinations);
   }
 }, InitialState);

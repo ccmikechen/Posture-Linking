@@ -1,7 +1,7 @@
 import React from 'react';
 import TriggerSetting from '../../containers/TriggerSetting';
 
-class TriggerListScreen extends React.Component {
+class TriggerSettingScreen extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,4 +13,4 @@ class TriggerListScreen extends React.Component {
   }
 }
 
-export default TriggerListScreen;
+export default TriggerSettingScreen;

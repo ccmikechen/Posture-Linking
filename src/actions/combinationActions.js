@@ -11,10 +11,15 @@ export const IS_NOT_GETTING_ACTION_LIST = 'IS_NOT_GETTING_ACTION_LIST';
 export const UPDATE_TRIGGER_LIST ='UPDATE_TRIGGER_LIST';
 export const IS_GETTING_TRIGGER_LIST = 'IS_GETTING_TRIGGER_LIST';
 export const IS_NOT_GETTING_TRIGGER_LIST = 'IS_NOT_GETTING_TRIGGER_LIST';
+export const CREATE_COMBINATION = 'CREATE_COMBINATION';
+export const REMOVE_COMBINATION = 'REMOVE_COMBINATION';
 export const GET_TRIGGER_ID = 'GET_TRIGGER_ID';
 export const GET_ACTION_ID = 'GET_ACTION_ID';
-export const SET_NOTIFY_TEXT = 'SET_NOTIFY_TEXT';
 export const SET_COMBINATION_DESCRIPTION = 'SET_COMBINATION_DESCRIPTION';
+export const SET_TRIGGER_CONFIG = 'SET_TRIGGER_CONFIG';
+export const SET_ACTION_CONFIG = 'SET_ACTION_CONFIG';
+export const SET_SELECTED_TRIGGER_CONFIG = 'SET_SELECTED_TRIGGER_CONFIG';
+export const SET_SELECTED_ACITON_CONFIG = 'SET_SELECTED_ACTION_CONFIG';
 export const ADD_COMBINATION = 'ADD_COMBINATION';
 export const SET_COMBINATION_STATUS = 'SET_COMBINATION_STATUS';
 
@@ -57,17 +62,48 @@ export const setActionId = (id) => (dispatch) => {
   dispatch({ type: GET_ACTION_ID, id });
 };
 
-export const setNotifyText = (text) => (dispatch) => {
-  dispatch({ type: SET_NOTIFY_TEXT, text });
-};
-
 export const setDescription = (text) => (dispatch) => {
   dispatch({ type: SET_COMBINATION_DESCRIPTION, text });
 };
 
+export const setTriggerConfig = (config) => (dispatch) => {
+  dispatch({ type: SET_TRIGGER_CONFIG, config });
+};
+
+export const setActionConfig = (config) => (dispatch) => {
+  dispatch({ type: SET_ACTION_CONFIG, config });
+};
+
+export const setSelectedTriggerConfig = (id) => (dispatch) => {
+  dispatch({ type: SET_SELECTED_TRIGGER_CONFIG, id });
+};
+
+export const setSelectedActionConfig = (id) => (dispatch) => {
+  dispatch({ type: SET_SELECTED_ACTION_CONFIG, id });
+};
+
+export const createCombination = (data) => (dispatch) => {
+  return poselink.createCombination(data)
+  .then((combination) => {
+    combinationManager.loadCombination(combination);
+    return combination;
+  }).then((combination) => {
+    dispatch({ type:CREATE_COMBINATION, combination });
+    return combination;
+  })
+};
+
+export const removeCombination = (combination) => (dispatch) => {
+  let id = combination.id;
+    return poselink.removeCombination(combination.id)
+    .then(
+      combinationManager.removeCombination(combination)
+    ).then(dispatch({ type:REMOVE_COMBINATION, id }))
+}
+
 export const setCombinationStatus = (combination, status) => (dispatch) => {
   combinationManager.getCombinationById(combination.id).setStatus(status);
-  poselink.updateCombinationStatus(combination.id, status);
+  poselink.updateCombinationStatus(combination.id,  status);
 
   dispatch({
     type: SET_COMBINATION_STATUS,

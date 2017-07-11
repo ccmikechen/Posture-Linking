@@ -29,7 +29,7 @@ class TriggerList extends React.Component {
       passProps: {},
       navigatorStyle: {},
       animationType: 'slide-down'
-    })
+    });
   }
 
   renderRow(trigger) {

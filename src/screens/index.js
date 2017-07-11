@@ -13,6 +13,7 @@ import TriggerListScreen from './TriggerListScreen';
 import ActionListScreen from './ActionListScreen';
 import ButtonListScreen from './ButtonListScreen';
 import TriggerSettingScreen from './TriggerSettingScreen';
+import TriggerSelectConfigScreen from './TriggerSelectConfigScreen';
 
 export function registerScreens() {
   Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider);
@@ -26,4 +27,5 @@ export function registerScreens() {
   Navigation.registerComponent('ActionListScreen', () => ActionListScreen, store, Provider);
   Navigation.registerComponent('ButtonListScreen', () => ButtonListScreen, store, Provider);
   Navigation.registerComponent('TriggerSettingScreen', () => TriggerSettingScreen, store, Provider);
+  Navigation.registerComponent('TriggerSelectConfigScreen', () => TriggerSelectConfigScreen, store, Provider);
 }

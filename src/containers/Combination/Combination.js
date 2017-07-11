@@ -6,10 +6,9 @@ import {
   updateCombinationList,
   notUpdateCombinationList,
   isUpdateCombinationList,
-  setCombinationStatus
+  setCombinationStatus,
+  removeCombination
 } from '../../actions/combinationActions';
-
-import CombinationClass from '../../../lib/Combination';
 
 class Combination extends React.Component {
   constructor(props) {
@@ -59,20 +58,13 @@ class Combination extends React.Component {
   }
 
   handleRemove(combination) {
-/*
-    console.log(combination);
-    const combinationManager = getCombinationManager();
-    api.removeCombination(combination.id)
-    .then(
-      combinationManager.removeCombination(new CombinationClass(combination))
-    )
+    this.props.removeCombination(combination)
     .then(this.props.notUpdateCombinationList())
     .then(
       setTimeout(() => {
         this.props.updateCombinationList();
       }, 1000)
     );
- */
   }
 
   handleStatusChange(combination, status) {
@@ -80,25 +72,23 @@ class Combination extends React.Component {
   }
 
   renderRow(combination) {
-    let item = combination;
-
     if(combination.status === 2 ) {
       return null;
     } else {
       return (
         <View style={{flex:1, backgroundColor:'#4edbda', padding:5, marginBottom:3, flexDirection:'row'}}>
           <View style={{flex:4}}>
-            <Text>Combination ID: {item.id}</Text>
-            <Text>description: {item.description}</Text>
-            <Text>TriggerID: {item.trigger.serviceId}</Text>
-            <Text>config: {item.trigger.config.content}</Text>
-            <Text>ActionID: {item.action.serviceId}</Text>
-            <Text>config: {item.action.config.content}</Text>
+            <Text>Combination ID: {combination.id}</Text>
+            <Text>description: {combination.description}</Text>
+            <Text>TriggerID: {combination.trigger.serviceId}</Text>
+            <Text>config: {combination.trigger.config.content}</Text>
+            <Text>ActionID: {combination.action.serviceId}</Text>
+            <Text>config: {combination.action.config.content}</Text>
           </View>
           <View style={{flex:1, flexDirection:'column'}}>
-            <Button title='刪除' onPress={()=> this.showAlert(item)}/>
+            <Button title='刪除' onPress={()=> this.showAlert(combination)}/>
              <Switch style={{marginTop:40}}
-             value={item.status ===1 ? true : false}
+             value={combination.status ===1 ? true : false}
              onValueChange={(e) => this.handleStatusChange(combination, e)}
              />
           </View>
@@ -138,5 +128,6 @@ export default connect((state) =>(
     updateCombinationList,
     notUpdateCombinationList,
     isUpdateCombinationList,
-    setCombinationStatus
+    setCombinationStatus,
+    removeCombination
   })(Combination);

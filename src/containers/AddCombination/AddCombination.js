@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import styles from './styles';
 import ButtonConfig from '../Configs/ButtonConfig';
 import NotificationConfig from '../Configs/NotificationConfig';
-import { setDescription, setActionId, setTriggerId, updateCombinationList } from '../../actions/combinationActions';
+import { setDescription,
+  setActionId,
+  setTriggerId,
+  updateCombinationList,
+  createCombination } from '../../actions/combinationActions';
 import api from '../../api/poselink';
-import { getCombinationManager } from '../../../lib/CombinationManager';
 import { getServiceById } from '../../../lib/helper';
 import Configs from '../Configs';
 
@@ -67,30 +70,6 @@ class AddCombination extends React.Component {
     });
   }
 
-  renderTriggerConfig() {
-    return (
-      <View style={{flex:1}}>
-          {this.props.triggerId!='' ?
-            this.props.triggerId==1 ? <ButtonConfig /> : null
-            :
-            null
-          }
-      </View>
-    )
-  }
-
-  renderActionConfig() {
-    return (
-      <View style={{flex:1, marginTop:10}}>
-        {this.props.actionId!='' ?
-          this.props.actionId== 4 ? <NotificationConfig /> : null
-          :
-          null
-        }
-      </View>
-    )
-  }
-
   renderOK(){
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
@@ -127,27 +106,35 @@ class AddCombination extends React.Component {
   }
 
   handleOK() {
-    const combinationManager = getCombinationManager();
     let data = {
       description: this.props.description,
       status:1,
       trigger: {
         serviceId: this.props.triggerId,
-        config: {
-        }
+        config: this.props.triggerConfig
       },
       action :{
         serviceId: this.props.actionId,
+        config: this.props.actionConfig
+      }
+    }
+
+    let data2 = {
+      description: 'test',
+      status:1,
+      trigger: {
+        serviceId: 1,
+        config: {}
+      },
+      action :{
+        serviceId: 4,
         config: {
-          content: this.props.notificationConfig.notifyText
+          content:'test123123123123123'
         }
       }
     }
 
-    api.createCombination(data)
-    .then(combination => {
-      combinationManager.loadCombination(combination);
-    })
+    this.props.createCombination(data2)
     .then(DeviceEventEmitter.emit('listUpdate'))
     .then(
       this.props.navigator.dismissModal({
@@ -195,8 +182,11 @@ class AddCombination extends React.Component {
 export default connect((state) => ({
   triggerId: state.getIn(['combination', 'triggerId']),
   actionId: state.getIn(['combination', 'actionId']),
-  notificationConfig: state.getIn(['combination', 'notificationConfig']).toJS(),
   description: state.getIn(['combination', 'description'])
 }), {
-  setDescription, setActionId, setTriggerId, updateCombinationList
+  setDescription,
+  setActionId,
+  setTriggerId,
+  updateCombinationList,
+  createCombination
 })(AddCombination);

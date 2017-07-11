@@ -49,6 +49,8 @@ class Configs extends React.Component {
 
   renderTrggerSetting() {
     let trigger = getServiceById(this.props.triggerId);
+    console.log(this.props.triggerConfig.size)
+
     if(this.props.triggerConfig.size ==0) {
       return (
         <View>
@@ -67,10 +69,10 @@ class Configs extends React.Component {
     }else{
       return (
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
             <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
               <Text style={{fontSize:16}}>{trigger.name}</Text>
-              <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>{this.props.triggerConfig}</Text>
+              <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
             </View>
           </TouchableOpacity>
            <TouchableOpacity onPress={() => this.handelAction()}>
@@ -85,12 +87,11 @@ class Configs extends React.Component {
 
   handleTriggerSetting() {
     this.props.navigator.push({
-      screen: 'TriggerSettingScreen',
-      title: 'TriggerSetting',
+      screen: 'TriggerSelectConfigScreen',
+      title: 'TriggerSelectSetting',
       passProps: {},
       navigatorStyle: {
-      },
-      animationType: 'slide-up'
+      }
     });
   }
 
