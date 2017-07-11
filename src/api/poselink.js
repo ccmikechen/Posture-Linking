@@ -75,14 +75,12 @@ export default {
     server.post("/combinations", {
       ...data,
       trigger: {
-        service_id: data.trigger.serviceId,
-        config: data.trigger.config,
-        event_id: data.trigger.eventId
+        event_id: data.trigger.eventId,
+        config: data.trigger.config
       },
       action: {
-        service_id: data.action.serviceId,
-        config: data.action.config,
-        event_id: data.action.eventId
+        event_id: data.action.eventId,
+        config: data.action.config
       }
     })
       .then(response => response.data)
@@ -92,11 +90,11 @@ export default {
     server.patch(`/combinations/${id}`, {
       ...data,
       trigger: {
-        service_id: data.trigger.serviceId,
+        event_id: data.trigger.eventId,
         config: data.trigger.config
       },
       action: {
-        service_id: data.action.serviceId,
+        event_id: data.action.eventId,
         config: data.action.config
       }
     })
@@ -133,9 +131,9 @@ export default {
       config
     })
   ),
-  trigger: (serviceId, payload) => (
+  trigger: (eventId, payload) => (
     server.post('/trigger/trigger', {
-      service_id: serviceId,
+      event_id: eventId,
       payload: {
         combination_id: payload.combinationId
       }

@@ -108,12 +108,10 @@ class AddCombination extends React.Component {
       description: this.props.description,
       status:1,
       trigger: {
-        serviceId: this.props.triggerId,
         eventId: this.props.selectedTriggerConfig,
         config: this.props.triggerConfig
       },
       action :{
-        serviceId: this.props.actionId,
         eventId: this.props.selectedActionConfig,
         config: this.props.actionConfig
       }
