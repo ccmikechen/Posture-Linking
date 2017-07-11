@@ -151,3 +151,4 @@ export default connect((state) => ({
   getEvent,
   setSelectedOption
 })(ActionSetting);
+

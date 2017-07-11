@@ -47,6 +47,7 @@ class Configs extends React.Component {
           onPress={() => this.handleTrigger()}
         />
 
+
         <AddCombinationDetail
           text='則 ○○'
           status={0}
@@ -151,6 +152,7 @@ class Configs extends React.Component {
           />
         </View>
       );
+
     }
   }
 
