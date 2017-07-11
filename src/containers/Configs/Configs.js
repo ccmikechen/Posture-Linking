@@ -9,7 +9,7 @@ class Configs extends React.Component {
     super(props);
   }
 
-  handelTrigger() {
+  handleTrigger() {
     this.props.navigator.showModal({
       screen: 'TriggerListScreen',
       title: 'Trigger',
@@ -19,7 +19,7 @@ class Configs extends React.Component {
     });
   }
 
-  handelAction() {
+  handleAction() {
     this.props.navigator.showModal({
       screen: 'ActionListScreen',
       title: 'Action',
@@ -34,7 +34,7 @@ class Configs extends React.Component {
   renderNew() {
     return (
       <View>
-        <TouchableOpacity onPress={() => this.handelTrigger()}>
+        <TouchableOpacity onPress={() => this.handleTrigger()}>
           <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginTop:50, marginBottom:50 }}>
             <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>如果Tirgger</Text>
           </View>
@@ -49,7 +49,6 @@ class Configs extends React.Component {
 
   renderTrggerSetting() {
     let trigger = getServiceById(this.props.triggerId);
-    console.log(this.props.triggerConfig.size)
 
     if(this.props.triggerConfig.size ==0) {
       return (
@@ -75,7 +74,7 @@ class Configs extends React.Component {
               <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
             </View>
           </TouchableOpacity>
-           <TouchableOpacity onPress={() => this.handelAction()}>
+           <TouchableOpacity onPress={() => this.handleAction()}>
               <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
                 <Text style={{fontSize:20, backgroundColor:'#fff', color: '#2aa5ce', textAlign:'center'}}>於是Action</Text>
               </View>
@@ -95,10 +94,61 @@ class Configs extends React.Component {
     });
   }
 
+    handleActionSetting() {
+    this.props.navigator.push({
+      screen: 'ActionSelectConfigScreen',
+      title: 'ActionSelectSetting',
+      passProps: {},
+      navigatorStyle: {
+      }
+    });
+  }
+
+  renderActionSetting() {
+    let trigger = getServiceById(this.props.triggerId);
+    let action = getServiceById(this.props.actionId);
+
+    if(this.props.actionConfig.size ==0) {
+      return (
+        <View>
+          <Text style={{fontSize:16}}>{trigger.name}</Text>
+          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
+            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
+              <Text style={{fontSize:16}}>{trigger.name}</Text>
+              <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.handleActionSetting()}>
+            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
+              <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>詳細設定</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )
+    }else{
+      return (
+        <View>
+          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
+            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
+              <Text style={{fontSize:16}}>{trigger.name}</Text>
+              <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
+            </View>
+          </TouchableOpacity>
+           <TouchableOpacity onPress={() => this.handleActionSetting()}>
+              <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
+                <Text style={{fontSize:16}}>{trigger.name}</Text>
+                <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.actionConfig.text}</Text>
+              </View>
+            </TouchableOpacity>
+        </View>
+      )
+    }
+  }
+
   render() {
     return (
       <View>
-        {this.props.triggerId =='' ? this.renderNew() : this.renderTrggerSetting()}
+        {this.props.triggerId =='' ? this.renderNew() : this.actionId == '' ? this.renderTrggerSetting() : this.renderActionSetting()}
       </View>
     )
   }
