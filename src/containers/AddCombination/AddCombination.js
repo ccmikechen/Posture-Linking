@@ -111,11 +111,12 @@ class AddCombination extends React.Component {
         eventId: this.props.selectedTriggerConfig,
         config: this.props.triggerConfig
       },
-      action :{
+      action: {
         eventId: this.props.selectedActionConfig,
         config: this.props.actionConfig
       }
-    }
+    };
+    console.log(data);
     
     this.props.createCombination(data)
     .then(DeviceEventEmitter.emit('listUpdate'))
@@ -168,7 +169,7 @@ export default connect((state) => ({
   actionId: state.getIn(['combination', 'actionId']),
   description: state.getIn(['combination', 'description']),
   triggerConfig: state.getIn(['combination', 'triggerConfig']),
-  actionConfig: state.getIn(['combination', 'triggerConfig']),
+  actionConfig: state.getIn(['combination', 'actionConfig']),
   selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),

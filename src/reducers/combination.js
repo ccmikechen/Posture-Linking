@@ -129,6 +129,12 @@ const combination = handleActions({
   ),
   IS_GETTING_ACTION_CONFIG: (state) => (
     state.set('isGetActionConfig', true)
+  ),
+  IS_NOT_GETTING_TRIGGER_CONFIG: (state) => (
+    state.set('isGetTriggerConfig', false)
+  ),
+  IS_NOT_GETTING_ACTION_CONFIG: (state) => (
+    state.set('isGetActionConfig', false)
   )
 }, InitialState);
 

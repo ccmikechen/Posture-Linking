@@ -20,14 +20,18 @@ class TriggerSetting extends React.Component {
   }
 
   renderSetting(event) {
+    if(event.options.length == 0 ) { return this.renderEmpty()}
     return event.options.map(option=> {
       switch (option.type) {
         case 'option':
           return this.renderOption(option)
         case 'textarea':
           return this.renderTextArea(option)
+        default:
+          return this.renderEmpty()
       };
     });
+    
   };
 
   _getOptionList() {
@@ -43,9 +47,9 @@ class TriggerSetting extends React.Component {
 
   renderOption(option) {
     return(
-      <View style={{flex:1}}>
-        <Text>{option.name}</Text>
-        <View style={styles.optionValueContainer}>
+      <View key={option.name} style={{flex:1}}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
+        <View style={{flex:1}}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}
@@ -61,7 +65,7 @@ class TriggerSetting extends React.Component {
               </Option>
             ))}
           </Select>
-           <OptionList ref="OPTIONLIST"/>
+          <OptionList overlayStyles={{height:120, width:250}} ref="OPTIONLIST"/>
         </View>
       </View>
     )
@@ -69,8 +73,8 @@ class TriggerSetting extends React.Component {
 
   renderTextArea(option) {
     return (
-      <View>
-        <Text>{option.name}</Text>
+      <View key={option.name}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
         <TextInput
           style={{height:100, backgroundColor:'#FFF', borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', fontSize:16}}
           multiline = {true}
@@ -79,6 +83,14 @@ class TriggerSetting extends React.Component {
           autoCapitalize = {'none'}
           onChangeText = {(text) => this.props.setSelectedOption(text, option.name)}
         />
+      </View>
+    )
+  }
+
+  renderEmpty() {
+    return(
+      <View key={1} style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <Text style={{fontSize:20, color:'#499275'}}>無需做任何設定</Text>
       </View>
     )
   }
@@ -98,7 +110,7 @@ class TriggerSetting extends React.Component {
   render() {
     let event = this.props.selectedEvent;
     return (
-      <View style={{flex:1, padding:15}}>
+      <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
         {this.props.isGettingEvent ? 
         <View style={{flex:1}}>
           <Text style={{fontSize:24}}>{event.name}</Text>

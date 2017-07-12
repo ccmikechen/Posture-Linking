@@ -24,10 +24,6 @@ class ActionList extends React.Component {
   handelOK(id) {
     this.props.setActionId(id);
     this.props.navigator.dismissModal({
-      screen: 'AddCombinationScreen',
-      title: 'AddCombination',
-      passProps: {},
-      navigatorStyle: {},
       animationType: 'slide-down'
     })
   }

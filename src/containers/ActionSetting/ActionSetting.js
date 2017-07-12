@@ -42,9 +42,9 @@ class ActionSetting extends React.Component {
 
   renderOption(option) {
     return(
-      <View style={{flex:1}}>
-        <Text>{option.name}</Text>
-        <View style={styles.optionValueContainer}>
+      <View key={option.name} style={{flex:1}}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
+        <View style={{flex:1}}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}
@@ -60,7 +60,7 @@ class ActionSetting extends React.Component {
               </Option>
             ))}
           </Select>
-           <OptionList ref="OPTIONLIST"/>
+          <OptionList overlayStyles={{height:120, width:250}} ref="OPTIONLIST"/>
         </View>
       </View>
     )
@@ -68,8 +68,8 @@ class ActionSetting extends React.Component {
 
   renderTextArea(option) {
     return (
-      <View>
-        <Text>{option.name}</Text>
+      <View key={option.name}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
         <TextInput
           style={{height:100, backgroundColor:'#FFF', borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', fontSize:16}}
           multiline = {true}
@@ -97,7 +97,7 @@ class ActionSetting extends React.Component {
   render() {
     let event = this.props.selectedEvent;
     return (
-      <View style={{flex:1, padding:15}}>
+      <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
         {this.props.isGettingEvent ? 
         <View style={{flex:1}}>
           <Text style={{fontSize:24}}>{event.name}</Text>

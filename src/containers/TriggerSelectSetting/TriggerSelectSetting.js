@@ -18,7 +18,7 @@ class TriggerSelectSetting extends React.Component {
     this.props.setSelectedTriggerConfig(id)
     this.props.navigator.push({
       screen: 'TriggerSettingScreen',
-      title: 'TriggerSetting',
+      title: '',
       passProps: {},
       navigatorStyle: {
       }
@@ -39,7 +39,7 @@ class TriggerSelectSetting extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor:'#fff'}}>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
           this.renderTrigger(event)
