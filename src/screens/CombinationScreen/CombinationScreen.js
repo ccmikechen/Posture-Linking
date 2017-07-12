@@ -6,7 +6,8 @@ class CombinationScreen extends React.Component {
     rightButtons:[
       {
         title:'新增',
-        id: 'add'
+        id: 'add',
+        icon: require('../../../res/img/add64.png')
       }
     ]
   };

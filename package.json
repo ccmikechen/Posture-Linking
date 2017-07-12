@@ -24,6 +24,7 @@
     "react-native-push-notification": "^3.0.0",
     "react-native-scrollable-tab-view": "^0.6.6",
     "react-native-selectme": "^1.2.3",
+    "react-native-swipe-list-view": "^0.4.1",
     "react-native-swiper": "^1.5.4",
     "react-native-tab-view": "^0.0.65",
     "react-native-textinput-effects": "^0.3.1",
