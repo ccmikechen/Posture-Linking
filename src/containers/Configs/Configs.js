@@ -50,7 +50,7 @@ class Configs extends React.Component {
   renderTrggerSetting() {
     let trigger = getServiceById(this.props.triggerId);
 
-    if(this.props.triggerConfig.size ==0) {
+    if(!this.props.isGetTriggerConfig) {
       return (
         <View>
           <Text style={{fontSize:16}}>{trigger.name}</Text>
@@ -59,7 +59,6 @@ class Configs extends React.Component {
               <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>詳細設定</Text>
             </View>
           </TouchableOpacity>
-
             <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'column', justifyContent:'center' }}>
               <Text style={{fontSize:20, backgroundColor:'#fff', color: '#b2b6b2', textAlign:'center'}}>於是Action</Text>
             </View>
@@ -87,7 +86,7 @@ class Configs extends React.Component {
   handleTriggerSetting() {
     this.props.navigator.push({
       screen: 'TriggerSelectConfigScreen',
-      title: 'TriggerSelectSetting',
+      title: '',
       passProps: {},
       navigatorStyle: {
       }
@@ -97,7 +96,7 @@ class Configs extends React.Component {
     handleActionSetting() {
     this.props.navigator.push({
       screen: 'ActionSelectConfigScreen',
-      title: 'ActionSelectSetting',
+      title: '',
       passProps: {},
       navigatorStyle: {
       }
@@ -108,7 +107,7 @@ class Configs extends React.Component {
     let trigger = getServiceById(this.props.triggerId);
     let action = getServiceById(this.props.actionId);
 
-    if(this.props.actionConfig.size ==0) {
+    if(!this.props.isGetActionConfig) {
       return (
         <View>
           <Text style={{fontSize:16}}>{trigger.name}</Text>
@@ -160,5 +159,7 @@ export default connect((state) =>(
     actionId: state.getIn(['combination', 'actionId']),
     triggerConfig: state.getIn(['combination', 'triggerConfig']),
     actionConfig: state.getIn(['combination', 'actionConfig']),
+    isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
+    isGetActionConfig: state.getIn(['combination', 'isGetActionConfig']),
   }), {
   })(Configs);

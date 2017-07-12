@@ -1,4 +1,8 @@
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { 
+  Text,
+  View,
+  TouchableOpacity, 
+  ActivityIndicator } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
 import styles from './styles';
@@ -18,7 +22,7 @@ class ActionSelectSetting extends React.Component {
     this.props.setSelectedActionConfig(id)
     this.props.navigator.push({
       screen: 'ActionSettingScreen',
-      title: 'ActionSetting',
+      title: '',
       passProps: {},
       navigatorStyle: {
       }
@@ -39,7 +43,7 @@ class ActionSelectSetting extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor:'#fff'}}>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
           this.renderAction(event)

@@ -34,6 +34,8 @@ export const IS_NOT_GETTING_EVENT = 'IS_NOT_GETTING_EVENT';
 export const SELECT_OPTION = 'SELECT_OPTION';
 export const IS_GETTING_TRIGGER_CONFIG = 'IS_GETTING_TRIGGER_CONFIG';
 export const IS_GETTING_ACTION_CONFIG = 'IS_GETTING_ACTION_CONFIG';
+export const IS_NOT_GETTING_TRIGGER_CONFIG = 'IS_NOT_GETTING_TRIGGER_CONFIG';
+export const IS_NOT_GETTING_ACTION_CONFIG = 'IS_NOT_GETTING_ACTION_CONFIG';
 
 const combinationManager = getCombinationManager();
 
@@ -67,10 +69,16 @@ export const getTriggerList = () => (dispatch) => {
 };
 
 export const setTriggerId = (id) => (dispatch) => {
+  let config = {};
+  dispatch({ type: IS_NOT_GETTING_TRIGGER_CONFIG });
+  dispatch({ type: SET_TRIGGER_CONFIG, config});
   dispatch({ type: GET_TRIGGER_ID, id });
 };
 
 export const setActionId = (id) => (dispatch) => {
+  let config = {};
+  dispatch({ type: IS_NOT_GETTING_ACTION_CONFIG });
+  dispatch({ type: SET_ACTION_CONFIG, config });
   dispatch({ type: GET_ACTION_ID, id });
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, ListView, TouchableOpacity, TextInput, ScrollView, DeviceEventEmitter, Alert } from 'react-native';
+import { View, Text, Button, ListView, TouchableOpacity, TextInput, DeviceEventEmitter, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import { setDescription,
@@ -10,6 +10,7 @@ import { setDescription,
 import api from '../../api/poselink';
 import { getServiceById } from '../../../lib/helper';
 import Configs from '../Configs';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class AddCombination extends React.Component {
   constructor(props) {
@@ -111,11 +112,12 @@ class AddCombination extends React.Component {
         eventId: this.props.selectedTriggerConfig,
         config: this.props.triggerConfig
       },
-      action :{
+      action: {
         eventId: this.props.selectedActionConfig,
         config: this.props.actionConfig
       }
-    }
+    };
+    console.log(data);
     
     this.props.createCombination(data)
     .then(DeviceEventEmitter.emit('listUpdate'))
@@ -133,7 +135,7 @@ class AddCombination extends React.Component {
     this.props.triggerId != '' ? triggerName = getServiceById(this.props.triggerId).getName() : triggerName='Trigger';
     this.props.actionId != '' ? actionName = getServiceById(this.props.actionId).getName() : actionName='Action';
     return (
-      <ScrollView style={{flex:0.8 , backgroundColor:'#fff'}}>
+      <KeyboardAwareScrollView style={{flex:0.8 , backgroundColor:'#fff'}}>
         <View style={{backgroundColor:'#e6eced'}}>
           <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
             <View style={{backgroundColor:'#76d9ae', marginTop:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
@@ -158,7 +160,7 @@ class AddCombination extends React.Component {
               this.renderOK() : null
             }
           </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
@@ -168,7 +170,7 @@ export default connect((state) => ({
   actionId: state.getIn(['combination', 'actionId']),
   description: state.getIn(['combination', 'description']),
   triggerConfig: state.getIn(['combination', 'triggerConfig']),
-  actionConfig: state.getIn(['combination', 'triggerConfig']),
+  actionConfig: state.getIn(['combination', 'actionConfig']),
   selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),

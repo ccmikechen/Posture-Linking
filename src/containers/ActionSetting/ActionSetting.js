@@ -8,6 +8,7 @@ import DropDown, {
   Option,
   OptionList,
 } from 'react-native-selectme';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class ActionSetting extends React.Component {
   constructor(props) {
@@ -42,9 +43,9 @@ class ActionSetting extends React.Component {
 
   renderOption(option) {
     return(
-      <View style={{flex:1}}>
-        <Text>{option.name}</Text>
-        <View style={styles.optionValueContainer}>
+      <View key={option.name} style={{flex:1}}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
+        <View style={{flex:1}}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}
@@ -60,7 +61,7 @@ class ActionSetting extends React.Component {
               </Option>
             ))}
           </Select>
-           <OptionList ref="OPTIONLIST"/>
+          <OptionList overlayStyles={{height:120, width:250}} ref="OPTIONLIST"/>
         </View>
       </View>
     )
@@ -68,8 +69,8 @@ class ActionSetting extends React.Component {
 
   renderTextArea(option) {
     return (
-      <View>
-        <Text>{option.name}</Text>
+      <View key={option.name}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
         <TextInput
           style={{height:100, backgroundColor:'#FFF', borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', fontSize:16}}
           multiline = {true}
@@ -97,17 +98,21 @@ class ActionSetting extends React.Component {
   render() {
     let event = this.props.selectedEvent;
     return (
-      <View style={{flex:1, padding:15}}>
+      <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
         {this.props.isGettingEvent ? 
         <View style={{flex:1}}>
+          <KeyboardAwareScrollView style={{flex:3}}>
           <Text style={{fontSize:24}}>{event.name}</Text>
           <Text style={{fontSize:16, marginBottom:10}}>{event.description}</Text>
             {this.renderSetting(event)}
-          <TouchableOpacity onPress={() => this.handleOK()}>
-            <View style={{alignItems:'center', height:60, borderRadius:5, backgroundColor:'#2aceba', justifyContent:'center', marginTop:20, marginLeft:20, marginRight:20}}>
-              <Text style={{fontSize:20, color:'#fff', textAlign:'center'}}>確認</Text>
-            </View>
-          </TouchableOpacity>
+          </KeyboardAwareScrollView>
+          <View>
+            <TouchableOpacity onPress={() => this.handleOK()}>
+              <View style={{alignItems:'center', height:60, borderRadius:5, backgroundColor:'#2aceba', justifyContent:'center', marginTop:20, marginLeft:20, marginRight:20}}>
+                <Text style={{fontSize:20, color:'#fff', textAlign:'center'}}>確認</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
         :
         <ActivityIndicator
