@@ -104,6 +104,7 @@ class Combination extends React.Component {
           <ListView
             dataSource={this._genDataSource(this.props.combinations)}
             renderRow={(combination) => this.renderRow(combination)}
+         enableEmptySections={true}    
           />
           :
           <View style={styles.cover}>
