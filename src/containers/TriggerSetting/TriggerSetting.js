@@ -8,6 +8,7 @@ import DropDown, {
   Option,
   OptionList,
 } from 'react-native-selectme';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class TriggerSetting extends React.Component {
   constructor(props) {
@@ -113,9 +114,11 @@ class TriggerSetting extends React.Component {
       <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
         {this.props.isGettingEvent ? 
         <View style={{flex:1}}>
-          <Text style={{fontSize:24}}>{event.name}</Text>
-          <Text style={{fontSize:16, marginBottom:10}}>{event.description}</Text>
+          <KeyboardAwareScrollView>
+            <Text style={{fontSize:24}}>{event.name}</Text>
+            <Text style={{fontSize:16, marginBottom:10}}>{event.description}</Text>
             {this.renderSetting(event)}
+          </KeyboardAwareScrollView>
           <TouchableOpacity onPress={() => this.handleOK()}>
             <View style={{alignItems:'center', height:60, borderRadius:5, backgroundColor:'#2aceba', justifyContent:'center', marginTop:20, marginLeft:20, marginRight:20}}>
               <Text style={{fontSize:20, color:'#fff', textAlign:'center'}}>確認</Text>
