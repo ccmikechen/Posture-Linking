@@ -83,6 +83,8 @@ const combination = handleActions({
   ),
   SET_COMBINATION_STATUS: (state, { id, status }) => {
     let newCombinations = state.get('combinations').map(combination => {
+      console.log(combination.toJS());
+
       if (combination.get('id') == id) {
         return combination.set('status', status);
       }
@@ -92,15 +94,17 @@ const combination = handleActions({
     return state.set('combinations', newCombinations);
   },
   CREATE_COMBINATION: (state, { combination }) => {
-    let newCombinations = state.get('combinations').push(combination);
+    let immutableCombination = Immutable.fromJS(combination);
+    let newCombinations = state.get('combinations')
+          .push(immutableCombination);
 
     return state.set('combinations', newCombinations);
   },
   REMOVE_COMBINATION: (state, { id }) => {
     let newCombinations = state.get('combinations').filter(combination => {
-      return combination.toJS().id != id;
+      return combination.get('id') != id;
     });
-    
+
     return state.set('combinations', newCombinations);
   },
   GET_EVENTS: (state, { events }) => (
