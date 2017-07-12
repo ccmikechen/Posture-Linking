@@ -110,13 +110,13 @@ class Configs extends React.Component {
     if(!this.props.isGetActionConfig) {
       return (
         <View>
-          <Text style={{fontSize:16}}>{trigger.name}</Text>
           <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
             <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
               <Text style={{fontSize:16}}>{trigger.name}</Text>
               <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
             </View>
           </TouchableOpacity>
+          <Text style={{fontSize:16}}>{action.name}</Text>
           <TouchableOpacity onPress={()=>this.handleActionSetting()}>
             <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
               <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>詳細設定</Text>
