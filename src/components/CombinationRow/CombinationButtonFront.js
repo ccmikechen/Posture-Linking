@@ -3,11 +3,11 @@ import {
   View,
   Text,
   Image,
+  Switch,
   TouchableOpacity
 } from 'react-native';
 import styles from './styles';
-import CombinationImage from './CombinationImage';
-import Switch from 'react-native-customisable-switch';
+import CombinationImage from '../CombinationImage';
 
 const CombinationButtonFront = ({data, onStatusChangeCallback, onEdit}) => {
   let opacity = 1;
@@ -18,22 +18,23 @@ const CombinationButtonFront = ({data, onStatusChangeCallback, onEdit}) => {
   }
 
   return(
-      <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style = {styles.rowFront} >
+    <View style = {styles.rowFront}>
+      <TouchableOpacity onPress = {onEdit} activeOpacity = {1} >
         <CombinationImage 
           smallTrigger = {require('../../../res/img/smallImage/trigger/Facebook.png')}
           smallAction = {require('../../../res/img/smallImage/action/Dropbox.png')}
           opacity = {opacity}
         />
-        <View style = {{opacity: opacity}}>
-          <Text>{data.description}</Text>
-        </View>
-        <Switch 
-          defaultValue = {switchValue}
-          onChangeValue = {(status)=>{
-            onStatusChangeCallback(data, status);
-          }}
-        />
       </TouchableOpacity>
+      <View style = {{opacity: opacity}}>
+        <Text>{data.description}</Text>
+        <Text>{data.status}</Text>
+      </View>
+      <Switch
+        value={switchValue}
+        onValueChange={(status) => onStatusChangeCallback(status)}
+      />
+    </View>
   )
 };
 

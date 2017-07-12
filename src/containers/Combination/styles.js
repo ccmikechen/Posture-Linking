@@ -4,7 +4,7 @@ export default styles = StyleSheet.create({
   rowBack: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#E9E9E9',
+    backgroundColor: 'lightgrey',
     justifyContent : 'flex-end',
     alignItems: 'center',
     borderRadius: 10,

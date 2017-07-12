@@ -102,7 +102,7 @@ class Combination extends React.Component {
         <CombinationRow
           data={item}
           onEdit={()=>{alert('edit');}}
-          onStatusChangeCallback={(data, status)=>{this.handleStatusChange(data, status);}}
+          onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
         />
       );
     }
