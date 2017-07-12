@@ -17,6 +17,13 @@ const parseCombination = (combination) => ({
   status: combination.status
 });
 
+const parseUserServiceConfig = (config) => ({
+  status: config.status,
+  serviceId: config.service_id,
+  id: config.id,
+  config: config.config
+});
+
 export default {
   createSession: ({ username, password }) => (
     server.post('/sessions', {
@@ -113,10 +120,12 @@ export default {
       service_id: serviceId
     })
       .then(response => response.data)
+      .then(data => parseUserServiceConfig)
   ),
   getUserServiceConfigs: () => (
     server.fetch('/user_service_configs')
       .then(response => response.data)
+      .then(data => data.map(parseUserServiceConfig))
   ),
   createUserServiceConfig: (serviceId, config, status) => (
     server.post('/user_service_configs', {
