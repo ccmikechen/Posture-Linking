@@ -7,7 +7,7 @@ class CombinationScreen extends React.Component {
       {
         title:'新增',
         id: 'add',
-        icon: require('../../../res/img/add64.png')
+        icon: require('../../../res/img/icon/add64.png')
       }
     ]
   };

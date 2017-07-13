@@ -7,15 +7,14 @@ export default styles = StyleSheet.create({
     backgroundColor: 'lightgrey',
     justifyContent : 'flex-end',
     alignItems: 'center',
-    height: 100,
     borderRadius: 10,
     marginTop: 5,
     marginLeft: 10,
     marginRight: 10
   },
   rowBackButton: {
-    height: 48,
-    width: 48,
+    height: 45,
+    width: 45,
     margin: 5
   }
 });

@@ -1,14 +1,14 @@
 import React from 'React';
 import { View, Image } from 'react-native';
 
-const CombinationImage = ({ smallicon, opacity, size = 1, left = 0 }) => {
+const CombinationImage = ({ smallicon, opacity = 1, backcolor = 'white', size = 1, left = 0 }) => {
 	let width = 100 * size * 2, height = 100 * size;
 	return (
 		<View style={{ height: height, width: width, flexDirection: 'row', margin: 5, left: left }}>
 
-      <Image source={require('../../../res/img/Trigger.png')}
+      <Image source={require('../../../res/img/puzzle/trigger.png')}
         style={{
-        	tintColor: '#3C5A99',
+        	tintColor: backcolor,
           height: height,
           width: width*0.55
         }}

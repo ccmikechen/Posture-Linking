@@ -10,11 +10,11 @@ import styles from './styles';
 import Triggerimg from '../Triggerhorimg';
 import Actionimg from '../Actionhorimg';
 
-const CombinationButtonFront = ({data, onStatusChangeCallback, onEdit}) => {
+const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   let opacity = 1;
   let switchValue = true;
   if(data.status == 0) {
-    opacity = 0.4;
+    opacity = 0.6;
     switchValue = false;
   }
 
@@ -27,6 +27,7 @@ const CombinationButtonFront = ({data, onStatusChangeCallback, onEdit}) => {
               <Triggerimg
                 smallicon = {require('../../../res/img/appicon/facebook.png')}
                 opacity = {opacity}
+                backcolor = '#3C5A99'
                 size = {0.8}
               />
             </View>
@@ -34,6 +35,7 @@ const CombinationButtonFront = ({data, onStatusChangeCallback, onEdit}) => {
               <Actionimg
                 smallicon = {require('../../../res/img/appicon/gmail.png')}
                 opacity = {opacity}
+                backcolor = '#DB4639'
                 size = {0.8}
               />
             </View>
@@ -55,4 +57,4 @@ const CombinationButtonFront = ({data, onStatusChangeCallback, onEdit}) => {
   )
 };
 
-export default CombinationButtonFront;
+export default CombinationRow;

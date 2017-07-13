@@ -37,11 +37,11 @@ export default styles = StyleSheet.create({
   name:{
     flex: 4,
     padding: 5,
-    marginTop: 7
+    marginTop: 8
   },
   text:{
     flex: 1,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: '',
   },
   switch:{

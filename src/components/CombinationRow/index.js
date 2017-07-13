@@ -1,1 +1,1 @@
-export { default } from './CombinationButtonFront';
+export { default } from './CombinationRow';
