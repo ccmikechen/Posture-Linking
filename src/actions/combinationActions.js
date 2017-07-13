@@ -107,7 +107,6 @@ export const setSelectedActionConfig = (id) => (dispatch) => {
 export const getEventList = (id) => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_EVENTS });
   let events = getEventsByServiceId(id);
-  console.log('events', events)
   dispatch({ type: GET_EVENTS, events });
   dispatch({ type: IS_GETTING_EVENTS });
 };
@@ -115,7 +114,6 @@ export const getEventList = (id) => (dispatch) => {
 export const getEvent = (id) => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_EVENT });
   let event = getEventById(id);
-  console.log('event', event);
   dispatch({ type: GET_EVENT, event });
   dispatch({ type: IS_GETTING_EVENT });
 };

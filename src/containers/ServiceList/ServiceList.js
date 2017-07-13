@@ -2,16 +2,16 @@ import React from 'react';
 import { View, Text, ListView, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { getServiceList } from '../../actions/serviceActions';
+import { getServiceList, selectService } from '../../actions/serviceActions';
 
 class ServiceList extends React.Component {
   constructor(props) {
     super(props);
-  }
+  };
 
   componentWillMount () {
     this.props.getServiceList();
-  }
+  };
 
   _genDataSource(services) {
     if (this.dataSource == undefined) {
@@ -19,19 +19,38 @@ class ServiceList extends React.Component {
     }
     this.dataSource = this.dataSource.cloneWithRows(services);
     return this.dataSource;
-  }
+  };
 
-  handelOK() {
-    
+  handlePress(service) {
+    this.props.selectService(service.id)
+    this.props.navigator.push({
+      screen: 'ServiceConnectScreen',
+      title: '',
+      passProps: {},
+      navigatorStyle: {
+      }
+    });
   }
 
   renderRow(service) {
-    return(
-        <View style={{margin:5, backgroundColor:'#65e8cf', height:50}}>
-          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
-        </View>
-    )
-  }
+    if(service.isConnected) {
+      return(
+        <TouchableOpacity onPress={()=>this.handlePress(service)}>
+          <View style={{margin:5, backgroundColor:'#65e8cf', height:50}}>
+            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
+          </View>
+        </TouchableOpacity>
+      )
+    } else {
+      return(
+        <TouchableOpacity onPress={()=>this.handlePress(service)}>
+          <View style={{margin:5, backgroundColor:'#d4d4d4', height:50}}>
+            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
+          </View>
+        </TouchableOpacity>
+      )
+    };
+  };
 
   render() {
     return (
@@ -61,5 +80,5 @@ export default connect((state) => ({
   isGetServices: state.getIn(['service','isGetServices']),
   services: state.getIn(['service','services']),
 }), {
-  getServiceList
+  getServiceList, selectService
 })(ServiceList);
