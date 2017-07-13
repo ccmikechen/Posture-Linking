@@ -1,18 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-  rowBack: {
+  container:{
+    flex:1, 
+    backgroundColor:'lightgrey'
+  },
+  rowback: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#BEBEBE',
     justifyContent : 'flex-end',
     alignItems: 'center',
     borderRadius: 10,
-    marginTop: 5,
-    marginLeft: 10,
-    marginRight: 10
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 5
   },
-  rowBackButton: {
+  rowbackbutton: {
     height: 45,
     width: 45,
     margin: 5

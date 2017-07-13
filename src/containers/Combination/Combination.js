@@ -106,12 +106,12 @@ class Combination extends React.Component {
       return null;
     } else {
       return (
-        <View style={styles.rowBack}>
+        <View style={styles.rowback}>
           <TouchableOpacity onPress = {() => {alert("share "+item.description);}}>
-            <Image source={require('../../../res/img/icon/share48.png')} style={styles.rowBackButton} />
+            <Image source={require('../../../res/img/icon/share.png')} tintColor={'blue'} style={styles.rowbackbutton} />
           </TouchableOpacity>
           <TouchableOpacity onPress = {() => {this.showAlert(item)}}>
-            <Image source={require('../../../res/img/icon/garbage48.png')} style={styles.rowBackButton} />
+            <Image source={require('../../../res/img/icon/garbage.png')} tintColor={'red'} style={styles.rowbackbutton} />
           </TouchableOpacity>
         </View>
       );
@@ -120,7 +120,7 @@ class Combination extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1, backgroundColor:'#E9E9E9'}}>
+      <View style={styles.container}>
         {this.props.isGetCombinations ?
           <SwipeListView
             rightOpenValue = {-125}

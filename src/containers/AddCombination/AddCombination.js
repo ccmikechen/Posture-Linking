@@ -10,11 +10,15 @@ import { setDescription,
 import api from '../../api/poselink';
 import { getServiceById } from '../../../lib/helper';
 import Configs from '../Configs';
+import TriggerVerImg from '../../components/TriggerVerImg'
+import ActionVerImg from '../../components/ActionVerImg'
 
 class AddCombination extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
+    this.getIcon.bind(this);
   }
 
   onNavigatorEvent(event) {
@@ -22,10 +26,10 @@ class AddCombination extends React.Component {
       if (event.id == 'close') {
         Alert.alert(
           'PostureLinking',
-          '鎮ㄧ⒑瀹氳闂滈枆鏂板绲勫悎',
+          '您確定要關閉新增組合',
           [
-            {text: '鍙栨秷', onPress: () => null},
-            {text: '纰哄畾', onPress: () => this.closeScreen()},
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.closeScreen()},
           ],
           { cancelable: false }
         )
@@ -72,7 +76,7 @@ class AddCombination extends React.Component {
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
         <View style={{flex:1, marginTop:10}}>
-          <Text style={{fontSize:16, height:20 }}>绲勫悎鎻忚堪</Text>
+          <Text style={{fontSize:16, height:20 }}>組合描述</Text>
           <TextInput
             style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:40, fontSize:25}}
             maxLength= {100}
@@ -81,7 +85,7 @@ class AddCombination extends React.Component {
           />
           <TouchableOpacity onPress={()=>this.showAlert()}>
             <View style={{marginTop:20, borderWidth:0, backgroundColor:'#59d059', height:50, alignItems:'center',  justifyContent: 'center'}}>
-              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>绲勫悎</Text>
+              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>組合</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -94,10 +98,10 @@ class AddCombination extends React.Component {
   showAlert() {
     Alert.alert(
           'PostureLinking',
-          '鎮ㄧ⒑瀹氳鏂板绲勫悎',
+          '您確定要新增組合',
           [
-            {text: '鍙栨秷', onPress: () => null},
-            {text: '纰哄畾', onPress: () => this.handleOK()},
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.handleOK()},
           ],
           { cancelable: false }
         )
@@ -126,14 +130,46 @@ class AddCombination extends React.Component {
     )
   }
 
+  getIcon(name){
+    let icon = [
+      { name: 'Trigger', icon: require('../../../res/img/serviceIcon/trigger.png'),color: '#F39FB3'  },
+      { name: 'Action', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C'  },
+      { name: 'button', icon: require('../../../res/img/serviceIcon/button.png'),color: '#A0A9B5'  },
+      { name: 'line notify', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00'  }
+    ];
+
+    let temp={};
+
+    icon.map((data) => {
+      if(data.name == name){
+        temp = data;
+      }
+    });
+    return temp;
+  }
+
   render() {
     console.log(this.props)
     let triggerName;
     let actionName;
     this.props.triggerId != '' ? triggerName = getServiceById(this.props.triggerId).getName() : triggerName='Trigger';
     this.props.actionId != '' ? actionName = getServiceById(this.props.actionId).getName() : actionName='Action';
+    
     return (
-      <ScrollView style={{flex:0.8 , backgroundColor:'#fff'}}>
+      <ScrollView style={{flex:0.8 , backgroundColor:'lightgrey'}}>
+
+        <View style={styles.imgcontent} >
+          <View style={styles.triggerimg} >
+            <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
+              <TriggerVerImg size={1} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.actionimg} >
+            <ActionVerImg size={1} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
+          </View>
+        </View>
+
+
         <View style={{backgroundColor:'#e6eced'}}>
           <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
             <View style={{backgroundColor:'#76d9ae', marginTop:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>

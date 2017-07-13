@@ -1,1 +1,1 @@
-export { default } from './Triggerhorimg';
+export { default } from './TriggerHorImg';

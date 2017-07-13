@@ -7,8 +7,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import styles from './styles';
-import Triggerimg from '../Triggerhorimg';
-import Actionimg from '../Actionhorimg';
+import TriggerHorImg from '../TriggerHorImg';
+import ActionHorImg from '../ActionHorImg';
 
 const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   let opacity = 1;
@@ -18,24 +18,41 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
     switchValue = false;
   }
 
+  let icon = [
+    { id: '1', icon: require('../../../res/img/serviceIcon/trigger.png'),color: '#F39FB3' },
+    { id: '2', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C' },
+    { id: '4', icon: require('../../../res/img/serviceIcon/gmail.png'),color: '#DB4639' },
+    { id: '5', icon: require('../../../res/img/serviceIcon/facebook.png'),color: '#3C5A99' }
+  ];
+
+  let getImageSetting = (id) => {
+    let temp = {};
+    icon.map((data) => {
+      if(data.id == id){
+        temp = data;
+      }
+    });
+    return temp;
+  }
+
   return(
-    <View style = {styles.rowFront}>
+    <View style = {styles.rowfront}>
       <View style={styles.combination}>
         <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationtouch}>
           <View style={styles.combinationimg}>
             <View style={styles.trigger}>
-              <Triggerimg
-                smallicon = {require('../../../res/img/appicon/facebook.png')}
+              <TriggerHorImg
+                icon = {getImageSetting(data.trigger.serviceId).icon}
                 opacity = {opacity}
-                backcolor = '#3C5A99'
+                color = {getImageSetting(data.trigger.serviceId).color}
                 size = {0.8}
               />
             </View>
             <View style={styles.action}>
-              <Actionimg
-                smallicon = {require('../../../res/img/appicon/gmail.png')}
+              <ActionHorImg
+                icon = {getImageSetting(data.action.serviceId).icon}
                 opacity = {opacity}
-                backcolor = '#DB4639'
+                color = {getImageSetting(data.action.serviceId).color}
                 size = {0.8}
               />
             </View>
@@ -44,7 +61,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
       </View>
       <View style={styles.content}>
         <View style={[styles.name,{opacity: opacity}]}>
-          <Text style={styles.text}>{data.description}安安安安安安安安安安安安安安安</Text>
+          <Text style={styles.text}>{data.trigger.serviceId}安安你好{data.action.serviceId}</Text>
         </View>
         <View style={styles.switch}>
           <Switch

@@ -1,1 +1,1 @@
-export { default } from './Actionhorimg';
+export { default } from './ActionHorImg';

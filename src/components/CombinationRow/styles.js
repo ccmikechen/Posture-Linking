@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-  rowFront: {
+  rowfront: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
@@ -43,6 +43,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontFamily: '',
+    fontWeight: 'bold'
   },
   switch:{
     flex: 2,
