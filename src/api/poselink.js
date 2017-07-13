@@ -134,10 +134,11 @@ export default {
       status
     })
   ),
-  updateUserServiceConfig: (serviceId, config) => (
+  updateUserServiceConfig: (serviceId, config, status) => (
     server.patch('/user_service_configs', {
       service_id: serviceId,
-      config
+      config,
+      status
     })
   ),
   trigger: (eventId, payload) => (

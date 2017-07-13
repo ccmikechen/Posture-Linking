@@ -43,6 +43,14 @@ class Home extends React.Component {
           animated:true,
         });
           break;
+        case 'serviceList':
+        this.props.navigator.push({
+          screen: 'ServiceListScreen',
+          title: 'Service List',
+          passProps: {},
+          animated:true,
+        });
+          break;
       }
     }
   }
@@ -65,6 +73,10 @@ class Home extends React.Component {
         <TestButton
           onPress={this.handleButtonPress('buttonList')}
           text='buttonList'
+        />
+        <TestButton
+          onPress={this.handleButtonPress('serviceList')}
+          text='serviceList'
         />
       </View>
     );

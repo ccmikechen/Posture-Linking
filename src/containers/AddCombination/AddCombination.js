@@ -72,10 +72,10 @@ class AddCombination extends React.Component {
   renderOK(){
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
-        <View style={{flex:1, marginTop:10}}>
+        <View style={{flex:1, marginTop:30}}>
           <Text style={{fontSize:16, height:20 }}>組合描述</Text>
           <TextInput
-            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:40, fontSize:25}}
+            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:60, fontSize:25}}
             maxLength= {100}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
