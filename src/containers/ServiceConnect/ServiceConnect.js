@@ -14,6 +14,7 @@ class ServiceConnect extends React.Component {
   };
 
   componentWillMount () {
+    this.props.getService(this.props.selectedService);
     this.service = getServiceById(this.props.selectedService);
     this.authorizer = this.service.createAuthorizer();
   };
@@ -80,7 +81,7 @@ class ServiceConnect extends React.Component {
             />
           </View>
         :
-          service._isConnected ? 
+          service.isConnected ? 
           this.renderDisconnect(service)
           :
           this.renderConnect(service)

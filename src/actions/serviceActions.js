@@ -22,7 +22,15 @@ export const selectService = (id) => (dispatch) => {
 };
 
 export const getService = (id) => (dispatch) => {
-  let service = getServiceById(id);
+  let selectService = getServiceById(id);
+  let service = {
+    id: selectService.id,
+    name: selectService.name,
+    icon: selectService.icon,
+    classification: selectService.classification,
+    isConnected: selectService.isConnected()
+  };
+  console.log(service)
   dispatch({ type: GET_SERVICE, service });
 };
 
