@@ -7,6 +7,7 @@ export default styles = StyleSheet.create({
     backgroundColor: 'lightgrey',
     justifyContent : 'flex-end',
     alignItems: 'center',
+    height: 100,
     borderRadius: 10,
     marginTop: 5,
     marginLeft: 10,
