@@ -1,29 +1,41 @@
 import React from 'react';
-import { View, Text, ListView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, ListView, ActivityIndicator, TouchableOpacity, Linking, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { getService, disconnectService } from '../../actions/serviceActions';
+import { getService, disconnectService, connectService } from '../../actions/serviceActions';
+
+import { getServiceById } from '../../../lib/helper';
+import ServiceAuthorizer from '../../../lib/ServiceAuthorizer';
 
 class ServiceConnect extends React.Component {
   constructor(props) {
     super(props);
+    this.handleAuthorized = this.handleAuthorized.bind(this);
+    this.handleFailedAuthorized = this.handleFailedAuthorized.bind(this);
   };
 
   componentWillMount () {
     this.props.getService(this.props.selectedService);
+    this.service = getServiceById(this.props.selectedService);
+    this.authorizer = this.service.createAuthorizer();
   };
 
   componentDidMount() {
-    Linking.addEventListener('url', this._handleOpenURL);
+    this.authorizer.addListener(this.handleAuthorized, this.handleFailedAuthorized);
   };
 
   componentWillUnmount() {
-    Linking.removeEventListener('url', this._handleOpenURL);
+    this.authorizer.removeListener();
   };
 
-  _handleOpenURL(event) {
-    console.log(event.url);
-  };
+  handleAuthorized() {
+    this.props.connectService(this.props.selectedService);
+    DeviceEventEmitter.emit('listUpdate')
+  }
+
+  handleFailedAuthorized() {
+
+  }
 
   renderConnect(service) {
     return(
@@ -39,14 +51,14 @@ class ServiceConnect extends React.Component {
   };
 
   handleConnect(service) {
-    Linking.openURL('https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=p2NJpZH0R3d9HJFVfpuyAq&redirect_uri=https://t21.bearlab.io/redirect/line_notify/callback&scope=notify&state=AAAA&response_mode=form_post').catch(err => console.error('An error occurred', err));
+   this.authorizer.authorize();
   }
 
   renderDisconnect(service) {
     return (
       <View>
         <Text style={{fontSize:26, textAlign:'center'}}>{service.name}</Text>
-        <TouchableOpacity onPress={()=>this.handleDisconnect(service)}>
+        <TouchableOpacity onPress={()=>this.handleDisconnect()}>
           <View style={{margin:20, backgroundColor:'#e64055', height:50}}>
             <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold', color:'#fff'}}>認證解除</Text>
           </View>
@@ -55,8 +67,11 @@ class ServiceConnect extends React.Component {
     )
   };
 
-  handleDisconnect(service) {
-    this.props.disconnectService(service)
+  handleDisconnect() {
+    this.props.disconnectService(this.service)
+      .then(
+        DeviceEventEmitter.emit('listUpdate')
+      )
       .then(
         this.props.navigator.pop()  
       )
@@ -75,7 +90,7 @@ class ServiceConnect extends React.Component {
             />
           </View>
         :
-          service._isConnected ? 
+          service.isConnected ? 
           this.renderDisconnect(service)
           :
           this.renderConnect(service)
@@ -91,5 +106,6 @@ export default connect((state) => ({
   isAuthorizing: state.getIn(['service', 'isAuthorizing']),
 }), {
   getService,
-  disconnectService
+  disconnectService,
+  connectService
 })(ServiceConnect);

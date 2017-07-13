@@ -46,8 +46,10 @@ const loadBackgroundProcess = async () => {
   await loadServiceConfigs();
   console.log('Loaded service configs');
 
-  await combinationManager.loadAllCombinaions();
+  await combinationManager.loadAllCombinations();
   console.log('Loaded combinations');
+
+  await combinationManager.applyCombinations();
 
   await initialSocket();
   console.log('Initialized socket');

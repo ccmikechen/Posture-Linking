@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, ListView, ActivityIndicator, TouchableOpacity} from 'react-native';
+import { View, Text, ListView, ActivityIndicator, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { getServiceList, selectService } from '../../actions/serviceActions';
+import { getServiceList, selectService, isNotGettingServices } from '../../actions/serviceActions';
 
 class ServiceList extends React.Component {
   constructor(props) {
@@ -11,6 +11,19 @@ class ServiceList extends React.Component {
 
   componentWillMount () {
     this.props.getServiceList();
+  };
+
+  componentDidMount () {
+    this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
+      this.props.isNotGettingServices();
+       setTimeout(() => {
+         this.props.getServiceList();
+       }, 1000);
+    });
+  };
+
+  componentWillUnmount(){
+    this.emitter.remove();
   };
 
   _genDataSource(services) {
@@ -80,5 +93,7 @@ export default connect((state) => ({
   isGetServices: state.getIn(['service','isGetServices']),
   services: state.getIn(['service','services']),
 }), {
-  getServiceList, selectService
+  getServiceList, 
+  selectService, 
+  isNotGettingServices
 })(ServiceList);

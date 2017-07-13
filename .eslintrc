@@ -13,6 +13,10 @@
         "jsx": true
     },
 
+      "parserOptions": {
+        "ecmaVersion": 6
+    },
+
     "plugins": [
         "react"
     ]
