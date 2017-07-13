@@ -10,11 +10,11 @@ const InitialState = Immutable.fromJS({
 });
 
 const service = handleActions({
-  IS_GETTING_SERVIECS: (state) => (
+  IS_GETTING_SERVICES: (state) => (
     state.set('isGetServices', true)
   ),
   IS_NOT_GETTING_SERVICES: (state) => (
-    state.set('isGetServices', true)
+    state.set('isGetServices', false)
   ),
   GET_SERVICES: (state, { services }) => (
     state.set('services', services)
@@ -40,7 +40,20 @@ const service = handleActions({
   ),
   IS_NOT_AUTHORIZING: (state) => (
     state.set('isAuthorizing', false)
-  )
+  ),
+  SUCCESS_AUTHORIZE: (state, { service }) => (
+    state.set('service', service)
+  ),
+  CONNECT_SERVICE: (state, { id }) => {
+    let newServices = state.get('services').map(service => {
+      if(service.id == id) {
+        service.isConnected = true
+      }
+      return service;
+    });
+
+    return state.set('services', newServices)
+  }
 }, InitialState);
 
 export default service;

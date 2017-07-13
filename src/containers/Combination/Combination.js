@@ -15,9 +15,6 @@ class Combination extends React.Component {
     super(props);
     this.emitter='';
     this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.state = {
-      combinations : this.props.dataSource
-    };
   }
 
   componentDidMount() {

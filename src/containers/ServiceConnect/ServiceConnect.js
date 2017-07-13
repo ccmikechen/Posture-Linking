@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, ListView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, ListView, ActivityIndicator, TouchableOpacity, Linking, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { getService, disconnectService } from '../../actions/serviceActions';
+import { getService, disconnectService, connectService } from '../../actions/serviceActions';
 
 import { getServiceById } from '../../../lib/helper';
 import ServiceAuthorizer from '../../../lib/ServiceAuthorizer';
@@ -10,7 +10,8 @@ import ServiceAuthorizer from '../../../lib/ServiceAuthorizer';
 class ServiceConnect extends React.Component {
   constructor(props) {
     super(props);
-    
+    this.handleAuthorized = this.handleAuthorized.bind(this);
+    this.handleFailedAuthorized = this.handleFailedAuthorized.bind(this);
   };
 
   componentWillMount () {
@@ -20,15 +21,20 @@ class ServiceConnect extends React.Component {
   };
 
   componentDidMount() {
-    this.authorizer.addListener(this.handleAuthorized);
+    this.authorizer.addListener(this.handleAuthorized, this.handleFailedAuthorized);
   };
 
   componentWillUnmount() {
     this.authorizer.removeListener();
   };
 
-  handleAuthorized = (result) => {
-    
+  handleAuthorized() {
+    this.props.connectService(this.props.selectedService);
+    DeviceEventEmitter.emit('listUpdate')
+  }
+
+  handleFailedAuthorized() {
+
   }
 
   renderConnect(service) {
@@ -52,7 +58,7 @@ class ServiceConnect extends React.Component {
     return (
       <View>
         <Text style={{fontSize:26, textAlign:'center'}}>{service.name}</Text>
-        <TouchableOpacity onPress={()=>this.handleDisconnect(service)}>
+        <TouchableOpacity onPress={()=>this.handleDisconnect()}>
           <View style={{margin:20, backgroundColor:'#e64055', height:50}}>
             <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold', color:'#fff'}}>認證解除</Text>
           </View>
@@ -61,8 +67,11 @@ class ServiceConnect extends React.Component {
     )
   };
 
-  handleDisconnect(service) {
-    this.props.disconnectService(service)
+  handleDisconnect() {
+    this.props.disconnectService(this.service)
+      .then(
+        DeviceEventEmitter.emit('listUpdate')
+      )
       .then(
         this.props.navigator.pop()  
       )
@@ -97,5 +106,6 @@ export default connect((state) => ({
   isAuthorizing: state.getIn(['service', 'isAuthorizing']),
 }), {
   getService,
-  disconnectService
+  disconnectService,
+  connectService
 })(ServiceConnect);

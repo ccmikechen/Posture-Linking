@@ -3,7 +3,7 @@ import RNFS from 'react-native-fs';
 
 const API = "https://t21.bearlab.io/api";
 
-const getToken = async () => {
+export const getToken = async () => {
   return await AsyncStorage.getItem('@session:token');
 };
 
