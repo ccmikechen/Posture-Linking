@@ -6,11 +6,13 @@ import jaStrings from './strings.ja';
 
 const getLocalizedStrings = () => {
   let deviceLocale = DeviceInfo.getDeviceLocale();
-
+  console.log(deviceLocale);
   switch (deviceLocale) {
   case 'en-US':
     return enUSStrings;
   case 'zh-TW':
+    return zhTWStrings;
+  case 'zh-Hant-TW':
     return zhTWStrings;
   case 'ja':
     return jaStrings;
