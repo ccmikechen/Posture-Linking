@@ -122,7 +122,7 @@ export const setSelectedOption = (option) => (dispatch) => {
 export const createCombination = (data) => (dispatch) => {
   return api.createCombination(data)
   .then((combination) => {
-    CombinationManager.loadCombination(combination);
+    CombinationManager.createCombination(combination);
     return combination;
   }).then((combination) => {
     dispatch({ type:CREATE_COMBINATION, combination });
