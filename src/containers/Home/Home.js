@@ -11,6 +11,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
+
+    console.log('hello: ', R.strings.HELLO);
   }
 
   handleButtonPress(type) {

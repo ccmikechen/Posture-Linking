@@ -1,3 +1,4 @@
+import '../res';
 import {
   startMainApp
 } from './apps';
