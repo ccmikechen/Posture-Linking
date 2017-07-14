@@ -1,15 +1,18 @@
 import React from 'react';
-
 import {
   View
 } from 'react-native';
+
 import TestButton from '../../components/TestButton';
 import styles from './styles';
 
 class Home extends React.Component {
+
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
+
+    console.log('hello: ', R.strings.HELLO);
   }
 
   handleButtonPress(type) {
@@ -18,33 +21,41 @@ class Home extends React.Component {
         case 'scan':
           this.props.navigator.push({
             screen: 'ScanBleScreen',
-            title: 'Scan'
+            title: R.strings.SCAN_TITLE
           });
           break;
         case 'posture':
           this.props.navigator.push({
             screen: 'PostureScreen',
-            title: 'Posture'
+            title: R.strings.POSTURE_TITLE
           });
           break;
         case 'combination':
           this.props.navigator.push({
             screen: 'CombinationScreen',
-            title: 'Combination',
+            title: R.strings.COMBINATION_TITLE,
             passProps: {},
-            animated:true,
+            animated: true
           });
           break;
         case 'buttonList':
         this.props.navigator.push({
           screen: 'ButtonListScreen',
-          title: 'Button List',
+          title: R.strings.BUTTON_LIST_TITLE,
           passProps: {},
-          animated:true,
+          animated: true
+        });
+          break;
+        case 'serviceList':
+        this.props.navigator.push({
+          screen: 'ServiceListScreen',
+          title: R.strings.SERVICE_LIST_TITLE,
+          passProps: {},
+          animated: true
         });
           break;
       }
-    }
+    };
   }
 
   render() {
@@ -52,19 +63,23 @@ class Home extends React.Component {
       <View style={styles.container}>
         <TestButton
           onPress={this.handleButtonPress('scan')}
-          text='scan'
+          text={R.strings.SCAN_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('posture')}
-          text='posture'
+          text={R.strings.POSTURE_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('combination')}
-          text='combination'
+          text={R.strings.COMBINATION_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('buttonList')}
-          text='buttonList'
+          text={R.strings.BUTTON_LIST_TITLE}
+        />
+        <TestButton
+          onPress={this.handleButtonPress('serviceList')}
+          text={R.strings.SERVICE_LIST_TITLE}
         />
       </View>
     );

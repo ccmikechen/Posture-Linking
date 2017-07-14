@@ -1,10 +1,22 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
+import {
+  View,
+  Text,
+  Button,
+  ListView,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native';
+
 import styles from './styles';
-import { getTriggerList, setTriggerId } from '../../actions/combinationActions';
+import {
+  getTriggerList,
+  setTriggerId
+} from '../../actions/combinationActions';
 
 class TriggerList extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -33,13 +45,13 @@ class TriggerList extends React.Component {
   }
 
   renderRow(trigger) {
-    return(
+    return (
       <TouchableOpacity onPress={() => this.handelOK(trigger.id)}>
         <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
           <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 
   render() {
@@ -61,7 +73,7 @@ class TriggerList extends React.Component {
             />
           </View>
         }
-      </View>    
+      </View>
     );
   }
 }
@@ -70,5 +82,6 @@ export default connect((state) => ({
   triggers: state.getIn(['combination','triggers']),
   isGetTriggers: state.getIn(['combination', 'isGetTriggers'])
 }), {
-  getTriggerList, setTriggerId
+  getTriggerList,
+  setTriggerId
 })(TriggerList);

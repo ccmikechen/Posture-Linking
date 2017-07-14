@@ -1,19 +1,37 @@
 import React from 'react';
-import { View, Text, Button, ListView, TouchableOpacity, TextInput, ScrollView, DeviceEventEmitter, Alert } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  View,
+  Text,
+  Button,
+  ListView,
+  TouchableOpacity,
+  TextInput,
+  DeviceEventEmitter,
+  Alert,
+  ScrollView
+} from 'react-native';
+
 import styles from './styles';
-import { setDescription,
+import {
+  setDescription,
   setActionId,
   setTriggerId,
   updateCombinationList,
-  createCombination } from '../../actions/combinationActions';
+  createCombination
+} from '../../actions/combinationActions';
 import api from '../../api/poselink';
-import { getServiceById } from '../../../lib/helper';
+import ServiceManager from '../../../lib/ServiceManager';
 import Configs from '../Configs';
 import TriggerVerImg from '../../components/TriggerVerImg'
 import ActionVerImg from '../../components/ActionVerImg'
 
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view';
+
 class AddCombination extends React.Component {
+
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
@@ -32,8 +50,7 @@ class AddCombination extends React.Component {
             {text: '確定', onPress: () => this.closeScreen()},
           ],
           { cancelable: false }
-        )
-        
+        );
       }
     }
   }
@@ -66,7 +83,6 @@ class AddCombination extends React.Component {
       title: 'Action',
       passProps: {},
       navigatorStyle: {
-        
       },
       animationType: 'slide-up'
     });
@@ -75,10 +91,10 @@ class AddCombination extends React.Component {
   renderOK(){
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
-        <View style={{flex:1, marginTop:10}}>
+        <View style={{flex:1, marginTop:30}}>
           <Text style={{fontSize:16, height:20 }}>組合描述</Text>
           <TextInput
-            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:40, fontSize:25}}
+            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:60, fontSize:25}}
             maxLength= {100}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
@@ -89,9 +105,9 @@ class AddCombination extends React.Component {
             </View>
           </TouchableOpacity>
         </View>
-      )
+      );
     }else{
-      return (null)
+      return null;
     }
   }
 
@@ -104,7 +120,7 @@ class AddCombination extends React.Component {
             {text: '確定', onPress: () => this.handleOK()},
           ],
           { cancelable: false }
-        )
+    );
   }
 
   handleOK() {
@@ -115,19 +131,19 @@ class AddCombination extends React.Component {
         eventId: this.props.selectedTriggerConfig,
         config: this.props.triggerConfig
       },
-      action :{
+      action: {
         eventId: this.props.selectedActionConfig,
         config: this.props.actionConfig
       }
-    }
-    
+    };
+
     this.props.createCombination(data)
     .then(DeviceEventEmitter.emit('listUpdate'))
     .then(
       this.props.navigator.dismissModal({
           animationType: 'slide-down'
         })
-    )
+    );
   }
 
   getIcon(name){
@@ -152,10 +168,12 @@ class AddCombination extends React.Component {
 
   render() {
     console.log(this.props)
-    let triggerName;
-    let actionName;
-    this.props.triggerId != '' ? triggerName = getServiceById(this.props.triggerId).getName() : triggerName='Trigger';
-    this.props.actionId != '' ? actionName = getServiceById(this.props.actionId).getName() : actionName='Action';
+    let triggerName = this.props.triggerId != ''?
+          ServiceManager.getServiceById(this.props.triggerId).getName()
+          : 'Trigger';
+    let actionName = this.props.actionId != ''?
+          ServiceManager.getServiceById(this.props.actionId).getName()
+          : 'Action';
     
     return (
       <ScrollView style={{flex:0.8 , backgroundColor:'lightgrey'}}>
@@ -183,6 +201,7 @@ class AddCombination extends React.Component {
           }
         </View>
       </ScrollView>
+
     );
   }
 }
@@ -192,11 +211,11 @@ export default connect((state) => ({
   actionId: state.getIn(['combination', 'actionId']),
   description: state.getIn(['combination', 'description']),
   triggerConfig: state.getIn(['combination', 'triggerConfig']),
-  actionConfig: state.getIn(['combination', 'triggerConfig']),
+  actionConfig: state.getIn(['combination', 'actionConfig']),
   selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
-  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig']),
+  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig'])
 }), {
   setDescription,
   setActionId,

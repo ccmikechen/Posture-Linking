@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Alert
  } from 'react-native';
+
 import styles from './styles';
 import {
   updateSelectedRecordHeight,
@@ -24,6 +25,7 @@ import PostureDataEmitter from '../../ble/postureDevice';
 import PostureDataRecorder from '../../ble/PostureDataRecorder';
 
 class PostureRecord extends React.Component {
+
   constructor(props) {
     super(props);
 

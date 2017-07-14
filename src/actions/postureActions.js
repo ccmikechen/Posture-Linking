@@ -36,10 +36,10 @@ export const stopRecording = () => (dispatch) => {
 export const loadPostureTypes = () => (dispatch) => {
   api.getPostures()
   .then(postures => {
-    dispatch({ type: UPDATE_POSTURE_TYPES, postures })
-  })
-}
+    dispatch({ type: UPDATE_POSTURE_TYPES, postures });
+  });
+};
 
 export const clearRecordForm = () => (dispatch) => {
   dispatch({ type: CLEAR_SELECTED_RECORD_FORM });
-}
+};

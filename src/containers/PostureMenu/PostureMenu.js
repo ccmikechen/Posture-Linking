@@ -3,6 +3,7 @@ import {
   View,
   Platform
 } from 'react-native';
+
 import TestButton from '../../components/TestButton';
 import styles from './styles';
 import api from '../../api/poselink';
@@ -32,7 +33,7 @@ class PostureMenu extends React.Component {
           this.updateModel();
           break;
       }
-    }
+    };
   }
 
   updateModel() {

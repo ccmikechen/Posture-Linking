@@ -18,15 +18,14 @@ import {
 } from '../../actions/bleActions';
 
 import BleManager from 'react-native-ble-manager';
-
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-
 import {
   connectDevice
 } from '../../ble/bleDevices';
 
 class ScanBle extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -58,8 +57,8 @@ class ScanBle extends React.Component {
           screen: 'HomeScreen',
           title: 'Home',
           passProps: {},
-          navigatorStyle: {},
-        })
+          navigatorStyle: {}
+        });
       }
     }
   }
@@ -124,7 +123,7 @@ class ScanBle extends React.Component {
           </View>
         </View>
       );
-    }
+    };
   }
 
   render() {

@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import <React/RCTLinkingManager.h>
 #import <React/RCTPushNotificationManager.h>
 #import <React/RCTBundleURLProvider.h>
 
@@ -11,6 +12,8 @@
 // with npm ver 2. You'll need to "npm install" with npm 3 (see https://github.com/wix/react-native-navigation/issues/1)
 
 #import <React/RCTRootView.h>
+
+
 @import UIKit;
 @import Firebase;
 
@@ -18,7 +21,14 @@
 
 @implementation AppDelegate
 
-
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url
+                      sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                             annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -82,5 +92,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
   [RCTPushNotificationManager didReceiveLocalNotification:notification];
 }
+
 
 @end

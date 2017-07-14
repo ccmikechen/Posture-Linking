@@ -1,13 +1,29 @@
-import { Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
+
 import styles from './styles';
-import { setActionConfig, getEvent, setSelectedOption } from '../../actions/combinationActions';
+import {
+  setActionConfig,
+  getEvent,
+  setSelectedOption
+} from '../../actions/combinationActions';
+
 import DropDown, {
   Select,
   Option,
   OptionList,
 } from 'react-native-selectme';
+
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view';
 
 class ActionSetting extends React.Component {
   constructor(props) {
@@ -23,9 +39,9 @@ class ActionSetting extends React.Component {
     return event.options.map(option=> {
       switch (option.type) {
         case 'option':
-          return this.renderOption(option)
+          return this.renderOption(option);
         case 'textarea':
-          return this.renderTextArea(option)
+          return this.renderTextArea(option);
       };
     });
   };
@@ -35,16 +51,15 @@ class ActionSetting extends React.Component {
   }
 
   onSelectOption(value, name) {
-    this.config[name] = value; 
-    console.log(this.config[name])
+    this.config[name] = value;
     this.props.setSelectedOption(value);
   }
 
   renderOption(option) {
     return(
-      <View style={{flex:1}}>
-        <Text>{option.name}</Text>
-        <View style={styles.optionValueContainer}>
+      <View key={option.name} style={{flex:1}}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
+        <View style={{flex:1}}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}
@@ -60,7 +75,7 @@ class ActionSetting extends React.Component {
               </Option>
             ))}
           </Select>
-           <OptionList ref="OPTIONLIST"/>
+          <OptionList overlayStyles={{height:120, width:250}} ref="OPTIONLIST"/>
         </View>
       </View>
     )
@@ -68,8 +83,8 @@ class ActionSetting extends React.Component {
 
   renderTextArea(option) {
     return (
-      <View>
-        <Text>{option.name}</Text>
+      <View key={option.name}>
+        <Text style={{fontSize:16}}>{option.name}</Text>
         <TextInput
           style={{height:100, backgroundColor:'#FFF', borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', fontSize:16}}
           multiline = {true}
@@ -79,15 +94,15 @@ class ActionSetting extends React.Component {
           onChangeText = {(text) => this.onSelectOption(text, option.name)}
         />
       </View>
-    )
+    );
   }
 
   handleOK() {
-    let data= {
+    let data = {
       ...this.config,
       text: this.props.selectedEvent.description
     };
-    console.log(this.config)
+
     this.props.setActionConfig(data);
     this.props.navigator.popToRoot({
       animationType: 'slide-down'
@@ -97,17 +112,21 @@ class ActionSetting extends React.Component {
   render() {
     let event = this.props.selectedEvent;
     return (
-      <View style={{flex:1, padding:15}}>
+      <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
         {this.props.isGettingEvent ? 
         <View style={{flex:1}}>
+          <KeyboardAwareScrollView style={{flex:3}}>
           <Text style={{fontSize:24}}>{event.name}</Text>
           <Text style={{fontSize:16, marginBottom:10}}>{event.description}</Text>
             {this.renderSetting(event)}
-          <TouchableOpacity onPress={() => this.handleOK()}>
-            <View style={{alignItems:'center', height:60, borderRadius:5, backgroundColor:'#2aceba', justifyContent:'center', marginTop:20, marginLeft:20, marginRight:20}}>
-              <Text style={{fontSize:20, color:'#fff', textAlign:'center'}}>確認</Text>
-            </View>
-          </TouchableOpacity>
+          </KeyboardAwareScrollView>
+          <View>
+            <TouchableOpacity onPress={() => this.handleOK()}>
+              <View style={{alignItems:'center', height:60, borderRadius:5, backgroundColor:'#2aceba', justifyContent:'center', marginTop:20, marginLeft:20, marginRight:20}}>
+                <Text style={{fontSize:20, color:'#fff', textAlign:'center'}}>確認</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
         :
         <ActivityIndicator
@@ -121,15 +140,14 @@ class ActionSetting extends React.Component {
   }
 }
 
-export default connect((state) =>(
-  {
-    actionId: state.getIn(['combination', 'actionId']),
-    selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
-    isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
-    selectedEvent: state.getIn(['combination', 'selectedEvent']),
-    selectedOption: state.getIn(['combination', 'selectedOption']),
-  }), {
-    setActionConfig,
-    getEvent,
-    setSelectedOption
-  })(ActionSetting);
+export default connect((state) => ({
+  actionId: state.getIn(['combination', 'actionId']),
+  selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
+  isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
+  selectedEvent: state.getIn(['combination', 'selectedEvent']),
+  selectedOption: state.getIn(['combination', 'selectedOption'])
+}), {
+  setActionConfig,
+  getEvent,
+  setSelectedOption
+})(ActionSetting);

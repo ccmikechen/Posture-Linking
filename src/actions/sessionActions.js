@@ -17,11 +17,9 @@ export const createAccount = (dispatch) => {
     sex: data
   })
   .then(response => {
-    console.log(response);
     return response;
   })
   .catch(error => {
-    console.log(error);
   });
 };
 

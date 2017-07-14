@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -8,11 +9,10 @@ import {
   DeviceEventEmitter,
   Switch,
   Alert,
-  TouchableOpacity,
   Image,
-  Dimensions
+  TouchableOpacity
 } from 'react-native';
-import { connect } from 'react-redux';
+
 import styles from './styles';
 import {
   updateCombinationList,
@@ -25,21 +25,19 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import CombinationRow from '../../components/CombinationRow';
 
 class Combination extends React.Component {
+
   constructor(props) {
     super(props);
-    this.emitter='';
+
     this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.state = {
-      combinations : this.props.dataSource
-    };
   }
 
   componentDidMount() {
     this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
       this.props.notUpdateCombinationList();
-       setTimeout(() => {
-         this.props.updateCombinationList();
-       }, 1000);
+      setTimeout(() => {
+        this.props.updateCombinationList();
+      }, 1000);
     });
   }
 
@@ -61,28 +59,28 @@ class Combination extends React.Component {
 
   showAlert(combination) {
     Alert.alert(
-          '確認',
-          '您確定要刪除組合?',
-          [
-            {text: '取消', onPress: () => null},
-            {text: '確定', onPress: () => this.handleRemove(combination)},
-          ],
-          { cancelable: false }
+      '確認',
+      '您確定要刪除組合?',
+      [
+        {text: '取消', onPress: () => null},
+        {text: '確定', onPress: () => this.handleRemove(combination)},
+      ],
+      { cancelable: false }
     );
   }
 
   handleRemove(combination) {
     this.props.removeCombination(combination)
-    .then(this.props.notUpdateCombinationList())
-    .then(
-      setTimeout(() => {
-        this.props.updateCombinationList();
-      }, 1000)
-    );
+      .then(this.props.notUpdateCombinationList())
+      .then(
+        setTimeout(() => {
+          this.props.updateCombinationList();
+        }, 1000)
+      );
   }
 
   handleStatusChange(combination, status) {
-      this.props.setCombinationStatus(combination, status==true ? 1 : 0);
+    this.props.setCombinationStatus(combination, status==true ? 1 : 0);
   }
 
   renderRow(combination) {
@@ -140,6 +138,7 @@ class Combination extends React.Component {
             renderHiddenRow={(combination) => this.renderHiddenRow(combination)}
             swipeRowStyle={{flex: 1}}
             recalculateHiddenLayout={true}
+
           />
           :
           <View style={styles.cover}>
@@ -155,15 +154,14 @@ class Combination extends React.Component {
   }
 }
 
-export default connect((state) =>(
-  {
-    combinations: state.getIn(['combination', 'combinations']).toJS(),
-    isGetCombinations: state.getIn(['combination', 'isGetCombinations']),
-    isChangeStatus : state.getIn(['combination', 'isChangeStatus'])
-  }), {
-    updateCombinationList,
-    notUpdateCombinationList,
-    isUpdateCombinationList,
-    setCombinationStatus,
-    removeCombination
-  })(Combination);
+export default connect((state) => ({
+  combinations: state.getIn(['combination', 'combinations']).toJS(),
+  isGetCombinations: state.getIn(['combination', 'isGetCombinations']),
+  isChangeStatus : state.getIn(['combination', 'isChangeStatus'])
+}), {
+  updateCombinationList,
+  notUpdateCombinationList,
+  isUpdateCombinationList,
+  setCombinationStatus,
+  removeCombination
+})(Combination);
