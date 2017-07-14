@@ -32,6 +32,7 @@ class ServiceConnect extends React.Component {
     this.props.getService(this.props.selectedService);
     this.service = ServiceManager.getServiceById(this.props.selectedService);
     this.authorizer = this.service.createAuthorizer();
+    this.authorizer.init();
   };
 
   componentDidMount() {
