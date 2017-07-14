@@ -21,19 +21,19 @@ class Home extends React.Component {
         case 'scan':
           this.props.navigator.push({
             screen: 'ScanBleScreen',
-            title: 'Scan'
+            title: R.strings.SCAN_TITLE
           });
           break;
         case 'posture':
           this.props.navigator.push({
             screen: 'PostureScreen',
-            title: 'Posture'
+            title: R.strings.POSTURE_TITLE
           });
           break;
         case 'combination':
           this.props.navigator.push({
             screen: 'CombinationScreen',
-            title: 'Combination',
+            title: R.strings.COMBINATION_TITLE,
             passProps: {},
             animated: true
           });
@@ -41,7 +41,7 @@ class Home extends React.Component {
         case 'buttonList':
         this.props.navigator.push({
           screen: 'ButtonListScreen',
-          title: 'Button List',
+          title: R.strings.BUTTON_LIST_TITLE,
           passProps: {},
           animated: true
         });
@@ -49,7 +49,7 @@ class Home extends React.Component {
         case 'serviceList':
         this.props.navigator.push({
           screen: 'ServiceListScreen',
-          title: 'Service List',
+          title: R.strings.SERVICE_LIST_TITLE,
           passProps: {},
           animated: true
         });
@@ -63,23 +63,23 @@ class Home extends React.Component {
       <View style={styles.container}>
         <TestButton
           onPress={this.handleButtonPress('scan')}
-          text='scan'
+          text={R.strings.SCAN_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('posture')}
-          text='posture'
+          text={R.strings.POSTURE_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('combination')}
-          text='combination'
+          text={R.strings.COMBINATION_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('buttonList')}
-          text='buttonList'
+          text={R.strings.BUTTON_LIST_TITLE}
         />
         <TestButton
           onPress={this.handleButtonPress('serviceList')}
-          text='serviceList'
+          text={R.strings.SERVICE_LIST_TITLE}
         />
       </View>
     );
