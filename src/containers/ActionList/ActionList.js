@@ -1,8 +1,19 @@
 import React from 'react';
-import { View, Text, Button, ListView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  View,
+  Text,
+  Button,
+  ListView,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native';
+
 import styles from './styles';
-import { getActionList, setActionId } from '../../actions/combinationActions';
+import {
+  getActionList,
+  setActionId
+} from '../../actions/combinationActions';
 
 class ActionList extends React.Component {
   constructor(props) {
@@ -15,9 +26,12 @@ class ActionList extends React.Component {
 
   _genDataSource(actions) {
     if (this.dataSource == undefined) {
-      this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      this.dataSource = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      });
     }
     this.dataSource = this.dataSource.cloneWithRows(actions);
+
     return this.dataSource;
   }
 
@@ -25,7 +39,7 @@ class ActionList extends React.Component {
     this.props.setActionId(id);
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
-    })
+    });
   }
 
   renderRow(action) {
@@ -35,7 +49,7 @@ class ActionList extends React.Component {
           <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{action.name}</Text>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 
   render() {

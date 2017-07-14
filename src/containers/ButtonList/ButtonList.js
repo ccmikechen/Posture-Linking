@@ -7,18 +7,21 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+
 import styles from './styles';
 import {
   updateCombinationList
 } from '../../actions/combinationActions';
 
-import { getServiceByTypeName } from '../../../lib/helper';
+import ServiceManager from '../../../lib/ServiceManager';
 
 class ButtonList extends React.Component {
+
   constructor(props) {
     super(props);
+
     this.handleButtonPress = this.handleButtonPress.bind(this);
-    this.buttonTrigger = getServiceByTypeName('trigger', 'button');
+    this.buttonTrigger = ServiceManager.getServiceByTypeName('trigger', 'button');
   }
 
   componentWillMount() {

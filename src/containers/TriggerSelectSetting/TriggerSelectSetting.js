@@ -1,21 +1,31 @@
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
+
 import styles from './styles';
-import { getEventList, setSelectedTriggerConfig } from '../../actions/combinationActions';
+import {
+  getEventList,
+  setSelectedTriggerConfig
+} from '../../actions/combinationActions';
 
 class TriggerSelectSetting extends React.Component {
+
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
-    this.props.setSelectedTriggerConfig('')
+    this.props.setSelectedTriggerConfig('');
     this.props.getEventList(this.props.triggerId);
   }
 
   handleSelectConfig(id) {
-    this.props.setSelectedTriggerConfig(id)
+    this.props.setSelectedTriggerConfig(id);
     this.props.navigator.push({
       screen: 'TriggerSettingScreen',
       title: '',
@@ -52,16 +62,15 @@ class TriggerSelectSetting extends React.Component {
             />
         }
       </View>
-    )
+    );
   }
 }
 
-export default connect((state) =>(
-  {
-    triggerId: state.getIn(['combination', 'triggerId']),
-    eventList: state.getIn(['combination', 'eventList']),
-    isGettingEvents: state.getIn(['combination', 'isGettingEvents'])
-  }), {
-    getEventList,
-    setSelectedTriggerConfig
-  })(TriggerSelectSetting);
+export default connect((state) => ({
+  triggerId: state.getIn(['combination', 'triggerId']),
+  eventList: state.getIn(['combination', 'eventList']),
+  isGettingEvents: state.getIn(['combination', 'isGettingEvents'])
+}), {
+  getEventList,
+  setSelectedTriggerConfig
+})(TriggerSelectSetting);

@@ -1,18 +1,34 @@
 import React from 'react';
-import { View, Text, Button, ListView, TouchableOpacity, TextInput, DeviceEventEmitter, Alert } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  View,
+  Text,
+  Button,
+  ListView,
+  TouchableOpacity,
+  TextInput,
+  DeviceEventEmitter,
+  Alert
+} from 'react-native';
+
 import styles from './styles';
-import { setDescription,
+import {
+  setDescription,
   setActionId,
   setTriggerId,
   updateCombinationList,
-  createCombination } from '../../actions/combinationActions';
+  createCombination
+} from '../../actions/combinationActions';
 import api from '../../api/poselink';
-import { getServiceById } from '../../../lib/helper';
+import ServiceManager from '../../../lib/ServiceManager';
 import Configs from '../Configs';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view';
 
 class AddCombination extends React.Component {
+
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
@@ -29,8 +45,7 @@ class AddCombination extends React.Component {
             {text: '確定', onPress: () => this.closeScreen()},
           ],
           { cancelable: false }
-        )
-        
+        );
       }
     }
   }
@@ -63,7 +78,6 @@ class AddCombination extends React.Component {
       title: 'Action',
       passProps: {},
       navigatorStyle: {
-        
       },
       animationType: 'slide-up'
     });
@@ -86,9 +100,9 @@ class AddCombination extends React.Component {
             </View>
           </TouchableOpacity>
         </View>
-      )
+      );
     }else{
-      return (null)
+      return null;
     }
   }
 
@@ -101,7 +115,7 @@ class AddCombination extends React.Component {
             {text: '確定', onPress: () => this.handleOK()},
           ],
           { cancelable: false }
-        )
+    );
   }
 
   handleOK() {
@@ -117,23 +131,24 @@ class AddCombination extends React.Component {
         config: this.props.actionConfig
       }
     };
-    console.log(data);
-    
+
     this.props.createCombination(data)
     .then(DeviceEventEmitter.emit('listUpdate'))
     .then(
       this.props.navigator.dismissModal({
           animationType: 'slide-down'
         })
-    )
+    );
   }
 
   render() {
-    console.log(this.props)
-    let triggerName;
-    let actionName;
-    this.props.triggerId != '' ? triggerName = getServiceById(this.props.triggerId).getName() : triggerName='Trigger';
-    this.props.actionId != '' ? actionName = getServiceById(this.props.actionId).getName() : actionName='Action';
+    let triggerName = this.props.triggerId != ''?
+          ServiceManager.getServiceById(this.props.triggerId).getName()
+          : 'Trigger';
+    let actionName = this.props.actionId != ''?
+          ServiceManager.getServiceById(this.props.actionId).getName()
+          : 'Action';
+
     return (
       <KeyboardAwareScrollView style={{flex:0.8 , backgroundColor:'#fff'}}>
         <View style={{backgroundColor:'#e6eced'}}>
@@ -174,7 +189,7 @@ export default connect((state) => ({
   selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
-  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig']),
+  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig'])
 }), {
   setDescription,
   setActionId,

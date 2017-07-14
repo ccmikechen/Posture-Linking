@@ -1,12 +1,13 @@
 import React from 'react';
-
 import {
   View
 } from 'react-native';
+
 import TestButton from '../../components/TestButton';
 import styles from './styles';
 
 class Home extends React.Component {
+
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
@@ -32,7 +33,7 @@ class Home extends React.Component {
             screen: 'CombinationScreen',
             title: 'Combination',
             passProps: {},
-            animated:true,
+            animated: true
           });
           break;
         case 'buttonList':
@@ -40,7 +41,7 @@ class Home extends React.Component {
           screen: 'ButtonListScreen',
           title: 'Button List',
           passProps: {},
-          animated:true,
+          animated: true
         });
           break;
         case 'serviceList':
@@ -48,11 +49,11 @@ class Home extends React.Component {
           screen: 'ServiceListScreen',
           title: 'Service List',
           passProps: {},
-          animated:true,
+          animated: true
         });
           break;
       }
-    }
+    };
   }
 
   render() {

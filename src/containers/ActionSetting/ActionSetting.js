@@ -1,14 +1,29 @@
-import { Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
+
 import styles from './styles';
-import { setActionConfig, getEvent, setSelectedOption } from '../../actions/combinationActions';
+import {
+  setActionConfig,
+  getEvent,
+  setSelectedOption
+} from '../../actions/combinationActions';
+
 import DropDown, {
   Select,
   Option,
   OptionList,
 } from 'react-native-selectme';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view';
 
 class ActionSetting extends React.Component {
   constructor(props) {
@@ -24,9 +39,9 @@ class ActionSetting extends React.Component {
     return event.options.map(option=> {
       switch (option.type) {
         case 'option':
-          return this.renderOption(option)
+          return this.renderOption(option);
         case 'textarea':
-          return this.renderTextArea(option)
+          return this.renderTextArea(option);
       };
     });
   };
@@ -36,8 +51,7 @@ class ActionSetting extends React.Component {
   }
 
   onSelectOption(value, name) {
-    this.config[name] = value; 
-    console.log(this.config[name])
+    this.config[name] = value;
     this.props.setSelectedOption(value);
   }
 
@@ -80,15 +94,15 @@ class ActionSetting extends React.Component {
           onChangeText = {(text) => this.onSelectOption(text, option.name)}
         />
       </View>
-    )
+    );
   }
 
   handleOK() {
-    let data= {
+    let data = {
       ...this.config,
       text: this.props.selectedEvent.description
     };
-    console.log(this.config)
+
     this.props.setActionConfig(data);
     this.props.navigator.popToRoot({
       animationType: 'slide-down'
@@ -126,15 +140,14 @@ class ActionSetting extends React.Component {
   }
 }
 
-export default connect((state) =>(
-  {
-    actionId: state.getIn(['combination', 'actionId']),
-    selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
-    isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
-    selectedEvent: state.getIn(['combination', 'selectedEvent']),
-    selectedOption: state.getIn(['combination', 'selectedOption']),
-  }), {
-    setActionConfig,
-    getEvent,
-    setSelectedOption
-  })(ActionSetting);
+export default connect((state) => ({
+  actionId: state.getIn(['combination', 'actionId']),
+  selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
+  isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
+  selectedEvent: state.getIn(['combination', 'selectedEvent']),
+  selectedOption: state.getIn(['combination', 'selectedOption'])
+}), {
+  setActionConfig,
+  getEvent,
+  setSelectedOption
+})(ActionSetting);

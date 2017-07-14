@@ -28,12 +28,12 @@ const service = handleActions({
   DISCONNECT_SERVICE: (state, { id }) => {
     let newServices = state.get('services').map(service => {
       if(service.id == id) {
-        service.isConnected = false
+        service.isConnected = false;
       }
       return service;
     });
 
-    return state.set('services', newServices)
+    return state.set('services', newServices);
   },
   IS_AUTHORIZING: (state) => (
     state.set('isAuthorizing', true)
@@ -47,12 +47,12 @@ const service = handleActions({
   CONNECT_SERVICE: (state, { id }) => {
     let newServices = state.get('services').map(service => {
       if(service.id == id) {
-        service.isConnected = true
+        service.isConnected = true;
       }
       return service;
     });
 
-    return state.set('services', newServices)
+    return state.set('services', newServices);
   }
 }, InitialState);
 

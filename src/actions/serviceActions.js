@@ -1,6 +1,6 @@
-import { getServices, getServiceById, disconnectAllService, loadServiceConfigs } from '../../lib/helper';
-import poselink from '../api/poselink';
-import { getCombinationManager } from '../../lib/CombinationManager';
+import ServiceManager from '../../lib/ServiceManager';
+import api from '../api/poselink';
+import CombinationManager from '../../lib/CombinationManager';
 
 export const IS_GETTING_SERVICES = 'IS_GETTING_SERVICES';
 export const IS_NOT_GETTING_SERVICES = 'IS_NOT_GETTING_SERVICES';
@@ -13,10 +13,8 @@ export const IS_NOT_AUTHORIZING = 'IS_NOT_AUTHORIZING';
 export const SUCCESS_AUTHORIZE = 'SUCCESS_AUTHORIZE';
 export const CONNECT_SERVICE = 'CONNECT_SERVICE';
 
-const combinationManager = getCombinationManager();
-
 export const getServiceList = () => (dispatch) => {
-  let services = getServices();
+  let services = ServiceManager.getServices();
   dispatch({ type: GET_SERVICES, services });
   dispatch({ type: IS_GETTING_SERVICES });
 };
@@ -26,7 +24,7 @@ export const selectService = (id) => (dispatch) => {
 };
 
 export const getService = (id) => (dispatch) => {
-  let selectService = getServiceById(id);
+  let selectService = ServiceManager.getServiceById(id);
   let service = {
     id: selectService.id,
     name: selectService.name,
@@ -34,31 +32,34 @@ export const getService = (id) => (dispatch) => {
     classification: selectService.classification,
     isConnected: selectService.isConnected()
   };
-  console.log(service)
+
   dispatch({ type: GET_SERVICE, service });
 };
 
 export const isNotGettingServices = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_SERVICES });
-}
+};
 
 export const disconnectService = (service) => (dispatch) => {
   let id = service.id;
+
   dispatch({ type: IS_AUTHORIZING });
+
   return service.unauthorize()
     .then(() => {
-      dispatch({ type: DISCONNECT_SERVICE , id })
-      dispatch({ type: IS_NOT_AUTHORIZING })
-    })
+      dispatch({ type: DISCONNECT_SERVICE , id });
+      dispatch({ type: IS_NOT_AUTHORIZING });
+    });
 };
 
 export const connectService = (id) => (dispatch) => {
   dispatch({ type: IS_AUTHORIZING });
-  combinationManager.unloadAllCombinations().then(
-    disconnectAllService().then(
-      loadServiceConfigs().then(
-        combinationManager.loadAllCombinations().then(() => {
-          let selectService = getServiceById(id);
+
+  CombinationManager.unloadAllCombinations().then(() => {
+    ServiceManager.disconnectAllService().then(() => {
+      ServiceManager.loadServiceConfigs().then(() => {
+        CombinationManager.loadAllCombinations().then(() => {
+          let selectService = ServiceManager.getServiceById(id);
           let service = {
             id: selectService.id,
             name: selectService.name,
@@ -69,15 +70,9 @@ export const connectService = (id) => (dispatch) => {
 
           dispatch({ type: SUCCESS_AUTHORIZE, service });
           dispatch({ type: CONNECT_SERVICE, id });
-          dispatch({ type: IS_NOT_AUTHORIZING })
-        })
-      )
-    )
-  )
-
-
-
-
-  
-
-}
+          dispatch({ type: IS_NOT_AUTHORIZING });
+        });
+      });
+    });
+  });
+};

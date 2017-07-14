@@ -1,10 +1,23 @@
 import React from 'react';
-import { View, Text, ListView, ActivityIndicator, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  View,
+  Text,
+  ListView,
+  ActivityIndicator,
+  TouchableOpacity,
+  DeviceEventEmitter
+} from 'react-native';
+
 import styles from './styles';
-import { getServiceList, selectService, isNotGettingServices } from '../../actions/serviceActions';
+import {
+  getServiceList,
+  selectService,
+  isNotGettingServices
+} from '../../actions/serviceActions';
 
 class ServiceList extends React.Component {
+
   constructor(props) {
     super(props);
   };
@@ -35,7 +48,7 @@ class ServiceList extends React.Component {
   };
 
   handlePress(service) {
-    this.props.selectService(service.id)
+    this.props.selectService(service.id);
     this.props.navigator.push({
       screen: 'ServiceConnectScreen',
       title: '',
@@ -53,7 +66,7 @@ class ServiceList extends React.Component {
             <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
           </View>
         </TouchableOpacity>
-      )
+      );
     } else {
       return(
         <TouchableOpacity onPress={()=>this.handlePress(service)}>
@@ -61,7 +74,7 @@ class ServiceList extends React.Component {
             <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
           </View>
         </TouchableOpacity>
-      )
+      );
     };
   };
 
@@ -84,16 +97,16 @@ class ServiceList extends React.Component {
             />
           </View>
         }
-      </View>    
+      </View>
     );
   }
 }
 
 export default connect((state) => ({
   isGetServices: state.getIn(['service','isGetServices']),
-  services: state.getIn(['service','services']),
+  services: state.getIn(['service','services'])
 }), {
-  getServiceList, 
-  selectService, 
+  getServiceList,
+  selectService,
   isNotGettingServices
 })(ServiceList);

@@ -1,9 +1,6 @@
-import poselink from '../api/poselink';
-import { getTriggerService,
-  getActionService, 
-  getEventsByServiceId,
-  getEventById } from '../../lib/helper';
-import { getCombinationManager } from '../../lib/CombinationManager';
+import api from '../api/poselink';
+import ServiceManager from '../../lib/ServiceManager';
+import CombinationManager from '../../lib/CombinationManager';
 
 export const UPDATE_COMBINATION_LIST = 'UPDATE_COMBINATION_LIST';
 export const IS_GETTING_COMBINATION_LIST = 'IS_GETTING_COMBINATION_LIST';
@@ -37,11 +34,9 @@ export const IS_GETTING_ACTION_CONFIG = 'IS_GETTING_ACTION_CONFIG';
 export const IS_NOT_GETTING_TRIGGER_CONFIG = 'IS_NOT_GETTING_TRIGGER_CONFIG';
 export const IS_NOT_GETTING_ACTION_CONFIG = 'IS_NOT_GETTING_ACTION_CONFIG';
 
-const combinationManager = getCombinationManager();
-
 export const updateCombinationList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
-  let data = combinationManager.getCombinations();
+  let data = CombinationManager.getCombinations();
   dispatch({ type: UPDATE_COMBINATION_LIST, data });
   dispatch({ type: IS_GETTING_COMBINATION_LIST});
 };
@@ -56,14 +51,14 @@ export const isUpdateCombinationList = () => (dispatch) => {
 
 export const getActionList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_ACTION_LIST });
-  let actions = getActionService();
+  let actions = ServiceManager.getActionService();
   dispatch({ type: UPDATE_ACTION_LIST, actions });
   dispatch({ type: IS_GETTING_ACTION_LIST });
 };
 
 export const getTriggerList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_TRIGGER_LIST });
-  let triggers = getTriggerService();
+  let triggers = ServiceManager.getTriggerService();
   dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
   dispatch({ type: IS_GETTING_TRIGGER_LIST });
 };
@@ -106,44 +101,49 @@ export const setSelectedActionConfig = (id) => (dispatch) => {
 
 export const getEventList = (id) => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_EVENTS });
-  let events = getEventsByServiceId(id);
+
+  let events = ServiceManager.getEventsByServiceId(id);
   dispatch({ type: GET_EVENTS, events });
   dispatch({ type: IS_GETTING_EVENTS });
 };
 
 export const getEvent = (id) => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_EVENT });
-  let event = getEventById(id);
+
+  let event = ServiceManager.getEventById(id);
   dispatch({ type: GET_EVENT, event });
   dispatch({ type: IS_GETTING_EVENT });
 };
 
 export const setSelectedOption = (option) => (dispatch) => {
   dispatch({ type: SELECT_OPTION, option });
-}
+};
 
 export const createCombination = (data) => (dispatch) => {
-  return poselink.createCombination(data)
+  return api.createCombination(data)
   .then((combination) => {
-    combinationManager.loadCombination(combination);
+    CombinationManager.loadCombination(combination);
     return combination;
   }).then((combination) => {
     dispatch({ type:CREATE_COMBINATION, combination });
     return combination;
-  })
+  });
 };
 
 export const removeCombination = (combination) => (dispatch) => {
   let id = combination.id;
-    return poselink.removeCombination(combination.id)
-    .then(
-      combinationManager.removeCombination(combination)
-    ).then(dispatch({ type:REMOVE_COMBINATION, id }))
-}
+  return api.removeCombination(combination.id)
+    .then(() => {
+      CombinationManager.removeCombination(combination);
+    })
+    .then(() => {
+      dispatch({ type:REMOVE_COMBINATION, id });
+    });
+};
 
 export const setCombinationStatus = (combination, status) => (dispatch) => {
-  combinationManager.getCombinationById(combination.id).setStatus(status);
-  poselink.updateCombinationStatus(combination.id,  status);
+  CombinationManager.getCombinationById(combination.id).setStatus(status);
+  api.updateCombinationStatus(combination.id,  status);
 
   dispatch({
     type: SET_COMBINATION_STATUS,

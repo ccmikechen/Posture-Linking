@@ -1,19 +1,34 @@
-import { Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
+
 import styles from './styles';
-import { setTriggerConfig, getEvent, setSelectedOption } from '../../actions/combinationActions';
+import {
+  setTriggerConfig,
+  getEvent,
+  setSelectedOption
+} from '../../actions/combinationActions';
+
 import DropDown, {
   Select,
   Option,
   OptionList,
 } from 'react-native-selectme';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view';
 
 class TriggerSetting extends React.Component {
+
   constructor(props) {
     super(props);
-    this.config={};
+    this.config = {};
   }
 
   componentWillMount() {
@@ -21,18 +36,20 @@ class TriggerSetting extends React.Component {
   }
 
   renderSetting(event) {
-    if(event.options.length == 0 ) { return this.renderEmpty()}
+    if(event.options.length == 0) {
+      return this.renderEmpty();
+    }
+
     return event.options.map(option=> {
       switch (option.type) {
         case 'option':
-          return this.renderOption(option)
+          return this.renderOption(option);
         case 'textarea':
-          return this.renderTextArea(option)
+          return this.renderTextArea(option);
         default:
-          return this.renderEmpty()
+          return this.renderEmpty();
       };
     });
-    
   };
 
   _getOptionList() {
@@ -40,8 +57,8 @@ class TriggerSetting extends React.Component {
   }
 
   onSelectOption(value, name) {
-    this.config[name] = value; 
-    console.log(this.config[name])
+    this.config[name] = value;
+
     let data = `{"${name}":${value}}`;
     this.props.setSelectedOption(JSON.parse(data));
   }
@@ -59,7 +76,7 @@ class TriggerSetting extends React.Component {
             defaultValue="請選擇時間"
            >
             {option.options.map(ItemOption=>(
-              <Option 
+              <Option
                 value={ItemOption.toString()}
                 key={ItemOption.toString()}>
                   {ItemOption.toString()}
@@ -85,7 +102,7 @@ class TriggerSetting extends React.Component {
           onChangeText = {(text) => this.props.setSelectedOption(text, option.name)}
         />
       </View>
-    )
+    );
   }
 
   renderEmpty() {
@@ -93,7 +110,7 @@ class TriggerSetting extends React.Component {
       <View key={1} style={{flex:1, justifyContent:'center', alignItems:'center'}}>
         <Text style={{fontSize:20, color:'#499275'}}>無需做任何設定</Text>
       </View>
-    )
+    );
   }
 
   handleOK() {
@@ -101,7 +118,7 @@ class TriggerSetting extends React.Component {
       ...this.config,
       text: this.props.selectedEvent.description
     };
-    console.log(this.config)
+
     this.props.setTriggerConfig(data);
     this.props.navigator.popToRoot({
       animationType: 'slide-down'
@@ -110,9 +127,10 @@ class TriggerSetting extends React.Component {
 
   render() {
     let event = this.props.selectedEvent;
+
     return (
       <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
-        {this.props.isGettingEvent ? 
+        {this.props.isGettingEvent ?
         <View style={{flex:1}}>
           <KeyboardAwareScrollView>
             <Text style={{fontSize:24}}>{event.name}</Text>
@@ -126,26 +144,25 @@ class TriggerSetting extends React.Component {
           </TouchableOpacity>
         </View>
         :
-        <ActivityIndicator
+          <ActivityIndicator
             animating={true}
             size='large'
             color='grey'
-            />
+          />
         }
       </View>
-    )
+    );
   }
 }
 
-export default connect((state) =>(
-  {
-    triggerId: state.getIn(['combination', 'triggerId']),
-    selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
-    isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
-    selectedEvent: state.getIn(['combination', 'selectedEvent']),
-    selectedOption: state.getIn(['combination', 'selectedOption']),
-  }), {
-    setTriggerConfig,
-    getEvent,
-    setSelectedOption
-  })(TriggerSetting);
+export default connect((state) => ({
+  triggerId: state.getIn(['combination', 'triggerId']),
+  selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
+  isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
+  selectedEvent: state.getIn(['combination', 'selectedEvent']),
+  selectedOption: state.getIn(['combination', 'selectedOption'])
+}), {
+  setTriggerConfig,
+  getEvent,
+  setSelectedOption
+})(TriggerSetting);

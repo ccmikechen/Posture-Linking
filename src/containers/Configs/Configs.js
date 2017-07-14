@@ -1,10 +1,17 @@
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity
+} from 'react-native';
+
 import styles from './styles';
-import { getServiceById } from '../../../lib/helper';
+import ServiceManager from '../../../lib/ServiceManager';
 
 class Configs extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -25,7 +32,6 @@ class Configs extends React.Component {
       title: 'Action',
       passProps: {},
       navigatorStyle: {
-        
       },
       animationType: 'slide-up'
     });
@@ -44,11 +50,11 @@ class Configs extends React.Component {
             <Text style={{fontSize:20, backgroundColor:'#fff', color: '#b2b6b2', textAlign:'center'}}>於是Action</Text>
           </View>
       </View>
-    )
+    );
   }
 
   renderTrggerSetting() {
-    let trigger = getServiceById(this.props.triggerId);
+    let trigger = ServiceManager.getServiceById(this.props.triggerId);
 
     if(!this.props.isGetTriggerConfig) {
       return (
@@ -63,8 +69,8 @@ class Configs extends React.Component {
               <Text style={{fontSize:20, backgroundColor:'#fff', color: '#b2b6b2', textAlign:'center'}}>於是Action</Text>
             </View>
         </View>
-      )
-    }else{
+      );
+    } else {
       return (
         <View>
           <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
@@ -79,7 +85,7 @@ class Configs extends React.Component {
               </View>
             </TouchableOpacity>
         </View>
-      )
+      );
     }
   }
 
@@ -93,7 +99,7 @@ class Configs extends React.Component {
     });
   }
 
-    handleActionSetting() {
+  handleActionSetting() {
     this.props.navigator.push({
       screen: 'ActionSelectConfigScreen',
       title: '',
@@ -104,8 +110,8 @@ class Configs extends React.Component {
   }
 
   renderActionSetting() {
-    let trigger = getServiceById(this.props.triggerId);
-    let action = getServiceById(this.props.actionId);
+    let trigger = ServiceManager.getServiceById(this.props.triggerId);
+    let action = ServiceManager.getServiceById(this.props.actionId);
 
     if(!this.props.isGetActionConfig) {
       return (
@@ -123,8 +129,8 @@ class Configs extends React.Component {
             </View>
           </TouchableOpacity>
         </View>
-      )
-    }else{
+      );
+    } else {
       return (
         <View>
           <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
@@ -140,7 +146,7 @@ class Configs extends React.Component {
               </View>
             </TouchableOpacity>
         </View>
-      )
+      );
     }
   }
 
@@ -149,17 +155,15 @@ class Configs extends React.Component {
       <View>
         {this.props.triggerId =='' ? this.renderNew() : this.props.actionId == '' ? this.renderTrggerSetting() : this.renderActionSetting()}
       </View>
-    )
+    );
   }
 }
 
-export default connect((state) =>(
-  {
-    triggerId: state.getIn(['combination', 'triggerId']),
-    actionId: state.getIn(['combination', 'actionId']),
-    triggerConfig: state.getIn(['combination', 'triggerConfig']),
-    actionConfig: state.getIn(['combination', 'actionConfig']),
-    isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
-    isGetActionConfig: state.getIn(['combination', 'isGetActionConfig']),
-  }), {
-  })(Configs);
+export default connect((state) => ({
+  triggerId: state.getIn(['combination', 'triggerId']),
+  actionId: state.getIn(['combination', 'actionId']),
+  triggerConfig: state.getIn(['combination', 'triggerConfig']),
+  actionConfig: state.getIn(['combination', 'actionConfig']),
+  isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
+  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig'])
+}))(Configs);

@@ -10,8 +10,8 @@ export const addNewScannedDevice = (device) => (dispatch) => {
 export const startBleScan = () => (dispatch) => {
   dispatch({ type: CLEAR_SCANNED_DEVICES });
   dispatch({ type: UPDATE_BLE_SCANNING_START });
-}
+};
 
 export const stopBleScan = () => (dispatch) => {
   dispatch({ type: UPDATE_BLE_SCANNING_STOP });
-}
+};

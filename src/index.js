@@ -5,17 +5,13 @@ import { AsyncStorage } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import api from './api/poselink';
 import { initialSocket, getChannel } from './api/channel';
-import {
-  loadServices,
-  loadServiceConfigs
-} from '../lib/helper';
-import { getCombinationManager } from '../lib/CombinationManager';
+
+import ServiceManager from '../lib/ServiceManager';
+import CombinationManager from '../lib/CombinationManager';
 
 const startBleManager = () => {
   BleManager.start({showAlert: false, allowDuplicates: false});
-}
-
-const combinationManager = getCombinationManager();
+};
 
 const defaultUser = {
   username: 'testuser',
@@ -40,16 +36,16 @@ const loadBackgroundProcess = async () => {
   await login(defaultUser);
   console.log('Loged in');
 
-  await loadServices();
+  await ServiceManager.loadServices();
   console.log('Loaded services');
 
-  await loadServiceConfigs();
+  await ServiceManager.loadServiceConfigs();
   console.log('Loaded service configs');
 
-  await combinationManager.loadAllCombinations();
+  await CombinationManager.loadAllCombinations();
   console.log('Loaded combinations');
 
-  await combinationManager.applyCombinations();
+  await CombinationManager.applyCombinations();
 
   await initialSocket();
   console.log('Initialized socket');
