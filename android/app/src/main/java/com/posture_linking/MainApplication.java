@@ -3,6 +3,7 @@ package com.posture_linking;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rnfs.RNFSPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -34,7 +35,8 @@ public class MainApplication extends NavigationApplication {
           new BleManagerPackage(),
           new ReactNativePushNotificationPackage(),
           new PostureDetectorPackage(),
-          new RNFSPackage()
+          new RNFSPackage(),
+          new RNDeviceInfo()
       );
   }
 
