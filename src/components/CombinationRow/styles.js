@@ -5,7 +5,6 @@ export default styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
-    height: 100,
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 5,
@@ -19,9 +18,9 @@ export default styles = StyleSheet.create({
     flex: 1
   },
   combinationimg:{
-    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 145
   },
   trigger:{
     flex: 1

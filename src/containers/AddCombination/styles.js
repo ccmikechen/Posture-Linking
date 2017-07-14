@@ -5,7 +5,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    height: 380,
+    height: 400,
     backgroundColor: '#E9E9E9'
   },
   triggerimg:{

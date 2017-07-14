@@ -9,7 +9,8 @@ import {
   Switch,
   Alert,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
@@ -60,11 +61,11 @@ class Combination extends React.Component {
 
   showAlert(combination) {
     Alert.alert(
-          'ç¢ºèª',
-          'æ‚¨ç¢ºå®šè¦åˆªé™¤çµ„åˆ?',
+          '½T»{',
+          '±z½T©w­n§R°£²Õ¦X?',
           [
-            {text: 'å–æ¶ˆ', onPress: () => null},
-            {text: 'ç¢ºå®š', onPress: () => this.handleRemove(combination)},
+            {text: '¨ú®ø', onPress: () => null},
+            {text: '½T©w', onPress: () => this.handleRemove(combination)},
           ],
           { cancelable: false }
     );
@@ -108,10 +109,18 @@ class Combination extends React.Component {
       return (
         <View style={styles.rowback}>
           <TouchableOpacity onPress = {() => {alert("share "+item.description);}}>
-            <Image source={require('../../../res/img/icon/share.png')} tintColor={'blue'} style={styles.rowbackbutton} />
+            <Image
+              source={require('../../../res/img/icon/share.png')}
+              tintColor={'#525252'}
+              style={styles.rowbackbutton}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress = {() => {this.showAlert(item)}}>
-            <Image source={require('../../../res/img/icon/garbage.png')} tintColor={'red'} style={styles.rowbackbutton} />
+            <Image
+              source={require('../../../res/img/icon/garbage.png')}
+              tintColor={'#525252'}
+              style={styles.rowbackbutton}
+            />
           </TouchableOpacity>
         </View>
       );
@@ -129,6 +138,8 @@ class Combination extends React.Component {
             dataSource={this._genDataSource(this.props.combinations)}
             renderRow={(combination) => this.renderRow(combination)}
             renderHiddenRow={(combination) => this.renderHiddenRow(combination)}
+            swipeRowStyle={{flex: 1}}
+            recalculateHiddenLayout={true}
           />
           :
           <View style={styles.cover}>

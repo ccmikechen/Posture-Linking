@@ -26,10 +26,10 @@ class AddCombination extends React.Component {
       if (event.id == 'close') {
         Alert.alert(
           'PostureLinking',
-          'ƒ˙¥_∂®“™ÍPÈ]–¬‘ˆΩM∫œ',
+          '√Ñ√∫¬¥_¬∂¬®√í¬™√™P√©]√ê√Ç√î√∂¬ΩM¬∫√è',
           [
-            {text: '»°œ˚', onPress: () => null},
-            {text: '¥_∂®', onPress: () => this.closeScreen()},
+            {text: '√à¬°√è√ª', onPress: () => null},
+            {text: '¬¥_¬∂¬®', onPress: () => this.closeScreen()},
           ],
           { cancelable: false }
         )
@@ -76,7 +76,7 @@ class AddCombination extends React.Component {
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
         <View style={{flex:1, marginTop:10}}>
-          <Text style={{fontSize:16, height:20 }}>ΩM∫œ√Ë ˆ</Text>
+          <Text style={{fontSize:16, height:20 }}>¬ΩM¬∫√è√É√®√ä√∂</Text>
           <TextInput
             style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:40, fontSize:25}}
             maxLength= {100}
@@ -85,7 +85,7 @@ class AddCombination extends React.Component {
           />
           <TouchableOpacity onPress={()=>this.showAlert()}>
             <View style={{marginTop:20, borderWidth:0, backgroundColor:'#59d059', height:50, alignItems:'center',  justifyContent: 'center'}}>
-              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>ΩM∫œ</Text>
+              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>¬ΩM¬∫√è</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -98,10 +98,10 @@ class AddCombination extends React.Component {
   showAlert() {
     Alert.alert(
           'PostureLinking',
-          'ƒ˙¥_∂®“™–¬‘ˆΩM∫œ',
+          '√Ñ√∫¬¥_¬∂¬®√í¬™√ê√Ç√î√∂¬ΩM¬∫√è',
           [
-            {text: '»°œ˚', onPress: () => null},
-            {text: '¥_∂®', onPress: () => this.handleOK()},
+            {text: '√à¬°√è√ª', onPress: () => null},
+            {text: '¬¥_¬∂¬®', onPress: () => this.handleOK()},
           ],
           { cancelable: false }
         )
@@ -135,7 +135,9 @@ class AddCombination extends React.Component {
       { name: 'Trigger', icon: require('../../../res/img/serviceIcon/trigger.png'),color: '#F39FB3'  },
       { name: 'Action', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C'  },
       { name: 'button', icon: require('../../../res/img/serviceIcon/button.png'),color: '#A0A9B5'  },
-      { name: 'line notify', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00'  }
+      { name: 'line notify', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
+      { name: 'line messaging', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
+      { name: 'notification', icon: require('../../../res/img/serviceIcon/notify.png'),color: '#6A9CCC' }
     ];
 
     let temp={};
@@ -160,40 +162,26 @@ class AddCombination extends React.Component {
 
         <View style={styles.imgcontent} >
           <View style={styles.triggerimg} >
-            <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
+            <TouchableOpacity onPress={this.handelTrigger.bind(this)} >
               <TriggerVerImg size={1} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
             </TouchableOpacity>
           </View>
           <View style={styles.actionimg} >
-            <ActionVerImg size={1} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
-          </View>
-        </View>
-
-
-        <View style={{backgroundColor:'#e6eced'}}>
-          <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
-            <View style={{backgroundColor:'#76d9ae', marginTop:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{textAlign: 'center', fontSize:20, fontWeight:'bold', color:'#fff'}}>{triggerName}</Text>
-            </View>
-          </TouchableOpacity>
           {this.props.isGetTriggerConfig ?
-            <TouchableOpacity onPress={this.handelAction.bind(this)}>
-              <View style={{backgroundColor:'#369fd3', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-                <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
-              </View>
+            <TouchableOpacity onPress={this.handelAction.bind(this)} >
+              <ActionVerImg size={1} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
             </TouchableOpacity>
           :
-            <View style={{backgroundColor:'#b2b4b5', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
-            </View>
+            <ActionVerImg size={1} icon={this.getIcon(actionName).icon} color= '#b2b4b5' />
+          }
+          </View>
+        </View>
+        <View style={{flex:1, backgroundColor:'#fff', padding:10}}>
+          <Configs navigator={this.props.navigator}/>
+          {(this.props.isGetTriggerConfig && this.props.isGetActionConfig) == true ? 
+            this.renderOK() : null
           }
         </View>
-          <View style={{flex:1, backgroundColor:'#fff', padding:10}}>
-            <Configs navigator={this.props.navigator}/>
-            {(this.props.isGetTriggerConfig && this.props.isGetActionConfig) == true ? 
-              this.renderOK() : null
-            }
-          </View>
       </ScrollView>
     );
   }

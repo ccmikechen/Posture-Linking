@@ -19,10 +19,11 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   }
 
   let icon = [
-    { id: '1', icon: require('../../../res/img/serviceIcon/trigger.png'),color: '#F39FB3' },
+    { id: '1', icon: require('../../../res/img/serviceIcon/button.png'),color: '#A0A9B5'  },
     { id: '2', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C' },
+    { id: '3', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
     { id: '4', icon: require('../../../res/img/serviceIcon/gmail.png'),color: '#DB4639' },
-    { id: '5', icon: require('../../../res/img/serviceIcon/facebook.png'),color: '#3C5A99' }
+    { id: '5', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00'  }
   ];
 
   let getImageSetting = (id) => {

@@ -15,6 +15,11 @@ class CombinationScreen extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.props.navigator.setStyle({
+      navBarBackgroundColor: '#3FA9F5',
+      navBarTextColor: 'white',
+      navBarButtonColor: 'white'
+    });
   }
 
 
