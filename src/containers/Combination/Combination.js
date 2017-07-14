@@ -61,11 +61,11 @@ class Combination extends React.Component {
 
   showAlert(combination) {
     Alert.alert(
-          '½T»{',
-          '±z½T©w­n§R°£²Õ¦X?',
+          'ç¢ºèª',
+          'æ‚¨ç¢ºå®šè¦åˆªé™¤çµ„åˆ?',
           [
-            {text: '¨ú®ø', onPress: () => null},
-            {text: '½T©w', onPress: () => this.handleRemove(combination)},
+            {text: 'å–æ¶ˆ', onPress: () => null},
+            {text: 'ç¢ºå®š', onPress: () => this.handleRemove(combination)},
           ],
           { cancelable: false }
     );

@@ -16,11 +16,11 @@ const CombinationImage = ({ icon=require('../../../res/img/serviceIcon/action.pn
 			<Image
 				source={icon}
 				style={{
-					height: height*0.34,
-					width: width*0.17,
+					height: height*0.5,
+					width: width*0.25,
 					position: 'absolute',
-					left: width*0.13,
-					top: height*0.33,
+					top: height*0.25,
+					left: width*0.1,
 					opacity: opacity
 				}}
 			/>

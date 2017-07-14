@@ -22,8 +22,9 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
     { id: '1', icon: require('../../../res/img/serviceIcon/button.png'),color: '#A0A9B5'  },
     { id: '2', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C' },
     { id: '3', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
-    { id: '4', icon: require('../../../res/img/serviceIcon/gmail.png'),color: '#DB4639' },
-    { id: '5', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00'  }
+    { id: '4', icon: require('../../../res/img/serviceIcon/notify.png'),color: '#6A9CCC'  },
+    { id: '5', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00'  },
+    { id: '6', icon: require('../../../res/img/serviceIcon/gmail.png'),color: '#DB4639' }
   ];
 
   let getImageSetting = (id) => {
@@ -62,7 +63,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
       </View>
       <View style={styles.content}>
         <View style={[styles.name,{opacity: opacity}]}>
-          <Text style={styles.text}>{data.trigger.serviceId}安安你好{data.action.serviceId}</Text>
+          <Text style={styles.text}>{data.trigger.serviceId}+{data.action.serviceId}安安我是" {data.description} "你好</Text>
         </View>
         <View style={styles.switch}>
           <Switch

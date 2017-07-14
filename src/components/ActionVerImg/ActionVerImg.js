@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 
 const InsertAction = ({ size=1, icon=require('../../../res/img/serviceIcon/action.png'), color='#F3D29C' }) => {
 	size = size * 200;
-	let iconWidth=size*0.3, iconHeight=size*0.3, iconBottom=size*0.22;
+	let iconWidth=size*0.45, iconHeight=size*0.45, iconBottom=size*0.15;
 
 	if(icon == require('../../../res/img/serviceIcon/action.png')){
 		iconWidth=size*0.5;

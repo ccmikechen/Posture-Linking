@@ -13,6 +13,11 @@ class AddCombinationScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.props.navigator.setStyle({
+      navBarBackgroundColor: '#3FA9F5',
+      navBarTextColor: 'white',
+      navBarButtonColor: 'white'
+    });
   }
 
   render() {

@@ -26,10 +26,10 @@ class AddCombination extends React.Component {
       if (event.id == 'close') {
         Alert.alert(
           'PostureLinking',
-          'Äú´_¶¨ÒªêPé]ÐÂÔö½MºÏ',
+          '您確定要關閉新增組合',
           [
-            {text: 'È¡Ïû', onPress: () => null},
-            {text: '´_¶¨', onPress: () => this.closeScreen()},
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.closeScreen()},
           ],
           { cancelable: false }
         )
@@ -76,7 +76,7 @@ class AddCombination extends React.Component {
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
         <View style={{flex:1, marginTop:10}}>
-          <Text style={{fontSize:16, height:20 }}>½MºÏÃèÊö</Text>
+          <Text style={{fontSize:16, height:20 }}>組合描述</Text>
           <TextInput
             style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:40, fontSize:25}}
             maxLength= {100}
@@ -85,7 +85,7 @@ class AddCombination extends React.Component {
           />
           <TouchableOpacity onPress={()=>this.showAlert()}>
             <View style={{marginTop:20, borderWidth:0, backgroundColor:'#59d059', height:50, alignItems:'center',  justifyContent: 'center'}}>
-              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>½MºÏ</Text>
+              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>組合</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -98,10 +98,10 @@ class AddCombination extends React.Component {
   showAlert() {
     Alert.alert(
           'PostureLinking',
-          'Äú´_¶¨ÒªÐÂÔö½MºÏ',
+          '您確定要新增組合',
           [
-            {text: 'È¡Ïû', onPress: () => null},
-            {text: '´_¶¨', onPress: () => this.handleOK()},
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.handleOK()},
           ],
           { cancelable: false }
         )
@@ -132,8 +132,8 @@ class AddCombination extends React.Component {
 
   getIcon(name){
     let icon = [
-      { name: 'Trigger', icon: require('../../../res/img/serviceIcon/trigger.png'),color: '#F39FB3'  },
-      { name: 'Action', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C'  },
+      { name: 'Trigger', icon: require('../../../res/img/serviceIcon/defult.png'),color: '#F39FB3'  },
+      { name: 'Action', icon: require('../../../res/img/serviceIcon/defult.png'),color: '#F3D29C'  },
       { name: 'button', icon: require('../../../res/img/serviceIcon/button.png'),color: '#A0A9B5'  },
       { name: 'line notify', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
       { name: 'line messaging', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
@@ -172,7 +172,7 @@ class AddCombination extends React.Component {
               <ActionVerImg size={1} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
             </TouchableOpacity>
           :
-            <ActionVerImg size={1} icon={this.getIcon(actionName).icon} color= '#b2b4b5' />
+            <ActionVerImg size={1} icon={require('../../../res/img/serviceIcon/action.png')} color= '#b2b4b5' />
           }
           </View>
         </View>

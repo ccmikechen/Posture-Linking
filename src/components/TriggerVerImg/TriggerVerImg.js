@@ -3,7 +3,7 @@ import { View, Image, TouchableOpacity } from 'react-native';
 
 const InsertTrigger = ({ size=1, icon=require('../../../res/img/serviceIcon/trigger.png'), color='#F39FB3' }) => {
 	size = size * 200;
-	let iconWidth=size*0.3, iconHeight=size*0.3, iconTop=size*0.22;
+	let iconWidth=size*0.45, iconHeight=size*0.45, iconTop=size*0.2;
 
 	if(icon == require('../../../res/img/serviceIcon/trigger.png')){
 		iconWidth=size*0.5;
