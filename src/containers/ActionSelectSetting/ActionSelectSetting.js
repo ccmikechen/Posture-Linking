@@ -39,8 +39,8 @@ class ActionSelectSetting extends React.Component {
     return(
       <View key={event.id} style={{padding:20, marginBottom:10}}>
         <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
-          <View style={{height:60, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
-            <Text style={{textAlign:'center', flex:1, fontSize:16, backgroundColor:'#fff'}}>{event.description}</Text>
+          <View style={{height:60, borderWidth:3, borderRadius:10, borderColor: '#3FA9F5', flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
+            <Text style={{textAlign:'center', flex:1,color: '#3FA9F5', fontSize:16, backgroundColor:'#fff'}}>{event.description}</Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -47,8 +47,8 @@ class TriggerList extends React.Component {
   renderRow(trigger) {
     return (
       <TouchableOpacity onPress={() => this.handelOK(trigger.id)}>
-        <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
-          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
+        <View style={styles.viewButton}>
+          <Text style={styles.text}>{trigger.name}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -56,7 +56,7 @@ class TriggerList extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1 , backgroundColor:'lightgray'}}>
+      <View style={styles.container}>
         {this.props.isGetTriggers ?
           <View>
             <ListView

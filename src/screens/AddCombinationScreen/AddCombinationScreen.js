@@ -5,8 +5,9 @@ class AddCombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
       {
-        title:'X',
-        id: 'close'
+        title:'cancel',
+        id: 'close',
+        icon: R.images.CLOSE_ICON
       }
     ]
   };
@@ -14,9 +15,10 @@ class AddCombinationScreen extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setStyle({
-      navBarBackgroundColor: '#3FA9F5',
-      navBarTextColor: 'white',
-      navBarButtonColor: 'white'
+      navBarBackgroundColor: R.colors.NAVBAR_BACKGROUND,
+      navBarTextColor: R.colors.NAVBAR_TEXT,
+      navBarButtonColor: R.colors.NAVBAR_BUTTON,
+      statusBarColor: R.colors.STATUSBAR_BACKGROUND
     });
   }
 

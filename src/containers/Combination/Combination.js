@@ -105,19 +105,19 @@ class Combination extends React.Component {
       return null;
     } else {
       return (
-        <View style={styles.rowback}>
+        <View style={styles.rowBack}>
           <TouchableOpacity onPress = {() => {alert("share "+item.description);}}>
             <Image
               source={require('../../../res/img/icon/share.png')}
               tintColor={'#525252'}
-              style={styles.rowbackbutton}
+              style={styles.rowBackButton}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress = {() => {this.showAlert(item)}}>
             <Image
               source={require('../../../res/img/icon/garbage.png')}
               tintColor={'#525252'}
-              style={styles.rowbackbutton}
+              style={styles.rowBackButton}
             />
           </TouchableOpacity>
         </View>

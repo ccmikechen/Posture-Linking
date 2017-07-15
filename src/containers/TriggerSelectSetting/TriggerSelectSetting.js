@@ -37,10 +37,10 @@ class TriggerSelectSetting extends React.Component {
 
   renderTrigger(event) {
     return(
-      <View key={event.id} style={{padding:20, marginBottom:10}}>
+      <View key={event.id} style={styles.content}>
         <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
-          <View style={{height:60, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
-            <Text style={{textAlign:'center', flex:1, fontSize:16, backgroundColor:'#fff', }}>{event.description}</Text>
+          <View style={styles.viewButton}>
+            <Text style={styles.text}>{event.description}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -49,7 +49,7 @@ class TriggerSelectSetting extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1, backgroundColor:'#fff'}}>
+      <View style={styles.container}>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
           this.renderTrigger(event)

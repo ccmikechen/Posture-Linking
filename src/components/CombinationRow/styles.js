@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-  rowfront: {
+  rowFront: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
@@ -14,10 +14,10 @@ export default styles = StyleSheet.create({
   combination:{
     flex: 3
   },
-  combinationtouch:{
+  combinationTouch:{
     flex: 1
   },
-  combinationimg:{
+  combinationImg:{
     flexDirection: 'row',
     alignItems: 'center',
     width: 145

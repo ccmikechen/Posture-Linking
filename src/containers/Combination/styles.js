@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
   container:{
     flex: 1, 
-    backgroundColor:'lightgrey'
+    backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
-  rowback: {
+  rowBack: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#BEBEBE',
+    backgroundColor: R.colors.COMBINATION_ROWBACK,
     justifyContent : 'flex-end',
     alignItems: 'center',
     borderRadius: 10,
@@ -16,9 +16,9 @@ export default styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 5
   },
-  rowbackbutton: {
+  rowBackButton: {
     height: 45,
     width: 45,
-    margin: 5
+    marginRight: 13
   }
 });

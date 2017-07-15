@@ -19,12 +19,12 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   }
 
   let icon = [
-    { id: '1', icon: require('../../../res/img/serviceIcon/button.png'),color: '#A0A9B5'  },
-    { id: '2', icon: require('../../../res/img/serviceIcon/action.png'),color: '#F3D29C' },
-    { id: '3', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00' },
-    { id: '4', icon: require('../../../res/img/serviceIcon/notify.png'),color: '#6A9CCC'  },
-    { id: '5', icon: require('../../../res/img/serviceIcon/line.png'),color: '#4ECD00'  },
-    { id: '6', icon: require('../../../res/img/serviceIcon/gmail.png'),color: '#DB4639' }
+    { id: '1', icon: require('../../../res/img/serviceIcon/button.png'), color: '#A0A9B5'  },
+    { id: '2', icon: require('../../../res/img/serviceIcon/action.png'), color: '#F3D29C' },
+    { id: '3', icon: require('../../../res/img/serviceIcon/line.png'), color: '#4ECD00' },
+    { id: '4', icon: require('../../../res/img/serviceIcon/notify.png'), color: '#6A9CCC'  },
+    { id: '5', icon: require('../../../res/img/serviceIcon/line.png'), color: '#4ECD00'  },
+    { id: '6', icon: require('../../../res/img/serviceIcon/gmail.png'), color: '#DB4639' }
   ];
 
   let getImageSetting = (id) => {
@@ -38,10 +38,10 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   }
 
   return(
-    <View style = {styles.rowfront}>
+    <View style = {styles.rowFront}>
       <View style={styles.combination}>
-        <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationtouch}>
-          <View style={styles.combinationimg}>
+        <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationTouch}>
+          <View style={styles.combinationImg}>
             <View style={styles.trigger}>
               <TriggerHorImg
                 icon = {getImageSetting(data.trigger.serviceId).icon}
@@ -63,7 +63,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
       </View>
       <View style={styles.content}>
         <View style={[styles.name,{opacity: opacity}]}>
-          <Text style={styles.text}>{data.trigger.serviceId}+{data.action.serviceId}安安我是" {data.description} "你好</Text>
+          <Text style={styles.text}>{data.description}</Text>
         </View>
         <View style={styles.switch}>
           <Switch
