@@ -59,6 +59,8 @@ export const connectService = (id) => (dispatch) => {
     ServiceManager.disconnectAllService().then(() => {
       ServiceManager.loadServiceConfigs().then(() => {
         CombinationManager.loadAllCombinations().then(() => {
+          CombinationManager.applyCombinations();
+
           let selectService = ServiceManager.getServiceById(id);
           let service = {
             id: selectService.id,

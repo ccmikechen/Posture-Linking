@@ -6,7 +6,6 @@ import {
   Button,
   ListView,
   ActivityIndicator,
-  DeviceEventEmitter,
   Switch,
   Alert
 } from 'react-native';
@@ -28,19 +27,6 @@ class Combination extends React.Component {
     this.handleStatusChange = this.handleStatusChange.bind(this);
   }
 
-  componentDidMount() {
-    this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
-      this.props.notUpdateCombinationList();
-      setTimeout(() => {
-        this.props.updateCombinationList();
-      }, 1000);
-    });
-  }
-
-  componentWillUnmount(){
-    this.emitter.remove();
-  };
-
   componentWillMount () {
     this.props.updateCombinationList();
   }
@@ -49,8 +35,7 @@ class Combination extends React.Component {
     if (this.dataSource == undefined) {
       this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     }
-    this.dataSource = this.dataSource.cloneWithRows(combinations);
-    return this.dataSource;
+    return this.dataSource.cloneWithRows(combinations);
   }
 
   showAlert(combination) {
