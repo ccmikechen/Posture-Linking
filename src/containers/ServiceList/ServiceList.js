@@ -5,8 +5,7 @@ import {
   Text,
   ListView,
   ActivityIndicator,
-  TouchableOpacity,
-  DeviceEventEmitter
+  TouchableOpacity
 } from 'react-native';
 
 import styles from './styles';
@@ -27,19 +26,6 @@ class ServiceList extends React.Component {
     this.props.getServiceList();
   };
 
-  componentDidMount () {
-    this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
-      this.props.isNotGettingServices();
-       setTimeout(() => {
-         this.props.getServiceList();
-       }, 1000);
-    });
-  };
-
-  componentWillUnmount(){
-    this.emitter.remove();
-  };
-
   handlePress(service) {
     this.props.selectService(service.id);
     this.props.navigator.push({
@@ -51,7 +37,35 @@ class ServiceList extends React.Component {
     });
   }
 
+  renderRow(service) {
+    console.log('render row', service);
+    if(service.isConnected) {
+      return(
+        <TouchableOpacity onPress={() => this.handlePress(service)}>
+          <View style={{margin:5, backgroundColor:'#65e8cf', height:50}}>
+            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    } else {
+      return(
+        <TouchableOpacity onPress={() => this.handlePress(service)}>
+          <View style={{margin:5, backgroundColor:'#d4d4d4', height:50}}>
+            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    };
+  };
+
+  shouldComponentUpdate() {
+    console.log('update', this.props.services);
+    return true;
+  }
+
   render() {
+    let dataSource = this._genDataSource(this.props.services);
+
     return (
       <View style={{flex:1 , backgroundColor:'#fff'}}>
         {this.props.isGetServices ?
