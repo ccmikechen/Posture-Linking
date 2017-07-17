@@ -71,6 +71,12 @@ export const isUpdateCombinationList = () => (dispatch) => {
 export const getActionList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_ACTION_LIST });
   let actions = ServiceManager.getActionService();
+  actions = actions.map(action => (
+    {
+      ...action,
+      isConnected: action.isConnected()
+    }
+  ));
   dispatch({ type: UPDATE_ACTION_LIST, actions });
   dispatch({ type: IS_GETTING_ACTION_LIST });
 };
@@ -78,6 +84,12 @@ export const getActionList = () => (dispatch) => {
 export const getTriggerList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_TRIGGER_LIST });
   let triggers = ServiceManager.getTriggerService();
+  triggers = triggers.map(trigger => (
+    {
+      ...trigger,
+      isConnected: trigger.isConnected()
+    }
+  ));
   dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
   dispatch({ type: IS_GETTING_TRIGGER_LIST });
 };

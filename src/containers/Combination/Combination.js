@@ -123,7 +123,6 @@ class Combination extends React.Component {
             renderHiddenRow={(combination) => this.renderHiddenRow(combination)}
             swipeRowStyle={{flex: 1}}
             recalculateHiddenLayout={true}
-
           />
           :
           <View style={styles.cover}>

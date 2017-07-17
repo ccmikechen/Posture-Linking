@@ -12,9 +12,13 @@ import {
 import styles from './styles';
 import {
   getTriggerList,
-  setTriggerId
+  setTriggerId,
 } from '../../actions/combinationActions';
+<<<<<<< 544491a83355ba96e84d65db5083536832b0b3eb
 import ServiceGrid from '../../components/ServiceGrid';
+=======
+import { selectService } from '../../actions/serviceActions';
+>>>>>>> fix service connect
 
 class TriggerList extends React.Component {
 
@@ -26,7 +30,7 @@ class TriggerList extends React.Component {
     this.props.getTriggerList();
   }
 
-  handelOK(id) {
+  handleOK(id) {
     this.props.setTriggerId(id);
     this.props.navigator.dismissModal({
       screen: 'AddCombinationScreen',
@@ -37,8 +41,35 @@ class TriggerList extends React.Component {
     });
   }
 
-  render() {
+  handleConnect(id) {
+    this.props.selectService(id);
+    this.props.navigator.push({
+      screen: 'ServiceConnectScreen',
+      title: '',
+      passProps: {},
+      navigatorStyle: {
+      }
+    });
+  }
 
+  renderRow(trigger) {
+    return (
+      trigger.isConnected ? 
+       <TouchableOpacity onPress={() => this.handleOK(trigger.id)}>
+        <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
+          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
+        </View>
+      </TouchableOpacity>
+      :
+       <TouchableOpacity onPress={() => this.handleConnect(trigger.id)}>
+        <View style={{margin:5, backgroundColor:'#c3c4c4', height:50}}>
+          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         {this.props.isGetTriggers ?
@@ -62,5 +93,6 @@ export default connect((state) => ({
   isGetTriggers: state.getIn(['combination', 'isGetTriggers'])
 }), {
   getTriggerList,
-  setTriggerId
+  setTriggerId,
+  selectService
 })(TriggerList);
