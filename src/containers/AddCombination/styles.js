@@ -38,9 +38,12 @@ export default styles = StyleSheet.create({
     height:40 
   },
   descriptionInput:{
-    borderRadius:5,
-    height:50,
-    fontSize:20,
+    borderRadius: 5,
+    height: 50,
+    fontSize: 20,
+    borderColor: R.colors.INPUT_BORDER,
+    borderWidth: 1,
+    paddingLeft: 10
   },
   submitContent:{
     marginTop:20,

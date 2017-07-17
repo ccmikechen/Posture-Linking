@@ -70,7 +70,7 @@ class TriggerList extends React.Component {
     return (
       <View style={styles.container}>
         {this.props.isGetTriggers ?
-          <ServiceGrid serviceData={this.props.triggers} onDataPress={(data) => this.handleOK(data.id)} />
+          <ServiceGrid serviceData={this.props.triggers} onOKPress={(data) => this.handleOK(data.id)} onConnectPress={(data) => this.handleConnect(data.id)} />
         :
           <View style={styles.cover}>
             <ActivityIndicator

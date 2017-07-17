@@ -22,7 +22,9 @@ const colors = {
 	BUTTON_UNDEFIND_TEXT: '#3FA9F5',
 	BUTTON_TEXT: 'white',
 	
-	SUBMIT: '#59d059'
+	SUBMIT: '#59d059',
+
+	INPUT_BORDER: '#B2B6B2'
 };
 
 export default colors;
