@@ -41,7 +41,6 @@ export default styles = StyleSheet.create({
   text:{
     flex: 1,
     fontSize: 16,
-    fontFamily: '',
     fontWeight: 'bold'
   },
   switch:{

@@ -20,11 +20,15 @@ import {
   updateCombinationList,
   createCombination
 } from '../../actions/combinationActions';
+
 import api from '../../api/poselink';
 import ServiceManager from '../../../lib/ServiceManager';
 import Configs from '../Configs';
 import TriggerVerImg from '../../components/TriggerVerImg';
 import ActionVerImg from '../../components/ActionVerImg';
+import {
+  getServiceList
+} from '../../actions/serviceActions';
 
 import {
   KeyboardAwareScrollView
@@ -65,6 +69,7 @@ class AddCombination extends React.Component {
     this.props.setTriggerId('');
     this.props.setActionId('');
     this.props.setDescription('');
+    this.props.getServiceList();
   }
 
   handelTrigger() {
@@ -211,5 +216,6 @@ export default connect((state) => ({
   setActionId,
   setTriggerId,
   updateCombinationList,
-  createCombination
+  createCombination,
+  getServiceList
 })(AddCombination);

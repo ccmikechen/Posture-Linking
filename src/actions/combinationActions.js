@@ -155,7 +155,27 @@ export const createCombination = (data) => (dispatch) => {
   .then((combination) => {
     CombinationManager.createCombination(combination);
     return combination;
-  }).then((combination) => {
+  })
+  .then((combination) => {
+    return {
+      id: combination.id,
+      description: combination.description,
+      status: combination.status,
+      trigger: {
+        eventId: combination.trigger.eventId,
+        serviceId: combination.trigger.serviceId,
+        name: ServiceManager.getServiceById(combination.trigger.serviceId).name,
+        config: combination.trigger.config
+      },
+      action: {
+        eventId: combination.action.eventId,
+        serviceId: combination.action.serviceId,
+        name: ServiceManager.getServiceById(combination.action.serviceId).name,
+        config: combination.action.config
+      }
+    }
+  })
+  .then((combination) => {
     dispatch({ type:CREATE_COMBINATION, combination });
     return combination;
   });

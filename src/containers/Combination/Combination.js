@@ -65,7 +65,7 @@ class Combination extends React.Component {
   }
 
   handleStatusChange(combination, status) {
-    this.props.setCombinationStatus(combination, status==true ? 1 : 0);
+    this.props.setCombinationStatus(combination, status == true ? 1 : 0);
   }
 
   renderRow(combination) {
@@ -76,7 +76,7 @@ class Combination extends React.Component {
       return (
         <CombinationRow
           data={item}
-          onEdit={()=>{alert('edit');}}
+          onEdit={()=>{Alert.alert('edit');}}
           onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
         />
       );
@@ -86,12 +86,12 @@ class Combination extends React.Component {
     renderHiddenRow(combination) {
     let item = combination;
 
-    if(combination.status === 2 ) {
+    if (combination.status === 2 ) {
       return null;
     } else {
       return (
         <View style={styles.rowBack}>
-          <TouchableOpacity onPress = {() => {alert("share "+item.description);}}>
+          <TouchableOpacity onPress = {() => {Alert.alert("share "+item.description);}}>
             <Image
               source={require('../../../res/img/icon/share.png')}
               tintColor={'#525252'}

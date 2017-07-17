@@ -13,8 +13,7 @@ import {
 import styles from './styles';
 import {
   disconnectService,
-  connectService,
-  getServiceList
+  connectService
 } from '../../actions/serviceActions';
 
 import ServiceManager from '../../../lib/ServiceManager';
@@ -29,7 +28,6 @@ class ServiceConnect extends React.Component {
   };
 
   componentWillMount () {
-    this.props.getServiceList();
     this.service = ServiceManager.getServiceById(this.props.selectedService);
     this.authorizer = this.service.createAuthorizer();
     this.authorizer.init();
@@ -126,6 +124,5 @@ export default connect((state) => ({
   isAuthorizing: state.getIn(['service', 'isAuthorizing'])
 }), {
   disconnectService,
-  connectService,
-  getServiceList
+  connectService
 })(ServiceConnect);
