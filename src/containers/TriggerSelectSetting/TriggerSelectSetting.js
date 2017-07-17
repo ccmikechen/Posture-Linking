@@ -36,7 +36,7 @@ class TriggerSelectSetting extends React.Component {
   }
 
   renderTrigger(event) {
-    return(
+    return (
       <View key={event.id} style={styles.content}>
         <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
           <View style={styles.viewButton}>
@@ -52,7 +52,7 @@ class TriggerSelectSetting extends React.Component {
       <View style={styles.container}>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
-          this.renderTrigger(event)
+         this.renderTrigger(event)
         ))
         :
         <ActivityIndicator
