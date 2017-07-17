@@ -12,6 +12,8 @@ export const IS_AUTHORIZING = 'IS_AUTHORIZING';
 export const IS_NOT_AUTHORIZING = 'IS_NOT_AUTHORIZING';
 export const SUCCESS_AUTHORIZE = 'SUCCESS_AUTHORIZE';
 export const CONNECT_SERVICE = 'CONNECT_SERVICE';
+export const UPDATE_ACTION_LIST = 'UPDATE_ACTION_LIST';
+export const UPDATE_TRIGGER_LIST = 'UPDATE_TRIGGER_LIST';
 
 export const getServiceList = () => (dispatch) => {
   let services = ServiceManager.getServices();
@@ -61,16 +63,25 @@ export const connectService = (id) => (dispatch) => {
         CombinationManager.loadAllCombinations().then(() => {
           CombinationManager.applyCombinations();
 
-          let selectService = ServiceManager.getServiceById(id);
-          let service = {
-            id: selectService.id,
-            name: selectService.name,
-            icon: selectService.icon,
-            classification: selectService.classification,
-            isConnected: selectService.isConnected()
-          };
+          let services = ServiceManager.getServices();
+          let actions = ServiceManager.getActionService();
+          let triggers = ServiceManager.getTriggerService();
 
-          dispatch({ type: SUCCESS_AUTHORIZE, service });
+          actions = actions.map(action => (
+            {
+              ...action,
+              isConnected: action.isConnected()
+            }
+          ));
+          triggers = triggers.map(trigger => (
+            {
+              ...trigger,
+              isConnected: trigger.isConnected()
+            }
+          ));
+          dispatch({ type: GET_SERVICES, services });
+          dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
+          dispatch({ type: UPDATE_ACTION_LIST, actions });
           dispatch({ type: CONNECT_SERVICE, id });
           dispatch({ type: IS_NOT_AUTHORIZING });
         });

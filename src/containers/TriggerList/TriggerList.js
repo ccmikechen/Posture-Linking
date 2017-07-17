@@ -12,8 +12,9 @@ import {
 import styles from './styles';
 import {
   getTriggerList,
-  setTriggerId
+  setTriggerId,
 } from '../../actions/combinationActions';
+import { selectService } from '../../actions/serviceActions';
 
 class TriggerList extends React.Component {
 
@@ -33,7 +34,7 @@ class TriggerList extends React.Component {
     return this.dataSource;
   }
 
-  handelOK(id) {
+  handleOK(id) {
     this.props.setTriggerId(id);
     this.props.navigator.dismissModal({
       screen: 'AddCombinationScreen',
@@ -44,10 +45,28 @@ class TriggerList extends React.Component {
     });
   }
 
+  handleConnect(id) {
+    this.props.selectService(id);
+    this.props.navigator.push({
+      screen: 'ServiceConnectScreen',
+      title: '',
+      passProps: {},
+      navigatorStyle: {
+      }
+    });
+  }
+
   renderRow(trigger) {
     return (
-      <TouchableOpacity onPress={() => this.handelOK(trigger.id)}>
+      trigger.isConnected ? 
+       <TouchableOpacity onPress={() => this.handleOK(trigger.id)}>
         <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
+          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
+        </View>
+      </TouchableOpacity>
+      :
+       <TouchableOpacity onPress={() => this.handleConnect(trigger.id)}>
+        <View style={{margin:5, backgroundColor:'#c3c4c4', height:50}}>
           <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
         </View>
       </TouchableOpacity>
@@ -83,5 +102,6 @@ export default connect((state) => ({
   isGetTriggers: state.getIn(['combination', 'isGetTriggers'])
 }), {
   getTriggerList,
-  setTriggerId
+  setTriggerId,
+  selectService
 })(TriggerList);
