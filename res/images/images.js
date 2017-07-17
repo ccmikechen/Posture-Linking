@@ -10,7 +10,7 @@ const images = {
       { name: 'gmail', icon: require('./serviceIcon/gmail.png'), color: '#DB4639' },
       { name: 'facebook', icon: require('./serviceIcon/facebook.png'), color: '#23599B' },
       { name: 'smart bulb', icon: require('./serviceIcon/homeDevice.png'), color: '#5EBBE7' },
-      { name: 'camera', icon: require('./serviceIcon/camera.png'), color: '#FCFFAE' },
+      { name: 'camera', icon: require('./serviceIcon/camera.png'), color: '#FC8B29' },
       { name: 'sheet music turner', icon: require('./serviceIcon/musicStand.png'), color: '#3FA9F5' },
       { name: 'slide show', icon: require('./serviceIcon/briefing.png'), color: '#ab20a0' }
   ],

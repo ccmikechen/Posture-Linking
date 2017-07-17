@@ -49,23 +49,6 @@ class TriggerList extends React.Component {
     });
   }
 
-  renderRow(trigger) {
-    return (
-      trigger.isConnected ? 
-       <TouchableOpacity onPress={() => this.handleOK(trigger.id)}>
-        <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
-          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
-        </View>
-      </TouchableOpacity>
-      :
-       <TouchableOpacity onPress={() => this.handleConnect(trigger.id)}>
-        <View style={{margin:5, backgroundColor:'#c3c4c4', height:50}}>
-          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{trigger.name}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
   render() {
     return (
       <View style={styles.container}>
