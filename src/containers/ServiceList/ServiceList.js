@@ -5,8 +5,7 @@ import {
   Text,
   ListView,
   ActivityIndicator,
-  TouchableOpacity,
-  DeviceEventEmitter
+  TouchableOpacity
 } from 'react-native';
 
 import styles from './styles';
@@ -27,19 +26,6 @@ class ServiceList extends React.Component {
     this.props.getServiceList();
   };
 
-  componentDidMount () {
-    this.emitter = DeviceEventEmitter.addListener('listUpdate', (e) => {
-      this.props.isNotGettingServices();
-       setTimeout(() => {
-         this.props.getServiceList();
-       }, 1000);
-    });
-  };
-
-  componentWillUnmount(){
-    this.emitter.remove();
-  };
-
   handlePress(service) {
     this.props.selectService(service.id);
     this.props.navigator.push({
@@ -51,12 +37,20 @@ class ServiceList extends React.Component {
     });
   }
 
+  shouldComponentUpdate() {
+    console.log('update', this.props.services);
+    return true;
+  }
+
+  shouldComponentUpdate() {
+    console.log('update', this.props.services);
+    return true;
+  }
+
   render() {
     return (
       <View style={{flex:1 , backgroundColor:'#fff'}}>
-        {this.props.isGetServices ?
-          <ServiceGrid serviceData={this.props.services} onDataPress={(service) => this.handlePress(service)} />
-        :
+        {this.props.isGettingServices ?
           <View style={styles.cover}>
             <ActivityIndicator
               animating={true}
@@ -64,6 +58,7 @@ class ServiceList extends React.Component {
               color='grey'
             />
           </View>
+         : <ServiceGrid serviceData={this.props.services} onDataPress={(service) => this.handlePress(service)} />
         }
       </View>
     );
@@ -71,8 +66,8 @@ class ServiceList extends React.Component {
 }
 
 export default connect((state) => ({
-  isGetServices: state.getIn(['service','isGetServices']),
-  services: state.getIn(['service','services'])
+  isGettingServices: state.getIn(['service','isGettingServices']),
+  services: state.getIn(['service','services']).toJS()
 }), {
   getServiceList,
   selectService,
