@@ -18,24 +18,17 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
     switchValue = false;
   }
 
-  let icon = [
-    { id: '1', icon: require('../../../res/img/serviceIcon/button.png'), color: '#A0A9B5'  },
-    { id: '2', icon: require('../../../res/img/serviceIcon/action.png'), color: '#F3D29C' },
-    { id: '3', icon: require('../../../res/img/serviceIcon/line.png'), color: '#4ECD00' },
-    { id: '4', icon: require('../../../res/img/serviceIcon/notify.png'), color: '#6A9CCC'  },
-    { id: '5', icon: require('../../../res/img/serviceIcon/line.png'), color: '#4ECD00'  },
-    { id: '6', icon: require('../../../res/img/serviceIcon/gmail.png'), color: '#DB4639' }
-  ];
-
-  let getImageSetting = (id) => {
+  let getImageSetting = (name) => {
     let temp = {};
-    icon.map((data) => {
-      if(data.id == id){
+    R.images.icon.map((data) => {
+      if(data.name == name){
         temp = data;
       }
     });
     return temp;
   }
+  console.log(data.trigger);
+  console.log(data.action);
 
   return(
     <View style = {styles.rowFront}>
@@ -44,15 +37,15 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
           <View style={[styles.combinationImg, { opacity: opacity-0.2 }]}>
             <View style={styles.trigger}>
               <TriggerHorImg
-                icon = {getImageSetting(data.trigger.serviceId).icon}
-                color = {getImageSetting(data.trigger.serviceId).color}
+                icon = {getImageSetting(data.trigger.name).icon}
+                color = {getImageSetting(data.trigger.name).color}
                 size = {0.8}
               />
             </View>
             <View style={styles.action}>
               <ActionHorImg
-                icon = {getImageSetting(data.action.serviceId).icon}
-                color = {getImageSetting(data.action.serviceId).color}
+                icon = {getImageSetting(data.action.name).icon}
+                color = {getImageSetting(data.action.name).color}
                 size = {0.8}
               />
             </View>
