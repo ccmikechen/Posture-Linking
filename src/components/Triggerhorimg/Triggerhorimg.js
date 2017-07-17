@@ -1,7 +1,7 @@
 import React from 'React';
 import { View, Image } from 'react-native';
 
-const CombinationImage = ({ icon=require('../../../res/img/serviceIcon/action.png'), opacity = 1, color = '#F39FB3', size = 1, left = 0 }) => {
+const CombinationImage = ({ icon='', color = '#B2B4B5', size = 1, left = 0 }) => {
 	let width = 100 * size * 2, height = 100 * size;
 	
 	return (
@@ -13,17 +13,21 @@ const CombinationImage = ({ icon=require('../../../res/img/serviceIcon/action.pn
           width: width*0.55
         }}
       />
-			<Image
-				source={icon}
-				style={{
-					height: height*0.5,
-					width: width*0.25,
-					position: 'absolute',
-					top: height*0.25,
-					left: width*0.1,
-					opacity: opacity
-				}}
-			/>
+      {icon == ''
+      ?
+      <View></View>
+      :
+				<Image
+					source={icon}
+					style={{
+						height: height*0.5,
+						width: width*0.25,
+						position: 'absolute',
+						top: height*0.25,
+						left: width*0.1
+					}}
+				/>
+			}
 		</View>
 	);
 }

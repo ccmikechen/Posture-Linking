@@ -27,7 +27,7 @@ export default styles = StyleSheet.create({
   },
   action:{
     flex: 1,
-    right: 17
+    right: 16.13
   },
   content:{
     flex: 4,

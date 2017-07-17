@@ -12,8 +12,8 @@ const AddCombinationDetail = ({ text, status, onPress }) => {
     switch(status) {
       case 0:
         return (
-          <View style={[styles.changeStyle, { height: 80, backgroundColor: '#FFFFFF', borderColor: '#B2B6B2' }]}>
-            <Text style={[styles.fontStyle, { color: '#B2B6B2' }]}>{text}</Text>
+          <View style={[styles.changeStyle, { height: 80, backgroundColor: R.colors.BUTTON_UNDEFIND_BACKGROUND, borderColor: R.colors.BUTTON_DISABLED_BORDER }]}>
+            <Text style={[styles.fontStyle, { color: R.colors.BUTTON_DISABLED_TEXT }]}>{text}</Text>
           </View>
         );
         break;
@@ -21,8 +21,8 @@ const AddCombinationDetail = ({ text, status, onPress }) => {
       case 2:
         return (
           <TouchableOpacity onPress={ onPress }>
-            <View style={[styles.changeStyle, { height: 80, backgroundColor: '#FFFFFF', borderColor: '#3FA9F5' }]}>
-                <Text style={[styles.fontStyle, { color: '#3FA9F5' }]}>{text}</Text>
+            <View style={[styles.changeStyle, { height: 80, backgroundColor: R.colors.BUTTON_UNDEFIND_BACKGROUND, borderColor: R.colors.BUTTON_UNDEFIND_BORDER }]}>
+                <Text style={[styles.fontStyle, { color: R.colors.BUTTON_UNDEFIND_TEXT }]}>{text}</Text>
             </View>
           </TouchableOpacity>
         );
@@ -30,8 +30,8 @@ const AddCombinationDetail = ({ text, status, onPress }) => {
       default:
         return (
           <TouchableOpacity onPress={ onPress }>
-            <View style={[styles.changeStyle, { height: 80, backgroundColor: '#3FA9F5', borderColor: '#FFFFFF' }]}>
-              <Text style={[styles.fontStyle, { color: '#FFFFFF' }]}>{text}</Text>
+            <View style={[styles.changeStyle, { height: 80, backgroundColor: R.colors.BUTTON_BACKGROUND, borderColor: R.colors.BUTTON_BORDER }]}>
+              <Text style={[styles.fontStyle, { color: R.colors.BUTTON_TEXT }]}>{text}</Text>
             </View>
           </TouchableOpacity>
         );

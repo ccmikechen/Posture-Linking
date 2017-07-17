@@ -41,11 +41,10 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
     <View style = {styles.rowFront}>
       <View style={styles.combination}>
         <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationTouch}>
-          <View style={styles.combinationImg}>
+          <View style={[styles.combinationImg, { opacity: opacity-0.2 }]}>
             <View style={styles.trigger}>
               <TriggerHorImg
                 icon = {getImageSetting(data.trigger.serviceId).icon}
-                opacity = {opacity}
                 color = {getImageSetting(data.trigger.serviceId).color}
                 size = {0.8}
               />
@@ -53,7 +52,6 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
             <View style={styles.action}>
               <ActionHorImg
                 icon = {getImageSetting(data.action.serviceId).icon}
-                opacity = {opacity}
                 color = {getImageSetting(data.action.serviceId).color}
                 size = {0.8}
               />

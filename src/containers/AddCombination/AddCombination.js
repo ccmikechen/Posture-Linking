@@ -182,7 +182,7 @@ class AddCombination extends React.Component {
               <ActionVerImg size={0.8} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
             </TouchableOpacity>
           :
-            <ActionVerImg size={0.8} icon={require('../../../res/img/serviceIcon/action.png')} color= '#b2b4b5' />
+            <ActionVerImg size={0.8} />
           }
           </View>
         </View>

@@ -14,6 +14,7 @@ import {
   getActionList,
   setActionId
 } from '../../actions/combinationActions';
+import ServiceGrid from '../../components/ServiceGrid';
 
 class ActionList extends React.Component {
   constructor(props) {
@@ -24,17 +25,6 @@ class ActionList extends React.Component {
     this.props.getActionList();
   }
 
-  _genDataSource(actions) {
-    if (this.dataSource == undefined) {
-      this.dataSource = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      });
-    }
-    this.dataSource = this.dataSource.cloneWithRows(actions);
-
-    return this.dataSource;
-  }
-
   handelOK(id) {
     this.props.setActionId(id);
     this.props.navigator.dismissModal({
@@ -42,26 +32,11 @@ class ActionList extends React.Component {
     });
   }
 
-  renderRow(action) {
-    return (
-      <TouchableOpacity onPress={() => this.handelOK(action.id)}>
-        <View style={{margin:5, backgroundColor:'#93d0ee', height:50}}>
-          <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{action.name}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
   render() {
     return (
-      <View style={{flex:1 , backgroundColor:'lightgray'}}>
+      <View style={styles.container}>
         {this.props.isGetActions ?
-          <View>
-            <ListView
-              dataSource={this._genDataSource(this.props.actions)}
-              renderRow={(action) => this.renderRow(action)}
-            />
-          </View>
+          <ServiceGrid serviceData={this.props.actions} onDataPress={(data) => this.handelOK(data.id)} />
           :
           <View style={styles.cover}>
             <ActivityIndicator

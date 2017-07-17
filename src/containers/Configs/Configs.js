@@ -42,13 +42,13 @@ class Configs extends React.Component {
     return (
       <View>
         <AddCombinationDetail
-          text='如果Tirgger'
+          text='如果 ○○○'
           status={1}
           onPress={() => this.handleTrigger()}
         />
 
         <AddCombinationDetail
-          text='於是Action'
+          text='則 ○○'
           status={0}
           onPress={() => this.handleTrigger()}
         />
@@ -69,7 +69,7 @@ class Configs extends React.Component {
             onPress={()=>this.handleTriggerSetting()}
           />
           <AddCombinationDetail
-            text='於是Action'
+            text='則 ○○'
             status={0}
           />
         </View>
@@ -84,7 +84,7 @@ class Configs extends React.Component {
             onPress={()=>this.handleTriggerSetting()}
           />
           <AddCombinationDetail
-            text='於是Action'
+            text='則 ○○'
             status={1}
             onPress={()=>this.handleAction()}
           />

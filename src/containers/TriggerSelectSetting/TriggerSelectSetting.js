@@ -56,10 +56,10 @@ class TriggerSelectSetting extends React.Component {
         ))
         :
         <ActivityIndicator
-              animating={true}
-              size='large'
-              color='grey'
-            />
+          animating={true}
+          size='large'
+          color='grey'
+        />
         }
       </View>
     );
