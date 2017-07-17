@@ -58,7 +58,11 @@ class ServiceList extends React.Component {
               color='grey'
             />
           </View>
-         : <ServiceGrid serviceData={this.props.services} onDataPress={(service) => this.handlePress(service)} />
+         : 
+          <ServiceGrid 
+            serviceData={this.props.services} 
+            onOKPress={(data) => this.handlePress(data)} 
+            onConnectPress={(data) => this.handlePress(data)} />
         }
       </View>
     );
