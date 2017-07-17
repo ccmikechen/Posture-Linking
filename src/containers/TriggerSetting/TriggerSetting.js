@@ -67,7 +67,7 @@ class TriggerSetting extends React.Component {
     return(
       <View key={option.name} style={{flex:1}}>
         <Text style={{fontSize:16}}>{option.name}</Text>
-        <View style={{flex:1}}>
+        <View style={{flex:1, height: 150}}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}

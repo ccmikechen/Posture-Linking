@@ -8,7 +8,11 @@ const images = {
       { name: 'notification', icon: require('./serviceIcon/notify.png'), color: '#6A9CCC' },
       { name: 'timer', icon: require('./serviceIcon/timer.png'), color: '#2aceba' },
       { name: 'gmail', icon: require('./serviceIcon/gmail.png'), color: '#DB4639' },
-      { name: 'facebook', icon: require('./serviceIcon/facebook.png'), color: '#23599B' }
+      { name: 'facebook', icon: require('./serviceIcon/facebook.png'), color: '#23599B' },
+      { name: 'home device', icon: require('./serviceIcon/homeDevice.png'), color: '#5EBBE7' },
+      { name: 'jump', icon: require('./serviceIcon/jump.png'), color: '#3FA9F5' },
+      { name: 'camera', icon: require('./serviceIcon/camera.png'), color: '#FCFFAE' },
+      { name: 'briefing', icon: require('./serviceIcon/briefing.png'), color: '#DB4639' }
   ],
   ADD_ICON: require('./icon/add.png'),
   CLOSE_ICON: require('./icon/close.png'),
