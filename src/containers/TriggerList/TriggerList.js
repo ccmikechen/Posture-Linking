@@ -14,11 +14,9 @@ import {
   getTriggerList,
   setTriggerId,
 } from '../../actions/combinationActions';
-<<<<<<< 544491a83355ba96e84d65db5083536832b0b3eb
-import ServiceGrid from '../../components/ServiceGrid';
-=======
 import { selectService } from '../../actions/serviceActions';
->>>>>>> fix service connect
+
+import ServiceGrid from '../../components/ServiceGrid';
 
 class TriggerList extends React.Component {
 
@@ -73,7 +71,7 @@ class TriggerList extends React.Component {
     return (
       <View style={styles.container}>
         {this.props.isGetTriggers ?
-          <ServiceGrid serviceData={this.props.triggers} onDataPress={(data) => this.handelOK(data.id)} />
+          <ServiceGrid serviceData={this.props.triggers} onDataPress={(data) => this.handleOK(data.id)} />
         :
           <View style={styles.cover}>
             <ActivityIndicator

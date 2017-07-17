@@ -2,21 +2,21 @@ import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 
 const InitialState = Immutable.fromJS({
-  isGetServices : false,
+  isGettingServices : false,
   services: [],
-  selectedService: '',
+  selectedService: 0,
   isAuthorizing: false
 });
 
 const service = handleActions({
   IS_GETTING_SERVICES: (state) => (
-    state.set('isGetServices', true)
+    state.set('isGettingServices', true)
   ),
   IS_NOT_GETTING_SERVICES: (state) => (
-    state.set('isGetServices', false)
+    state.set('isGettingServices', false)
   ),
   GET_SERVICES: (state, { services }) => (
-    state.set('services', services)
+    state.set('services', Immutable.fromJS(services))
   ),
   SELECT_SERVICE: (state, { id }) => (
     state.set('selectedService', id)
@@ -27,13 +27,10 @@ const service = handleActions({
   IS_NOT_AUTHORIZING: (state) => (
     state.set('isAuthorizing', false)
   ),
-  SUCCESS_AUTHORIZE: (state, { service }) => (
-    state.set('service', service)
-  ),
   CONNECT_SERVICE: (state, { id }) => {
     let newServices = state.get('services').map(service => {
-      if(service.id == id) {
-        service.isConnected = true;
+      if(service.get('id') == id) {
+        return service.set('isConnected', true);
       }
       return service;
     });
@@ -42,8 +39,8 @@ const service = handleActions({
   },
   DISCONNECT_SERVICE: (state, { id }) => {
     let newServices = state.get('services').map(service => {
-      if(service.id == id) {
-        service.isConnected = false;
+      if(service.get('id') == id) {
+        return service.set('isConnected', false);
       }
       return service;
     });

@@ -69,7 +69,7 @@ class ActionList extends React.Component {
     return (
       <View style={styles.container}>
         {this.props.isGetActions ?
-          <ServiceGrid serviceData={this.props.actions} onDataPress={(data) => this.handelOK(data.id)} />
+          <ServiceGrid serviceData={this.props.actions} onDataPress={(data) => this.handleOK(data.id)} />
           :
           <View style={styles.cover}>
             <ActivityIndicator
@@ -84,12 +84,11 @@ class ActionList extends React.Component {
   }
 }
 
-export default connect((state) =>(
-  {
-    actions: state.getIn(['combination', 'actions']),
-    isGetActions : state.getIn(['combination', 'isGetActions'])
-  }), {
-    getActionList,
-    setActionId,
-    selectService
-  })(ActionList);
+export default connect((state) =>({
+  actions: state.getIn(['combination', 'actions']),
+  isGetActions : state.getIn(['combination', 'isGetActions'])
+}), {
+  getActionList,
+  setActionId,
+  selectService
+})(ActionList);
