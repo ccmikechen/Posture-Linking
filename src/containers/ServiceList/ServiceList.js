@@ -14,6 +14,7 @@ import {
   selectService,
   isNotGettingServices
 } from '../../actions/serviceActions';
+import ServiceGrid from '../../components/ServiceGrid';
 
 class ServiceList extends React.Component {
 
@@ -23,13 +24,6 @@ class ServiceList extends React.Component {
 
   componentWillMount () {
     this.props.getServiceList();
-  };
-
-  _genDataSource(services) {
-    if (this.dataSource == undefined) {
-      this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    }
-    return this.dataSource.cloneWithRows(services);
   };
 
   handlePress(service) {
@@ -43,26 +37,10 @@ class ServiceList extends React.Component {
     });
   }
 
-  renderRow(service) {
-    console.log('render row', service);
-    if(service.isConnected) {
-      return(
-        <TouchableOpacity onPress={() => this.handlePress(service)}>
-          <View style={{margin:5, backgroundColor:'#65e8cf', height:50}}>
-            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
-          </View>
-        </TouchableOpacity>
-      );
-    } else {
-      return(
-        <TouchableOpacity onPress={() => this.handlePress(service)}>
-          <View style={{margin:5, backgroundColor:'#d4d4d4', height:50}}>
-            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>{service.name}</Text>
-          </View>
-        </TouchableOpacity>
-      );
-    };
-  };
+  shouldComponentUpdate() {
+    console.log('update', this.props.services);
+    return true;
+  }
 
   shouldComponentUpdate() {
     console.log('update', this.props.services);
@@ -74,14 +52,7 @@ class ServiceList extends React.Component {
 
     return (
       <View style={{flex:1 , backgroundColor:'#fff'}}>
-        {this.props.isGetServices ?
-          <View>
-            <ListView
-              dataSource={this._genDataSource(this.props.services)}
-              renderRow={(service) => this.renderRow(service)}
-            />
-          </View>
-        :
+        {this.props.isGettingServices ?
           <View style={styles.cover}>
             <ActivityIndicator
               animating={true}
@@ -89,6 +60,7 @@ class ServiceList extends React.Component {
               color='grey'
             />
           </View>
+         : <ServiceGrid serviceData={this.props.services} onDataPress={(service) => this.handlePress(service)} />
         }
       </View>
     );
@@ -96,8 +68,8 @@ class ServiceList extends React.Component {
 }
 
 export default connect((state) => ({
-  isGetServices: state.getIn(['service','isGetServices']),
-  services: state.getIn(['service','services'])
+  isGettingServices: state.getIn(['service','isGettingServices']),
+  services: state.getIn(['service','services']).toJS()
 }), {
   getServiceList,
   selectService,

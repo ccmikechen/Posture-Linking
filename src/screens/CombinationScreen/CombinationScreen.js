@@ -5,8 +5,9 @@ class CombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
       {
-        title:'新增',
-        id: 'add'
+        title:'add',
+        id: 'add',
+        icon: R.images.ADD_ICON
       }
     ]
   };
@@ -14,6 +15,12 @@ class CombinationScreen extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.props.navigator.setStyle({
+      navBarBackgroundColor: R.colors.NAVBAR_BACKGROUND,
+      navBarTextColor: R.colors.NAVBAR_TEXT,
+      navBarButtonColor: R.colors.NAVBAR_BUTTON,
+      statusBarColor: R.colors.STATUSBAR_BACKGROUND
+    });
   }
 
 

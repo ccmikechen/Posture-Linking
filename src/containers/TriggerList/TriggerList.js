@@ -15,6 +15,7 @@ import {
   setTriggerId,
 } from '../../actions/combinationActions';
 import { selectService } from '../../actions/serviceActions';
+import ServiceGrid from '../../components/ServiceGrid';
 
 class TriggerList extends React.Component {
 
@@ -24,14 +25,6 @@ class TriggerList extends React.Component {
 
   componentWillMount () {
     this.props.getTriggerList();
-  }
-
-  _genDataSource(combination) {
-    if (this.dataSource == undefined) {
-      this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    }
-    this.dataSource = this.dataSource.cloneWithRows(combination);
-    return this.dataSource;
   }
 
   handleOK(id) {
@@ -75,14 +68,9 @@ class TriggerList extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1 , backgroundColor:'lightgray'}}>
+      <View style={styles.container}>
         {this.props.isGetTriggers ?
-          <View>
-            <ListView
-              dataSource={this._genDataSource(this.props.triggers)}
-              renderRow={(trigger) => this.renderRow(trigger)}
-            />
-          </View>
+          <ServiceGrid serviceData={this.props.triggers} onDataPress={(data) => this.handleOK(data.id)} />
         :
           <View style={styles.cover}>
             <ActivityIndicator

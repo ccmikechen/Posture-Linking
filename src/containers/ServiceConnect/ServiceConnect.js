@@ -44,8 +44,10 @@ class ServiceConnect extends React.Component {
   };
 
   handleAuthorized() {
-    this.props.connectService(this.props.selectedService);
-    this.props.navigator.pop();
+    this.props.connectService(this.props.selectedService)
+      .then(() => {
+        this.props.navigator.pop();
+      });
   }
 
   handleFailedAuthorized() {
@@ -120,7 +122,7 @@ class ServiceConnect extends React.Component {
 
 export default connect((state) => ({
   selectedService: state.getIn(['service', 'selectedService']),
-  services: state.getIn(['service', 'services']),
+  services: state.getIn(['service', 'services']).toJS(),
   isAuthorizing: state.getIn(['service', 'isAuthorizing'])
 }), {
   disconnectService,

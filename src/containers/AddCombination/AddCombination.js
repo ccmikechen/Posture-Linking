@@ -7,6 +7,8 @@ import {
   ListView,
   TouchableOpacity,
   TextInput,
+  Image,
+  ScrollView,
   Alert
 } from 'react-native';
 
@@ -21,6 +23,8 @@ import {
 import api from '../../api/poselink';
 import ServiceManager from '../../../lib/ServiceManager';
 import Configs from '../Configs';
+import TriggerVerImg from '../../components/TriggerVerImg';
+import ActionVerImg from '../../components/ActionVerImg';
 
 import {
   KeyboardAwareScrollView
@@ -31,6 +35,8 @@ class AddCombination extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
+    this.getIcon.bind(this);
   }
 
   onNavigatorEvent(event) {
@@ -85,17 +91,17 @@ class AddCombination extends React.Component {
   renderOK(){
     if(this.props.actionId !='' && this.props.triggerId !='') {
       return(
-        <View style={{flex:1, marginTop:30}}>
-          <Text style={{fontSize:16, height:20 }}>組合描述</Text>
+        <View style={styles.lastSection}>
+          <Text style={styles.descriptionTitle}>組合描述</Text>
           <TextInput
-            style={{borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', height:60, fontSize:25}}
+            style={styles.descriptionInput}
             maxLength= {100}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
           />
           <TouchableOpacity onPress={()=>this.showAlert()}>
-            <View style={{marginTop:20, borderWidth:0, backgroundColor:'#59d059', height:50, alignItems:'center',  justifyContent: 'center'}}>
-              <Text style={{textAlign:'center', fontSize:25, color:'#FFF'}}>組合</Text>
+            <View style={styles.submitContent}>
+              <Image source={R.images.OK_ICON} style={styles.submit} />
             </View>
           </TouchableOpacity>
         </View>
@@ -139,7 +145,20 @@ class AddCombination extends React.Component {
     );
   }
 
+  getIcon(name) {
+
+    let temp={};
+
+    R.images.icon.forEach((data) => {
+      if(data.name == name){
+        temp = data;
+      }
+    });
+    return temp;
+  }
+
   render() {
+    console.log(this.props)
     let triggerName = this.props.triggerId != ''?
           ServiceManager.getServiceById(this.props.triggerId).getName()
           : 'Trigger';
@@ -148,32 +167,31 @@ class AddCombination extends React.Component {
           : 'Action';
 
     return (
-      <KeyboardAwareScrollView style={{flex:0.8 , backgroundColor:'#fff'}}>
-        <View style={{backgroundColor:'#e6eced'}}>
-          <TouchableOpacity onPress={this.handelTrigger.bind(this)}>
-            <View style={{backgroundColor:'#76d9ae', marginTop:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{textAlign: 'center', fontSize:20, fontWeight:'bold', color:'#fff'}}>{triggerName}</Text>
-            </View>
-          </TouchableOpacity>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.imgContent} >
+          <View style={styles.triggerImg} >
+            <TouchableOpacity onPress={this.handelTrigger.bind(this)} >
+              <TriggerVerImg size={0.8} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.actionImg} >
           {this.props.isGetTriggerConfig ?
-            <TouchableOpacity onPress={this.handelAction.bind(this)}>
-              <View style={{backgroundColor:'#369fd3', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-                <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
-              </View>
+            <TouchableOpacity onPress={this.handelAction.bind(this)} >
+              <ActionVerImg size={0.8} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
             </TouchableOpacity>
           :
-            <View style={{backgroundColor:'#b2b4b5', marginBottom:20, marginLeft:20, marginRight:20, height:100, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{textAlign: 'center', fontSize:20, color:'#fff', fontWeight:'bold'}}>{actionName}</Text>
-            </View>
+            <ActionVerImg size={0.8} />
+          }
+          </View>
+        </View>
+        <View style={styles.settingConent}>
+          <Configs navigator={this.props.navigator}/>
+          {(this.props.isGetTriggerConfig && this.props.isGetActionConfig) == true ? 
+            this.renderOK() : null
           }
         </View>
-          <View style={{flex:1, backgroundColor:'#fff', padding:10}}>
-            <Configs navigator={this.props.navigator}/>
-            {(this.props.isGetTriggerConfig && this.props.isGetActionConfig) == true ? 
-              this.renderOK() : null
-            }
-          </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
+
     );
   }
 }

@@ -9,6 +9,7 @@ import {
 
 import styles from './styles';
 import ServiceManager from '../../../lib/ServiceManager';
+import AddCombinationDetail from '../../components/AddCombinationDetail';
 
 class Configs extends React.Component {
 
@@ -40,15 +41,18 @@ class Configs extends React.Component {
   renderNew() {
     return (
       <View>
-        <TouchableOpacity onPress={() => this.handleTrigger()}>
-          <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginTop:50, marginBottom:50 }}>
-            <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>如果Tirgger</Text>
-          </View>
-        </TouchableOpacity>
+        <AddCombinationDetail
+          text='如果 ○○○'
+          status={1}
+          onPress={() => this.handleTrigger()}
+        />
 
-          <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'column', justifyContent:'center' }}>
-            <Text style={{fontSize:20, backgroundColor:'#fff', color: '#b2b6b2', textAlign:'center'}}>於是Action</Text>
-          </View>
+
+        <AddCombinationDetail
+          text='則 ○○'
+          status={0}
+          onPress={() => this.handleTrigger()}
+        />
       </View>
     );
   }
@@ -59,31 +63,32 @@ class Configs extends React.Component {
     if(!this.props.isGetTriggerConfig) {
       return (
         <View>
-          <Text style={{fontSize:16}}>{trigger.name}</Text>
-          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
-              <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>詳細設定</Text>
-            </View>
-          </TouchableOpacity>
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', flexDirection: 'column', justifyContent:'center' }}>
-              <Text style={{fontSize:20, backgroundColor:'#fff', color: '#b2b6b2', textAlign:'center'}}>於是Action</Text>
-            </View>
+          <Text style={styles.text}>{trigger.name}</Text>
+          <AddCombinationDetail
+            text='詳細設定'
+            status={2}
+            onPress={()=>this.handleTriggerSetting()}
+          />
+          <AddCombinationDetail
+            text='則 ○○'
+            status={0}
+          />
         </View>
       );
     } else {
       return (
         <View>
-          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
-              <Text style={{fontSize:16}}>{trigger.name}</Text>
-              <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
-            </View>
-          </TouchableOpacity>
-           <TouchableOpacity onPress={() => this.handleAction()}>
-              <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
-                <Text style={{fontSize:20, backgroundColor:'#fff', color: '#2aa5ce', textAlign:'center'}}>於是Action</Text>
-              </View>
-            </TouchableOpacity>
+          <Text style={styles.text}>{trigger.name}</Text>
+          <AddCombinationDetail
+            text={this.props.triggerConfig.text}
+            status={3}
+            onPress={()=>this.handleTriggerSetting()}
+          />
+          <AddCombinationDetail
+            text='則 ○○'
+            status={1}
+            onPress={()=>this.handleAction()}
+          />
         </View>
       );
     }
@@ -116,37 +121,38 @@ class Configs extends React.Component {
     if(!this.props.isGetActionConfig) {
       return (
         <View>
-          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
-              <Text style={{fontSize:16}}>{trigger.name}</Text>
-              <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
-            </View>
-          </TouchableOpacity>
-          <Text style={{fontSize:16}}>{action.name}</Text>
-          <TouchableOpacity onPress={()=>this.handleActionSetting()}>
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
-              <Text style={{fontSize:20, backgroundColor:'#fff', color:'#2aa5ce', textAlign:'center'}}>詳細設定</Text>
-            </View>
-          </TouchableOpacity>
+          <Text style={styles.text}>{trigger.name}</Text>
+          <AddCombinationDetail
+            text={this.props.triggerConfig.text}
+            status={3}
+            onPress={()=>this.handleTriggerSetting()}
+          />
+          <Text style={styles.text}>{action.name}</Text>
+          <AddCombinationDetail
+            text='詳細設定'
+            status={2}
+            onPress={()=>this.handleActionSetting()}
+          />
         </View>
       );
     } else {
       return (
         <View>
-          <TouchableOpacity onPress={()=>this.handleTriggerSetting()}>
-            <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', justifyContent:'center', marginBottom:50 }}>
-              <Text style={{fontSize:16}}>{trigger.name}</Text>
-              <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.triggerConfig.text}</Text>
-            </View>
-          </TouchableOpacity>
-           <TouchableOpacity onPress={() => this.handleActionSetting()}>
-              <View style={{alignItems:'center', height:80, borderWidth:1, borderRadius:5, borderColor:'#2aa5ce', flexDirection: 'column', justifyContent:'center' }}>
-                <Text style={{fontSize:16}}>{action.name}</Text>
-                <Text style={{fontSize:20, backgroundColor:'#fff', textAlign:'center'}}>{this.props.actionConfig.text}</Text>
-              </View>
-            </TouchableOpacity>
+          <Text style={styles.text}>{trigger.name}</Text>
+          <AddCombinationDetail
+            text={this.props.triggerConfig.text}
+            status={3}
+            onPress={()=>this.handleTriggerSetting()}
+          />
+          <Text style={styles.text}>{action.name}</Text>
+          <AddCombinationDetail
+            text={this.props.actionConfig.text}
+            status={3}
+            onPress={()=>this.handleActionSetting()}
+          />
         </View>
       );
+
     }
   }
 

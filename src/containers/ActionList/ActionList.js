@@ -15,6 +15,7 @@ import {
   setActionId,
 } from '../../actions/combinationActions';
 import { selectService } from '../../actions/serviceActions';
+import ServiceGrid from '../../components/ServiceGrid';
 
 class ActionList extends React.Component {
   constructor(props) {
@@ -23,17 +24,6 @@ class ActionList extends React.Component {
 
   componentWillMount () {
     this.props.getActionList();
-  }
-
-  _genDataSource(actions) {
-    if (this.dataSource == undefined) {
-      this.dataSource = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      });
-    }
-    this.dataSource = this.dataSource.cloneWithRows(actions);
-
-    return this.dataSource;
   }
 
   handleOK(id) {
@@ -73,14 +63,9 @@ class ActionList extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1 , backgroundColor:'lightgray'}}>
+      <View style={styles.container}>
         {this.props.isGetActions ?
-          <View>
-            <ListView
-              dataSource={this._genDataSource(this.props.actions)}
-              renderRow={(action) => this.renderRow(action)}
-            />
-          </View>
+          <ServiceGrid serviceData={this.props.actions} onDataPress={(data) => this.handleOK(data.id)} />
           :
           <View style={styles.cover}>
             <ActivityIndicator
@@ -95,12 +80,12 @@ class ActionList extends React.Component {
   }
 }
 
-export default connect((state) =>(
-  {
-    actions: state.getIn(['combination', 'actions']),
-    isGetActions : state.getIn(['combination', 'isGetActions'])
-  }), {
-    getActionList,
-    setActionId,
-    selectService
-  })(ActionList);
+export default connect((state) =>({
+  actions: state.getIn(['combination', 'actions']),
+  isGetActions : state.getIn(['combination', 'isGetActions'])
+}), {
+  getActionList,
+  setActionId,
+  selectService
+})(ActionList);
+

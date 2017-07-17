@@ -10,15 +10,17 @@ export const GET_SERVICE = 'GET_SERVICE';
 export const DISCONNECT_SERVICE = 'DISCONNECT_SERVICE';
 export const IS_AUTHORIZING = 'IS_AUTHORIZING';
 export const IS_NOT_AUTHORIZING = 'IS_NOT_AUTHORIZING';
-export const SUCCESS_AUTHORIZE = 'SUCCESS_AUTHORIZE';
 export const CONNECT_SERVICE = 'CONNECT_SERVICE';
 export const UPDATE_ACTION_LIST = 'UPDATE_ACTION_LIST';
 export const UPDATE_TRIGGER_LIST = 'UPDATE_TRIGGER_LIST';
 
 export const getServiceList = () => (dispatch) => {
+  dispatch({ type: IS_GETTING_SERVICES });
+
   let services = ServiceManager.getServices();
   dispatch({ type: GET_SERVICES, services });
-  dispatch({ type: IS_GETTING_SERVICES });
+
+  dispatch({ type: IS_NOT_GETTING_SERVICES });
 };
 
 export const selectService = (id) => (dispatch) => {
@@ -49,43 +51,41 @@ export const disconnectService = (service) => (dispatch) => {
 
   return service.unauthorize()
     .then(() => {
-      dispatch({ type: DISCONNECT_SERVICE , id });
+      dispatch({ type: DISCONNECT_SERVICE, id });
       dispatch({ type: IS_NOT_AUTHORIZING });
     });
 };
 
-export const connectService = (id) => (dispatch) => {
+export const connectService = (id) => async (dispatch) => {
   dispatch({ type: IS_AUTHORIZING });
 
-  CombinationManager.unloadAllCombinations().then(() => {
-    ServiceManager.disconnectAllService().then(() => {
-      ServiceManager.loadServiceConfigs().then(() => {
-        CombinationManager.loadAllCombinations().then(() => {
-          CombinationManager.applyCombinations();
+  await CombinationManager.unloadAllCombinations();
+  await ServiceManager.disconnectAllService();
+  await ServiceManager.loadServiceConfigs();
+  await CombinationManager.loadAllCombinations();
+  CombinationManager.applyCombinations();
 
-          let services = ServiceManager.getServices();
-          let actions = ServiceManager.getActionService();
-          let triggers = ServiceManager.getTriggerService();
+  let services = ServiceManager.getServices();
+  let actions = ServiceManager.getActionService();
+  let triggers = ServiceManager.getTriggerService();
 
-          actions = actions.map(action => (
-            {
-              ...action,
-              isConnected: action.isConnected()
-            }
-          ));
-          triggers = triggers.map(trigger => (
-            {
-              ...trigger,
-              isConnected: trigger.isConnected()
-            }
-          ));
-          dispatch({ type: GET_SERVICES, services });
-          dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
-          dispatch({ type: UPDATE_ACTION_LIST, actions });
-          dispatch({ type: CONNECT_SERVICE, id });
-          dispatch({ type: IS_NOT_AUTHORIZING });
-        });
-      });
-    });
-  });
+  actions = actions.map(action => (
+    {
+      ...action,
+      isConnected: action.isConnected()
+    }
+  ));
+
+  triggers = triggers.map(trigger => (
+    {
+      ...trigger,
+      isConnected: trigger.isConnected()
+    }
+  ));
+
+  dispatch({ type: GET_SERVICES, services });
+  dispatch({ type: UPDATE_TRIGGER_LIST, triggers });
+  dispatch({ type: UPDATE_ACTION_LIST, actions });
+  dispatch({ type: CONNECT_SERVICE, id });
+  dispatch({ type: IS_NOT_AUTHORIZING });
 };

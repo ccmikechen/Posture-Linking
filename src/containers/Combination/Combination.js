@@ -7,7 +7,9 @@ import {
   ListView,
   ActivityIndicator,
   Switch,
-  Alert
+  Alert,
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 import styles from './styles';
@@ -18,6 +20,8 @@ import {
   setCombinationStatus,
   removeCombination
 } from '../../actions/combinationActions';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import CombinationRow from '../../components/CombinationRow';
 
 class Combination extends React.Component {
 
@@ -65,26 +69,42 @@ class Combination extends React.Component {
   }
 
   renderRow(combination) {
-    if(combination.status === 2) {
+    let item = combination;
+    if(combination.status === 2 ) {
       return null;
     } else {
       return (
-        <View style={{flex:1, backgroundColor:'#4edbda', padding:5, marginBottom:3, flexDirection:'row'}}>
-          <View style={{flex:4}}>
-            <Text>Combination ID: {combination.id}</Text>
-            <Text>description: {combination.description}</Text>
-            <Text>TriggerID: {combination.trigger.serviceId}</Text>
-            <Text>config: {combination.trigger.config.time}</Text>
-            <Text>ActionID: {combination.action.serviceId}</Text>
-            <Text>config: {combination.action.config.message}</Text>
-          </View>
-          <View style={{flex:1, flexDirection:'column'}}>
-            <Button title='刪除' onPress={()=> this.showAlert(combination)}/>
-             <Switch style={{marginTop:40}}
-             value={combination.status ===1 ? true : false}
-             onValueChange={(e) => this.handleStatusChange(combination, e)}
-             />
-          </View>
+        <CombinationRow
+          data={item}
+          onEdit={()=>{alert('edit');}}
+          onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
+        />
+      );
+    }
+  }
+
+    renderHiddenRow(combination) {
+    let item = combination;
+
+    if(combination.status === 2 ) {
+      return null;
+    } else {
+      return (
+        <View style={styles.rowBack}>
+          <TouchableOpacity onPress = {() => {alert("share "+item.description);}}>
+            <Image
+              source={require('../../../res/img/icon/share.png')}
+              tintColor={'#525252'}
+              style={styles.rowBackButton}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress = {() => {this.showAlert(item)}}>
+            <Image
+              source={require('../../../res/img/icon/garbage.png')}
+              tintColor={'#525252'}
+              style={styles.rowBackButton}
+            />
+          </TouchableOpacity>
         </View>
       );
     }
@@ -92,12 +112,17 @@ class Combination extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1, backgroundColor:'#fff'}}>
+      <View style={styles.container}>
         {this.props.isGetCombinations ?
-          <ListView
+          <SwipeListView
+            rightOpenValue = {-125}
+            stopRightSwipe = {-150}
+            stopLeftSwipe = {10}
             dataSource={this._genDataSource(this.props.combinations)}
             renderRow={(combination) => this.renderRow(combination)}
-            enableEmptySections={true}    
+            renderHiddenRow={(combination) => this.renderHiddenRow(combination)}
+            swipeRowStyle={{flex: 1}}
+            recalculateHiddenLayout={true}
           />
           :
           <View style={styles.cover}>
