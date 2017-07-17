@@ -48,8 +48,6 @@ class ServiceList extends React.Component {
   }
 
   render() {
-    let dataSource = this._genDataSource(this.props.services);
-
     return (
       <View style={{flex:1 , backgroundColor:'#fff'}}>
         {this.props.isGettingServices ?

@@ -46,16 +46,6 @@ const service = handleActions({
     });
 
     return state.set('services', newServices);
-  },
-  DISCONNECT_SERVICE: (state, { id }) => {
-    let newServices = state.get('services').map(service => {
-      if(service.id == id) {
-        service.isConnected = false;
-      }
-      return service;
-    });
-
-    return state.set('services', newServices);
   }
 }, InitialState);
 
