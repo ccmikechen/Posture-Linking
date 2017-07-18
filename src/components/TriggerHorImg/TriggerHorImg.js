@@ -6,7 +6,7 @@ const CombinationImage = ({ icon='', color = '#B2B4B5', size = 1, left = 0 }) =>
 	
 	return (
 		<View style={{ height: height, width: width, flexDirection: 'row', margin: 5, left: left }}>
-      <Image source={require('../../../res/img/puzzle/horTrigger.png')}
+      <Image source={R.images.HORTRIGGER}
         style={{
         	tintColor: color,
           height: height,

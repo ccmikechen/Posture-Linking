@@ -2,11 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   View,
-  Text,
-  Button,
   ListView,
   ActivityIndicator,
-  Switch,
   Alert,
   Image,
   TouchableOpacity
@@ -93,14 +90,14 @@ class Combination extends React.Component {
         <View style={styles.rowBack}>
           <TouchableOpacity onPress = {() => {Alert.alert("share "+item.description);}}>
             <Image
-              source={require('../../../res/img/icon/share.png')}
+              source={R.images.SHARE_ICON}
               tintColor={'#525252'}
               style={styles.rowBackButton}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress = {() => {this.showAlert(item)}}>
             <Image
-              source={require('../../../res/img/icon/garbage.png')}
+              source={R.images.TRASH_CAN_ICON}
               tintColor={'#525252'}
               style={styles.rowBackButton}
             />

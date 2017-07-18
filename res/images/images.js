@@ -12,6 +12,7 @@ const images = {
       { name: 'smart bulb', icon: require('./serviceIcon/homeDevice.png'), color: '#5EBBE7' },
       { name: 'camera', icon: require('./serviceIcon/camera.png'), color: '#FC8B29' },
       { name: 'sheet music turner', icon: require('./serviceIcon/musicStand.png'), color: '#3FA9F5' },
+      { name: 'posture', icon: require('./serviceIcon/posture.png'), color: '#F47777' },
       { name: 'slide show', icon: require('./serviceIcon/briefing.png'), color: '#ab20a0' }
   ],
   ADD_ICON: require('./icon/add.png'),

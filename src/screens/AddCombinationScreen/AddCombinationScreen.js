@@ -1,13 +1,15 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import AddCombination from '../../containers/AddCombination';
 
 class AddCombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
       {
-        title:'cancel',
+        title:'close',
         id: 'close',
-        icon: R.images.CLOSE_ICON
+        icon: Platform.OS === 'ios' ? '' : R.images.CLOSE_ICON,
+        buttonFontSize: 12
       }
     ]
   };

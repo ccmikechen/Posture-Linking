@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import Combination from '../../containers/Combination';
 
 class CombinationScreen extends React.Component {
@@ -7,7 +8,8 @@ class CombinationScreen extends React.Component {
       {
         title:'add',
         id: 'add',
-        icon: R.images.ADD_ICON
+        icon: Platform.OS === 'ios' ? '' : R.images.ADD_ICON,
+        buttonFontSize: 12
       }
     ]
   };
