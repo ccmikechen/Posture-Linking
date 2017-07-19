@@ -13,9 +13,10 @@ const InsertAction = ({ size=1, icon='', color= R.colors.PUZZLE_BACK }) => {
 					style={{ tintColor: R.colors.PUZZLE_BACK, width: size, height: size}} />
 			</View>
 			<View style={{ width: size, height: size, position: 'absolute' }}>
-				<Image source={R.images.VERACTION} style={{ tintColor: color, width: size, height: size }} />
+				<Image
+					source={R.images.VERACTION}
+					style={{ tintColor: color, width: size, height: size }} />
 			</View>
-			
 			<View style={{ position: 'absolute', bottom: iconBottom }}>
 				{icon == '' ? <View></View> : <Image source={icon} style={{ width: iconWidth, height: iconHeight }} />}
 			</View>

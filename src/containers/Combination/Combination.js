@@ -122,13 +122,11 @@ class Combination extends React.Component {
             recalculateHiddenLayout={true}
           />
           :
-          <View style={styles.cover}>
             <ActivityIndicator
               animating={true}
               size='large'
               color='grey'
             />
-          </View>
         }
       </View>
     );

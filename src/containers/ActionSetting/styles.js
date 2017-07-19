@@ -1,52 +1,52 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-	container:{
-		flex:1,
-		padding:15,
-		backgroundColor:'#fff'
-	},
   optionValueContainer: {
     width: '100%'
   },
   pickerOption: {
     width: '100%'
   },
+	container:{
+		flex: 1,
+		padding: 15,
+		backgroundColor: R.colors.SETTING_BACKGROUND
+	},
   content:{
-  	flex:1
+  	flex: 1
   },
   KeyboardView:{
-  	flex:3
+  	flex: 3
   },
   nameText:{
-  	fontSize:24
+  	fontSize: 24
   },
   descriptionText:{
-  	fontSize:16,
-  	marginBottom:10
+  	fontSize: 16,
+  	marginBottom: 10
   },
   optionContent:{
-  	flex:1
+  	flex: 1
   },
   optionText:{
-  	fontSize:16
+  	fontSize: 16
   },
   optionView:{
-  	flex:1
+  	flex: 1
   },
   optionList:{
-  	height:120,
-  	width:250
+  	height: 120,
+  	width: 250
   },
   textArea:{
-  	fontSize:16
+  	fontSize: 16
   },
   textInput:{
-  	height:100,
-  	backgroundColor:'#FFF',
+  	height: 100,
+  	backgroundColor: R.colors.SETTING_BACKGROUND,
   	borderWidth:1,
   	borderRadius:5,
-  	borderColor:'#b2b6b2',
+  	borderColor: R.colors.INPUT_BORDER,
   	fontSize:16
   },
   submit:{

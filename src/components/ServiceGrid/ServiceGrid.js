@@ -1,11 +1,12 @@
 import React from 'React';
 import { View } from 'react-native';
+import styles from './styles'
 import Grid from 'react-native-grid-component';
 import ServiceItem from '../ServiceItem';
 
 const ServiceGrid = ({ serviceData, onConnectPress, onOKPress }) => {
 	return (
-    <View style={{flex: 1, margin: 5 }} >
+    <View style={styles.gridView} >
       <Grid
         renderItem={(service) => 
         	<View key={service.id} >

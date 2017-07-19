@@ -87,8 +87,7 @@ class AddCombination extends React.Component {
       screen: 'ActionListScreen',
       title: 'Action',
       passProps: {},
-      navigatorStyle: {
-      },
+      navigatorStyle: {},
       animationType: 'slide-up'
     });
   }
