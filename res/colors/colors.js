@@ -23,6 +23,7 @@ const colors = {
 	BUTTON_TEXT: 'white',
 	
 	SUBMIT: '#59d059',
+	SETTING_SUBMIT: '#2aceba',
 
 	INPUT_BORDER: '#B2B6B2'
 };
