@@ -5,13 +5,23 @@ import Combination from '../../containers/Combination';
 class CombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
-      {
-        title:'add',
-        id: 'add',
-        icon: Platform.OS === 'ios' ? '' : R.images.ADD_ICON,
-        buttonFontSize: 12
-      }
+      Platform.OS === 'ios' ? 
+        {
+          title:'+',
+          id: 'add',
+        }
+      :
+        {
+          title:'add',
+          id: 'add',
+          icon: R.images.ADD_ICON,
+          buttonFontSize: 12
+        }
     ]
+  };
+
+  static navigatorStyle = {
+    navBarRightButtonFontSize: 30,
   };
 
   constructor(props) {
