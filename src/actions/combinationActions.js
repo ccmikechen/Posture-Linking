@@ -33,6 +33,8 @@ export const IS_GETTING_TRIGGER_CONFIG = 'IS_GETTING_TRIGGER_CONFIG';
 export const IS_GETTING_ACTION_CONFIG = 'IS_GETTING_ACTION_CONFIG';
 export const IS_NOT_GETTING_TRIGGER_CONFIG = 'IS_NOT_GETTING_TRIGGER_CONFIG';
 export const IS_NOT_GETTING_ACTION_CONFIG = 'IS_NOT_GETTING_ACTION_CONFIG';
+export const SELECT_COMBINATION_ID = 'SELECT_COMBINATION_ID';
+export const UPDATE_COMBINATION = 'UPDATE_COMBINATION';
 
 export const updateCombinationList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
@@ -181,6 +183,32 @@ export const createCombination = (data) => (dispatch) => {
   });
 };
 
+export const updateCombination = (id, data) => (dispatch) => {
+  return api.updateCombination(id, data)
+    .then(() => {
+      let combination = {
+        id: id,
+        description: data.description,
+        status: data.status,
+        trigger: {
+          eventId: data.trigger.eventId,
+          serviceId: data.trigger.serviceId,
+          name: ServiceManager.getServiceById(data.trigger.serviceId).name,
+          config: data.trigger.config
+        },
+        action: {
+          eventId: data.action.eventId,
+          serviceId: data.action.serviceId,
+          name: ServiceManager.getServiceById(data.action.serviceId).name,
+          config: data.action.config
+        }
+      };
+
+      dispatch({ type: UPDATE_COMBINATION, combination });
+    });
+    
+};
+
 export const removeCombination = (combination) => (dispatch) => {
   let id = combination.id;
   return api.removeCombination(combination.id)
@@ -201,4 +229,8 @@ export const setCombinationStatus = (combination, status) => (dispatch) => {
     id: combination.id,
     status
   });
+};
+
+export const selectCombinationId = (id) => (dispatch) => {
+  dispatch({ type:SELECT_COMBINATION_ID, id });
 };

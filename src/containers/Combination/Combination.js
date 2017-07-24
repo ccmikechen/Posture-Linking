@@ -15,7 +15,8 @@ import {
   notUpdateCombinationList,
   isUpdateCombinationList,
   setCombinationStatus,
-  removeCombination
+  removeCombination,
+  selectCombinationId
 } from '../../actions/combinationActions';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CombinationRow from '../../components/CombinationRow';
@@ -26,6 +27,7 @@ class Combination extends React.Component {
     super(props);
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
+    this.handleShowEdit = this.handleShowEdit.bind(this);
   }
 
   componentWillMount () {
@@ -65,6 +67,17 @@ class Combination extends React.Component {
     this.props.setCombinationStatus(combination, status == true ? 1 : 0);
   }
 
+  handleShowEdit(id) {
+    this.props.selectCombinationId(id);
+    this.props.navigator.showModal({
+      screen:'EditCombinationScreen',
+      title:'編輯組合',
+      passProps: {},
+      animated:true,
+      animationType: 'slide-up'
+    });
+  }
+
   renderRow(combination) {
     let item = combination;
     if(combination.status === 2 ) {
@@ -73,7 +86,7 @@ class Combination extends React.Component {
       return (
         <CombinationRow
           data={item}
-          onEdit={()=>{Alert.alert('edit');}}
+          onEdit={() => this.handleShowEdit(combination.id)}
           onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
         />
       );
@@ -144,5 +157,6 @@ export default connect((state) => ({
   notUpdateCombinationList,
   isUpdateCombinationList,
   setCombinationStatus,
-  removeCombination
+  removeCombination,
+  selectCombinationId
 })(Combination);

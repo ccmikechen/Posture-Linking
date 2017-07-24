@@ -18,7 +18,7 @@ import ActionSettingScreen from './ActionSettingScreen';
 import ActionSelectConfigScreen from './ActionSelectConfigScreen';
 import ServiceListScreen from './ServiceListScreen';
 import ServiceConnectScreen from './ServiceConnectScreen';
-
+import EditCombinationScreen from './EditCombinationScreen';
 
 export function registerScreens() {
   Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider);
@@ -37,4 +37,5 @@ export function registerScreens() {
   Navigation.registerComponent('ActionSelectConfigScreen', () => ActionSelectConfigScreen, store, Provider);
   Navigation.registerComponent('ServiceListScreen', () => ServiceListScreen, store, Provider);
   Navigation.registerComponent('ServiceConnectScreen', () => ServiceConnectScreen, store, Provider);
+  Navigation.registerComponent('EditCombinationScreen', () => EditCombinationScreen, store, Provider);
 }
