@@ -1,7 +1,29 @@
 import React from 'react';
 import ActionList from '../../containers/ActionList';
+import { Platform } from 'react-native';
 
 class ActionListScreen extends React.Component {
+  static navigatorButtons = {
+    rightButtons:[
+      Platform.OS === 'ios' ?
+        {
+          title:'X',
+          id: 'close'
+        }
+      :
+        {
+          title:'close',
+          id: 'close',
+          icon: R.images.CLOSE_ICON,
+          buttonFontSize: 12
+        }
+    ]
+  };
+
+  static navigatorStyle = {
+    navBarRightButtonFontSize: 25,
+  };
+
   constructor(props) {
     super(props);
     this.props.navigator.setStyle({

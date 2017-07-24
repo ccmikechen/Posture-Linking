@@ -1,8 +1,8 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import AddCombination from '../../containers/AddCombination';
+import EditCombination from '../../containers/EditCombination';
 
-class AddCombinationScreen extends React.Component {
+class EditCombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
       Platform.OS === 'ios' ?
@@ -36,9 +36,9 @@ class AddCombinationScreen extends React.Component {
 
   render() {
     return (
-      <AddCombination navigator={this.props.navigator} />
+      <EditCombination navigator={this.props.navigator} />
     );
   }
 }
 
-export default AddCombinationScreen;
+export default EditCombinationScreen;

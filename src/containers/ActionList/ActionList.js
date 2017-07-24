@@ -20,10 +20,21 @@ import ServiceGrid from '../../components/ServiceGrid';
 class ActionList extends React.Component {
   constructor(props) {
     super(props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentWillMount () {
     this.props.getActionList();
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'close') {
+        this.props.navigator.dismissModal({
+          animationType: 'slide-down'
+        });
+      }
+    }
   }
 
   handleOK(id) {
