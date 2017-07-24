@@ -7,10 +7,11 @@ import {
   NativeEventEmitter
 } from 'react-native';
 import styles from './styles';
+import PostureDeviceScanning from '../../components/PostureDeviceScanning';
 
 import {
-  startBleScan,
-  stopBleScan
+  resetDeviceDiscoveringState,
+  updateDeviceDiscovered
 } from '../../actions/bleActions';
 
 import BleManager from 'react-native-ble-manager';
@@ -26,6 +27,10 @@ class PostureDeviceScanner extends React.Component {
     this.handleStopScan = this.handleStopScan.bind(this);
     this.bleSubscriptions = [];
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  componentWillMount() {
+    this.props.resetDeviceDiscoveringState();
   }
 
   componentDidMount() {
@@ -63,29 +68,28 @@ class PostureDeviceScanner extends React.Component {
   }
 
   handleStopScan() {
-    this.props.stopBleScan();
   }
 
   startScan() {
     BleManager.scan([], 0, false).then((results) => {
-      this.props.startBleScan();
     });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          {this.props.isScanning? 'Scanning...' : 'Stoped'}
-        </Text>
+        {this.props.isDiscoveredDevice?
+         <Text>Stoped</Text> :
+         <PostureDeviceScanning />
+        }
       </View>
     );
   }
 }
 
 export default connect((state) => ({
-  isScanning: state.getIn(['ble', 'isScanning'])
+  isDiscoveredDevice: state.getIn(['ble', 'isDiscoveredDevice'])
 }), {
-  startBleScan,
-  stopBleScan
+  resetDeviceDiscoveringState,
+  updateDeviceDiscovered
 })(PostureDeviceScanner);

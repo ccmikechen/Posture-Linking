@@ -3,7 +3,8 @@ import { handleActions } from 'redux-actions';
 
 const InitialState = Immutable.fromJS({
   scannedDevices: [],
-  isScanning: false
+  isScanning: false,
+  isDiscoveredDevice: false
 });
 
 const updateDevices = (devices, newDevice) => {
@@ -37,7 +38,15 @@ const ble = handleActions({
   ),
   UPDATE_BLE_SCANNING_STOP: (state) => (
     state.set('isScanning', false)
+  ),
+  UPDATE_DEVICE_DISCOVERED: (state) => (
+    state.set('isDiscoveredDevice', true)
+  ),
+  UPDATE_DEVICE_NOT_DISCOVERED: (state) => (
+    state.set('isDiscoveredDevice', false)
   )
 }, InitialState);
 
 export default ble;
+
+
