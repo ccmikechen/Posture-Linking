@@ -179,7 +179,11 @@
 			remoteGlobalIDString = 2D2A28471D9B043800D4039D;
 			remoteInfo = "RCTLinking-tvOS";
 		};
+<<<<<<< HEAD
 		14B28DEF1F2607250020AEF1 /* PBXContainerItemProxy */ = {
+=======
+		14B28E2B1F2624810020AEF1 /* PBXContainerItemProxy */ = {
+>>>>>>> merge branch
 			isa = PBXContainerItemProxy;
 			containerPortal = 0427C051973B4AA49D3F6743 /* RNDeviceInfo.xcodeproj */;
 			proxyType = 2;
@@ -595,10 +599,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		14B28DCA1F2607250020AEF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				14B28DF01F2607250020AEF1 /* libRNDeviceInfo.a */,
+=======
+		14B28E061F2624800020AEF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14B28E2C1F2624810020AEF1 /* libRNDeviceInfo.a */,
+>>>>>>> merge branch
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -931,7 +942,11 @@
 					ProjectRef = C9998A14ECB74E408CDD5870 /* ReactNativeNavigation.xcodeproj */;
 				},
 				{
+<<<<<<< HEAD
 					ProductGroup = 14B28DCA1F2607250020AEF1 /* Products */;
+=======
+					ProductGroup = 14B28E061F2624800020AEF1 /* Products */;
+>>>>>>> merge branch
 					ProjectRef = 0427C051973B4AA49D3F6743 /* RNDeviceInfo.xcodeproj */;
 				},
 				{
@@ -1066,11 +1081,19 @@
 			remoteRef = 14913FEB1F16648900578EDA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+<<<<<<< HEAD
 		14B28DF01F2607250020AEF1 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNDeviceInfo.a;
 			remoteRef = 14B28DEF1F2607250020AEF1 /* PBXContainerItemProxy */;
+=======
+		14B28E2C1F2624810020AEF1 /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 14B28E2B1F2624810020AEF1 /* PBXContainerItemProxy */;
+>>>>>>> merge branch
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		14BABF631EE716AA007D6240 /* libBleManager.a */ = {
