@@ -17,7 +17,7 @@ import {
 } from '../../actions/serviceActions';
 
 import ServiceManager from '../../../lib/ServiceManager';
-import ServiceAuthorizer from '../../../lib/ServiceAuthorizer';
+import ServiceAuthorizer from '../../../lib/authorizers/ServiceAuthorizer';
 
 class ServiceConnect extends React.Component {
 
@@ -29,7 +29,7 @@ class ServiceConnect extends React.Component {
 
   componentWillMount () {
     this.service = ServiceManager.getServiceById(this.props.selectedService);
-    this.authorizer = this.service.createAuthorizer();
+    this.authorizer = this.service.createAuthorizer(this.props.navigator);
     this.authorizer.init();
   };
 

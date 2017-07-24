@@ -20,7 +20,7 @@ public class PostureClassifierFactory {
     this.rootPath = rootPath;
   }
 
-  public void initAndloadFormalPostureClassifier(final int classes) {
+  public void initAndLoadFormalPostureClassifier(final int classes, final int rows, final int cols) {
     executor.execute(new Runnable() {
       @Override
       public void run() {
@@ -28,8 +28,8 @@ public class PostureClassifierFactory {
           classifier = PostureClassifier.create(
             rootPath,
             FORMAL_MODEL_FILE,
-            FORMAL_MODEL_ROW_SIZE,
-            FORMAL_MODEL_COLUMN_SIZE,
+            rows,
+            cols,
             classes,
             FORMAL_MODEL_INPUT_NAME,
             FORMAL_MODEL_OUTPUT_NAME);

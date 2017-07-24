@@ -5,7 +5,8 @@ const initialRecordForm = Immutable.fromJS({
   height: null,
   weight: null,
   insoleSize: '7',
-  posture: 1
+  posture: 1,
+  currentPosture: 1
 });
 
 const InitialState = Immutable.fromJS({
@@ -38,6 +39,9 @@ const posture = handleActions({
   ),
   CLEAR_SELECTED_RECORD_FORM: (state) => (
     state.set('recordForm', initialRecordForm)
+  ),
+  UPDATE_CURRENT_POSTURE: (state, { id }) => (
+    state.set('currentPosture', id)
   )
 }, InitialState);
 

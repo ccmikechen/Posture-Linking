@@ -46,7 +46,12 @@ public class PostureDetectorModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void reloadModel(int classes) {
-    this.postureClassifierFactory.initAndloadFormalPostureClassifier(classes);
+    this.reloadModel(classes, 17, 16);
+  }
+
+  @ReactMethod
+  public void reloadModel(int classes, int rows, int cols) {
+      this.postureClassifierFactory.initAndLoadFormalPostureClassifier(classes, rows, cols);
   }
 
   @ReactMethod

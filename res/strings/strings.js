@@ -6,7 +6,8 @@ const strings = {
   BUTTON_LIST_TITLE: 'Button List',
   SERVICE_LIST_TITLE: 'Service List',
   AUTHORIZING_FAILED: 'Authorizing failed',
-  AUTHORIZING_SUCCESSED: 'Authorizing successed'
+  AUTHORIZING_SUCCESSED: 'Authorizing successed',
+  SCANNING_DEVICE_TITLE: 'Scanning Device'
 };
 
 export default strings;
