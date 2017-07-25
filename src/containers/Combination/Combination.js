@@ -6,7 +6,8 @@ import {
   ActivityIndicator,
   Alert,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  RefreshControl
 } from 'react-native';
 
 import styles from './styles';
@@ -16,7 +17,8 @@ import {
   isUpdateCombinationList,
   setCombinationStatus,
   removeCombination,
-  selectCombinationId
+  selectCombinationId,
+  refreshCombinationList
 } from '../../actions/combinationActions';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CombinationRow from '../../components/CombinationRow';
@@ -57,9 +59,7 @@ class Combination extends React.Component {
     this.props.removeCombination(combination)
       .then(this.props.notUpdateCombinationList())
       .then(
-        setTimeout(() => {
-          this.props.updateCombinationList();
-        }, 1000)
+       this._onRefresh()
       );
   }
 
@@ -120,6 +120,13 @@ class Combination extends React.Component {
     }
   }
 
+  _onRefresh() {
+    this.props.notUpdateCombinationList();
+    this.props.refreshCombinationList().then(()=>{
+      this.props.isUpdateCombinationList();
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -128,6 +135,12 @@ class Combination extends React.Component {
             rightOpenValue = {-125}
             stopRightSwipe = {-150}
             stopLeftSwipe = {10}
+            refreshControl={
+              <RefreshControl
+                refreshing = {!this.props.isGetCombinations}
+                onRefresh={this._onRefresh.bind(this)}
+              />
+            }
             dataSource={this._genDataSource(this.props.combinations)}
             renderRow={(combination) => this.renderRow(combination)}
             renderHiddenRow={(combination) => this.renderHiddenRow(combination)}
@@ -158,5 +171,6 @@ export default connect((state) => ({
   isUpdateCombinationList,
   setCombinationStatus,
   removeCombination,
-  selectCombinationId
+  selectCombinationId,
+  refreshCombinationList
 })(Combination);
