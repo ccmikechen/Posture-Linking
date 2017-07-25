@@ -42,11 +42,6 @@ class ServiceList extends React.Component {
     return true;
   }
 
-  shouldComponentUpdate() {
-    console.log('update', this.props.services);
-    return true;
-  }
-
   render() {
     return (
       <View style={{flex:1 , backgroundColor:'#fff'}}>
