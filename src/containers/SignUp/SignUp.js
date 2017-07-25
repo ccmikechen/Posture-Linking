@@ -7,22 +7,26 @@ import {
 
 import { connect } from 'react-redux';
 import styles from './styles';
-import LoginForm from '../../components/LoginForm';
-import { login } from '../../actions/sessionActions';
+import SignUpForm from '../../components/SignUpForm';
+import { createAccount } from '../../actions/sessionActions';
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
 
-class Login extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.onLogin = this.onLogin.bind(this);
   }
 
   onLogin(values) {
-    this.props.login({
+    this.props.createAccount({
       username: values.get('username'),
-      password: values.get('password')
+      password: values.get('password'),
+      nickname: values.get('nickname'),
+      email: values.get('email'),
+      first_name: values.get('firstname'),
+      last_name: values.get('lastname'),
     })
   }
 
@@ -43,13 +47,8 @@ class Login extends React.Component {
       <KeyboardAwareScrollView style={styles.KeyboardContainer}>
         <View style={styles.container}>
             <Text style={styles.logoText}>PostureLinking</Text>
-            {this.props.failed == true ?
-              <Text style={styles.errorText}>帳號或密碼錯誤</Text>
-              :
-              null
-            }
-            <LoginForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
-            {this.props.isLoggingIn? this.renderCover() : null}
+            <SignUpForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
+            {this.props.isSigningUp? this.renderCover() : null}
         </View>
        </KeyboardAwareScrollView>
     );
@@ -57,10 +56,7 @@ class Login extends React.Component {
 }
 
 export default connect((state) => ({
-  isAuthenticated: state.getIn(['session', 'isAuthenticated']),
-  isLoggingIn: state.getIn(['session', 'isLoggingIn']),
-  error: state.getIn(['session', 'error']),
-  failed: state.getIn(['session', 'failed'])
+  isSigningUp: state.getIn(['session', 'isSigningUp'])
 }), {
-  login
-})(Login);
+  createAccount
+})(SignUp);

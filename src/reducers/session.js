@@ -14,11 +14,13 @@ const InitialState = Immutable.fromJS({
     phoneNumber: '',
     firstName: '',
     lastName: '',
+    nikeName: '',
     image: '',
     id: null,
     email: '',
     birthday: null
-  }
+  },
+  isSigningUp: false
 });
 
 const session = handleActions({
@@ -47,7 +49,8 @@ const session = handleActions({
     state.set('isAuthenticated', false)
       .setIn(['user', 'username'], '')
       .setIn(['user', 'sex'], '')
-      .setIn(['user', 'phoneNumber'], )
+      .setIn(['user', 'phoneNumber'], '')
+      .setIn(['user', 'nikeName'], '')
       .setIn(['user', 'firstName'], '')
       .setIn(['user', 'lastName'], '')
       .setIn(['user', 'image'], '')
@@ -55,6 +58,12 @@ const session = handleActions({
       .setIn(['user', 'email'], '')
       .setIn(['user', 'birthday'], null)
   ),
+   UPDATE_IS_SIGNING_UP: (state) => (
+    state.set('isSigningUp', true)
+  ),
+  UPDATE_IS_NOT_SIGNING_UP: (state) => (
+    state.set('isSigningUp', false)
+  )
 }, InitialState);
 
 export default session;

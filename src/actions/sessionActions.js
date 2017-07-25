@@ -5,6 +5,8 @@ import api from '../api/poselink';
 import {
   startLoginApp
 } from '../apps';
+import ServiceManager from '../../lib/ServiceManager';
+import CombinationManager from '../../lib/CombinationManager';
 
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
@@ -17,6 +19,7 @@ export const UPDATE_IS_NOT_SIGNING_UP = 'UPDATE_IS_NOT_SIGNING_UP';
 export const UPDATE_UNAUTHENTICATED = 'UPDATE_UNAUTHENTICATED';
 
 export const createAccount = (data) => (dispatch) => {
+  console.log(data);
   dispatch({ type: UPDATE_IS_SIGNING_UP });
 
   api.createUser(data)
@@ -28,7 +31,7 @@ export const createAccount = (data) => (dispatch) => {
     startApp();
   })
   .catch(error => {
-    dispatch({ type: SIGNUP_FAILED, error });
+    console.log(error)
     dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
   });
 };
@@ -53,8 +56,10 @@ export const login = (data) => (dispatch) => {
   });
 };
 
-export const logout = () => (dispatch) => {
-  api.destroySession()
+export const logout = () => async (dispatch) => {
+  await CombinationManager.unloadAllCombinations();
+  await ServiceManager.clearAllService();
+  await api.destroySession()
   .then(response => {
     dispatch({ type: UPDATE_UNAUTHENTICATED });
     startLoginApp();

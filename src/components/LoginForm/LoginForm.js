@@ -20,8 +20,19 @@ const renderField = ({ input: { onChange, ...restInput }, isPassword, label}) =>
 }
 
 const LoginForm = (props) => {
-  const { handleSubmit, onSubmit } = props;
-  
+  const { handleSubmit, onSubmit, navigator } = props;
+  const handleSignUp = () => {
+    navigator.push({
+      screen: 'SignUpScreen',
+      title: '',
+      passProps: {},
+      navigatorStyle: {
+        navBarBackgroundColor: '#616161',
+        drawUnderNavBar: true,
+        navBarNoBorder: true
+      }
+    })
+  }
   return (
     <View style={styles.container}>
       <Field
@@ -39,6 +50,11 @@ const LoginForm = (props) => {
       <TouchableOpacity onPress={handleSubmit(onSubmit)}>
         <View style={styles.button}>
            <Text style={styles.buttonText}>Login</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleSignUp}>
+        <View style={styles.signUpButton}>
+           <Text style={styles.buttonText}>Sign Up</Text>
         </View>
       </TouchableOpacity>
     </View>

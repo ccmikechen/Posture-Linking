@@ -33,7 +33,8 @@ const colors = {
 	SUBMIT: '#59d059',
 	SETTING_SUBMIT: '#2aceba',
 	WHITE_TEXT: '#FFFFFF',
-
+	SIGNUP_SUBMIT: '#269be7',
+	ERROR_TEXT: '#e93a5c'
 };
 
 export default colors;

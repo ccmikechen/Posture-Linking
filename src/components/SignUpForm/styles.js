@@ -19,13 +19,13 @@ export default styles = StyleSheet.create({
   },
   input: {
     marginTop:10,
-    paddingLeft:10,
+    paddingLeft:15,
     borderColor: R.colors.INPUT_BORDER,
   	fontSize:16,
     backgroundColor: '#FFF',
     borderRadius: 10,
     borderWidth: 1,
-    height: 40,
+    height: 50,
     width:250,
     opacity: 0.8
   },
@@ -40,20 +40,13 @@ export default styles = StyleSheet.create({
   	marginLeft: 20,
   	marginRight: 20
   },
-  signUpButton: {
-    alignItems: 'center',
-    height: 40,
-    width:200,
-  	borderRadius: 5,
-  	backgroundColor: R.colors.SIGNUP_SUBMIT,
-  	justifyContent: 'center',
-  	marginTop: 20,
-  	marginLeft: 20,
-  	marginRight: 20
-  },
   buttonText: {
     fontSize: 20,
   	color: R.colors.BUTTON_TEXT,
   	textAlign: 'center'
+  },
+  errorText: {
+    color: R.colors.ERROR_TEXT,
+    fontSize:14
   }
 });
