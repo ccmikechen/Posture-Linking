@@ -3,8 +3,10 @@ import {
   View
 } from 'react-native';
 
+import { connect } from 'react-redux';
 import TestButton from '../../components/TestButton';
 import styles from './styles';
+import { logout } from '../../actions/sessionActions';
 
 class Home extends React.Component {
 
@@ -54,6 +56,9 @@ class Home extends React.Component {
           animated: true
         });
           break;
+        case 'logout':
+        this.props.logout();
+          break;
       }
     };
   }
@@ -81,9 +86,17 @@ class Home extends React.Component {
           onPress={this.handleButtonPress('serviceList')}
           text={R.strings.SERVICE_LIST_TITLE}
         />
+        <TestButton
+          onPress={this.handleButtonPress('logout')}
+          text={R.strings.LOGOUT}
+        />
       </View>
     );
   }
 }
 
-export default Home;
+export default connect((state) => ({
+  
+}), {
+  logout
+})(Home);
