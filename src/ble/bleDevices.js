@@ -16,6 +16,10 @@ const DEVICES = [
   {
     id: 'D7:B6:30:D8:36:4D',
     type: 'posture'
+  },
+  {
+    id: 'EC:84:B4:F9:07:64',
+    type: 'posture'
   }
 ];
 
@@ -79,7 +83,7 @@ export const connectDevice = (device) => {
   .catch((error) => {
     console.log(error);
   });
-}
+};
 
 export const on = (eventName, callback) => {
   deviceDataEmitter.on(eventName, callback);

@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
   rowFront: {
     flex: 1,
-    flexDirection: 'row',
     backgroundColor: R.colors.COMBINATION_ROW,
     borderRadius: 10,
     marginTop: 5,
@@ -11,11 +10,12 @@ export default styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
+  combinationTouch:{
+    flex: 1,
+    flexDirection: 'row',
+  },
   combination:{
     flex: 3
-  },
-  combinationTouch:{
-    flex: 1
   },
   combinationImg:{
     flexDirection: 'row',
@@ -35,6 +35,7 @@ export default styles = StyleSheet.create({
   },
   name:{
     flex: 4,
+    height: 54,
     padding: 5,
     marginTop: 8
   },

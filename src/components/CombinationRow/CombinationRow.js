@@ -32,8 +32,8 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
 
   return(
     <View style = {styles.rowFront}>
-      <View style={styles.combination}>
-        <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationTouch}>
+      <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationTouch}>
+        <View style={styles.combination}>
           <View style={[styles.combinationImg, { opacity: opacity-0.2 }]}>
             <View style={styles.trigger}>
               <TriggerHorImg
@@ -50,19 +50,19 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
               />
             </View>
           </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.content}>
-        <View style={[styles.name,{opacity: opacity}]}>
-          <Text style={styles.text}>{data.description}</Text>
         </View>
-        <View style={styles.switch}>
-          <Switch
-            value={switchValue}
-            onValueChange={(status) => onStatusChangeCallback(status)}
-          />
+        <View style={styles.content}>
+          <View style={[styles.name,{opacity: opacity}]}>
+            <Text style={styles.text}>{data.description}</Text>
+          </View>
+          <View style={styles.switch}>
+            <Switch
+              value={switchValue}
+              onValueChange={(status) => onStatusChangeCallback(status)}
+            />
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   )
 };

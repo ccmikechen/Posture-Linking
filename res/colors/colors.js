@@ -31,8 +31,13 @@ const colors = {
 	INPUT_BORDER: '#B2B6B2',
 
 	SUBMIT: '#59d059',
-	SETTING_SUBMIT: '#2aceba'
+	SETTING_SUBMIT: '#2aceba',
 
+
+	INPUT_BORDER: '#B2B6B2',
+
+  SCANNING_BACKGROUND: '#42B9F4',
+  SCANNING_TIPS_BACKGROUND: '#e5fbfc'
 };
 
 export default colors;

@@ -23,7 +23,12 @@ const images = {
   HORTRIGGER: require('./puzzle/horTrigger.png'),
   HORACTION: require('./puzzle/horAction.png'),
   VERTRIGGER: require('./puzzle/verTrigger.png'),
-  VERACTION: require('./puzzle/verAction.png')
+  VERACTION: require('./puzzle/verAction.png'),
+  postures: {
+    SITTING: require('./posture/sitting.png'),
+    STANDING: require('./posture/standing.png'),
+    JUMPING: require('./posture/jumping.png')
+  }
 };
 
 export default images;

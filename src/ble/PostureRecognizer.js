@@ -2,7 +2,8 @@ import EventEmitter from 'events';
 import PostureDetector from '../modules/PostureDetector';
 import api from '../api/poselink';
 
-const DATA_LIST_LENGTH = 16;
+const DATA_COLS = 17;
+const DATA_LIST_LENGTH = 8;
 const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
 
@@ -20,7 +21,7 @@ class PostureRecognizer {
   async init() {
     let postures = await api.getPostures();
     this.setPostures(postures);
-    PostureDetector.reloadModel(postures.length);
+    PostureDetector.reloadModel(postures.length, DATA_COLS, DATA_LIST_LENGTH);
     this.eventEmitter = new EventEmitter();
     this.dataList = [];
     this.dataEmitter.on('posture:notification', this.handleDataNotification);
