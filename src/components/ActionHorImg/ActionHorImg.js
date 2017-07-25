@@ -1,7 +1,7 @@
 import React from 'React';
 import { View, Image } from 'react-native';
 
-const CombinationImage = ({ icon='', color = R.colors.PUZZLE_BACK, size = 1, right = 0 }) => {
+const ActionHorImg = ({ icon='', color = R.colors.PUZZLE_BACK, size = 1, right = 0 }) => {
 	let width = 100 * size * 2, height = 100 * size;
 	
 	return (
@@ -32,4 +32,4 @@ const CombinationImage = ({ icon='', color = R.colors.PUZZLE_BACK, size = 1, rig
 	);
 }
 
-export default CombinationImage;
+export default ActionHorImg;

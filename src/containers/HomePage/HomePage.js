@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View,
+  ScrollView,
   Image,
   Text,
   TouchableOpacity
@@ -9,7 +10,7 @@ import {
 import TestButton from '../../components/TestButton';
 import styles from './styles';
 
-class Home extends React.Component {
+class HomePage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -63,8 +64,42 @@ class Home extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.handleButtonPress('scan')}>
+        <ScrollView style={styles.scrollview} >
+          <View style={styles.container} >
+            <View style={styles.buttonsView} >
+              <View style={styles.buttonAreaTop} >
+                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('scan')}>
+                  <View style={styles.buttonLeft} >
+                    <Image style={styles.image} source={require('../../../res/images/puzzle1.png')} />
+                  </View>
+                </TouchableOpacity>
+                
+                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('posture')}>
+                  <View style={styles.buttonRight} >
+                    <Image style={styles.image} source={require('../../../res/images/puzzle2.png')} />
+                  </View>
+                </TouchableOpacity>
+
+              </View>
+              <View style={styles.buttonAreaMiddle} >
+                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('combination')}>
+                  <View style={styles.buttonLeft} >
+                    <Image style={styles.image} source={require('../../../res/images/puzzle3.png')} />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('buttonList')}>
+                  <View style={styles.buttonRight} >
+                    <Image style={styles.image} source={require('../../../res/images/puzzle4.png')} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('serviceList')}>
+                  <View style={styles.buttonBottom} >
+                    <Image style={styles.imageBottom} source={require('../../../res/images/puzzle5.png')} />
+                  </View>
+                </TouchableOpacity>
+            </View>
+        {/*<TouchableOpacity onPress={this.handleButtonPress('scan')}>
           <View style={styles.finishStyle}>
             <Text style={styles.finishFontStyle}>{R.strings.SCAN_TITLE}</Text>
           </View>
@@ -88,10 +123,11 @@ class Home extends React.Component {
           <View style={styles.finishStyle}>
             <Text style={styles.finishFontStyle}>{R.strings.SERVICE_LIST_TITLE}</Text>
           </View>
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity>*/}
+          </View>
+        </ScrollView>
     );
   }
 }
 
-export default Home;
+export default HomePage;

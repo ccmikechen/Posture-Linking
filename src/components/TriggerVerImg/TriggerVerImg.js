@@ -1,7 +1,7 @@
 import React from 'React';
 import { View, Image, TouchableOpacity } from 'react-native';
 
-const InsertTrigger = ({ size=1, icon='', color=R.colors.PUZZLE_BACK }) => {
+const TriggerVerImg = ({ size=1, icon='', color=R.colors.PUZZLE_BACK }) => {
 	size = size * 200;
 	let iconWidth=size*0.45, iconHeight=size*0.45, iconTop=size*0.2;
 
@@ -24,4 +24,4 @@ const InsertTrigger = ({ size=1, icon='', color=R.colors.PUZZLE_BACK }) => {
 	);
 }
 
-export default InsertTrigger;
+export default TriggerVerImg;

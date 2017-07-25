@@ -3,18 +3,21 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgrey'
+    backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
-  button: {
-    height: 60,
-    justifyContent: 'center',
+  finishStyle: {
+    height: 80,
+    backgroundColor: R.colors.BUTTON_BACKGROUND,
+    borderColor: R.colors.BUTTON_BORDER,
     alignItems: 'center',
-    borderWidth: 2,
-    backgroundColor: 'white',
-    margin: 15,
-    marginBottom: 5
+    justifyContent: 'center',
+    borderRadius: 30,
+    borderWidth: 3,
+    margin: 10,
+    padding: 20
   },
-  buttonText: {
-    fontSize: 30
+  finishFontStyle: {
+    color: R.colors.BUTTON_TEXT,
+    fontSize: 20
   }
 });

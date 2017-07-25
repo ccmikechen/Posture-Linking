@@ -1,7 +1,7 @@
 import React from 'React';
 import { View, Image } from 'react-native';
 
-const CombinationImage = ({ icon='', color = '#B2B4B5', size = 1, left = 0 }) => {
+const TriggerHorImg = ({ icon='', color = '#B2B4B5', size = 1, left = 0 }) => {
 	let width = 100 * size * 2, height = 100 * size;
 	
 	return (
@@ -32,4 +32,4 @@ const CombinationImage = ({ icon='', color = '#B2B4B5', size = 1, left = 0 }) =>
 	);
 }
 
-export default CombinationImage;
+export default TriggerHorImg;

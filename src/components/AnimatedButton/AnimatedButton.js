@@ -28,7 +28,7 @@ class AnimatedButton extends React.Component {
       this.state.progress,
       {
         toValue: 150,
-        duration: 1000
+        duration: 10000
       }
     );
   }
@@ -71,13 +71,13 @@ class AnimatedButton extends React.Component {
         onPressOut={() => this.handleButtonPressOut()}
       >
         <View style={[styles.container, containerStyle, this.props.style]}>
-        <Animated.View style={{
-          width: this.state.progress,
-          height: this.state.progress,
-          backgroundColor: 'red',
-          opacity: 0.2,
-          borderRadius: 9999
-        }} />
+          <Animated.View style={{
+            width: this.state.progress,
+            height: this.state.progress,
+            backgroundColor: 'red',
+            opacity: 0.2,
+            borderRadius: 9999
+          }} />
         </View>
       </TouchableWithoutFeedback>
     );
