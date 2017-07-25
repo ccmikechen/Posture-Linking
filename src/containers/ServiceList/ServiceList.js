@@ -42,22 +42,15 @@ class ServiceList extends React.Component {
     return true;
   }
 
-  shouldComponentUpdate() {
-    console.log('update', this.props.services);
-    return true;
-  }
-
   render() {
     return (
-      <View style={{flex:1 , backgroundColor:'#fff'}}>
+      <View style={styles.container}>
         {this.props.isGettingServices ?
-          <View style={styles.cover}>
             <ActivityIndicator
               animating={true}
               size='large'
               color='grey'
             />
-          </View>
          : 
           <ServiceGrid 
             serviceData={this.props.services} 

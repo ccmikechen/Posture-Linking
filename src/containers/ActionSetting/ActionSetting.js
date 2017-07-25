@@ -12,7 +12,8 @@ import styles from './styles';
 import {
   setActionConfig,
   getEvent,
-  setSelectedOption
+  setSelectedOption,
+  setDescription
 } from '../../actions/combinationActions';
 
 import DropDown, {
@@ -24,6 +25,7 @@ import DropDown, {
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
+import ServiceManager from '../../../lib/ServiceManager';
 
 class ActionSetting extends React.Component {
   constructor(props) {
@@ -57,9 +59,9 @@ class ActionSetting extends React.Component {
 
   renderOption(option) {
     return(
-      <View key={option.name} style={{flex:1}}>
-        <Text style={{fontSize:16}}>{option.name}</Text>
-        <View style={{flex:1}}>
+      <View key={option.name} style={styles.optionContent}>
+        <Text style={styles.optionText}>{option.name}</Text>
+        <View style={styles.optionView}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}
@@ -75,7 +77,7 @@ class ActionSetting extends React.Component {
               </Option>
             ))}
           </Select>
-          <OptionList overlayStyles={{height:120, width:250}} ref="OPTIONLIST"/>
+          <OptionList overlayStyles={styles.optionList} ref="OPTIONLIST"/>
         </View>
       </View>
     )
@@ -84,9 +86,9 @@ class ActionSetting extends React.Component {
   renderTextArea(option) {
     return (
       <View key={option.name}>
-        <Text style={{fontSize:16}}>{option.name}</Text>
+        <Text style={styles.textArea}>{option.name}</Text>
         <TextInput
-          style={{height:100, backgroundColor:'#FFF', borderWidth:1, borderRadius:5, borderColor:'#b2b6b2', fontSize:16}}
+          style={styles.textInput}
           multiline = {true}
           numberOfLines = {4}
           maxLength={200}
@@ -104,26 +106,28 @@ class ActionSetting extends React.Component {
     };
 
     this.props.setActionConfig(data);
+    let triggerName = ServiceManager.getServiceById(this.props.triggerId).getName();
+    let actionName =  ServiceManager.getServiceById(this.props.actionId).getName();
+    this.props.setDescription(`如果使用${triggerName}，則觸發${actionName}`);
     this.props.navigator.popToRoot({
-      animationType: 'slide-down'
     });
   };
 
   render() {
     let event = this.props.selectedEvent;
     return (
-      <View style={{flex:1, padding:15, backgroundColor:'#fff'}}>
+      <View style={styles.container}>
         {this.props.isGettingEvent ? 
-        <View style={{flex:1}}>
-          <KeyboardAwareScrollView style={{flex:3}}>
-          <Text style={{fontSize:24}}>{event.name}</Text>
-          <Text style={{fontSize:16, marginBottom:10}}>{event.description}</Text>
+        <View style={styles.content}>
+          <KeyboardAwareScrollView style={styles.KeyboardView}>
+          <Text style={styles.nameText}>{event.name}</Text>
+          <Text style={styles.descriptionText}>{event.description}</Text>
             {this.renderSetting(event)}
           </KeyboardAwareScrollView>
           <View>
             <TouchableOpacity onPress={() => this.handleOK()}>
-              <View style={{alignItems:'center', height:60, borderRadius:5, backgroundColor:'#2aceba', justifyContent:'center', marginTop:20, marginLeft:20, marginRight:20}}>
-                <Text style={{fontSize:20, color:'#fff', textAlign:'center'}}>確認</Text>
+              <View style={styles.submit}>
+                <Text style={styles.submitText}>確認</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -141,6 +145,7 @@ class ActionSetting extends React.Component {
 }
 
 export default connect((state) => ({
+  triggerId: state.getIn(['combination', 'triggerId']),
   actionId: state.getIn(['combination', 'actionId']),
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
@@ -149,6 +154,7 @@ export default connect((state) => ({
 }), {
   setActionConfig,
   getEvent,
-  setSelectedOption
+  setSelectedOption,
+  setDescription
 })(ActionSetting);
 

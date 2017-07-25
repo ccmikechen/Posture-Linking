@@ -1,6 +1,7 @@
 import '../res';
 import {
-  startMainApp
+  startMainApp,
+  startLoginApp
 } from './apps';
 import { AsyncStorage } from 'react-native';
 import BleManager from 'react-native-ble-manager';
@@ -14,27 +15,27 @@ const startBleManager = () => {
   BleManager.start({showAlert: false, allowDuplicates: false});
 };
 
+/*
 const defaultUser = {
   username: 'testuser',
   password: 'aaaaaaaa'
 };
+*/
 
-const login = (user) => {
+const login = () => {
   return new Promise((resolve, reject) => {
     api.refreshSession()
     .then(() => {
       resolve();
     })
     .catch(error => {
-      api.createSession(user).then(() => {
-        resolve();
-      });
+      startLoginApp();
     });
   });
 };
 
 const loadBackgroundProcess = async () => {
-  await login(defaultUser);
+  await login();
   console.log('Loged in');
 
   await ServiceManager.loadServices();

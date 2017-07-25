@@ -1,44 +1,68 @@
 import { AsyncStorage } from 'react-native';
 import server from '../api/server';
-import { startMainApp } from '../apps';
+import startApp from '../index';
+import api from '../api/poselink';
+import {
+  startLoginApp
+} from '../apps';
+import ServiceManager from '../../lib/ServiceManager';
+import CombinationManager from '../../lib/CombinationManager';
 
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const UPDATE_AUTHENTICATED = 'UPDATE_AUTHENTICATED';
+export const UPDATE_IS_LOGGING_IN = 'UPDATE_IS_LOGGING_IN';
+export const UPDATE_IS_NOT_LOGGING_IN = 'UPDATE_IS_NOT_LOGGING_IN';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const UPDATE_IS_SIGNING_UP = 'UPDATE_IS_SIGNING_UP';
+export const UPDATE_IS_NOT_SIGNING_UP = 'UPDATE_IS_NOT_SIGNING_UP';
+export const UPDATE_UNAUTHENTICATED = 'UPDATE_UNAUTHENTICATED';
 
-export const createAccount = (dispatch) => {
-  let data = 'testdata';
-  return (dispatch) => server.post('/users', {
-    username: data,
-    email: data,
-    password: data,
-    first_name: data,
-    last_name: data,
-    sex: data
+export const createAccount = (data) => (dispatch) => {
+  console.log(data);
+  dispatch({ type: UPDATE_IS_SIGNING_UP });
+
+  api.createUser(data)
+  .then(token => {
+    dispatch({ type: UPDATE_AUTHENTICATED });
+    dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
   })
-  .then(response => {
-    return response;
+  .then(() => {
+    startApp();
   })
   .catch(error => {
+    console.log(error)
+    dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
   });
 };
 
-export const login = (data) => (dispatch) => () => {
+export const login = (data) => (dispatch) => {
   console.log(data);
-  server.post('/sessions', {
+  dispatch({ type: UPDATE_IS_LOGGING_IN });
+
+  api.createSession({
     ...data
   })
-  .then(response => {
-    let { token } = response.meta;
-    AsyncStorage.setItem('@session:token', token);
-    startMainApp();
-
-    return dispatch({
-      type: UPDATE_AUTHENTICATED
-    });
+  .then(token => {
+    dispatch({ type: UPDATE_AUTHENTICATED });
+    dispatch({ type: UPDATE_IS_NOT_LOGGING_IN });
+  })
+  .then(()=> {
+    startApp();
   })
   .catch(error => {
-    console.log(error);
+    dispatch({ type: LOGIN_FAILED, error });
+    dispatch({ type: UPDATE_IS_NOT_LOGGING_IN });
+  });
+};
+
+export const logout = () => async (dispatch) => {
+  await CombinationManager.unloadAllCombinations();
+  await ServiceManager.clearAllService();
+  await api.destroySession()
+  .then(response => {
+    dispatch({ type: UPDATE_UNAUTHENTICATED });
+    startLoginApp();
   });
 };
 

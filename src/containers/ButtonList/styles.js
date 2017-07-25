@@ -17,5 +17,18 @@ export default styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 30
+  },
+  viewButton:{
+    height:60,
+    width:300,
+    borderRadius:15,
+    backgroundColor: R.colors.BUTTON_UNDEFIND_BORDER,
+    flexDirection: 'row',
+    alignItems:'center',
+    justifyContent:'center' 
+  },
+   text:{
+    color: R.colors.WHITE_TEXT,
+    fontSize:20
   }
 });

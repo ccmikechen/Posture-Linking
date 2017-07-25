@@ -39,7 +39,6 @@ class AddCombination extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-
     this.getIcon.bind(this);
   }
 
@@ -67,8 +66,8 @@ class AddCombination extends React.Component {
 
   componentWillMount () {
     this.props.setTriggerId('');
-    this.props.setActionId('');
     this.props.setDescription('');
+    this.props.setActionId('');
     this.props.getServiceList();
   }
 
@@ -87,24 +86,20 @@ class AddCombination extends React.Component {
       screen: 'ActionListScreen',
       title: 'Action',
       passProps: {},
-      navigatorStyle: {
-      },
+      navigatorStyle: {},
       animationType: 'slide-up'
     });
   }
 
   renderOK(){
-    if(this.props.actionId !='' && this.props.triggerId !='') {
-      let triggerName = ServiceManager.getServiceById(this.props.triggerId).getName();
-      let actionName =  ServiceManager.getServiceById(this.props.actionId).getName();
-      this.props.setDescription(`如果使用${triggerName}，則觸發${actionName}`);
+    if(this.props.actionId != '' && this.props.triggerId != '') {
       return(
         <View style={styles.lastSection}>
           <Text style={styles.descriptionTitle}>組合描述</Text>
           <TextInput
             style={styles.descriptionInput}
             maxLength= {100}
-            defaultValue = {`如果使用${triggerName}，則觸發${actionName}`}
+            defaultValue = {this.props.description}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
           />

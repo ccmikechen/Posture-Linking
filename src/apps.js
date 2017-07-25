@@ -14,3 +14,15 @@ export const startMainApp = () => {
     }
   });
 };
+
+export const startLoginApp = () => {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'LoginScreen',
+      navigatorStyle: {
+        navBarHidden: true,
+        drawUnderNavBar: true
+      }
+    }
+  });
+};

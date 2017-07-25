@@ -4,7 +4,7 @@ export default styles = StyleSheet.create({
   rowFront: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: R.colors.COMBINATION_ROW,
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 5,
