@@ -12,7 +12,8 @@ import styles from './styles';
 import {
   setActionConfig,
   getEvent,
-  setSelectedOption
+  setSelectedOption,
+  setDescription
 } from '../../actions/combinationActions';
 
 import DropDown, {
@@ -24,6 +25,7 @@ import DropDown, {
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
+import ServiceManager from '../../../lib/ServiceManager';
 
 class ActionSetting extends React.Component {
   constructor(props) {
@@ -104,8 +106,10 @@ class ActionSetting extends React.Component {
     };
 
     this.props.setActionConfig(data);
+    let triggerName = ServiceManager.getServiceById(this.props.triggerId).getName();
+    let actionName =  ServiceManager.getServiceById(this.props.actionId).getName();
+    this.props.setDescription(`如果使用${triggerName}，則觸發${actionName}`);
     this.props.navigator.popToRoot({
-      animationType: 'slide-down'
     });
   };
 
@@ -141,6 +145,7 @@ class ActionSetting extends React.Component {
 }
 
 export default connect((state) => ({
+  triggerId: state.getIn(['combination', 'triggerId']),
   actionId: state.getIn(['combination', 'actionId']),
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
@@ -149,6 +154,7 @@ export default connect((state) => ({
 }), {
   setActionConfig,
   getEvent,
-  setSelectedOption
+  setSelectedOption,
+  setDescription
 })(ActionSetting);
 

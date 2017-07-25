@@ -121,7 +121,6 @@ class TriggerSetting extends React.Component {
 
     this.props.setTriggerConfig(data);
     this.props.navigator.popToRoot({
-      animationType: 'slide-down'
     });
   };
 

@@ -41,7 +41,7 @@ class ActionList extends React.Component {
     this.props.setActionId(id);
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
-    }); 
+    });
   }
 
   handleConnect(id) {
