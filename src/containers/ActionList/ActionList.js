@@ -59,15 +59,16 @@ class ActionList extends React.Component {
     return (
       <View style={styles.container}>
         {this.props.isGetActions ?
-          <ServiceGrid serviceData={this.props.actions} onOKPress={(data) => this.handleOK(data.id)} onConnectPress={(data) => this.handleConnect(data.id)} />
+          <ServiceGrid 
+            serviceData={this.props.actions}
+            onOKPress={(data) => this.handleOK(data.id)}
+            onConnectPress={(data) => this.handleConnect(data.id)} />
           :
-          <View style={styles.cover}>
             <ActivityIndicator
               animating={true}
               size='large'
               color='grey'
             />
-          </View>
         }
       </View>
     );
