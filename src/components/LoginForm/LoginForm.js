@@ -15,6 +15,7 @@ const renderField = ({ input: { onChange, ...restInput }, isPassword, label}) =>
     onChangeText={onChange} 
     secureTextEntry = {isPassword}
     autoCapitalize = 'none'
+    underlineColorAndroid='transparent'
     {...restInput} 
     />
 }

@@ -36,7 +36,7 @@ class SignUp extends React.Component {
         <ActivityIndicator
           animating={true}
           size='large'
-          color='grey'
+          color='fff'
         />
       </View>
     );
@@ -45,11 +45,15 @@ class SignUp extends React.Component {
   render() {
     return (
       <KeyboardAwareScrollView style={styles.KeyboardContainer}>
+        {this.props.isSigningUp ? 
+          this.renderCover() 
+        : 
         <View style={styles.container}>
             <Text style={styles.logoText}>PostureLinking</Text>
             <SignUpForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
-            {this.props.isSigningUp? this.renderCover() : null}
+             
         </View>
+        }
        </KeyboardAwareScrollView>
     );
   }
