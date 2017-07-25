@@ -21,10 +21,13 @@ const colors = {
 	BUTTON_DISABLED_TEXT: '#B2B6B2',
 	BUTTON_UNDEFIND_TEXT: '#3FA9F5',
 	BUTTON_TEXT: 'white',
-	
+
 	SUBMIT: '#59d059',
 
-	INPUT_BORDER: '#B2B6B2'
+	INPUT_BORDER: '#B2B6B2',
+
+  SCANNING_BACKGROUND: '#42B9F4',
+  SCANNING_TIPS_BACKGROUND: '#e5fbfc'
 };
 
 export default colors;

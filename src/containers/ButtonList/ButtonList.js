@@ -8,6 +8,7 @@ import {
   Alert
 } from 'react-native';
 
+import AnimatedButton from '../../components/AnimatedButton';
 import styles from './styles';
 import {
   updateCombinationList
@@ -34,13 +35,12 @@ class ButtonList extends React.Component {
 
   renderButton(combination) {
     return (
-      <TouchableOpacity
+      <AnimatedButton
         style={styles.button}
         onPress={() => this.handleButtonPress(combination.id)}
         key={combination.id}
-      >
-        <Text style={styles.buttonText}>Combination {combination.id}</Text>
-      </TouchableOpacity>
+        id={combination.id}
+      />
     );
   }
 
