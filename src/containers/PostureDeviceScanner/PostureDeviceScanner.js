@@ -49,7 +49,7 @@ class PostureDeviceScanner extends React.Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'PostureDeviceScannerScreen:back') {
-        this.props.navigator.dismissModel({
+        this.props.navigator.dismissModal({
           animationType: 'slide-down'
         });
       }
