@@ -95,12 +95,16 @@ class AddCombination extends React.Component {
 
   renderOK(){
     if(this.props.actionId !='' && this.props.triggerId !='') {
+      let triggerName = ServiceManager.getServiceById(this.props.triggerId).getName();
+      let actionName =  ServiceManager.getServiceById(this.props.actionId).getName();
+      this.props.setDescription(`如果使用${triggerName}，則觸發${actionName}`);
       return(
         <View style={styles.lastSection}>
           <Text style={styles.descriptionTitle}>組合描述</Text>
           <TextInput
             style={styles.descriptionInput}
             maxLength= {100}
+            defaultValue = {`如果使用${triggerName}，則觸發${actionName}`}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
           />
@@ -163,7 +167,6 @@ class AddCombination extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     let triggerName = this.props.triggerId != ''?
           ServiceManager.getServiceById(this.props.triggerId).getName()
           : 'Trigger';
