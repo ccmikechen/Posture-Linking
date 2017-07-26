@@ -39,7 +39,7 @@ const loadBackgroundProcess = async () => {
   console.log('Loged in');
 
   await ServiceManager.loadServices();
-  console.log('Loaded services', ServiceManager.getServices());
+  console.log('Loaded services');
 
   await ServiceManager.loadServiceConfigs();
   console.log('Loaded service configs');
