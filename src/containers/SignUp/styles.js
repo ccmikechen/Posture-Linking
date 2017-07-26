@@ -22,6 +22,18 @@ export default styles = StyleSheet.create({
   KeyboardContainer :{
      flex: 1,
      backgroundColor: '#616161',
+  },
+  cover: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    opacity: 0.9,
+    marginTop: 400
   }
     
 });

@@ -32,7 +32,7 @@ class Login extends React.Component {
         <ActivityIndicator
           animating={true}
           size='large'
-          color='grey'
+          color='#fff'
         />
       </View>
     );
@@ -40,7 +40,11 @@ class Login extends React.Component {
 
   render() {
     return (
+      
       <KeyboardAwareScrollView style={styles.KeyboardContainer}>
+        {this.props.isLoggingIn?
+          this.renderCover()
+        : 
         <View style={styles.container}>
             <Text style={styles.logoText}>PostureLinking</Text>
             {this.props.failed == true ?
@@ -49,8 +53,8 @@ class Login extends React.Component {
               null
             }
             <LoginForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
-            {this.props.isLoggingIn? this.renderCover() : null}
         </View>
+        }
        </KeyboardAwareScrollView>
     );
   }

@@ -17,6 +17,7 @@ const renderField = ({ input: { onChange, ...restInput }, isPassword, label,  me
       onChangeText={onChange} 
       secureTextEntry = {isPassword}
       autoCapitalize = 'none'
+      underlineColorAndroid='transparent'
       {...restInput} 
     />
     {touched && error && <Text style={styles.errorText}>{error}</Text>}
