@@ -47,22 +47,10 @@ const SingUpForm = (props) => {
         isPassword = {true}
         label="Confirm Password"
       />
-      <Field name="nickname" 
-        component={renderField}
-        isPassword = {false}
-        label="Nick Name" />
       <Field name="email" 
         component={renderField}
         isPassword = {false}
         label="Email Address" />
-      <Field name="firstname" 
-        component={renderField}
-        isPassword = {false}
-        label="First Name" />
-      <Field name="lastname" 
-        component={renderField}
-        isPassword = {false}
-        label="Last Name" />
       <TouchableOpacity onPress={handleSubmit(onSubmit)}>
         <View style={styles.button}>
            <Text style={styles.buttonText}>Sign Up</Text>

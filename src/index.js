@@ -53,8 +53,8 @@ const loadBackgroundProcess = async () => {
   console.log('Initialized socket');
 };
 
-const startApp = () => {
-  loadBackgroundProcess().then(() => {
+const startApp = async () => {
+  return await loadBackgroundProcess().then(() => {
     startBleManager();
     startMainApp();
   });
