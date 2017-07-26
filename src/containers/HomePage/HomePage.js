@@ -52,7 +52,7 @@ class HomePage extends React.Component {
           screen: 'ServiceListScreen',
           title: R.strings.SERVICE_LIST_TITLE,
           passProps: {},
-          animated: true
+          animated: false
         });
           break;
       }

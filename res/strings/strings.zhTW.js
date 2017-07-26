@@ -8,7 +8,8 @@ const strings = {
   AUTHORIZING_FAILED: '認證失敗',
   AUTHORIZING_SUCCESSED: '認證成功',
   SCANNING_DEVICE_TITLE: '裝置掃描',
-  SCANNING_POSTURE_DEVICE_TITLE: '正在找尋附近的Posture Linking智慧手環'
+  SCANNING_POSTURE_DEVICE_TITLE: '正在找尋附近的Posture Linking智慧手環',
+  LOGOUT: '登出'
 };
 
 export default strings;

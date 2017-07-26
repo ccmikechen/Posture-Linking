@@ -1,5 +1,6 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { BackHandler, Platform } from 'react-native';
+
 import Combination from '../../containers/Combination';
 
 class CombinationScreen extends React.Component {
@@ -17,8 +18,20 @@ class CombinationScreen extends React.Component {
           icon: R.images.ADD_ICON,
           buttonFontSize: 12
         }
-    ]
+    ],
+    leftButtons:[{
+      id: 'sideMenu'
+    }]
   };
+
+  onNavigatorEvent(event) {
+    if (event.id == 'sideMenu') {
+      this.props.navigator.setDrawerEnabled({
+        side: 'left',
+        enabled: true
+      });
+    }
+  }
 
   static navigatorStyle = {
     navBarRightButtonFontSize: 30,
@@ -33,8 +46,23 @@ class CombinationScreen extends React.Component {
       navBarButtonColor: R.colors.NAVBAR_BUTTON,
       statusBarColor: R.colors.STATUSBAR_BACKGROUND
     });
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.goToMainScreen = this.goToMainScreen.bind(this);
   }
 
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.goToMainScreen);
+  }
+
+  goToMainScreen() {
+    this.props.navigator.resetTo({
+      screen: 'CombinationScreen',
+      title: R.strings.COMBINATION_TITLE,
+      passProps: {},
+      animated: false
+    });
+    return true;
+  }
 
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {

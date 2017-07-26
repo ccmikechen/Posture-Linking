@@ -39,7 +39,6 @@ class AddCombination extends React.Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-
     this.getIcon.bind(this);
   }
 
@@ -67,8 +66,8 @@ class AddCombination extends React.Component {
 
   componentWillMount () {
     this.props.setTriggerId('');
-    this.props.setActionId('');
     this.props.setDescription('');
+    this.props.setActionId('');
     this.props.getServiceList();
   }
 
@@ -93,13 +92,14 @@ class AddCombination extends React.Component {
   }
 
   renderOK(){
-    if(this.props.actionId !='' && this.props.triggerId !='') {
+    if(this.props.actionId != '' && this.props.triggerId != '') {
       return(
         <View style={styles.lastSection}>
           <Text style={styles.descriptionTitle}>組合描述</Text>
           <TextInput
             style={styles.descriptionInput}
             maxLength= {100}
+            defaultValue = {this.props.description}
             autoCapitalize = {'none'}
             onChangeText = {(text) => this.props.setDescription(text)}
           />
@@ -162,7 +162,6 @@ class AddCombination extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     let triggerName = this.props.triggerId != ''?
           ServiceManager.getServiceById(this.props.triggerId).getName()
           : 'Trigger';

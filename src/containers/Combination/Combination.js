@@ -6,7 +6,8 @@ import {
   ActivityIndicator,
   Alert,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  RefreshControl
 } from 'react-native';
 
 import styles from './styles';
@@ -15,7 +16,9 @@ import {
   notUpdateCombinationList,
   isUpdateCombinationList,
   setCombinationStatus,
-  removeCombination
+  removeCombination,
+  selectCombinationId,
+  refreshCombinationList
 } from '../../actions/combinationActions';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CombinationRow from '../../components/CombinationRow';
@@ -26,6 +29,7 @@ class Combination extends React.Component {
     super(props);
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
+    this.handleShowEdit = this.handleShowEdit.bind(this);
   }
 
   componentWillMount () {
@@ -55,14 +59,23 @@ class Combination extends React.Component {
     this.props.removeCombination(combination)
       .then(this.props.notUpdateCombinationList())
       .then(
-        setTimeout(() => {
-          this.props.updateCombinationList();
-        }, 1000)
+       this._onRefresh()
       );
   }
 
   handleStatusChange(combination, status) {
     this.props.setCombinationStatus(combination, status == true ? 1 : 0);
+  }
+
+  handleShowEdit(id) {
+    this.props.selectCombinationId(id);
+    this.props.navigator.showModal({
+      screen:'EditCombinationScreen',
+      title:'編輯組合',
+      passProps: {},
+      animated:true,
+      animationType: 'slide-up'
+    });
   }
 
   renderRow(combination) {
@@ -73,7 +86,7 @@ class Combination extends React.Component {
       return (
         <CombinationRow
           data={item}
-          onEdit={()=>{Alert.alert('edit');}}
+          onEdit={() => this.handleShowEdit(combination.id)}
           onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
         />
       );
@@ -107,6 +120,13 @@ class Combination extends React.Component {
     }
   }
 
+  _onRefresh() {
+    this.props.notUpdateCombinationList();
+    this.props.refreshCombinationList().then(()=>{
+      this.props.isUpdateCombinationList();
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -115,6 +135,12 @@ class Combination extends React.Component {
             rightOpenValue = {-125}
             stopRightSwipe = {-150}
             stopLeftSwipe = {10}
+            refreshControl={
+              <RefreshControl
+                refreshing = {!this.props.isGetCombinations}
+                onRefresh={this._onRefresh.bind(this)}
+              />
+            }
             dataSource={this._genDataSource(this.props.combinations)}
             renderRow={(combination) => this.renderRow(combination)}
             renderHiddenRow={(combination) => this.renderHiddenRow(combination)}
@@ -142,5 +168,7 @@ export default connect((state) => ({
   notUpdateCombinationList,
   isUpdateCombinationList,
   setCombinationStatus,
-  removeCombination
+  removeCombination,
+  selectCombinationId,
+  refreshCombinationList
 })(Combination);

@@ -27,8 +27,6 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
     });
     return temp;
   }
-  console.log(data.trigger);
-  console.log(data.action);
 
   return(
     <View style = {styles.rowFront}>

@@ -9,13 +9,25 @@ registerScreens();
 export const startMainApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'HomeScreen',
-      title: 'Home'
+      screen: 'CombinationScreen',
+      title: R.strings.COMBINATION_TITLE
     },
     drawer: {
     	left: {
     		screen: 'SlideMenuScreen'
     	}
+    }
+  });
+};
+
+export const startLoginApp = () => {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'LoginScreen',
+      navigatorStyle: {
+        navBarHidden: true,
+        drawUnderNavBar: true
+      }
     }
   });
 };

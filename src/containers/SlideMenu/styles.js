@@ -40,13 +40,15 @@ export default styles = StyleSheet.create({
   	backgroundColor: R.colors.MENU_BACKGROUND
   },
   items:{
-  	justifyContent: 'center',
+  	flexDirection: 'row',
+  	alignItems: 'center',
   	height: 70,
   	borderBottomWidth: 1,
   	borderBottomColor: R.colors.BORDER,
   	paddingLeft: 20
   },
-  text:{
+  itemsText:{
+  	marginLeft: 10,
   	fontSize: 16
   }
 });

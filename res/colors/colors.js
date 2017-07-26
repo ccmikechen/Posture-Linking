@@ -1,18 +1,19 @@
 const colors = {
 //navigationbar
-	NAVBAR_BACKGROUND: '#0084E2',
+	NAVBAR_BACKGROUND: '#D10909',
 	NAVBAR_TEXT: 'white',
 	NAVBAR_BUTTON: 'white',
-	STATUSBAR_BACKGROUND: '#1273B8',
+	STATUSBAR_BACKGROUND: '#B10101',
 	CONTAINER_BACKGROUND: '#E9E9E9',
 	SETTING_BACKGROUND: 'white',
 
 //slidemenu 
 	BORDER: '#CCC',
-	USER_VIEW: '#28A4FC',
+	USER_VIEW: '#D10909',
 	USER_IMG: 'white',
 	USER_TEXT: 'white',
 	MENU_BACKGROUND: 'white',
+	ITEMS_ICON: '#FF5B5B',
 
 //combination list
 	PUZZLE_BACK: '#BEBEBE',
@@ -44,7 +45,11 @@ const colors = {
 	INPUT_BORDER: '#B2B6B2',
 
   SCANNING_BACKGROUND: '#42B9F4',
-  SCANNING_TIPS_BACKGROUND: '#e5fbfc'
+  SCANNING_TIPS_BACKGROUND: '#e5fbfc',
+  
+	WHITE_TEXT: '#FFFFFF',
+	SIGNUP_SUBMIT: '#269be7',
+	ERROR_TEXT: '#e93a5c'
 };
 
 export default colors;

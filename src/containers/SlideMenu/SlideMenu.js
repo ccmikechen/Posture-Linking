@@ -15,63 +15,58 @@ class SlideMenu extends React.Component {
     this.handleButtonPress = this.handleButtonPress.bind(this);
   }
 
+  closeDrawer() {
+    this.props.navigator.toggleDrawer({
+      side: 'left',
+      animated: true,
+      to: 'close'
+    });
+  }
+
+  toScreen(props) {
+    this.props.navigator.resetTo(props);
+    this.closeDrawer();
+  }
+
   handleButtonPress(type) {
     return () => {
       switch (type) {
         case 'scan':
-          this.props.navigator.push({
+          this.toScreen({
             screen: 'ScanBleScreen',
-            title: R.strings.SCAN_TITLE
-          });
-          this.props.navigator.setDrawerEnabled({
-            side: 'left',
-            enabled: false
+            title: R.strings.SCAN_TITLE,
+            animated: false
           });
           break;
         case 'posture':
-          this.props.navigator.push({
+          this.toScreen({
             screen: 'PostureScreen',
-            title: R.strings.POSTURE_TITLE
-          });
-          this.props.navigator.setDrawerEnabled({
-            side: 'left',
-            enabled: false
+            title: R.strings.POSTURE_TITLE,
+            animated: false
           });
           break;
         case 'combination':
-          this.props.navigator.push({
+          this.toScreen({
             screen: 'CombinationScreen',
             title: R.strings.COMBINATION_TITLE,
             passProps: {},
-            animated: true
-          });
-          this.props.navigator.setDrawerEnabled({
-            side: 'left',
-            enabled: false
+            animated: false
           });
           break;
         case 'buttonList':
-          this.props.navigator.push({
+          this.toScreen({
             screen: 'ButtonListScreen',
             title: R.strings.BUTTON_LIST_TITLE,
             passProps: {},
-            animated: true
-          });
-          this.props.navigator.setDrawerEnabled({
-            side: 'left',
-            enabled: false
+            animated: false
           });
           break;
         case 'serviceList':
-          this.props.navigator.push({
+          this.toScreen({
             screen: 'ServiceListScreen',
             title: R.strings.SERVICE_LIST_TITLE,
             passProps: {},
-            animated: true
-          });
-          this.props.navigator.setDrawerEnabled({
-            side: 'left',
-            enabled: false
+            animated: false
           });
           break;
       }
@@ -100,17 +95,20 @@ class SlideMenu extends React.Component {
         <View style={styles.content} >
           <TouchableOpacity onPress={this.handleButtonPress('combination')}>
             <View style={styles.items}>
-              <Text style={styles.text}>{R.strings.COMBINATION_TITLE}</Text>
+              <Icon name='extension' size={40} color={R.colors.ITEMS_ICON} />
+              <Text style={styles.itemsText}>{R.strings.COMBINATION_TITLE}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
             <View style={styles.items}>
-              <Text style={styles.text}>{R.strings.BUTTON_LIST_TITLE}</Text>
+              <Icon name='touch-app' size={40} color={R.colors.ITEMS_ICON} />
+              <Text style={styles.itemsText}>{R.strings.BUTTON_LIST_TITLE}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
             <View style={styles.items}>
-              <Text style={styles.text}>{R.strings.SERVICE_LIST_TITLE}</Text>
+              <Icon name='room-service' size={40} color={R.colors.ITEMS_ICON} />
+              <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
             </View>
           </TouchableOpacity>
         </View>

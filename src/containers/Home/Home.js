@@ -6,8 +6,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { connect } from 'react-redux';
 import TestButton from '../../components/TestButton';
 import styles from './styles';
+import { logout } from '../../actions/sessionActions';
 
 class Home extends React.Component {
 
@@ -57,6 +59,9 @@ class Home extends React.Component {
           animated: true
         });
           break;
+        case 'logout':
+        this.props.logout();
+          break;
       }
     };
   }
@@ -64,34 +69,37 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.handleButtonPress('scan')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.SCAN_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('posture')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.POSTURE_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('combination')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.COMBINATION_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.BUTTON_LIST_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.SERVICE_LIST_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
+        <TestButton
+          onPress={this.handleButtonPress('scan')}
+          text={R.strings.SCAN_TITLE}
+        />
+        <TestButton
+          onPress={this.handleButtonPress('posture')}
+          text={R.strings.POSTURE_TITLE}
+        />
+        <TestButton
+          onPress={this.handleButtonPress('combination')}
+          text={R.strings.COMBINATION_TITLE}
+        />
+        <TestButton
+          onPress={this.handleButtonPress('buttonList')}
+          text={R.strings.BUTTON_LIST_TITLE}
+        />
+        <TestButton
+          onPress={this.handleButtonPress('serviceList')}
+          text={R.strings.SERVICE_LIST_TITLE}
+        />
+        <TestButton
+          onPress={this.handleButtonPress('logout')}
+          text={R.strings.LOGOUT}
+        />
       </View>
     );
   }
 }
 
-export default Home;
+export default connect((state) => ({
+  
+}), {
+  logout
+})(Home);

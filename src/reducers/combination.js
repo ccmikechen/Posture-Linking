@@ -21,7 +21,8 @@ const InitialState = Immutable.fromJS({
   isGettingEvent: false,
   selectedOption:[],
   isGetTriggerConfig: false,
-  isGetActionConfig: false
+  isGetActionConfig: false,
+  selectedCombinationId: '',
 });
 
 const combination = handleActions({
@@ -83,7 +84,6 @@ const combination = handleActions({
   ),
   SET_COMBINATION_STATUS: (state, { id, status }) => {
     let newCombinations = state.get('combinations').map(combination => {
-      console.log(combination.toJS());
 
       if (combination.get('id') == id) {
         return combination.set('status', status);
@@ -139,7 +139,22 @@ const combination = handleActions({
   ),
   IS_NOT_GETTING_ACTION_CONFIG: (state) => (
     state.set('isGetActionConfig', false)
-  )
+  ),
+  SELECT_COMBINATION_ID: (state, { id }) => (
+    state.set('selectedCombinationId', id)
+  ),
+  UPDATE_COMBINATION: (state, { combination }) => {
+    let immutableCombination = Immutable.fromJS(combination);
+    let newCombinations = state.get('combinations').map(_combination => {
+      if (combination.id == _combination.get('id')) {
+        return immutableCombination;
+      } else {
+        return _combination;
+      }
+    })
+          
+    return state.set('combinations', newCombinations);
+  }
 }, InitialState);
 
 export default combination;
