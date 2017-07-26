@@ -6,8 +6,6 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-
-import TestButton from '../../components/TestButton';
 import styles from './styles';
 
 class HomePage extends React.Component {
@@ -15,7 +13,6 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
-
     console.log('hello: ', R.strings.HELLO);
   }
 
@@ -64,68 +61,27 @@ class HomePage extends React.Component {
 
   render() {
     return (
-        <ScrollView style={styles.scrollview} >
-          <View style={styles.container} >
-            <View style={styles.buttonsView} >
-              <View style={styles.buttonAreaTop} >
-                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('scan')}>
-                  <View style={styles.buttonLeft} >
-                    <Image style={styles.image} source={require('../../../res/images/puzzle1.png')} />
-                  </View>
-                </TouchableOpacity>
-                
-                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('posture')}>
-                  <View style={styles.buttonRight} >
-                    <Image style={styles.image} source={require('../../../res/images/puzzle2.png')} />
-                  </View>
-                </TouchableOpacity>
+        <View style={styles.container} >
 
-              </View>
-              <View style={styles.buttonAreaMiddle} >
-                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('combination')}>
-                  <View style={styles.buttonLeft} >
-                    <Image style={styles.image} source={require('../../../res/images/puzzle3.png')} />
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('buttonList')}>
-                  <View style={styles.buttonRight} >
-                    <Image style={styles.image} source={require('../../../res/images/puzzle4.png')} />
-                  </View>
-                </TouchableOpacity>
-              </View>
-                <TouchableOpacity style={styles.TouchableOpacity} onPress={this.handleButtonPress('serviceList')}>
-                  <View style={styles.buttonBottom} >
-                    <Image style={styles.imageBottom} source={require('../../../res/images/puzzle5.png')} />
-                  </View>
-                </TouchableOpacity>
+          <TouchableOpacity style={styles.touch} onPress={this.handleButtonPress('combination')}>
+            <View style={[styles.buttonView,{backgroundColor: '#E8ACC2'}]}>
+              <Text style={styles.text}>{R.strings.COMBINATION_TITLE}</Text>
             </View>
-        {/*<TouchableOpacity onPress={this.handleButtonPress('scan')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.SCAN_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('posture')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.POSTURE_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('combination')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.COMBINATION_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.BUTTON_LIST_TITLE}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}>{R.strings.SERVICE_LIST_TITLE}</Text>
-          </View>
-        </TouchableOpacity>*/}
-          </View>
-        </ScrollView>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.touch} onPress={this.handleButtonPress('buttonList')}>
+            <View style={[styles.buttonView,{backgroundColor: '#F8D5CE'}]}>
+              <Text style={styles.text}>{R.strings.BUTTON_LIST_TITLE}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.touch} onPress={this.handleButtonPress('serviceList')}>
+            <View style={[styles.buttonView,{backgroundColor: '#D7F5C1'}]}>
+              <Text style={styles.text}>{R.strings.SERVICE_LIST_TITLE}</Text>
+            </View>
+          </TouchableOpacity>
+
+        </View>
     );
   }
 }

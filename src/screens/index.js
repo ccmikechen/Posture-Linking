@@ -19,6 +19,7 @@ import ActionSelectConfigScreen from './ActionSelectConfigScreen';
 import ServiceListScreen from './ServiceListScreen';
 import ServiceConnectScreen from './ServiceConnectScreen';
 import PostureDeviceScannerScreen from './PostureDeviceScannerScreen';
+import SlideMenuScreen from './SlideMenuScreen';
 
 export function registerScreens() {
   Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider);
@@ -38,4 +39,5 @@ export function registerScreens() {
   Navigation.registerComponent('ServiceListScreen', () => ServiceListScreen, store, Provider);
   Navigation.registerComponent('ServiceConnectScreen', () => ServiceConnectScreen, store, Provider);
   Navigation.registerComponent('PostureDeviceScannerScreen', () => PostureDeviceScannerScreen, store, Provider);
+  Navigation.registerComponent('SlideMenuScreen', () => SlideMenuScreen, store, Provider);
 };

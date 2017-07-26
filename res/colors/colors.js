@@ -1,11 +1,18 @@
 const colors = {
 //navigationbar
-	NAVBAR_BACKGROUND: '#3FA9F5',
+	NAVBAR_BACKGROUND: '#0084E2',
 	NAVBAR_TEXT: 'white',
 	NAVBAR_BUTTON: 'white',
-	STATUSBAR_BACKGROUND: '#2F7FB8',
+	STATUSBAR_BACKGROUND: '#1273B8',
 	CONTAINER_BACKGROUND: '#E9E9E9',
 	SETTING_BACKGROUND: 'white',
+
+//slidemenu 
+	BORDER: '#CCC',
+	USER_VIEW: '#28A4FC',
+	USER_IMG: 'white',
+	USER_TEXT: 'white',
+	MENU_BACKGROUND: 'white',
 
 //combination list
 	PUZZLE_BACK: '#BEBEBE',

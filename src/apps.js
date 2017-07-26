@@ -11,6 +11,11 @@ export const startMainApp = () => {
     screen: {
       screen: 'HomeScreen',
       title: 'Home'
+    },
+    drawer: {
+    	left: {
+    		screen: 'SlideMenuScreen'
+    	}
     }
   });
 };

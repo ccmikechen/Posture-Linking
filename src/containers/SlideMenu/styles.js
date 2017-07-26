@@ -1,0 +1,52 @@
+import { StyleSheet } from 'react-native';
+
+export default styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: R.colors.CONTAINER_BACKGROUND
+  },
+  userView:{
+  	flex:2,
+  	flexDirection: 'column',
+  	justifyContent: 'center',
+  	borderBottomWidth: 1,
+  	borderBottomColor: R.colors.BORDER,
+  	backgroundColor: R.colors.USER_VIEW
+  },
+  userImg:{
+  	flex:3,
+  	justifyContent: 'flex-end',
+  	paddingLeft: 15
+  },
+  userText:{
+  	flex:2,
+  	justifyContent: 'space-between',
+  	paddingLeft: 20,
+  	paddingRight: 20,
+  	paddingTop: 10
+  },
+  logoutView:{
+  	flex:1,
+  	flexDirection: 'row',
+  	justifyContent: 'space-between',
+  },
+  username:{
+  	fontSize: 14,
+  	color: R.colors.USER_TEXT
+  },
+  content:{
+  	flex:5,
+  	flexDirection: 'column',
+  	backgroundColor: R.colors.MENU_BACKGROUND
+  },
+  items:{
+  	justifyContent: 'center',
+  	height: 70,
+  	borderBottomWidth: 1,
+  	borderBottomColor: R.colors.BORDER,
+  	paddingLeft: 20
+  },
+  text:{
+  	fontSize: 16
+  }
+});
