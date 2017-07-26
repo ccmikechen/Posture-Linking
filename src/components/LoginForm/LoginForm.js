@@ -40,22 +40,22 @@ const LoginForm = (props) => {
         name="username"
         component={renderField}
         isPassword = {false}
-        label="Username"
+        label={R.strings.USERNAME}
       />
       <Field
         name="password"
         component={renderField}
         isPassword = {true}
-        label="Password"
+        label={R.strings.PASSWORD}
       />
       <TouchableOpacity onPress={handleSubmit(onSubmit)}>
         <View style={styles.button}>
-           <Text style={styles.buttonText}>Login</Text>
+           <Text style={styles.buttonText}>{R.strings.LOGIN}</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignUp}>
         <View style={styles.signUpButton}>
-           <Text style={styles.buttonText}>Sign Up</Text>
+           <Text style={styles.buttonText}>{R.strings.SIGNUP}</Text>
         </View>
       </TouchableOpacity>
     </View>

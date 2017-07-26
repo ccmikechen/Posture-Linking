@@ -33,27 +33,27 @@ const SingUpForm = (props) => {
         name="username"
         component={renderField}
         isPassword = {false}
-        label="User Name"
+        label= {R.strings.USERNAME}
       />
       <Field
         name="password"
         component={renderField}
         isPassword = {true}
-        label="Password"
+        label={R.strings.PASSWORD}
       />
       <Field
         name="confirmPassword"
         component={renderField}
         isPassword = {true}
-        label="Confirm Password"
+        label={R.strings.CONFIRM_PASSWORD}
       />
       <Field name="email" 
         component={renderField}
         isPassword = {false}
-        label="Email Address" />
+        label={R.strings.EMAIL} />
       <TouchableOpacity onPress={handleSubmit(onSubmit)}>
         <View style={styles.button}>
-           <Text style={styles.buttonText}>Sign Up</Text>
+           <Text style={styles.buttonText}>{R.strings.SIGNUP}</Text>
         </View>
       </TouchableOpacity>
     </View>

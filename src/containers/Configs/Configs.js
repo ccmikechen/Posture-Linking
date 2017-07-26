@@ -42,14 +42,14 @@ class Configs extends React.Component {
     return (
       <View>
         <AddCombinationDetail
-          text='如果 ○○○'
+          text={R.strings.IF_TEXT}
           status={1}
           onPress={() => this.handleTrigger()}
         />
 
 
         <AddCombinationDetail
-          text='則 ○○'
+          text={R.strings.THEN_TEXT}
           status={0}
           onPress={() => this.handleTrigger()}
         />
@@ -63,14 +63,14 @@ class Configs extends React.Component {
     if(!this.props.isGetTriggerConfig) {
       return (
         <View>
-          <Text style={styles.text}>{trigger.name}</Text>
+          <Text style={styles.text}>{R.strings.services[trigger.id]}</Text>
           <AddCombinationDetail
-            text='詳細設定'
+            text={R.strings.DETAILED_SETTING}
             status={2}
             onPress={()=>this.handleTriggerSetting()}
           />
           <AddCombinationDetail
-            text='則 ○○'
+            text={R.strings.THEN_TEXT}
             status={0}
           />
         </View>
@@ -78,14 +78,14 @@ class Configs extends React.Component {
     } else {
       return (
         <View>
-          <Text style={styles.text}>{trigger.name}</Text>
+          <Text style={styles.text}>{R.strings.services[trigger.id]}</Text>
           <AddCombinationDetail
             text={this.props.triggerConfig.text}
             status={3}
             onPress={()=>this.handleTriggerSetting()}
           />
           <AddCombinationDetail
-            text='則 ○○'
+            text={R.strings.THEN_TEXT}
             status={1}
             onPress={()=>this.handleAction()}
           />
@@ -121,15 +121,15 @@ class Configs extends React.Component {
     if(!this.props.isGetActionConfig) {
       return (
         <View>
-          <Text style={styles.text}>{trigger.name}</Text>
+          <Text style={styles.text}>{R.strings.services[trigger.id]}</Text>
           <AddCombinationDetail
             text={this.props.triggerConfig.text}
             status={3}
             onPress={()=>this.handleTriggerSetting()}
           />
-          <Text style={styles.text}>{action.name}</Text>
+          <Text style={styles.text}>{R.strings.services[action.id]}</Text>
           <AddCombinationDetail
-            text='詳細設定'
+            text={R.strings.DETAILED_SETTING}
             status={2}
             onPress={()=>this.handleActionSetting()}
           />
@@ -138,13 +138,13 @@ class Configs extends React.Component {
     } else {
       return (
         <View>
-          <Text style={styles.text}>{trigger.name}</Text>
+          <Text style={styles.text}>{R.strings.services[trigger.id]}</Text>
           <AddCombinationDetail
             text={this.props.triggerConfig.text}
             status={3}
             onPress={()=>this.handleTriggerSetting()}
           />
-          <Text style={styles.text}>{action.name}</Text>
+          <Text style={styles.text}>{R.strings.services[action.id]}</Text>
           <AddCombinationDetail
             text={this.props.actionConfig.text}
             status={3}
