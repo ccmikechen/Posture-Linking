@@ -36,6 +36,7 @@ class ButtonList extends React.Component {
   }
 
   handleButtonPress(combinationId) {
+    console.log(this);
     this.buttonTrigger.trigger({ combinationId });
   }
 
@@ -70,7 +71,7 @@ class ButtonList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.buttonTrigger.isConnected == false ? 
+        {this.buttonTrigger.isConnected() == false ? 
         <TouchableOpacity onPress={() => this.connectService()}> 
           <View style={styles.viewButton}>
             <Text style={styles.text}>按鈕服務認證</Text>
