@@ -17,6 +17,8 @@ export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const UPDATE_IS_SIGNING_UP = 'UPDATE_IS_SIGNING_UP';
 export const UPDATE_IS_NOT_SIGNING_UP = 'UPDATE_IS_NOT_SIGNING_UP';
 export const UPDATE_UNAUTHENTICATED = 'UPDATE_UNAUTHENTICATED';
+export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
+export const IS_SIGN_UP_FAILD = 'IS_SIGN_UP_FAILD';
 
 export const createAccount = (data) => (dispatch) => {
   dispatch({ type: UPDATE_IS_SIGNING_UP });
@@ -29,8 +31,9 @@ export const createAccount = (data) => (dispatch) => {
     })
   })
   .catch(error => {
-    console.log(error)
+    dispatch({ type: SIGN_UP_ERROR, error})
     dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
+    dispatch({ type: IS_SIGN_UP_FAILD });
   });
 };
 

@@ -20,7 +20,9 @@ const InitialState = Immutable.fromJS({
     email: '',
     birthday: null
   },
-  isSigningUp: false
+  isSigningUp: false,
+  signUpError: {},
+  isSignUpFaild: false,
 });
 
 const session = handleActions({
@@ -63,6 +65,12 @@ const session = handleActions({
   ),
   UPDATE_IS_NOT_SIGNING_UP: (state) => (
     state.set('isSigningUp', false)
+  ),
+  SIGN_UP_ERROR: (state, { error }) => (
+    state.set('signUpError', error)
+  ),
+  IS_SIGN_UP_FAILD: (state) => (
+    state.set('isSignUpFaild', true)
   )
 }, InitialState);
 

@@ -118,8 +118,8 @@ class AddCombination extends React.Component {
 
   showAlert() {
     Alert.alert(
-      'PostureLinking',
-      '您確定要新增組合',
+      'Posture Linking',
+      '您確定要新增組合嗎',
       [
         {text: '取消', onPress: () => null},
         {text: '確定', onPress: () => this.handleOK()},

@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
   },
   errorText: {
     color:"#e84f1e",
-    fontSize:14,
+    fontSize:16,
     textAlign:'center',
     marginTop:5
   },
@@ -32,8 +32,6 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
-    opacity: 0.9,
-    marginTop: 400
   }
     
 });

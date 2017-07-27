@@ -28,14 +28,13 @@ class SideMenu extends React.Component {
     });
   }
 
-  toScreen(props) {
-    this.props.navigator.resetTo(props);
+  toScreen(screenProps) {
     this.closeDrawer();
+    this.props.navigator.resetTo(screenProps);
   }
 
   handleButtonPress(type) {
     return () => {
-      console.log(type)
       switch (type) {
         case 'scan':
           this.toScreen({

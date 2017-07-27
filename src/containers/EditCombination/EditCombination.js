@@ -51,8 +51,8 @@ class EditCombination extends React.Component {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'close') {
         Alert.alert(
-          'PostureLinking',
-          '您確定要關閉編輯組合',
+          'Posture Linking',
+          '您確定要關閉編輯組合嗎',
           [
             {text: '取消', onPress: () => null},
             {text: '確定', onPress: () => this.closeScreen()},
@@ -84,18 +84,18 @@ class EditCombination extends React.Component {
     this.props.setSelectedActionConfig(selectedCombination.action.eventId);
     let triggerConfig = {
       ...selectedCombination.action.config,
-      text: ServiceManager.getEventById(selectedCombination.trigger.eventId).description
+      text: R.strings.events[selectedCombination.trigger.eventId].description
     };
     this.props.setTriggerConfig(triggerConfig);
     let actionConfig = {
       ...selectedCombination.action.config,
-      text: ServiceManager.getEventById(selectedCombination.action.eventId).description
+      text: R.strings.events[selectedCombination.action.eventId].description
     };
     this.props.setActionConfig(actionConfig);
   }
 
   handelTrigger() {
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'TriggerListScreen',
       title: 'Trigger',
       passProps: {},
@@ -105,7 +105,7 @@ class EditCombination extends React.Component {
   }
 
   handelAction() {
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'ActionListScreen',
       title: 'Action',
       passProps: {},
