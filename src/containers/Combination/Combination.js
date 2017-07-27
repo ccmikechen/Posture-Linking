@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   RefreshControl
 } from 'react-native';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 import styles from './styles';
 import {
@@ -20,8 +21,8 @@ import {
   selectCombinationId,
   refreshCombinationList
 } from '../../actions/combinationActions';
-import { SwipeListView } from 'react-native-swipe-list-view';
 import CombinationRow from '../../components/CombinationRow';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Combination extends React.Component {
 
@@ -101,19 +102,11 @@ class Combination extends React.Component {
     } else {
       return (
         <View style={styles.rowBack}>
-          <TouchableOpacity onPress = {() => {Alert.alert("share "+item.description);}}>
-            <Image
-              source={R.images.SHARE_ICON}
-              tintColor={'#525252'}
-              style={styles.rowBackButton}
-            />
+          <TouchableOpacity style={styles.touch} onPress = {() => {Alert.alert("share this combination");}}>
+            <Icon name='share-alt' size={40} color= '#525252' />
           </TouchableOpacity>
-          <TouchableOpacity onPress = {() => {this.showAlert(item)}}>
-            <Image
-              source={R.images.TRASH_CAN_ICON}
-              tintColor={'#525252'}
-              style={styles.rowBackButton}
-            />
+          <TouchableOpacity style={styles.touch} onPress = {() => {this.showAlert(item)}}>
+            <Icon name='trash' size={50} color= '#525252' />
           </TouchableOpacity>
         </View>
       );

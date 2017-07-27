@@ -20,5 +20,8 @@ export default styles = StyleSheet.create({
     height: 45,
     width: 45,
     marginRight: 13
+  },
+  touch:{
+    marginRight: 20
   }
 });

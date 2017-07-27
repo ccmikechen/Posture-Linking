@@ -46,10 +46,15 @@ export default styles = StyleSheet.create({
     paddingLeft: 10
   },
   submitContent:{
-    marginTop:20,
-    height:100,
+    marginTop: 20,
+    height: 100,
     alignItems:'center',
     justifyContent: 'center'
+  },
+  touch:{
+    height: 90,
+    width: 90,
+    alignItems:'center'
   },
   submit:{
     tintColor: R.colors.SUBMIT,

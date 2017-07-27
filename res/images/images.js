@@ -17,8 +17,6 @@ const images = {
   ],
   ADD_ICON: require('./icon/add.png'),
   CLOSE_ICON: require('./icon/close.png'),
-  TRASH_CAN_ICON: require('./icon/trashCan.png'),
-  SHARE_ICON: require('./icon/share.png'),
   OK_ICON: require('./icon/ok.png'),
   HORTRIGGER: require('./puzzle/horTrigger.png'),
   HORACTION: require('./puzzle/horAction.png'),

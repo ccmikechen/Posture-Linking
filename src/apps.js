@@ -14,7 +14,7 @@ export const startMainApp = () => {
     },
     drawer: {
     	left: {
-    		screen: 'SlideMenuScreen'
+    		screen: 'SideMenuScreen'
     	}
     }
   });

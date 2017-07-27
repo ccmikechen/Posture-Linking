@@ -20,7 +20,7 @@ import ServiceListScreen from './ServiceListScreen';
 import ServiceConnectScreen from './ServiceConnectScreen';
 import EditCombinationScreen from './EditCombinationScreen';
 import PostureDeviceScannerScreen from './PostureDeviceScannerScreen';
-import SlideMenuScreen from './SlideMenuScreen';
+import SideMenuScreen from './SideMenuScreen';
 import LoginScreen from './LoginScreen';
 import SignUpScreen from './SignUpScreen';
 
@@ -43,7 +43,7 @@ export function registerScreens() {
   Navigation.registerComponent('ServiceConnectScreen', () => ServiceConnectScreen, store, Provider);
   Navigation.registerComponent('EditCombinationScreen', () => EditCombinationScreen, store, Provider);
   Navigation.registerComponent('PostureDeviceScannerScreen', () => PostureDeviceScannerScreen, store, Provider);
-  Navigation.registerComponent('SlideMenuScreen', () => SlideMenuScreen, store, Provider);
+  Navigation.registerComponent('SideMenuScreen', () => SideMenuScreen, store, Provider);
   Navigation.registerComponent('LoginScreen', ()=> LoginScreen, store, Provider);
   Navigation.registerComponent('SignUpScreen', ()=> SignUpScreen, store, Provider);
 };

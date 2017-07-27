@@ -21,9 +21,10 @@ class ServiceListScreen extends React.Component {
 
   onNavigatorEvent(event) {
     if (event.id == 'sideMenu') {
-      this.props.navigator.setDrawerEnabled({
+      this.props.navigator.toggleDrawer({
         side: 'left',
-        enabled: true
+        animated: true,
+        to: 'open'
       });
     }
   }

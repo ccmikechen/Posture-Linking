@@ -8,7 +8,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 
-class SlideMenu extends React.Component {
+class SideMenu extends React.Component {
 
   constructor(props) {
     super(props);
@@ -85,7 +85,7 @@ class SlideMenu extends React.Component {
             <Text style={styles.username} >水母白</Text>
             <View style={styles.logoutView} >
               <Text style={styles.username} >s56238106@gmail.com</Text>
-              <TouchableOpacity onPress={() => alert('5566')} >
+              <TouchableOpacity onPress={() => alert('logout')} >
                 <Text style={styles.username} >登出</Text>
               </TouchableOpacity>
             </View>
@@ -117,4 +117,4 @@ class SlideMenu extends React.Component {
   }
 }
 
-export default SlideMenu;
+export default SideMenu;
