@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
   userImg:{
   	flex:3,
   	justifyContent: 'flex-end',
-  	paddingLeft: 15
+  	paddingLeft: 10
   },
   userText:{
   	flex:2,

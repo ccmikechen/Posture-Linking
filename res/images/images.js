@@ -15,8 +15,12 @@ const images = {
       { name: 'posture', icon: require('./serviceIcon/posture.png'), color: '#F47777' },
       { name: 'slide show', icon: require('./serviceIcon/briefing.png'), color: '#ab20a0' }
   ],
-  ADD_ICON: require('./icon/add.png'),
-  CLOSE_ICON: require('./icon/close.png'),
+  ADD_ANDROID: require('./icon/add@64.png'),
+  ADD_IOS: require('./icon/add@20.png'),
+  CLOSE_ANDROID: require('./icon/close@64.png'),
+  CLOSE_IOS: require('./icon/close@20.png'),
+  MENU_IOS: require('./icon/menu@20.png'),
+
   HORTRIGGER: require('./puzzle/horTrigger.png'),
   HORACTION: require('./puzzle/horAction.png'),
   VERTRIGGER: require('./puzzle/verTrigger.png'),
