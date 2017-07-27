@@ -31,10 +31,10 @@ class Combination extends React.Component {
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleShowEdit = this.handleShowEdit.bind(this);
-    this.goToAddCombination= this.goToAddCombination.bind(this);
+    this.goToAddCombination = this.goToAddCombination.bind(this);
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.props.updateCombinationList();
   }
 
@@ -133,7 +133,7 @@ class Combination extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.isGetCombinations ?
+        {!this.props.isGettingCombinations ? (
           this.props.combinations.length === 0 ?
             <View style= {styles.noCombination} >
               <TouchableOpacity style={styles.imgTouch} onPress={this.goToAddCombination} >
@@ -149,7 +149,7 @@ class Combination extends React.Component {
               stopLeftSwipe = {10}
               refreshControl={
                 <RefreshControl
-                  refreshing = {!this.props.isGetCombinations}
+                  refreshing = {this.props.isGettingCombinations}
                   onRefresh={this._onRefresh.bind(this)}
                 />
               }
@@ -159,7 +159,7 @@ class Combination extends React.Component {
               swipeRowStyle={{flex: 1}}
               recalculateHiddenLayout={true}
             />
-          :
+        ) :
             <ActivityIndicator
               animating={true}
               size='large'
@@ -173,7 +173,7 @@ class Combination extends React.Component {
 
 export default connect((state) => ({
   combinations: state.getIn(['combination', 'combinations']).toJS(),
-  isGetCombinations: state.getIn(['combination', 'isGetCombinations']),
+  isGettingCombinations: state.getIn(['combination', 'isGettingCombinations']),
   isChangeStatus : state.getIn(['combination', 'isChangeStatus'])
 }), {
   updateCombinationList,

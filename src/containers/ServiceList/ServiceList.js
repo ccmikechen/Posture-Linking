@@ -22,7 +22,7 @@ class ServiceList extends React.Component {
     super(props);
   };
 
-  componentWillMount () {
+  componentDidMount () {
     this.props.getServiceList();
   };
 
@@ -51,10 +51,10 @@ class ServiceList extends React.Component {
               size='large'
               color='grey'
             />
-         : 
-          <ServiceGrid 
-            serviceData={this.props.services} 
-            onOKPress={(data) => this.handlePress(data)} 
+         :
+          <ServiceGrid
+            serviceData={this.props.services}
+            onOKPress={(data) => this.handlePress(data)}
             onConnectPress={(data) => this.handlePress(data)} />
         }
       </View>
