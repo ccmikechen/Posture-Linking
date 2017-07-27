@@ -39,16 +39,17 @@ class TriggerSetting extends React.Component {
     if(event.options.length == 0) {
       return this.renderEmpty();
     }
-
+    let i = 0;
     return event.options.map(option=> {
       switch (option.type) {
         case 'option':
-          return this.renderOption(option);
+          return this.renderOption(option, i);
         case 'textarea':
-          return this.renderTextArea(option);
+          return this.renderTextArea(option, i);
         default:
           return this.renderEmpty();
       };
+        i = i+1;
     });
   };
 
@@ -63,17 +64,17 @@ class TriggerSetting extends React.Component {
     this.props.setSelectedOption(JSON.parse(data));
   }
 
-  renderOption(option) {
+  renderOption(option, i) {
     return(
       <View key={option.name} style={styles.optionContent}>
-        <Text style={styles.optionText}>{option.name}</Text>
+        <Text style={styles.optionText}>{R.strings.events[this.props.selectedEvent.id].options[i]}</Text>
         <View style={styles.optionView}>
           <Select
             width={250}
             ref={`SELECT:${option.name}`}
             optionListRef={this._getOptionList.bind(this)}
             onSelect={(value) => this.onSelectOption(value, option.name)}
-            defaultValue="請選擇時間"
+            defaultValue={R.strings.SELECT_TIME}
            >
             {option.options.map(ItemOption=>(
               <Option
@@ -89,10 +90,10 @@ class TriggerSetting extends React.Component {
     )
   };
 
-  renderTextArea(option) {
+  renderTextArea(option, i) {
     return (
       <View key={option.name}>
-        <Text style={styles.textArea}>{option.name}</Text>
+        <Text style={styles.textArea}>{R.strings.events[this.props.selectedEvent.id].options[i]}</Text>
         <TextInput
           style={styles.textInput}
           multiline = {true}
@@ -108,7 +109,7 @@ class TriggerSetting extends React.Component {
   renderEmpty() {
     return(
       <View key={1} style={styles.emptyView}>
-        <Text style={styles.emptyText}>無需做任何設定</Text>
+        <Text style={styles.emptyText}>{R.strings.NO_SETTING}</Text>
       </View>
     );
   }
@@ -116,7 +117,7 @@ class TriggerSetting extends React.Component {
   handleOK() {
     let data= {
       ...this.config,
-      text: this.props.selectedEvent.description
+      text: R.strings.events[this.props.selectedEvent.id].description
     };
 
     this.props.setTriggerConfig(data);
@@ -132,13 +133,13 @@ class TriggerSetting extends React.Component {
         {this.props.isGettingEvent ?
         <View style={styles.content}>
           <KeyboardAwareScrollView style={styles.KeyboardView} >
-            <Text style={styles.nameText} >{event.name}</Text>
-            <Text style={styles.descriptionText} >{event.description}</Text>
+            <Text style={styles.nameText} >{R.strings.services[this.props.triggerId]}</Text>
+            <Text style={styles.descriptionText} >{R.strings.events[event.id].description}</Text>
             {this.renderSetting(event)}
           </KeyboardAwareScrollView>
           <TouchableOpacity onPress={() => this.handleOK()}>
             <View style={styles.submit}>
-              <Text style={styles.submitText}>確認</Text>
+              <Text style={styles.submitText}>{R.strings.OK}</Text>
             </View>
           </TouchableOpacity>
         </View>

@@ -4,18 +4,17 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 const ServiceItem = ({ service, onConnectPress, onOKPress,size=100 }) => {
 	let item = {}, color = R.colors.DISABLE_BUTTON;
 	let handlePress = onConnectPress;
-
 	R.images.icon.forEach((data) => {
 		if(service.name == data.name){
 			item = data;
 		}
 	});
 
+
 	if (service.isConnected) {
 		color = item.color;
 		handlePress = onOKPress;
 	}
-
 	return (
     <TouchableOpacity onPress={handlePress}>
 			<View style={{
@@ -35,7 +34,7 @@ const ServiceItem = ({ service, onConnectPress, onOKPress,size=100 }) => {
 				}}>
 					<Image source={item.icon} style={{ width:size*0.6, height:size*0.6 }} />
 				</View>
-				<Text style={{ color: color, fontSize: size*0.12, fontWeight: 'bold', marginTop: 1.5}}>{item.name}</Text>
+				<Text style={{ color: color, fontSize: size*0.12, fontWeight: 'bold', marginTop: 1.5}}>{R.strings.services[service.id]}</Text>
 			</View>
 		</TouchableOpacity>
 	);

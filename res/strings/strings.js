@@ -15,7 +15,100 @@ const strings = {
     '3.將手機靠近智慧手環，並等待連接',
     '4.若經過一分鐘仍未掃描到裝置，請將智慧手環關閉，並將智慧鞋墊電池拔除後，返回步驟1繼續操作'
   ],
-  LOGOUT: 'logout'
+  LOGOUT: 'Logout',
+  LOGIN: 'Login',
+  SIGNUP: 'Sign Up',
+  USERNAME: 'User Name',
+  PASSWORD: 'Password',
+  CONFIRM_PASSWORD: 'Confirm Password',
+  EMAIL: 'Email Address',
+  OK: 'OK',
+  IF_USE: 'IF use',
+  THEN_USE: ',then use',
+  SELECT_TIME: 'Please select the time',
+  NO_SETTING: 'No settings are required',
+  IF_TEXT: 'IF ○○○',
+  THEN_TEXT: 'THEN ○○',
+  DETAILED_SETTING: 'Detailed settings',
+
+  services : {
+    1 : 'Button',
+    2 : 'Timer',
+    3 : 'LINE Messaging',
+    4 : 'Posture',
+    5 : 'Notification',
+    6 : 'LINE Notify',
+    7 : 'Sheet Music Turner',
+    8 : 'Smart Bulb',
+    9 : 'Slide Show',
+    10 : 'Camera'
+  },
+
+  //events
+  events: {
+    //trigger
+    1 : {
+      description : 'When button has been clicked',
+      options: []
+    },
+    2 : {
+      description : 'At every specific time',
+      options: ['time'],
+    },
+    3 : {
+      description : 'When a message has been received',
+      options: ['message']
+    },
+    15: {
+      description : 'When standing',
+      options: []
+    },
+  //action
+    4: {
+      description : 'Notify to smart phone',
+      options: ['message']
+    },
+    5: {
+      description : 'Notify to LINE',
+      options: ['message']
+    },
+    6: {
+      description : 'Turn to next page of sheet music',
+      options: ['']
+    },
+    7: {
+      description : 'Turn to previous page of sheet music',
+      options: ['']
+    },
+    8: {
+      description : 'Start from first page of sheet music',
+      options: ['']
+    },
+    9: {
+      description : 'Turn the smart bulb on',
+      options: ['']
+    },
+    10: {
+      description : 'Turn the smart bulb off',
+      options: ['']
+    },
+    11: {
+      description : 'Turn to next page of slide show',
+      options: ['']
+    },
+    12: {
+      description : 'Turn to previous page of slide show',
+      options: ['']
+    },
+    13: {
+      description : 'Start from first page of slide show',
+      options: ['']
+    },
+    14: {
+      description : '"Capture the photo"',
+      options: ['']
+    }
+  }
 };
 
 export default strings;

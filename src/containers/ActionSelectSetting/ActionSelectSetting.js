@@ -40,7 +40,7 @@ class ActionSelectSetting extends React.Component {
       <View key={event.id} style={styles.viewKey}>
         <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
           <View style={styles.button}>
-            <Text style={styles.text}>{event.description}</Text>
+            <Text style={styles.text}>{R.strings.events[event.id].description}</Text>
           </View>
         </TouchableOpacity>
       </View>

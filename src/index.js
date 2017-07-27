@@ -39,7 +39,7 @@ const loadBackgroundProcess = async () => {
   console.log('Loged in');
 
   await ServiceManager.loadServices();
-  console.log('Loaded services', ServiceManager.getServices());
+  console.log('Loaded services');
 
   await ServiceManager.loadServiceConfigs();
   console.log('Loaded service configs');
@@ -53,8 +53,8 @@ const loadBackgroundProcess = async () => {
   console.log('Initialized socket');
 };
 
-const startApp = () => {
-  loadBackgroundProcess().then(() => {
+const startApp = async () => {
+  return await loadBackgroundProcess().then(() => {
     startBleManager();
     startMainApp();
   });

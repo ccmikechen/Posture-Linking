@@ -23,10 +23,10 @@ class SignUp extends React.Component {
     this.props.createAccount({
       username: values.get('username'),
       password: values.get('password'),
-      nickname: values.get('nickname'),
+      nickname: values.get('username'),
       email: values.get('email'),
-      first_name: values.get('firstname'),
-      last_name: values.get('lastname'),
+      first_name: '',
+      last_name: '',
     })
   }
 
@@ -36,7 +36,7 @@ class SignUp extends React.Component {
         <ActivityIndicator
           animating={true}
           size='large'
-          color='fff'
+          color='#fff'
         />
       </View>
     );

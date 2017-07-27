@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
     justifyContent:'center',
     backgroundColor: '#616161',
     alignItems: 'center',
-    marginTop:80
+    marginTop:150
   },
   logoText: {
     color:"#fca7c3",

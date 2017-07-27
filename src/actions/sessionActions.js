@@ -19,16 +19,14 @@ export const UPDATE_IS_NOT_SIGNING_UP = 'UPDATE_IS_NOT_SIGNING_UP';
 export const UPDATE_UNAUTHENTICATED = 'UPDATE_UNAUTHENTICATED';
 
 export const createAccount = (data) => (dispatch) => {
-  console.log(data);
   dispatch({ type: UPDATE_IS_SIGNING_UP });
 
   api.createUser(data)
-  .then(token => {
-    dispatch({ type: UPDATE_AUTHENTICATED });
-    dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
-  })
   .then(() => {
-    startApp();
+    startApp().then(()=>{
+      dispatch({ type: UPDATE_AUTHENTICATED });
+      dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
+    })
   })
   .catch(error => {
     console.log(error)
@@ -37,18 +35,16 @@ export const createAccount = (data) => (dispatch) => {
 };
 
 export const login = (data) => (dispatch) => {
-  console.log(data);
   dispatch({ type: UPDATE_IS_LOGGING_IN });
 
   api.createSession({
     ...data
   })
-  .then(token => {
-    dispatch({ type: UPDATE_AUTHENTICATED });
-    dispatch({ type: UPDATE_IS_NOT_LOGGING_IN });
-  })
   .then(()=> {
-    startApp();
+    startApp().then(() => {
+      dispatch({ type: UPDATE_AUTHENTICATED });
+      dispatch({ type: UPDATE_IS_NOT_LOGGING_IN });
+    })
   })
   .catch(error => {
     dispatch({ type: LOGIN_FAILED, error });
