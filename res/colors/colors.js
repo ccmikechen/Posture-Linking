@@ -19,6 +19,7 @@ const colors = {
 	PUZZLE_BACK: '#BEBEBE',
 	COMBINATION_ROW: 'white',
 	COMBINATION_ROWBACK: 'lightgrey',
+	ROWBACK_BUTTON: '#525252',
 
 //addcombination setting button
 	DISABLE_BUTTON: '#969696',

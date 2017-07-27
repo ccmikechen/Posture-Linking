@@ -6,6 +6,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import DeviceInfo from 'react-native-device-info';
+
 import styles from './styles';
 
 class SideMenu extends React.Component {
@@ -74,9 +76,9 @@ class SideMenu extends React.Component {
   }
 
   render() {
+    //console.log(DeviceInfo.getVersion());
     return (
       <View style={styles.container}>
-
         <View style={styles.userView} >
           <View style={styles.userImg} >
             <Icon name='person' size={70} color={R.colors.USER_IMG} />
@@ -111,7 +113,11 @@ class SideMenu extends React.Component {
               <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
             </View>
           </TouchableOpacity>
+            
         </View>
+          <View style={styles.version}>
+            <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}</Text>
+          </View>
       </View>
     );
   }

@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   userView:{
-  	flex:2,
+  	flex:6,
   	flexDirection: 'column',
   	justifyContent: 'center',
   	borderBottomWidth: 1,
@@ -35,7 +35,7 @@ export default styles = StyleSheet.create({
   	color: R.colors.USER_TEXT
   },
   content:{
-  	flex:5,
+  	flex:15,
   	flexDirection: 'column',
   	backgroundColor: R.colors.MENU_BACKGROUND
   },
@@ -50,5 +50,14 @@ export default styles = StyleSheet.create({
   itemsText:{
   	marginLeft: 10,
   	fontSize: 16
+  },
+  version:{
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 10,
+    backgroundColor: R.colors.MENU_BACKGROUND
+  },
+  versionText:{
+    fontSize:14
   }
 });

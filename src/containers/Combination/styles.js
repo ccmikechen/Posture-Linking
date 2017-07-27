@@ -23,5 +23,19 @@ export default styles = StyleSheet.create({
   },
   touch:{
     marginRight: 20
+  },
+  noCombination:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: R.colors.CONTAINER_BACKGROUND,
+  },
+  imgTouch:{
+    height: 200,
+    width: 155,
+    alignItems: 'center'
+  },
+  text:{
+    fontSize: 16
   }
 });

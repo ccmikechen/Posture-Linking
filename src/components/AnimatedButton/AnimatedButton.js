@@ -28,7 +28,7 @@ class AnimatedButton extends React.Component {
       this.state.progress,
       {
         toValue: 150,
-        duration: 10000
+        duration: 1000
       }
     );
   }

@@ -9,7 +9,8 @@ const strings = {
   AUTHORIZING_SUCCESSED: '認證成功',
   SCANNING_DEVICE_TITLE: '裝置掃描',
   SCANNING_POSTURE_DEVICE_TITLE: '正在找尋附近的Posture Linking智慧手環',
-  LOGOUT: '登出'
+  LOGOUT: '登出',
+  VERSION: '版本'
 };
 
 export default strings;
