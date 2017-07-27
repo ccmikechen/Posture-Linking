@@ -19,6 +19,8 @@ export const UPDATE_IS_NOT_SIGNING_UP = 'UPDATE_IS_NOT_SIGNING_UP';
 export const UPDATE_UNAUTHENTICATED = 'UPDATE_UNAUTHENTICATED';
 export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 export const IS_SIGN_UP_FAILD = 'IS_SIGN_UP_FAILD';
+export const IS_LOGGING_OUT = 'IS_LOGGING_OUT';
+export const IS_NOT_LOGGING_OUT = 'IS_NOT_LOGGING_OUT';
 
 export const createAccount = (data) => (dispatch) => {
   dispatch({ type: UPDATE_IS_SIGNING_UP });
@@ -56,11 +58,13 @@ export const login = (data) => (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
+  dispatch({ type: IS_LOGGING_OUT });
   await CombinationManager.unloadAllCombinations();
   await ServiceManager.clearAllService();
   await api.destroySession()
   .then(response => {
     dispatch({ type: UPDATE_UNAUTHENTICATED });
+    dispatch({ type: IS_NOT_LOGGING_OUT });
     startLoginApp();
   });
 };

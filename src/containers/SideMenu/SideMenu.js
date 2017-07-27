@@ -3,7 +3,8 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/sessionActions';
@@ -18,6 +19,7 @@ class SideMenu extends React.Component {
   constructor(props) {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   closeDrawer() {
@@ -78,55 +80,72 @@ class SideMenu extends React.Component {
     };
   }
 
+  handleLogout() {
+    this.props.logout()
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.userView} >
-          <View style={styles.userImg} >
-            <Icon name='person' size={70} color={R.colors.USER_IMG} />
+      <View  style={styles.container}>
+        {this.props.isLoggingOut ? 
+         ( <View style={styles.cover}>
+            <ActivityIndicator
+              style={{marginTop:400}}
+              animating={true}
+              size='large'
+              color='#ffffff'
+            />
           </View>
-          <View style={styles.userText} >
-            <Text style={styles.username} >使用者</Text>
-            <View style={styles.logoutView} >
-              <Text style={styles.username} >hello@gmail.com</Text>
-              <TouchableOpacity onPress={() => this.props.logout()} >
-                <Text style={styles.username} >{R.strings.LOGOUT}</Text>
-              </TouchableOpacity>
+         )
+        : 
+        <View style={{flex:1}}> 
+          <View style={styles.userView} >
+            <View style={styles.userImg} >
+              <Icon name='person' size={70} color={R.colors.USER_IMG} />
+            </View>
+            <View style={styles.userText} >
+              <Text style={styles.username} >使用者</Text>
+              <View style={styles.logoutView} >
+                <Text style={styles.username} >hello@gmail.com</Text>
+                <TouchableOpacity onPress={this.handleLogout} >
+                  <Text style={styles.username} >{R.strings.LOGOUT}</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.content} >
-          <TouchableOpacity onPress={this.handleButtonPress('combination')}>
-            <View style={styles.items}>
-              <Icon name='extension' size={40} color={R.colors.ITEMS_ICON} />
-              <Text style={styles.itemsText}>{R.strings.COMBINATION_TITLE}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
-            <View style={styles.items}>
-              <Icon name='touch-app' size={40} color={R.colors.ITEMS_ICON} />
-              <Text style={styles.itemsText}>{R.strings.BUTTON_LIST_TITLE}</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
-            <View style={styles.items}>
-              <Icon name='room-service' size={40} color={R.colors.ITEMS_ICON} />
-              <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
-            </View>
-          </TouchableOpacity>
-            
-        </View>
+          <View style={styles.content} >
+            <TouchableOpacity onPress={this.handleButtonPress('combination')}>
+              <View style={styles.items}>
+                <Icon name='extension' size={40} color={R.colors.ITEMS_ICON} />
+                <Text style={styles.itemsText}>{R.strings.COMBINATION_TITLE}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
+              <View style={styles.items}>
+                <Icon name='touch-app' size={40} color={R.colors.ITEMS_ICON} />
+                <Text style={styles.itemsText}>{R.strings.BUTTON_LIST_TITLE}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
+              <View style={styles.items}>
+                <Icon name='room-service' size={40} color={R.colors.ITEMS_ICON} />
+                <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
           <View style={styles.version}>
             <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}</Text>
-          </View>
+          </View> 
+         </View>
+        }
       </View>
     );
   }
 }
 
 export default connect((state) => ({
-  
+  isLoggingOut: state.getIn(['session', 'isLoggingOut']),
 }), {
   logout
 })(SideMenu);

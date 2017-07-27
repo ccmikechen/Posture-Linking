@@ -59,5 +59,14 @@ export default styles = StyleSheet.create({
   },
   versionText:{
     fontSize:14
+	},
+	cover: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });

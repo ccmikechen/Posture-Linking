@@ -23,6 +23,7 @@ const InitialState = Immutable.fromJS({
   isSigningUp: false,
   signUpError: {},
   isSignUpFaild: false,
+  isLoggingOut: false,
 });
 
 const session = handleActions({
@@ -71,7 +72,13 @@ const session = handleActions({
   ),
   IS_SIGN_UP_FAILD: (state) => (
     state.set('isSignUpFaild', true)
-  )
+  ),
+  IS_LOGGING_OUT: (state) => (
+    state.set('isLoggingOut', true)
+  ),
+  IS_NOT_LOGGING_OUT: (state) => (
+    state.set('isLoggingOut', false)
+  ),
 }, InitialState);
 
 export default session;
