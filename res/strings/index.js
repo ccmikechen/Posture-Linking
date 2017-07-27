@@ -9,7 +9,7 @@ const getLocalizedStrings = () => {
   console.log(deviceLocale);
   switch (deviceLocale) {
   case 'en-US':
-    return enUSStrings;
+//    return enUSStrings;
   case 'zh-TW':
     return zhTWStrings;
   case 'zh-Hant-TW':

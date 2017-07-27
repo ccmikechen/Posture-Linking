@@ -4,6 +4,20 @@ import {
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './screens';
 
+Navigation._isMainScreen = false;
+
+Navigation.isMainScreen = () => {
+  return this._isMainScreen;
+};
+
+Navigation.setIsMainScreen = () => {
+  this._isMainScreen = true;
+};
+
+Navigation.setIsNotMainScreen = () => {
+  this._isMainScreen = false;
+};
+
 registerScreens();
 
 export const startMainApp = () => {

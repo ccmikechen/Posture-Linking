@@ -39,8 +39,10 @@ class ActionList extends React.Component {
 
   handleOK(id) {
     this.props.setActionId(id);
-    this.props.navigator.dismissModal({
-      animationType: 'slide-down'
+    this.props.navigator.push({
+      screen: 'ActionSelectConfigScreen',
+      title: '',
+      animated: false
     });
   }
 
