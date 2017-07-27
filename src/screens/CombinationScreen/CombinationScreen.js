@@ -19,9 +19,11 @@ class CombinationScreen extends React.Component {
           buttonFontSize: 12
         }
     ],
-    leftButtons:[{
-      id: 'sideMenu'
-    }]
+    leftButtons:[
+      {
+        id: 'sideMenu',
+      }
+    ]
   };
 
   onNavigatorEvent(event) {

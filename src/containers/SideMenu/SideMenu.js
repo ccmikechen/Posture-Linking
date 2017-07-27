@@ -5,6 +5,9 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/sessionActions';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DeviceInfo from 'react-native-device-info';
 
@@ -32,6 +35,7 @@ class SideMenu extends React.Component {
 
   handleButtonPress(type) {
     return () => {
+      console.log(type)
       switch (type) {
         case 'scan':
           this.toScreen({
@@ -76,7 +80,6 @@ class SideMenu extends React.Component {
   }
 
   render() {
-    //console.log(DeviceInfo.getVersion());
     return (
       <View style={styles.container}>
         <View style={styles.userView} >
@@ -87,7 +90,7 @@ class SideMenu extends React.Component {
             <Text style={styles.username} >水母白</Text>
             <View style={styles.logoutView} >
               <Text style={styles.username} >s56238106@gmail.com</Text>
-              <TouchableOpacity onPress={() => alert('logout')} >
+              <TouchableOpacity onPress={() => this.props.logout()} >
                 <Text style={styles.username} >登出</Text>
               </TouchableOpacity>
             </View>
@@ -123,4 +126,8 @@ class SideMenu extends React.Component {
   }
 }
 
-export default SideMenu;
+export default connect((state) => ({
+  
+}), {
+  logout
+})(SideMenu);
