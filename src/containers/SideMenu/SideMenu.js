@@ -86,10 +86,10 @@ class SideMenu extends React.Component {
           <View style={styles.userImg} >
             <Icon name='person' size={70} color={R.colors.USER_IMG} />
           </View>
-          <View style={styles.userText} >
-            <Text style={styles.username} >使用者</Text>
-            <View style={styles.logoutView} >
-              <Text style={styles.username} >hello@gmail.com</Text>
+          <View style={styles.userText}>
+            <Text style={styles.username}>使用者</Text>
+            <View style={styles.logoutView}>
+              <Text style={styles.username}>hello@gmail.com</Text>
               <TouchableOpacity onPress={() => this.props.logout()} >
                 <Text style={styles.username} >{R.strings.LOGOUT}</Text>
               </TouchableOpacity>
