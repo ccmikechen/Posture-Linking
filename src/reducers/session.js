@@ -14,7 +14,7 @@ const InitialState = Immutable.fromJS({
     phoneNumber: '',
     firstName: '',
     lastName: '',
-    nikeName: '',
+    nickName: '',
     image: '',
     id: null,
     email: '',
@@ -53,7 +53,7 @@ const session = handleActions({
       .setIn(['user', 'username'], '')
       .setIn(['user', 'sex'], '')
       .setIn(['user', 'phoneNumber'], '')
-      .setIn(['user', 'nikeName'], '')
+      .setIn(['user', 'nickName'], '')
       .setIn(['user', 'firstName'], '')
       .setIn(['user', 'lastName'], '')
       .setIn(['user', 'image'], '')
@@ -79,6 +79,18 @@ const session = handleActions({
   IS_NOT_LOGGING_OUT: (state) => (
     state.set('isLoggingOut', false)
   ),
+  GET_USER_INFO : (state, { data }) => (
+    state.setIn(['user', 'username'], data.username)
+      .setIn(['user', 'sex'], data.sex)
+      .setIn(['user', 'phoneNumber'], data.phonenumber)
+      .setIn(['user', 'nickName'], data.nickname)
+      .setIn(['user', 'firstName'], data.firstname)
+      .setIn(['user', 'lastName'], data.lastname)
+      .setIn(['user', 'image'], data.image)
+      .setIn(['user', 'id'], data.id)
+      .setIn(['user', 'email'], data.email)
+      .setIn(['user', 'birthday'], data.birthday)
+  )
 }, InitialState);
 
 export default session;

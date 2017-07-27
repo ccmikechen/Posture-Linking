@@ -21,6 +21,7 @@ export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 export const IS_SIGN_UP_FAILD = 'IS_SIGN_UP_FAILD';
 export const IS_LOGGING_OUT = 'IS_LOGGING_OUT';
 export const IS_NOT_LOGGING_OUT = 'IS_NOT_LOGGING_OUT';
+export const GET_USER_INFO = 'GET_USER_INFO';
 
 export const createAccount = (data) => (dispatch) => {
   dispatch({ type: UPDATE_IS_SIGNING_UP });
@@ -81,4 +82,14 @@ export const updatePassword = (password) => (dispatch) => {
     type: UPDATE_PASSWORD,
     password
   });
+};
+
+export const getUserInfo = () => (dispatch) => {
+  return api.getCurrentUser()
+    .then(data => (
+      dispatch({ type: GET_USER_INFO, data })
+    ))
+    .then(data => {
+      console.log(data)
+    });
 };

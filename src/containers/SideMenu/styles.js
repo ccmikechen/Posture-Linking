@@ -29,13 +29,17 @@ export default styles = StyleSheet.create({
   	flex:1,
   	flexDirection: 'row',
   	justifyContent: 'space-between',
+	},
+	nickname:{
+  	fontSize: 16,
+  	color: R.colors.USER_TEXT
   },
   username:{
   	fontSize: 14,
   	color: R.colors.USER_TEXT
   },
   content:{
-  	flex:15,
+  	flex:14,
   	flexDirection: 'column',
   	backgroundColor: R.colors.MENU_BACKGROUND
   },

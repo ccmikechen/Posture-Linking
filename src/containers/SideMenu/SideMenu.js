@@ -7,7 +7,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/sessionActions';
+import { logout, getUserInfo } from '../../actions/sessionActions';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DeviceInfo from 'react-native-device-info';
@@ -20,6 +20,10 @@ class SideMenu extends React.Component {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.getUserInfo();
   }
 
   closeDrawer() {
@@ -85,6 +89,7 @@ class SideMenu extends React.Component {
   }
 
   render() {
+    let user = this.props.user;
     return (
       <View  style={styles.container}>
         {this.props.isLoggingOut ? 
@@ -104,9 +109,10 @@ class SideMenu extends React.Component {
               <Icon name='person' size={70} color={R.colors.USER_IMG} />
             </View>
             <View style={styles.userText} >
-              <Text style={styles.username} >使用者</Text>
+              <Text style={styles.nickname} >{user.nickName}</Text>
+              <Text style={styles.username} >@{user.username}</Text>
               <View style={styles.logoutView} >
-                <Text style={styles.username} >hello@gmail.com</Text>
+                <Text style={styles.username} >{user.email}</Text>
                 <TouchableOpacity onPress={this.handleLogout} >
                   <Text style={styles.username} >{R.strings.LOGOUT}</Text>
                 </TouchableOpacity>
@@ -146,6 +152,8 @@ class SideMenu extends React.Component {
 
 export default connect((state) => ({
   isLoggingOut: state.getIn(['session', 'isLoggingOut']),
+  user: state.getIn(['session', 'user']).toJS(),
 }), {
-  logout
+  logout,
+  getUserInfo
 })(SideMenu);
