@@ -10,18 +10,28 @@ class CombinationScreen extends React.Component {
         {
           title:'+',
           id: 'add',
+          icon: R.images.ADD_IOS
         }
       :
         {
           title:'add',
           id: 'add',
-          icon: R.images.ADD_ICON,
+          icon: R.images.ADD_ANDROID,
           buttonFontSize: 12
         }
     ],
-    leftButtons:[{
-      id: 'sideMenu'
-    }]
+    leftButtons:[
+      Platform.OS === 'ios' ? 
+        {
+          title:'menu',
+          id: 'sideMenu',
+          icon: R.images.MENU_IOS
+        }
+      :
+        {
+          id: 'sideMenu'
+        }
+    ]
   };
 
   onNavigatorEvent(event) {

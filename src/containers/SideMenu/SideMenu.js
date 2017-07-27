@@ -76,7 +76,6 @@ class SideMenu extends React.Component {
   }
 
   render() {
-    //console.log(DeviceInfo.getVersion());
     return (
       <View style={styles.container}>
         <View style={styles.userView} >
@@ -84,9 +83,9 @@ class SideMenu extends React.Component {
             <Icon name='person' size={70} color={R.colors.USER_IMG} />
           </View>
           <View style={styles.userText} >
-            <Text style={styles.username} >水母白</Text>
+            <Text style={styles.username} >使用者</Text>
             <View style={styles.logoutView} >
-              <Text style={styles.username} >s56238106@gmail.com</Text>
+              <Text style={styles.username} >hello@gmail.com</Text>
               <TouchableOpacity onPress={() => alert('logout')} >
                 <Text style={styles.username} >登出</Text>
               </TouchableOpacity>
