@@ -23,7 +23,6 @@ class CombinationScreen extends React.Component {
     leftButtons:[
       Platform.OS === 'ios' ? 
         {
-          title:'menu',
           id: 'sideMenu',
           icon: R.images.MENU_IOS
         }
@@ -33,16 +32,6 @@ class CombinationScreen extends React.Component {
         }
     ]
   };
-
-  onNavigatorEvent(event) {
-    if (event.id == 'sideMenu') {
-      this.props.navigator.toggleDrawer({
-        side: 'left',
-        animated: true,
-        to: 'open'
-      });
-    }
-  }
 
   static navigatorStyle = {
     navBarRightButtonFontSize: 30,
@@ -80,13 +69,21 @@ class CombinationScreen extends React.Component {
       if (event.id == 'add') {
         this.props.navigator.showModal({
           screen:'AddCombinationScreen',
-          title:'新增組合',
+          title: R.strings.ADD_COMBINATION,
           passProps: {},
           animated:true,
           animationType: 'slide-up'
         });
       }
+      if (event.id == 'sideMenu') {
+        this.props.navigator.toggleDrawer({
+          side: 'left',
+          animated: true,
+          to: 'open'
+        });
+      }
     }
+
   }
 
   render() {

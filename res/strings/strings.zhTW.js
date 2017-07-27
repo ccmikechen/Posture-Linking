@@ -25,7 +25,7 @@ const strings = {
   IF_TEXT: '如果 ○○○',
   THEN_TEXT: '則 ○○',
   DETAILED_SETTING: '詳細設定',
-
+  ADD_COMBINATION : '新增組合',
   services : {
     1 : '按鈕',
     2 : '定時',

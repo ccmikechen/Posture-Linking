@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonList from '../../containers/ButtonList';
+import { BackHandler, Platform } from 'react-native';
 
 class ButtonListScreen extends React.Component {
   constructor(props) {
@@ -14,9 +15,17 @@ class ButtonListScreen extends React.Component {
   }
 
   static navigatorButtons = {
-    leftButtons:[{
-      id: 'sideMenu'
-    }]
+    leftButtons:[
+      Platform.OS === 'ios' ? 
+        {
+          id: 'sideMenu',
+          icon: R.images.MENU_IOS
+        }
+      :
+        {
+          id: 'sideMenu'
+        }
+    ]
   }
 
   onNavigatorEvent(event) {
