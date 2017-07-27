@@ -91,7 +91,7 @@ class SideMenu extends React.Component {
             <View style={styles.logoutView} >
               <Text style={styles.username} >s56238106@gmail.com</Text>
               <TouchableOpacity onPress={() => this.props.logout()} >
-                <Text style={styles.username} >登出</Text>
+                <Text style={styles.username} >{R.strings.LOGOUT}</Text>
               </TouchableOpacity>
             </View>
           </View>
