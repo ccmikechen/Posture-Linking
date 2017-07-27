@@ -20,6 +20,7 @@ const colors = {
 	COMBINATION_ROW: 'white',
 	COMBINATION_ROWBACK: 'lightgrey',
 	ROWBACK_BUTTON: '#525252',
+	NO_CONBINATION: '#B6B6B6',
 
 //addcombination setting button
 	DISABLE_BUTTON: '#969696',

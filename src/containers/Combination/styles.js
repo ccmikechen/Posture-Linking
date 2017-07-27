@@ -36,6 +36,8 @@ export default styles = StyleSheet.create({
     alignItems: 'center'
   },
   text:{
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: R.colors.NO_CONBINATION
   }
 });

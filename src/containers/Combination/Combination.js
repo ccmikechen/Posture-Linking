@@ -137,7 +137,7 @@ class Combination extends React.Component {
           this.props.combinations.length === 0 ?
             <View style= {styles.noCombination} >
               <TouchableOpacity style={styles.imgTouch} onPress={this.goToAddCombination} >
-                <ViewIcon name= 'touch-app' size= {150} color= {R.colors.COMBINATION_ROWBACK} />
+                <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
                 <Text style={styles.text} >點擊這裡</Text>
                 <Text style={styles.text} >新增組合</Text>
               </TouchableOpacity>
