@@ -40,12 +40,12 @@ class TriggerList extends React.Component {
 
   handleOK(id) {
     this.props.setTriggerId(id);
-    this.props.navigator.dismissModal({
-      screen: 'AddCombinationScreen',
-      title: 'AddCombination',
+    this.props.navigator.push({
+      screen: 'TriggerSelectConfigScreen',
+      title: '',
       passProps: {},
       navigatorStyle: {},
-      animationType: 'slide-down'
+      animated: false
     });
   }
 

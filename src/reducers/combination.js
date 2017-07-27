@@ -7,7 +7,7 @@ const InitialState = Immutable.fromJS({
   triggers: [],
   isGetActions: false,
   isGetTriggers: false,
-  isGetCombinations: false,
+  isGettingCombinations: false,
   triggerId: '',
   actionId: '',
   description: '',
@@ -22,7 +22,7 @@ const InitialState = Immutable.fromJS({
   selectedOption:[],
   isGetTriggerConfig: false,
   isGetActionConfig: false,
-  selectedCombinationId: '',
+  selectedCombinationId: ''
 });
 
 const combination = handleActions({
@@ -56,10 +56,10 @@ const combination = handleActions({
     state.set('isGetTriggers', false)
   ),
   IS_GETTING_COMBINATION_LIST: (state) => (
-    state.set('isGetCombinations', true)
+    state.set('isGettingCombinations', true)
   ),
   IS_NOT_GETTING_COMBINATION_LIST: (state) => (
-    state.set('isGetCombinations', false)
+    state.set('isGettingCombinations', false)
   ),
   GET_TRIGGER_ID: (state, { id }) => (
     state.set('triggerId', id)

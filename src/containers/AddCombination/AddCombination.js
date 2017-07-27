@@ -73,22 +73,22 @@ class AddCombination extends React.Component {
   }
 
   handelTrigger() {
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'TriggerListScreen',
       title: 'Trigger',
       passProps: {},
       navigatorStyle: {},
-      animationType: 'slide-up'
+      animated: false
     });
   }
 
   handelAction() {
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'ActionListScreen',
       title: 'Action',
       passProps: {},
       navigatorStyle: {},
-      animationType: 'slide-up'
+      animated: false
     });
   }
 

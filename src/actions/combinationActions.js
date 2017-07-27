@@ -61,13 +61,14 @@ export const refreshCombinationList = () => async (dispatch) => {
         name: ServiceManager.getServiceById(combination.action.serviceId).name,
         config: combination.action.config
       }
-    }
+    };
   });
   dispatch({ type: UPDATE_COMBINATION_LIST, data });
 };
 
 export const updateCombinationList = () => (dispatch) => {
-  dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
+  dispatch({ type: IS_GETTING_COMBINATION_LIST});
+
   let combinations = CombinationManager.getCombinations();
   let data = combinations.map((combination) => {
     return {
@@ -89,15 +90,15 @@ export const updateCombinationList = () => (dispatch) => {
     }
   });
   dispatch({ type: UPDATE_COMBINATION_LIST, data });
-  dispatch({ type: IS_GETTING_COMBINATION_LIST});
-};
-
-export const notUpdateCombinationList = () => (dispatch) => {
   dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
 };
 
-export const isUpdateCombinationList = () => (dispatch) => {
+export const notUpdateCombinationList = () => (dispatch) => {
   dispatch({ type: IS_GETTING_COMBINATION_LIST});
+};
+
+export const isUpdateCombinationList = () => (dispatch) => {
+  dispatch({ type: IS_NOT_GETTING_COMBINATION_LIST});
 };
 
 export const getActionList = () => (dispatch) => {

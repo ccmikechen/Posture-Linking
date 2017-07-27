@@ -3,6 +3,8 @@ import { BackHandler, Platform } from 'react-native';
 
 import Combination from '../../containers/Combination';
 
+let isInMainScreen = false;
+
 class CombinationScreen extends React.Component {
   static navigatorButtons = {
     rightButtons:[
@@ -35,7 +37,7 @@ class CombinationScreen extends React.Component {
   }
 
   static navigatorStyle = {
-    navBarRightButtonFontSize: 30,
+    navBarRightButtonFontSize: 30
   };
 
   constructor(props) {
@@ -52,10 +54,20 @@ class CombinationScreen extends React.Component {
   }
 
   componentWillMount() {
+    isInMainScreen = true;
+
     BackHandler.addEventListener('hardwareBackPress', this.goToMainScreen);
   }
 
+  componentWillUnmount() {
+//    isInMainScreen = false;
+  }
+
   goToMainScreen() {
+    if (isInMainScreen) {
+      return false;
+    }
+
     this.props.navigator.resetTo({
       screen: 'CombinationScreen',
       title: R.strings.COMBINATION_TITLE,

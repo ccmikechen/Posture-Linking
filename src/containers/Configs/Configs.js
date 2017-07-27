@@ -18,23 +18,23 @@ class Configs extends React.Component {
   }
 
   handleTrigger() {
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'TriggerListScreen',
       title: 'Trigger',
       passProps: {},
       navigatorStyle: {},
-      animationType: 'slide-up'
+      animated: false
     });
   }
 
   handleAction() {
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'ActionListScreen',
       title: 'Action',
       passProps: {},
       navigatorStyle: {
       },
-      animationType: 'slide-up'
+      animated: false
     });
   }
 
