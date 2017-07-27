@@ -108,7 +108,7 @@ class ServiceConnect extends React.Component {
             />
           </View>
         :
-          service.isConnected ?
+         service.isConnected ?
           this.renderDisconnect(service)
           :
           this.renderConnect(service)

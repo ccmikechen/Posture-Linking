@@ -75,8 +75,7 @@ class Combination extends React.Component {
       screen:'EditCombinationScreen',
       title:'編輯組合',
       passProps: {},
-      animated:true,
-      animationType: 'slide-up'
+      animated: false
     });
   }
 
@@ -105,7 +104,7 @@ class Combination extends React.Component {
           <TouchableOpacity style={styles.touch} onPress = {() => {Alert.alert("目前尚未開放分享功能");}}>
             <Icon name='share-alt' size={40} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.touch} onPress = {() => {this.showAlert(item)}}>
+          <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>
             <Icon name='trash' size={50} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
         </View>
@@ -122,11 +121,10 @@ class Combination extends React.Component {
 
   goToAddCombination() {
     this.props.navigator.showModal({
-      screen:'AddCombinationScreen',
-      title:'新增組合',
+      screen: 'AddCombinationScreen',
+      title: '新增組合',
       passProps: {},
-      animated:true,
-      animationType: 'slide-up'
+      animated: false
     });
   }
 

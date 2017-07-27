@@ -15,13 +15,6 @@ const startBleManager = () => {
   BleManager.start({showAlert: false, allowDuplicates: false});
 };
 
-/*
-const defaultUser = {
-  username: 'testuser',
-  password: 'aaaaaaaa'
-};
-*/
-
 const login = () => {
   return new Promise((resolve, reject) => {
     api.refreshSession()
