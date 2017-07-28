@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 10,
     borderWidth: 1,
-    height: 40,
+    height: 50,
     width:250,
     opacity: 0.8
   },

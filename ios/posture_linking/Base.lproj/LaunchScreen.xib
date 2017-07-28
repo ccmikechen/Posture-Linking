@@ -12,40 +12,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="466" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="466" height="489"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posture-linking-red@128.png" translatesAutoresizingMaskIntoConstraints="NO" id="VGM-5J-64i">
-                    <rect key="frame" x="173" y="180" width="120" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="120" id="hqc-I8-M4V"/>
-                        <constraint firstAttribute="height" constant="120" id="xF3-Np-fvk"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="launch_screen" highlightedImage="launch_screen" translatesAutoresizingMaskIntoConstraints="NO" id="Fb0-wi-Bqk">
+                    <rect key="frame" x="136" y="79" width="194" height="331"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posture Linking" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNF-5I-wuH">
-                    <rect key="frame" x="144.5" y="102" width="177.5" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="6MV-7h-rBI"/>
-                        <constraint firstAttribute="width" constant="177.5" id="G18-Vz-R0R"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                    <color key="textColor" red="0.92549020049999997" green="0.23529411850000001" blue="0.1019607857" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="TNF-5I-wuH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GQ4-JQ-qfV"/>
-                <constraint firstItem="VGM-5J-64i" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Oht-v0-8IJ"/>
-                <constraint firstItem="TNF-5I-wuH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="102" id="fnC-Ot-Bb3"/>
-                <constraint firstItem="VGM-5J-64i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lH9-aJ-LYl"/>
+                <constraint firstItem="Fb0-wi-Bqk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5fR-tP-Wk1"/>
+                <constraint firstItem="Fb0-wi-Bqk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fwT-fo-NPF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="541" y="455"/>
+            <point key="canvasLocation" x="541" y="459.5"/>
         </view>
     </objects>
     <resources>
-        <image name="posture-linking-red@128.png" width="128" height="128"/>
+        <image name="launch_screen" width="451" height="801"/>
     </resources>
 </document>
