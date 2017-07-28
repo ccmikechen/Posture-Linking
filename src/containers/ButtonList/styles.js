@@ -38,5 +38,8 @@ export default styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: R.colors.NO_CONBINATION
+  },
+  description:{
+    fontSize: 18
   }
 });

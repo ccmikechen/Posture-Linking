@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   View,
   Text,
+  Image,
   ListView,
   ActivityIndicator,
   TouchableOpacity,
@@ -57,15 +58,44 @@ class ServiceConnect extends React.Component {
   }
 
   renderConnect(service) {
+    let buttonColor, buttonText, icon={};
+
+    R.images.icon.forEach((data) => {
+      if(data.name ==  service.name){
+        icon = data;
+      }
+    });
+    if(service.isConnected) {
+      buttonColor = '#e64055';
+      buttonText = '認證解除';
+      description = R.strings.SERVICE_DISCONNECT_DIRECTION;
+    }else {
+      buttonColor = '#47cf95';
+      buttonText = '認證授權';
+      description = R.strings.SERVICE_CONNECT_DIRECTION;
+    }
+
     return(
-    <View>
-        <Text style={{fontSize:26, textAlign:'center'}}>{service.name}</Text>
-        <TouchableOpacity onPress={() => this.handleConnect(service)}>
-          <View style={{margin:20, backgroundColor:'#47cf95', height:50}}>
-            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold', color:'#fff'}}>認證授權</Text>
+      <View style={styles.content}>
+        <View style={[styles.imgView, {backgroundColor: icon.color}]}>
+          <View style={[styles.imgBackground, {backgroundColor: icon.color}]}>
+            <Image style={styles.img} source={icon.icon} />
           </View>
-        </TouchableOpacity>
-     </View>
+        </View>
+        <View style={styles.description}>
+          <Text style={styles.descriptionText} >{description}</Text>
+          <TouchableOpacity style={styles.touch} onPress={() => {
+            service.isConnected?
+            this.handleDisconnect(service)
+            :
+            this.handleConnect(service)
+          }}>
+            <View style={[styles.submitView, {backgroundColor: buttonColor}]}>
+              <Text style={styles.submitText}>{buttonText}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   };
 
@@ -74,19 +104,6 @@ class ServiceConnect extends React.Component {
       .then(() => {
         this.props.navigator.pop();
       });
-  };
-
-  renderDisconnect(service) {
-    return (
-      <View>
-        <Text style={{fontSize:26, textAlign:'center'}}>{service.name}</Text>
-        <TouchableOpacity onPress={() => this.handleDisconnect()}>
-          <View style={{margin:20, backgroundColor:'#e64055', height:50}}>
-            <Text style={{alignItems: 'center', marginTop: 13, fontSize: 20, textAlign: 'center', fontWeight:'bold', color:'#fff'}}>認證解除</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
   };
 
   render() {
@@ -98,7 +115,7 @@ class ServiceConnect extends React.Component {
     }, null);
 
     return (
-      <View style={{flex:1 , backgroundColor:'#fff'}}>
+      <View style={styles.container}>
         {this.props.isAuthorizing ?
           <View style={styles.cover}>
             <ActivityIndicator
@@ -108,9 +125,6 @@ class ServiceConnect extends React.Component {
             />
           </View>
         :
-         service.isConnected ?
-          this.renderDisconnect(service)
-          :
           this.renderConnect(service)
         }
       </View>

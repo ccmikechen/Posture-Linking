@@ -49,12 +49,17 @@ class ButtonList extends React.Component {
   }
 
   renderButton(combination) {
+    console.log(combination);
     let icon = {};
+    let description = R.strings.events[combination.action.eventId].description;
+    description += R.strings.events[combination.action.eventId].options;
+
     R.images.icon.forEach((data) => {
       if(combination.action.name == data.name) {
         icon = data;
       }
     });
+
     return (
       <View style={styles.content} key={combination.id} >
         <AnimatedButton
@@ -63,7 +68,7 @@ class ButtonList extends React.Component {
           color={icon.color}
           icon={icon.icon}
         />
-        <Text>{combination.action.name}</Text>
+        <Text style={styles.description} >{description}</Text>
       </View>
     );
   }

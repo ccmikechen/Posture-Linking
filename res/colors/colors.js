@@ -22,7 +22,7 @@ const colors = {
 	ROWBACK_BUTTON: '#525252',
 	NO_CONBINATION: '#B6B6B6',
 
-//addcombination setting button
+//setting button
 	DISABLE_BUTTON: '#969696',
 
 	BUTTON_DISABLED_BORDER: '#B2B6B2',
