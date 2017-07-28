@@ -5,7 +5,8 @@ import {
   Text,
   Button,
   TouchableOpacity,
-  Alert
+  Alert,
+  ScrollView
 } from 'react-native';
 
 import AnimatedButton from '../../components/AnimatedButton';
@@ -47,13 +48,23 @@ class ButtonList extends React.Component {
   }
 
   renderButton(combination) {
+    let icon = {};
+    R.images.icon.forEach((data) => {
+      if(combination.action.name == data.name) {
+        icon = data;
+      }
+    });
     return (
-      <AnimatedButton
-        style={styles.button}
-        onPress={() => this.handleButtonPress(combination.id)}
-        key={combination.id}
-        id={combination.id}
-      />
+      <View style={styles.content} >
+        <AnimatedButton
+          size={150}
+          onPress={() => this.handleButtonPress(combination.id)}
+          color={icon.color}
+          key={combination.id}
+          icon={icon.icon}
+        />
+        <Text>{combination.action.name}</Text>
+      </View>
     );
   }
 
@@ -70,21 +81,23 @@ class ButtonList extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.buttonTrigger.isConnected() == false ? 
-        <TouchableOpacity onPress={() => this.connectService()}> 
-          <View style={styles.viewButton}>
-            <Text style={styles.text}>按鈕服務認證</Text>
-          </View>
-        </TouchableOpacity>
-        :
-          this.props.combinations.map(combination => (
-            (combination.trigger.serviceId == this.buttonTrigger.id)
-              && (combination.status == 1) ?
-              this.renderButton(combination) : null
-          ))
-        }
-      </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.content} >
+          {this.buttonTrigger.isConnected() == false ? 
+            <TouchableOpacity onPress={() => this.connectService()}> 
+              <View style={styles.viewButton}>
+                <Text style={styles.text}>按鈕服務認證</Text>
+              </View>
+            </TouchableOpacity>
+          :
+            this.props.combinations.map(combination => (
+              (combination.trigger.serviceId == this.buttonTrigger.id)
+                && (combination.status == 1) ?
+                this.renderButton(combination) : null
+            ))
+          }
+        </View>
+      </ScrollView>
     );
   }
 }

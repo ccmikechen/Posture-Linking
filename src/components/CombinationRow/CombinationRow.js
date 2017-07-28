@@ -30,7 +30,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
 
   return(
     <View style = {styles.rowFront}>
-      <TouchableOpacity onPress = {onEdit} activeOpacity = {1} style={styles.combinationTouch}>
+      <TouchableOpacity onPress = {onEdit} activeOpacity = {0.5} style={styles.combinationTouch}>
         <View style={styles.combination}>
           <View style={[styles.combinationImg, { opacity: opacity-0.2 }]}>
             <View style={styles.trigger}>
@@ -51,7 +51,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
         </View>
         <View style={styles.content}>
           <View style={[styles.name,{opacity: opacity}]}>
-            <Text style={styles.text}>{data.description}</Text>
+            <Text style={styles.text}>{data.description.substring(0,18)}</Text>
           </View>
           <View style={styles.switch}>
             <Switch

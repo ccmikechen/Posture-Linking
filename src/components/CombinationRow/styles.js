@@ -35,7 +35,6 @@ export default styles = StyleSheet.create({
   },
   name:{
     flex: 4,
-    height: 54,
     padding: 5,
     marginTop: 8
   },

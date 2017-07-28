@@ -103,39 +103,45 @@ class SideMenu extends React.Component {
           </View>
          )
         : 
-        <View style={{flex:1}}> 
+        <View style={{flex:1}}>
+
           <View style={styles.userView} >
-            <View style={styles.userImg} >
-              <Icon name='person' size={70} color={R.colors.USER_IMG} />
+
+            <View style={styles.userInfo} >
+              <View style={styles.userImg} >
+                <Icon name='person' size={70} color={R.colors.USER_IMG} />
+              </View>
+              <Text style={styles.username} >{user.username.substring(0,20)}</Text>
             </View>
-            <View style={styles.userText} >
-              <Text style={styles.nickname} >{user.nickName}</Text>
-              <Text style={styles.username} >@{user.username}</Text>
-              <View style={styles.logoutView} >
-                <Text style={styles.username} >{user.email}</Text>
+
+            <View style={styles.logoutView} >
+              <View style={styles.logoutEmpty} ></View>
+              <View style={styles.logoutContent} >
                 <TouchableOpacity onPress={this.handleLogout} >
-                  <Text style={styles.username} >{R.strings.LOGOUT}</Text>
+                  <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
                 </TouchableOpacity>
               </View>
             </View>
+
           </View>
+
 
           <View style={styles.content} >
             <TouchableOpacity onPress={this.handleButtonPress('combination')}>
               <View style={styles.items}>
-                <Icon name='extension' size={40} color={R.colors.ITEMS_ICON} />
+                <Icon name='extension' size={35} color={R.colors.ITEMS_ICON} />
                 <Text style={styles.itemsText}>{R.strings.COMBINATION_TITLE}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
               <View style={styles.items}>
-                <Icon name='touch-app' size={40} color={R.colors.ITEMS_ICON} />
+                <Icon name='touch-app' size={35} color={R.colors.ITEMS_ICON} />
                 <Text style={styles.itemsText}>{R.strings.BUTTON_LIST_TITLE}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
               <View style={styles.items}>
-                <Icon name='room-service' size={40} color={R.colors.ITEMS_ICON} />
+                <Icon name='room-service' size={35} color={R.colors.ITEMS_ICON} />
                 <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
               </View>
             </TouchableOpacity>
