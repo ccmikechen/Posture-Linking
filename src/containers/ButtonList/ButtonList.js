@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import AnimatedButton from '../../components/AnimatedButton';
+import ViewIcon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import {
   updateCombinationList
@@ -83,11 +84,13 @@ class ButtonList extends React.Component {
       <ScrollView style={styles.container}>
         <View style={styles.content} >
           {this.buttonTrigger.isConnected() == false ? 
-            <TouchableOpacity onPress={() => this.connectService()}> 
-              <View style={styles.viewButton}>
-                <Text style={styles.text}>按鈕服務認證</Text>
-              </View>
+          <View style= {styles.noAuthorized} >
+            <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}> 
+              <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+                <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
+                <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
             </TouchableOpacity>
+          </View>
           :
             this.props.combinations.map(combination => (
               (combination.trigger.serviceId == this.buttonTrigger.id)

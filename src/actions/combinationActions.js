@@ -253,7 +253,7 @@ export const removeCombination = (combination) => (dispatch) => {
 
 export const setCombinationStatus = (combination, status) => (dispatch) => {
   CombinationManager.getCombinationById(combination.id).setStatus(status);
-  api.updateCombinationStatus(combination.id,  status);
+  api.updateCombinationStatus(combination.id, status);
 
   dispatch({
     type: SET_COMBINATION_STATUS,

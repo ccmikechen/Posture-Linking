@@ -73,7 +73,7 @@ class Combination extends React.Component {
     this.props.selectCombinationId(id);
     this.props.navigator.showModal({
       screen:'EditCombinationScreen',
-      title:'編輯組合',
+      title: R.strings.EDIT_COMBINATION,
       passProps: {},
       animated: false
     });
@@ -122,7 +122,7 @@ class Combination extends React.Component {
   goToAddCombination() {
     this.props.navigator.showModal({
       screen: 'AddCombinationScreen',
-      title: '新增組合',
+      title: R.strings.ADD_COMBINATION,
       passProps: {},
       animated: false
     });
@@ -136,8 +136,8 @@ class Combination extends React.Component {
             <View style= {styles.noCombination} >
               <TouchableOpacity style={styles.imgTouch} onPress={this.goToAddCombination} >
                 <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
-                <Text style={styles.text} >點擊這裡</Text>
-                <Text style={styles.text} >新增組合</Text>
+                <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
+                <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
               </TouchableOpacity>
             </View>
           :
