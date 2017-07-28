@@ -51,7 +51,14 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
         </View>
         <View style={styles.content}>
           <View style={[styles.name,{opacity: opacity}]}>
-            <Text style={styles.text}>{data.description.substring(0,18)}</Text>
+            <Text style={styles.text}>
+              {
+                data.description.length>20?
+                  data.description.substring(0,20) + '...'
+                :
+                  data.description
+              }
+            </Text>
           </View>
           <View style={styles.switch}>
             <Switch
