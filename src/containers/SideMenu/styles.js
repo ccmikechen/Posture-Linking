@@ -32,7 +32,8 @@ export default styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingRight: 5
   },
   logoutEmpty:{
     flex: 6
@@ -40,9 +41,15 @@ export default styles = StyleSheet.create({
   logoutContent:{
     flex: 2
   },
+  logoutTouch:{
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
   logoutText:{
     fontSize: 14,
     color: R.colors.USER_TEXT,
+    marginLeft:5
   },
 
 
