@@ -6,38 +6,46 @@ export default styles = StyleSheet.create({
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   userView:{
-  	flex:6,
-  	flexDirection: 'column',
+  	flex:5,
+  	flexDirection: 'row',
   	justifyContent: 'center',
   	borderBottomWidth: 1,
   	borderBottomColor: R.colors.BORDER,
   	backgroundColor: R.colors.USER_VIEW
   },
-  userImg:{
-  	flex:3,
-  	justifyContent: 'flex-end',
+  userInfo:{
+  	flex: 3,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   	paddingLeft: 10
   },
-  userText:{
-  	flex:2,
-  	justifyContent: 'space-between',
-  	paddingLeft: 20,
-  	paddingRight: 20,
-  	paddingTop: 10
-  },
-  logoutView:{
-  	flex:1,
-  	flexDirection: 'row',
-  	justifyContent: 'space-between',
-	},
-	nickname:{
-  	fontSize: 16,
-  	color: R.colors.USER_TEXT
+  userImg:{
+    flex: 6,
+    justifyContent: 'flex-end'
   },
   username:{
-  	fontSize: 14,
-  	color: R.colors.USER_TEXT
+    flex: 2,
+    fontSize: 14,
+    color: R.colors.USER_TEXT
   },
+  logoutView:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  logoutEmpty:{
+    flex: 6
+  },
+  logoutContent:{
+    flex: 2
+  },
+  logoutText:{
+    fontSize: 14,
+    color: R.colors.USER_TEXT,
+  },
+
+
   content:{
   	flex:14,
   	flexDirection: 'column',
@@ -52,7 +60,7 @@ export default styles = StyleSheet.create({
   	paddingLeft: 20
   },
   itemsText:{
-  	marginLeft: 10,
+  	marginLeft: 20,
   	fontSize: 16
   },
   version:{

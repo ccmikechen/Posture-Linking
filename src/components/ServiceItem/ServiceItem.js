@@ -32,7 +32,12 @@ const ServiceItem = ({ service, onConnectPress, onOKPress,size=100 }) => {
 					alignItems: 'center',
 					justifyContent: 'center'
 				}}>
+				{
+					(!service.isConnected && item.serviceType == 0)?
+					<Image source={item.icon} style={{ width:size*0.6, height:size*0.6, tintColor: '#D3D3D3' }} />
+					:
 					<Image source={item.icon} style={{ width:size*0.6, height:size*0.6 }} />
+				}
 				</View>
 				<Text style={{ color: color, fontSize: size*0.12, fontWeight: 'bold', marginTop: 1.5}}>{R.strings.services[service.id]}</Text>
 			</View>
