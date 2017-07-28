@@ -32,7 +32,8 @@ class Login extends React.Component {
       <View style={styles.container}>
         <KeyboardAwareScrollView style={styles.KeyboardContainer}>
           <View style={styles.formContainer}>
-            <Text style={styles.logoText}>PostureLinking</Text>
+            <Text style={styles.logoText}>{R.strings.APP_NAME}</Text>
+            {MODE == 'dev'? <Text style={styles.logoText}>{R.strings.DEVELOP_MODE}</Text> : null}
               {this.props.failed == true?
                 <Text style={styles.errorText}>{this.props.error.error}</Text>
                 :

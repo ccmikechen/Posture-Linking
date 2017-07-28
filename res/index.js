@@ -7,3 +7,9 @@ global.R = {
   images,
   colors
 };
+
+/*
+ 'dev' = Development Mode
+ 'prod' = Production Mode
+*/
+global.MODE = 'dev';
