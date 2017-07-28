@@ -29,6 +29,9 @@ const strings = {
   THEN_TEXT: '則 ○○',
   DETAILED_SETTING: '詳細設定',
   ADD_COMBINATION : '新增組合',
+  EDIT_COMBINATION: '編輯組合',
+  CLICK_THIS: '點擊這裡',
+  AUTHORIZING : '認證授權',
   services : {
     1 : '按鈕',
     2 : '定時',

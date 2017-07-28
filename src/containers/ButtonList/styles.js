@@ -30,9 +30,21 @@ export default styles = StyleSheet.create({
     justifyContent:'center',
     marginTop: 15
   },
-   text:{
-    fontSize:20,
-    color: R.colors.WHITE_TEXT
+  noAuthorized:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: R.colors.CONTAINER_BACKGROUND,
+  },
+  imgTouch:{
+    height: 200,
+    width: 155,
+    alignItems: 'center'
+  },
+  text:{
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: R.colors.NO_CONBINATION
   },
   description:{
     fontSize: 18

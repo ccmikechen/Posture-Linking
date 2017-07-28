@@ -1,15 +1,17 @@
 import '../res';
 import {
   startMainApp,
-  startLoginApp
+  startLoginApp,
+  startiOSMainApp
 } from './apps';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import api from './api/poselink';
 import { initialSocket, getChannel } from './api/channel';
 
 import ServiceManager from '../lib/ServiceManager';
 import CombinationManager from '../lib/CombinationManager';
+import { iconsMap, iconsLoaded } from '../res/icons';
 
 const startBleManager = () => {
   BleManager.start({showAlert: false, allowDuplicates: false});
@@ -50,7 +52,15 @@ const loadBackgroundProcess = async () => {
 const startApp = async () => {
   return await loadBackgroundProcess().then(() => {
     startBleManager();
-    startMainApp();
+    iconsLoaded.then(() => {
+      if (Platform.OS === 'ios') {
+        
+          startiOSMainApp();
+      
+      } else {
+        startMainApp();
+      }
+    })
   });
 };
 

@@ -25,8 +25,7 @@ class CombinationScreen extends React.Component {
     leftButtons:[
       Platform.OS === 'ios' ? 
         {
-          id: 'sideMenu',
-          icon: R.images.MENU_IOS
+         
         }
       :
         {
