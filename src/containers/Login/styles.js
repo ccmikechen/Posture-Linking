@@ -25,16 +25,5 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#616161',
     paddingTop: 120
-  },
-  cover: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    opacity: 0.5
   }
 });

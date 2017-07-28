@@ -7,26 +7,28 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { reduxForm, Field } from 'redux-form/immutable';
-import validate from './validate'
+import validate from './validate';
 
 const renderField = ({ input: { onChange, ...restInput }, isPassword, label,  meta: { touched, error } }) => {
-  return <View>
-    <TextInput 
-      style={styles.input} 
-      placeholder={label}
-      onChangeText={onChange} 
-      secureTextEntry = {isPassword}
-      autoCapitalize = 'none'
-      underlineColorAndroid='transparent'
-      {...restInput} 
-    />
-    {touched && error && <Text style={styles.errorText}>{error}</Text>}
+  return (
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.input}
+        placeholder={label}
+        onChangeText={onChange}
+        secureTextEntry = {isPassword}
+        autoCapitalize = 'none'
+        underlineColorAndroid='transparent'
+          {...restInput}
+      />
+      {touched && error && <Text style={styles.errorText}>{error}</Text>}
     </View>
+  );
 }
 
 const SingUpForm = (props) => {
   const { handleSubmit, onSubmit } = props;
-  
+
   return (
     <View style={styles.container}>
       <Field
@@ -47,7 +49,7 @@ const SingUpForm = (props) => {
         isPassword = {true}
         label={R.strings.CONFIRM_PASSWORD}
       />
-      <Field name="email" 
+      <Field name="email"
         component={renderField}
         isPassword = {false}
         label={R.strings.EMAIL} />
@@ -57,7 +59,7 @@ const SingUpForm = (props) => {
         </View>
       </TouchableOpacity>
     </View>
-  )
+  );
 };
 
 export default reduxForm({

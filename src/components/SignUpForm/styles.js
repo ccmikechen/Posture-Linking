@@ -3,31 +3,23 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     backgroundColor: '#616161',
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center'
   },
-  cover: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    opacity: 0.5
-  },
   input: {
-    marginTop:10,
-    paddingLeft:15,
+    marginTop: 10,
+    paddingLeft: 15,
     borderColor: R.colors.INPUT_BORDER,
-  	fontSize:16,
+  	fontSize: 16,
     backgroundColor: '#FFF',
     borderRadius: 10,
     borderWidth: 1,
     height: 50,
-    width:250,
+    width: 250,
     opacity: 0.8
+  },
+  inputContainer: {
+    alignItems: 'center'
   },
   button: {
     alignItems: 'center',

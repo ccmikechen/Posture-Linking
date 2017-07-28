@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 import LoginForm from '../../components/LoginForm';
+import Cover from '../../components/Cover';
 import { login } from '../../actions/sessionActions';
 import {
   KeyboardAwareScrollView
@@ -26,26 +27,13 @@ class Login extends React.Component {
     });
   }
 
-  renderCover() {
-    return (
-      <View style={styles.cover}>
-        <ActivityIndicator
-
-          animating={true}
-          size='large'
-          color='#ffffff'
-        />
-      </View>
-    );
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <KeyboardAwareScrollView style={styles.KeyboardContainer}>
           <View style={styles.formContainer}>
             <Text style={styles.logoText}>PostureLinking</Text>
-              {this.props.failed == true ?
+              {this.props.failed == true?
                 <Text style={styles.errorText}>{this.props.error.error}</Text>
                 :
                 null
@@ -53,7 +41,7 @@ class Login extends React.Component {
             <LoginForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
           </View>
        </KeyboardAwareScrollView>
-       {this.props.isLoggingIn? this.renderCover() : null}
+       {this.props.isLoggingIn? <Cover /> : null}
      </View>
     );
   }

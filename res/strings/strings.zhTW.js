@@ -2,7 +2,7 @@ const strings = {
   FETCH_TIMEOUT_MESSAGE: '伺服器連線發生錯誤，請檢查網路連線。',
   BLUETOOTH_CANCELED_MESSAGE: '你必須開啟藍牙才可搜尋及連接藍牙裝置。',
   SCAN_TITLE: '掃描裝置',
-  POSTURE_TITLE: '姿態',
+  POSTURE_TITLE: '姿態辨識',
   COMBINATION_TITLE: '組合列表',
   BUTTON_LIST_TITLE: '按鈕列表',
   SERVICE_LIST_TITLE: '服務列表',
@@ -36,7 +36,7 @@ const strings = {
     1 : '按鈕',
     2 : '定時',
     3 : 'LINE Messaging',
-    4 : '姿態',
+    4 : '姿態辨識',
     5 : '手機通知',
     6 : 'LINE Notify',
     7 : '電子樂譜',
@@ -53,8 +53,8 @@ const strings = {
       options: []
     },
     2 : {
-      description : '在每個特別的時間點',
-      options: ['時間'],
+      description : '在每個指定的時間點',
+      options: ['時間']
     },
     3 : {
       description : '當收到一則訊息',

@@ -36,7 +36,8 @@ public class MainApplication extends NavigationApplication {
           new ReactNativePushNotificationPackage(),
           new PostureDetectorPackage(),
           new RNFSPackage(),
-          new RNDeviceInfo()
+          new RNDeviceInfo(),
+          new VectorIconsPackage()
       );
   }
 

@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 import SignUpForm from '../../components/SignUpForm';
+import Cover from '../../components/Cover';
 import { createAccount } from '../../actions/sessionActions';
 import {
   KeyboardAwareScrollView
@@ -26,48 +27,33 @@ class SignUp extends React.Component {
       nickname: values.get('username'),
       email: values.get('email'),
       first_name: '',
-      last_name: '',
-    })
-  }
-
-  renderCover() {
-    return (
-      <View style={styles.cover}>
-        <ActivityIndicator
-          style={{marginTop:400, width:200}}
-          animating={true}
-          size='large'
-          color='#ffffff'
-        />
-      </View>
-    );
+      last_name: ''
+    });
   }
 
   renderError(key, error) {
     let errorText = key + ' ' + error;
     return (
       <Text key={key} style={styles.errorText}>{errorText}</Text>
-    )
+    );
   }
 
   render() {
     return (
-      <KeyboardAwareScrollView style={styles.KeyboardContainer}>
-        {this.props.isSigningUp ? 
-          this.renderCover() 
-        : 
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <KeyboardAwareScrollView style={styles.KeyboardContainer}>
+          <View style={styles.formContainer}>
             <Text style={styles.logoText}>PostureLinking</Text>
-            {this.props.isSignUpFaild ? 
-            Object.keys(this.props.signUpError.errors).map((key) => {
-              return this.renderError(key, this.props.signUpError.errors[key][0])
-            })
+              {this.props.isSignUpFaild?
+                Object.keys(this.props.signUpError.errors).map((key) => {
+                  return this.renderError(key, this.props.signUpError.errors[key][0]);
+              })
              : null}
             <SignUpForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
-             
         </View>
-        }
-       </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+        {this.props.isSigningUp? <Cover /> : null}
+      </View>
     );
   }
 }
