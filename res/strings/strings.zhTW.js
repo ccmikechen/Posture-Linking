@@ -1,5 +1,6 @@
 const strings = {
-  HELLO: '你好 台灣',
+  FETCH_TIMEOUT_MESSAGE: '伺服器連線發生錯誤，請檢查網路連線。',
+  BLUETOOTH_CANCELED_MESSAGE: '你必須開啟藍牙才可搜尋及連接藍牙裝置。',
   SCAN_TITLE: '掃描裝置',
   POSTURE_TITLE: '姿態',
   COMBINATION_TITLE: '組合列表',

@@ -177,7 +177,6 @@ class AnimatedButton extends React.Component {
   handleButtonPress({ finished }) {
     if (finished) {
       this.buttonOnCheck();
-      this.props.onPress();
     }
     this.state.progressSize1.setValue({x: this.state.size+200, y: 0});
     this.state.progressSize2.setValue({x: this.state.size+125, y: 0});
@@ -190,6 +189,7 @@ class AnimatedButton extends React.Component {
   buttonOnCheck(){
     setTimeout(() => {
       this.animatedFinish.start((e) => {
+        this.props.onPress();
         this.animatedFinish.reset();
         this.state.checkIconOpacity.setValue(0);
         this.state.iconSize.setValue(this.props.size/2);

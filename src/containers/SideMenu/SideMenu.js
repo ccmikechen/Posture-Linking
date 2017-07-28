@@ -4,7 +4,8 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -20,6 +21,7 @@ class SideMenu extends React.Component {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.showLogoutAlert = this.showLogoutAlert.bind(this);
   }
 
   componentWillMount() {
@@ -84,6 +86,18 @@ class SideMenu extends React.Component {
     };
   }
 
+  showLogoutAlert() {
+    Alert.alert(
+      'Posture Linking',
+      '您確定要離開Posture Linking嗎?',
+      [
+        {text: '取消', onPress: () => null},
+        {text: '確定', onPress: () => this.handleLogout()},
+      ],
+      { cancelable: false }
+    );
+  }
+
   handleLogout() {
     this.props.logout()
   }
@@ -117,7 +131,7 @@ class SideMenu extends React.Component {
             <View style={styles.logoutView} >
               <View style={styles.logoutEmpty} ></View>
               <View style={styles.logoutContent} >
-                <TouchableOpacity style={styles.logoutTouch} onPress={this.handleLogout} >
+                <TouchableOpacity style={styles.logoutTouch} onPress={this.showLogoutAlert} >
                   <LogoutIcon name= 'sign-out' size={23} color='white' />
                   <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
                 </TouchableOpacity>
