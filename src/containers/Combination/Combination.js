@@ -18,7 +18,8 @@ import {
   updateCombinationList,
   notUpdateCombinationList,
   isUpdateCombinationList,
-  setCombinationStatus,
+  turnOnCombination,
+  turnOffCombination,
   removeCombination,
   selectCombinationId,
   refreshCombinationList
@@ -66,7 +67,11 @@ class Combination extends React.Component {
   }
 
   handleStatusChange(combination, status) {
-    this.props.setCombinationStatus(combination, status == true ? 1 : 0);
+    if (status == 1) {
+      this.props.turnOnCombination(combination);
+    } else if (status == 0) {
+      this.props.turnOffCombination(combination);
+    }
   }
 
   handleShowEdit(id) {
@@ -177,7 +182,8 @@ export default connect((state) => ({
   updateCombinationList,
   notUpdateCombinationList,
   isUpdateCombinationList,
-  setCombinationStatus,
+  turnOnCombination,
+  turnOffCombination,
   removeCombination,
   selectCombinationId,
   refreshCombinationList

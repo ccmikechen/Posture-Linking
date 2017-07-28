@@ -26,7 +26,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
       }
     });
     return temp;
-  }
+  };
 
   return(
     <View style = {styles.rowFront}>
@@ -62,7 +62,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
         </View>
       </TouchableOpacity>
     </View>
-  )
+  );
 };
 
 export default CombinationRow;

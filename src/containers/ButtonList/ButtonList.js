@@ -38,13 +38,13 @@ class ButtonList extends React.Component {
   }
 
   handleButtonPress(combinationId) {
-    console.log(this);
+    console.log(this, combinationId);
     this.buttonTrigger.trigger({ combinationId });
   }
 
   shouldComponentUpdate() {
     this.buttonTrigger = ServiceManager.getServiceByTypeName('trigger', 'button');
-    console.log('update', this.buttonTrigger );
+
     return true;
   }
 
@@ -83,20 +83,23 @@ class ButtonList extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.content} >
-          {this.buttonTrigger.isConnected() == false ? 
-          <View style= {styles.noAuthorized} >
-            <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}> 
-              <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
-                <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
-                <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
-            </TouchableOpacity>
-          </View>
-          :
-            this.props.combinations.map(combination => (
-              (combination.trigger.serviceId == this.buttonTrigger.id)
-                && (combination.status == 1) ?
-                this.renderButton(combination) : null
-            ))
+        {
+          this.buttonTrigger? (
+            this.buttonTrigger.isConnected() == false?
+            <View style= {styles.noAuthorized} >
+              <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}> 
+                <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+                  <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
+                  <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
+              </TouchableOpacity>
+            </View>
+              :
+                this.props.combinations.map(combination => (
+                (combination.trigger.serviceId == this.buttonTrigger.id)
+                  && (combination.status == 1) ?
+                  this.renderButton(combination) : null
+                ))
+          ) : null
           }
         </View>
       </ScrollView>

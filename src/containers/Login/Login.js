@@ -23,14 +23,14 @@ class Login extends React.Component {
     this.props.login({
       username: values.get('username') || '',
       password: values.get('password') || ''
-    })
+    });
   }
 
   renderCover() {
     return (
       <View style={styles.cover}>
         <ActivityIndicator
-          style={{marginTop:400}}
+
           animating={true}
           size='large'
           color='#ffffff'
@@ -41,22 +41,20 @@ class Login extends React.Component {
 
   render() {
     return (
-      
-      <KeyboardAwareScrollView style={styles.KeyboardContainer}>
-        {this.props.isLoggingIn?
-          this.renderCover()
-        : 
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <KeyboardAwareScrollView style={styles.KeyboardContainer}>
+          <View style={styles.formContainer}>
             <Text style={styles.logoText}>PostureLinking</Text>
-            {this.props.failed == true ?
-              <Text style={styles.errorText}>{this.props.error.error}</Text>
-              :
-              null
-            }
+              {this.props.failed == true ?
+                <Text style={styles.errorText}>{this.props.error.error}</Text>
+                :
+                null
+              }
             <LoginForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
-        </View>
-        }
+          </View>
        </KeyboardAwareScrollView>
+       {this.props.isLoggingIn? this.renderCover() : null}
+     </View>
     );
   }
 }
