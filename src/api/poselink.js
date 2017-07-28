@@ -53,8 +53,8 @@ export default {
         return token;
       });
   },
-  createUser: (data) => (
-    server.post('/users', {
+  createUser: (data) => {
+    return server.post('/users', {
       ...data
     })
       .then(response => {
@@ -62,7 +62,7 @@ export default {
         AsyncStorage.setItem('@session:token', token);
         return token;
       })
-  ),
+  },
   getCurrentUser: () => (
     server.fetch('/sessions/user')
       .then(response => response.data)

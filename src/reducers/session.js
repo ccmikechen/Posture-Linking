@@ -14,13 +14,16 @@ const InitialState = Immutable.fromJS({
     phoneNumber: '',
     firstName: '',
     lastName: '',
-    nikeName: '',
+    nickName: '',
     image: '',
     id: null,
     email: '',
     birthday: null
   },
-  isSigningUp: false
+  isSigningUp: false,
+  signUpError: {},
+  isSignUpFaild: false,
+  isLoggingOut: false,
 });
 
 const session = handleActions({
@@ -50,7 +53,7 @@ const session = handleActions({
       .setIn(['user', 'username'], '')
       .setIn(['user', 'sex'], '')
       .setIn(['user', 'phoneNumber'], '')
-      .setIn(['user', 'nikeName'], '')
+      .setIn(['user', 'nickName'], '')
       .setIn(['user', 'firstName'], '')
       .setIn(['user', 'lastName'], '')
       .setIn(['user', 'image'], '')
@@ -63,6 +66,30 @@ const session = handleActions({
   ),
   UPDATE_IS_NOT_SIGNING_UP: (state) => (
     state.set('isSigningUp', false)
+  ),
+  SIGN_UP_ERROR: (state, { error }) => (
+    state.set('signUpError', error)
+  ),
+  IS_SIGN_UP_FAILD: (state) => (
+    state.set('isSignUpFaild', true)
+  ),
+  IS_LOGGING_OUT: (state) => (
+    state.set('isLoggingOut', true)
+  ),
+  IS_NOT_LOGGING_OUT: (state) => (
+    state.set('isLoggingOut', false)
+  ),
+  GET_USER_INFO : (state, { data }) => (
+    state.setIn(['user', 'username'], data.username)
+      .setIn(['user', 'sex'], data.sex)
+      .setIn(['user', 'phoneNumber'], data.phonenumber)
+      .setIn(['user', 'nickName'], data.nickname)
+      .setIn(['user', 'firstName'], data.firstname)
+      .setIn(['user', 'lastName'], data.lastname)
+      .setIn(['user', 'image'], data.image)
+      .setIn(['user', 'id'], data.id)
+      .setIn(['user', 'email'], data.email)
+      .setIn(['user', 'birthday'], data.birthday)
   )
 }, InitialState);
 

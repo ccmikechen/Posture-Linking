@@ -17,6 +17,11 @@ export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const UPDATE_IS_SIGNING_UP = 'UPDATE_IS_SIGNING_UP';
 export const UPDATE_IS_NOT_SIGNING_UP = 'UPDATE_IS_NOT_SIGNING_UP';
 export const UPDATE_UNAUTHENTICATED = 'UPDATE_UNAUTHENTICATED';
+export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
+export const IS_SIGN_UP_FAILD = 'IS_SIGN_UP_FAILD';
+export const IS_LOGGING_OUT = 'IS_LOGGING_OUT';
+export const IS_NOT_LOGGING_OUT = 'IS_NOT_LOGGING_OUT';
+export const GET_USER_INFO = 'GET_USER_INFO';
 
 export const createAccount = (data) => (dispatch) => {
   dispatch({ type: UPDATE_IS_SIGNING_UP });
@@ -29,8 +34,9 @@ export const createAccount = (data) => (dispatch) => {
     })
   })
   .catch(error => {
-    console.log(error)
+    dispatch({ type: SIGN_UP_ERROR, error})
     dispatch({ type: UPDATE_IS_NOT_SIGNING_UP });
+    dispatch({ type: IS_SIGN_UP_FAILD });
   });
 };
 
@@ -53,11 +59,13 @@ export const login = (data) => (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
+  dispatch({ type: IS_LOGGING_OUT });
   await CombinationManager.unloadAllCombinations();
   await ServiceManager.clearAllService();
   await api.destroySession()
   .then(response => {
     dispatch({ type: UPDATE_UNAUTHENTICATED });
+    dispatch({ type: IS_NOT_LOGGING_OUT });
     startLoginApp();
   });
 };
@@ -74,4 +82,14 @@ export const updatePassword = (password) => (dispatch) => {
     type: UPDATE_PASSWORD,
     password
   });
+};
+
+export const getUserInfo = () => (dispatch) => {
+  return api.getCurrentUser()
+    .then(data => (
+      dispatch({ type: GET_USER_INFO, data })
+    ))
+    .then(data => {
+      console.log(data)
+    });
 };

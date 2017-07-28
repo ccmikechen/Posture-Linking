@@ -112,7 +112,7 @@ class ActionSetting extends React.Component {
     this.props.setActionConfig(data);
     let triggerName = R.strings.services[this.props.triggerId];
     let actionName =  R.strings.services[this.props.actionId];
-    this.props.setDescription(`${if_use} ${triggerName}${then_use} ${actionName}`);
+    this.props.setDescription(`${if_use}${triggerName}${then_use}${actionName}`);
     this.props.navigator.popToRoot({
     });
   };

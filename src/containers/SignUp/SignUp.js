@@ -34,12 +34,20 @@ class SignUp extends React.Component {
     return (
       <View style={styles.cover}>
         <ActivityIndicator
+          style={{marginTop:400, width:200}}
           animating={true}
           size='large'
-          color='#fff'
+          color='#ffffff'
         />
       </View>
     );
+  }
+
+  renderError(key, error) {
+    let errorText = key + ' ' + error;
+    return (
+      <Text key={key} style={styles.errorText}>{errorText}</Text>
+    )
   }
 
   render() {
@@ -50,6 +58,11 @@ class SignUp extends React.Component {
         : 
         <View style={styles.container}>
             <Text style={styles.logoText}>PostureLinking</Text>
+            {this.props.isSignUpFaild ? 
+            Object.keys(this.props.signUpError.errors).map((key) => {
+              return this.renderError(key, this.props.signUpError.errors[key][0])
+            })
+             : null}
             <SignUpForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
              
         </View>
@@ -60,7 +73,9 @@ class SignUp extends React.Component {
 }
 
 export default connect((state) => ({
-  isSigningUp: state.getIn(['session', 'isSigningUp'])
+  isSigningUp: state.getIn(['session', 'isSigningUp']),
+  signUpError : state.getIn(['session', 'signUpError']),
+  isSignUpFaild: state.getIn(['session', 'isSignUpFaild'])
 }), {
   createAccount
 })(SignUp);

@@ -21,8 +21,8 @@ class Login extends React.Component {
 
   onLogin(values) {
     this.props.login({
-      username: values.get('username'),
-      password: values.get('password')
+      username: values.get('username') || '',
+      password: values.get('password') || ''
     })
   }
 
@@ -30,9 +30,10 @@ class Login extends React.Component {
     return (
       <View style={styles.cover}>
         <ActivityIndicator
+          style={{marginTop:400}}
           animating={true}
           size='large'
-          color='#fff'
+          color='#ffffff'
         />
       </View>
     );
@@ -48,7 +49,7 @@ class Login extends React.Component {
         <View style={styles.container}>
             <Text style={styles.logoText}>PostureLinking</Text>
             {this.props.failed == true ?
-              <Text style={styles.errorText}>帳號或密碼錯誤</Text>
+              <Text style={styles.errorText}>{this.props.error.error}</Text>
               :
               null
             }
