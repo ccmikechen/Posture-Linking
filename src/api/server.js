@@ -1,7 +1,7 @@
 import { AsyncStorage, Alert } from 'react-native';
 import RNFS from 'react-native-fs';
 
-const API = "https://t21.bearlab.io/api";
+const API = MODE == 'dev'? 'https://t21.bearlab.io/api' : 'https://test.bearlab.io/api';
 
 const fetchTimeout = (url, options, time = 5000) => {
   let promise = new Promise((resolve, reject) => {

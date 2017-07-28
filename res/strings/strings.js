@@ -1,5 +1,6 @@
 const strings = {
   APP_NAME: 'Posture Linking',
+  DEVELOP_MODE: 'Development Mode',
   FETCH_TIMEOUT_MESSAGE: 'Server connection timeout',
   BLUETOOTH_CANCELED_MESSAGE: 'You must turn on the Bluetooth',
   SCAN_TITLE: 'Scan',

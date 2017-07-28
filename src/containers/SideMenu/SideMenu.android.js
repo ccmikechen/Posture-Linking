@@ -99,14 +99,14 @@ class SideMenu extends React.Component {
   }
 
   handleLogout() {
-    this.props.logout()
+    this.props.logout();
   }
 
   render() {
     let user = this.props.user;
     return (
       <View  style={styles.container}>
-        {this.props.isLoggingOut ? 
+        {this.props.isLoggingOut?
          ( <View style={styles.cover}>
             <ActivityIndicator
               style={{marginTop:400}}
@@ -116,7 +116,7 @@ class SideMenu extends React.Component {
             />
           </View>
          )
-        : 
+        :
         <View style={{flex:1}}>
 
           <View style={styles.userView} >
@@ -162,8 +162,8 @@ class SideMenu extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={styles.version}>
-            <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}</Text>
-          </View> 
+            <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}{MODE == 'dev'? R.strings.DEVELOP_MODE : ''}</Text>
+          </View>
          </View>
         }
       </View>
@@ -173,7 +173,7 @@ class SideMenu extends React.Component {
 
 export default connect((state) => ({
   isLoggingOut: state.getIn(['session', 'isLoggingOut']),
-  user: state.getIn(['session', 'user']).toJS(),
+  user: state.getIn(['session', 'user']).toJS()
 }), {
   logout,
   getUserInfo

@@ -30,7 +30,6 @@ const login = () => {
 };
 
 const loadBackgroundProcess = async () => {
-
   await login();
   console.log('Loged in');
 
@@ -55,7 +54,7 @@ const startApp = async () => {
     if (Platform.OS === 'ios') {
       iconsLoaded.then(() => {
         startiOSMainApp();
-      })
+      });
     } else {
       startMainApp();
     }
