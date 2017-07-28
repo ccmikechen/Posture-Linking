@@ -1,5 +1,7 @@
 const strings = {
-  HELLO: 'hello world',
+  APP_NAME: 'Posture Linking',
+  FETCH_TIMEOUT_MESSAGE: 'Server connection timeout',
+  BLUETOOTH_CANCELED_MESSAGE: 'You must turn on the Bluetooth',
   SCAN_TITLE: 'Scan',
   POSTURE_TITLE: 'Posture',
   COMBINATION_TITLE: 'Combinations',
