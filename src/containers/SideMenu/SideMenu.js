@@ -7,12 +7,12 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
-import { logout, getUserInfo } from '../../actions/sessionActions';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LogoutIcon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
 
 import styles from './styles';
+import { logout, getUserInfo } from '../../actions/sessionActions';
 
 class SideMenu extends React.Component {
 
@@ -117,7 +117,8 @@ class SideMenu extends React.Component {
             <View style={styles.logoutView} >
               <View style={styles.logoutEmpty} ></View>
               <View style={styles.logoutContent} >
-                <TouchableOpacity onPress={this.handleLogout} >
+                <TouchableOpacity style={styles.logoutTouch} onPress={this.handleLogout} >
+                  <LogoutIcon name= 'sign-out' size={23} color='white' />
                   <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
                 </TouchableOpacity>
               </View>

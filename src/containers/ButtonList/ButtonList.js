@@ -55,12 +55,11 @@ class ButtonList extends React.Component {
       }
     });
     return (
-      <View style={styles.content} >
+      <View style={styles.content} key={combination.id} >
         <AnimatedButton
           size={150}
           onPress={() => this.handleButtonPress(combination.id)}
           color={icon.color}
-          key={combination.id}
           icon={icon.icon}
         />
         <Text>{combination.action.name}</Text>
