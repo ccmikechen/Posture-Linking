@@ -30,7 +30,7 @@ class ServiceList extends React.Component {
     this.props.selectService(service.id);
     this.props.navigator.push({
       screen: 'ServiceConnectScreen',
-      title: R.strings.services[service.id],
+      title: '',
       passProps: {},
       navigatorStyle: {
       }

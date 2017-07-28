@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
 		flex: 1
 	},
 	imgView:{
-		 flex: 2,
+		 flex: 5,
 		 opacity: 0.85,
 		 justifyContent: 'center',
 		 alignItems: 'center' 
@@ -25,8 +25,14 @@ export default styles = StyleSheet.create({
 		width: 100,
 		height: 100
 	},
+	imgText:{
+		fontSize: 28,
+		fontWeight: 'bold',
+		justifyContent: 'center',
+		color: R.colors.BUTTON_TEXT
+	},
 	description:{
-		flex: 3,
+		flex: 6,
 		padding: 15
 	},
 	descriptionText:{

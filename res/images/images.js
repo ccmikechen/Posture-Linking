@@ -21,6 +21,9 @@ const images = {
   CLOSE_IOS: require('./icon/close@20.png'),
   MENU_IOS: require('./icon/menu@20.png'),
 
+  ANIMATED_CHECK: require('./icon/check.png'),
+  BLUETOOTH: require('./icon/blueTooth.png'),
+  SEARCH: require('./icon/search.png'),
   HORTRIGGER: require('./puzzle/horTrigger.png'),
   HORACTION: require('./puzzle/horAction.png'),
   VERTRIGGER: require('./puzzle/verTrigger.png'),

@@ -22,6 +22,9 @@ const colors = {
 	ROWBACK_BUTTON: '#525252',
 	NO_CONBINATION: '#B6B6B6',
 
+//buttonlist
+	BUTTONLIST_BACKGROUND: 'white',
+
 //setting button
 	DISABLE_BUTTON: '#969696',
 
@@ -49,6 +52,7 @@ const colors = {
 	WHITE_TEXT: '#FFFFFF',
 	SIGNUP_SUBMIT: '#269be7',
 	ERROR_TEXT: '#e93a5c'
+
 };
 
 export default colors;

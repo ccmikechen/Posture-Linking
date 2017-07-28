@@ -81,6 +81,7 @@ class ServiceConnect extends React.Component {
           <View style={[styles.imgBackground, {backgroundColor: icon.color}]}>
             <Image style={styles.img} source={icon.icon} />
           </View>
+          <Text style={styles.imgText} >{R.strings.services[service.id]}</Text>
         </View>
         <View style={styles.description}>
           <Text style={styles.descriptionText} >{description}</Text>

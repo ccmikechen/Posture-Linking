@@ -23,6 +23,7 @@ class AnimatedButton extends React.Component {
     outerSize: this.props.size + 30,
     middleSize: this.props.size + 15,
     size: this.props.size,
+    checkIcon: R.images.ANIMATED_CHECK,
     checkIconOpacity: new Animated.Value(0),
     iconSize: new Animated.Value(this.props.size/2)
   }
@@ -299,20 +300,14 @@ class AnimatedButton extends React.Component {
                 width: iconSize
               }
             ]} />
-            <Animated.View style={[
+            <Animated.Image source={checkIcon} style={[
               styles.iconImage,
               {
-                opacity: checkIconOpacity,
                 height: size/2,
-                width: size/2
+                width: size/2,
+                opacity: checkIconOpacity
               }
-            ]} >
-              <Icon
-                name='check'
-                size= {size/2}
-                color= 'white'
-              />
-            </Animated.View>
+            ]}/>
           </Animated.View>
         </View>
       </TouchableWithoutFeedback>

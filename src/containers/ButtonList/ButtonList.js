@@ -22,6 +22,7 @@ import {
 
 import ServiceManager from '../../../lib/ServiceManager';
 
+
 class ButtonList extends React.Component {
 
   constructor(props) {
@@ -48,7 +49,6 @@ class ButtonList extends React.Component {
   }
 
   renderButton(combination) {
-    console.log(combination);
     let icon = {};
     let description = R.strings.events[combination.action.eventId].description;
     description += R.strings.events[combination.action.eventId].options;
@@ -60,7 +60,7 @@ class ButtonList extends React.Component {
     });
 
     return (
-      <View style={styles.content} key={combination.id} >
+      <View style={styles.animatedButtonView} key={combination.id} >
         <AnimatedButton
           size={150}
           onPress={() => this.handleButtonPress(combination.id)}

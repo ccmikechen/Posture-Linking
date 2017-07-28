@@ -8,7 +8,14 @@ export default styles = StyleSheet.create({
   content:{
     flex: 1,
     alignItems: 'center'
-
+  },
+  animatedButtonView:{
+    height: 250,
+    width: 300,
+    alignItems: 'center',
+    margin: 15,
+    borderRadius: 20,
+    backgroundColor: R.colors.BUTTONLIST_BACKGROUND
   },
   buttonText: {
     fontSize: 30
