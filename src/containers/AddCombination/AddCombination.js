@@ -47,7 +47,7 @@ class AddCombination extends React.Component {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'close') {
         Alert.alert(
-          'PostureLinking',
+          'Posture Linking',
           '您確定要關閉新增組合',
           [
             {text: '取消', onPress: () => null},
