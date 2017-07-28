@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
   	flex: 3,
     flexDirection: 'column',
     alignItems: 'flex-start',
-  	paddingLeft: 10
+  	paddingLeft: 5
   },
   userImg:{
     flex: 6,
@@ -26,7 +26,8 @@ export default styles = StyleSheet.create({
   username:{
     flex: 2,
     fontSize: 14,
-    color: R.colors.USER_TEXT
+    color: R.colors.USER_TEXT,
+    paddingLeft: 10
   },
   logoutView:{
     flex: 1,

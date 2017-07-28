@@ -24,7 +24,10 @@ export default styles = StyleSheet.create({
     marginTop: 15
   },
    text:{
-    color: R.colors.WHITE_TEXT,
-    fontSize:20
+    fontSize:20,
+    color: R.colors.WHITE_TEXT
+  },
+  description:{
+    fontSize: 18
   }
 });
