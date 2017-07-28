@@ -4,7 +4,8 @@ import {
   View,
   Text,
   NativeModules,
-  NativeEventEmitter
+  NativeEventEmitter,
+  Alert
 } from 'react-native';
 import styles from './styles';
 import PostureDeviceScanning from '../../components/PostureDeviceScanning';
@@ -38,7 +39,22 @@ class PostureDeviceScanner extends React.Component {
       bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral),
       bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan)
     ];
-    this.startScan();
+
+    BleManager.enableBluetooth()
+      .then(() => {
+        this.startScan();
+      })
+      .catch((error) => {
+        Alert.alert(R.strings.APP_NAME, R.strings.BLUETOOTH_CANCELED_MESSAGE, [
+          {text: 'OK', onPress: () => {
+            this.props.navigator.dismissModal({
+              animated: false
+            });
+          }}
+        ], {
+          cancelable: false
+        });
+      });
   }
 
   componentWillUnmount() {
@@ -50,7 +66,7 @@ class PostureDeviceScanner extends React.Component {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'PostureDeviceScannerScreen:back') {
         this.props.navigator.dismissModal({
-          animationType: 'slide-down'
+          animated: false
         });
       }
     }
