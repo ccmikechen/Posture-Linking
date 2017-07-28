@@ -262,6 +262,34 @@ export const setCombinationStatus = (combination, status) => (dispatch) => {
   });
 };
 
+export const turnOnCombination = (combination) => (dispatch) => {
+  let combinationInstance = CombinationManager.getCombinationById(combination.id);
+  combinationInstance.setStatus(1);
+  combinationInstance.apply();
+
+  dispatch({
+    type: SET_COMBINATION_STATUS,
+    id: combination.id,
+    status: 1
+  });
+
+  api.updateCombinationStatus(combination.id,  1);
+};
+
+export const turnOffCombination = (combination) => (dispatch) => {
+  let combinationInstance = CombinationManager.getCombinationById(combination.id);
+  combinationInstance.setStatus(0);
+  combinationInstance.destroy();
+
+  dispatch({
+    type: SET_COMBINATION_STATUS,
+    id: combination.id,
+    status: 0
+  });
+
+  api.updateCombinationStatus(combination.id,  0);
+};
+
 export const selectCombinationId = (id) => (dispatch) => {
   dispatch({ type:SELECT_COMBINATION_ID, id });
 };
