@@ -79,7 +79,7 @@ class ScanBle extends React.Component {
   }
 
   startScan() {
-    BleManager.scan([], 3, false).then((results) => {
+    BleManager.scan([], 1, false).then((results) => {
       this.props.startBleScan();
     });
   }
