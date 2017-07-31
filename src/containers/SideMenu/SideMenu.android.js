@@ -88,8 +88,8 @@ class SideMenu extends React.Component {
 
   showLogoutAlert() {
     Alert.alert(
-      'Posture Linking',
-      '您確定要離開Posture Linking嗎?',
+      R.strings.APP_NAME,
+      '您確定要登出嗎?',
       [
         {text: '取消', onPress: () => null},
         {text: '確定', onPress: () => this.handleLogout()},
@@ -102,12 +102,23 @@ class SideMenu extends React.Component {
     this.props.logout();
   }
 
+  renderOption({ item, title, icon }) {
+    return (
+      <TouchableOpacity onPress={this.handleButtonPress(item)}>
+          <View style={styles.items}>
+            <Icon name={icon} size={35} color={R.colors.ITEMS_ICON} />
+          <Text style={styles.itemsText}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     let user = this.props.user;
     return (
-      <View  style={styles.container}>
-        {this.props.isLoggingOut?
-         ( <View style={styles.cover}>
+      <View style={styles.container}>
+        {this.props.isLoggingOut? (
+          <View style={styles.cover}>
             <ActivityIndicator
               style={{marginTop:400}}
               animating={true}
@@ -115,55 +126,55 @@ class SideMenu extends React.Component {
               color='#ffffff'
             />
           </View>
-         )
-        :
-        <View style={{flex:1}}>
-
-          <View style={styles.userView} >
-
-            <View style={styles.userInfo} >
-              <View style={styles.userImg} >
-                <Icon name='person' size={70} color={R.colors.USER_IMG} />
+        ) :
+          <View style={{flex:1}}>
+            <View style={styles.userView} >
+              <View style={styles.userInfo} >
+                <View style={styles.userImg} >
+                  <Icon name='person' size={70} color={R.colors.USER_IMG} />
+                </View>
+                <Text style={styles.username} >{user.username.substring(0,20)}</Text>
               </View>
-              <Text style={styles.username} >{user.username.substring(0,20)}</Text>
-            </View>
-
-            <View style={styles.logoutView} >
-              <View style={styles.logoutEmpty} ></View>
-              <View style={styles.logoutContent} >
-                <TouchableOpacity style={styles.logoutTouch} onPress={this.showLogoutAlert} >
-                  <LogoutIcon name= 'sign-out' size={23} color='white' />
-                  <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
-                </TouchableOpacity>
+              <View style={styles.logoutView} >
+                <View style={styles.logoutEmpty} ></View>
+                <View style={styles.logoutContent} >
+                  <TouchableOpacity style={styles.logoutTouch} onPress={this.showLogoutAlert} >
+                    <LogoutIcon name= 'sign-out' size={23} color='white' />
+                    <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-
-          </View>
-
-
-          <View style={styles.content} >
-            <TouchableOpacity onPress={this.handleButtonPress('combination')}>
-              <View style={styles.items}>
-                <Icon name='extension' size={35} color={R.colors.ITEMS_ICON} />
-                <Text style={styles.itemsText}>{R.strings.COMBINATION_TITLE}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
-              <View style={styles.items}>
-                <Icon name='touch-app' size={35} color={R.colors.ITEMS_ICON} />
-                <Text style={styles.itemsText}>{R.strings.BUTTON_LIST_TITLE}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
-              <View style={styles.items}>
-                <Icon name='room-service' size={35} color={R.colors.ITEMS_ICON} />
-                <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.version}>
-            <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}{MODE == 'dev'? R.strings.DEVELOP_MODE : ''}</Text>
-          </View>
+            <View style={styles.content} >
+              {this.renderOption({
+                item: 'combination',
+                title: R.strings.COMBINATION_TITLE,
+                icon: 'extension'
+              })}
+              {this.renderOption({
+                item: 'buttonList',
+                title: R.strings.BUTTON_LIST_TITLE,
+                icon: 'touch-app'
+              })}
+              {this.renderOption({
+                item: 'serviceList',
+                title: R.strings.SERVICE_LIST_TITLE,
+                icon: 'room-service'
+              })}
+              {this.renderOption({
+                item: 'scan',
+                title: R.strings.SCAN_TITLE,
+                icon: 'extension'
+              })}
+              {this.renderOption({
+                item: 'posture',
+                title: R.strings.POSTURE_TITLE,
+                icon: 'extension'
+              })}
+            </View>
+            <View style={styles.version}>
+              <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}{MODE == 'dev'? R.strings.DEVELOP_MODE : ''}</Text>
+            </View>
          </View>
         }
       </View>

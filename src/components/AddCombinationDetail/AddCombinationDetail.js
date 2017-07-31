@@ -16,7 +16,6 @@ const AddCombinationDetail = ({ text, status, onPress }) => {
             <Text style={styles.disabledFontStyle}>{text}</Text>
           </View>
         );
-        break;
       case 1:
       case 2:
         return (
@@ -26,7 +25,6 @@ const AddCombinationDetail = ({ text, status, onPress }) => {
             </View>
           </TouchableOpacity>
         );
-        break;
       default:
         return (
           <TouchableOpacity onPress={ onPress }>
