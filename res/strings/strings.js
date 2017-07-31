@@ -33,7 +33,9 @@ const strings = {
   IF_TEXT: 'IF ○○○',
   THEN_TEXT: 'THEN ○○',
   DETAILED_SETTING: 'Detailed settings',
-
+  NUMBERS_ONLY_WARNING: 'Please enter numbers only',
+  SAVE_BUTTON_TEXT: 'Save',
+  
   services : {
     1 : 'Button',
     2 : 'Timer',

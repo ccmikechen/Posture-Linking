@@ -2,7 +2,7 @@ import EventEmitter from 'events';
 import PostureDetector from '../modules/PostureDetector';
 import api from '../api/poselink';
 
-const DATA_COLS = 17;
+const DATA_COLS = 20;
 const DATA_LIST_LENGTH = 8;
 const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
@@ -28,7 +28,10 @@ class PostureRecognizer {
   }
 
   handleDataNotification(data) {
-    this.dataList.push(this.parseDataToArray(data));
+    let parsedData = this.parseDataToArray(data);
+    // console.log(data.band.acc);
+
+    this.dataList.push(parsedData);
 
     if (this.dataList.length + 1 > DATA_LIST_LENGTH + BATCH_GAP) {
       this.dataList = this.dataList.slice(BATCH_GAP, this.dataList.length);
@@ -53,7 +56,7 @@ class PostureRecognizer {
       ...this.normalizeAcc(data.insole.right),
       ...this.normalizePressure(data.insole.right),
       ...this.normalizeAcc(data.band.acc),
-//      ...this.normalizeAcc(data.band.gyro)
+      ...this.normalizeAcc(data.band.gyro)
     ];
 
     return normalizedData;

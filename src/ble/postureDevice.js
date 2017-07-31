@@ -1,6 +1,8 @@
 import EventEmitter from 'events';
 import * as BleDevices from './bleDevices';
 
+import Buffer from 'bops';
+
 class PostureDataEmitter extends EventEmitter {
   constructor() {
     super();
@@ -31,12 +33,12 @@ class PostureDataEmitter extends EventEmitter {
 
   handleBandData(data) {
     this.bandData = {
-      acc: {
+      gyro: {
         x: this.parseBand3dData(data[1], data[2]),
         y: this.parseBand3dData(data[3], data[4]),
         z: this.parseBand3dData(data[5], data[6])
       },
-      gyro: {
+      acc: {
         x: this.parseBand3dData(data[7], data[8]),
         y: this.parseBand3dData(data[9], data[10]),
         z: this.parseBand3dData(data[11], data[12])
@@ -73,11 +75,13 @@ class PostureDataEmitter extends EventEmitter {
   }
 
   parseBand3dData(low, high) {
-    return ((high << 8) | (low & 0xFF)) / 0xF000;
+    let buf = Buffer.from([low, high]);
+    return Buffer.readInt16LE(buf) / 0x4000;
   }
 
   parseInsoleAccData(low, high) {
-    return ((high << 8) | (low & 0xFF)) / 0xF000;
+    let buf = Buffer.from([low, high]);
+    return Buffer.readInt16LE(buf) / 0x4000;
   }
 
   parseInsolePressureData(data) {

@@ -9,6 +9,7 @@
     "reset": "adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
+    "bops": "^1.0.0",
     "eslint-plugin-standard": "^3.0.1",
     "events": "^1.1.1",
     "immutable": "^3.8.1",

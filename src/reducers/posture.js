@@ -12,7 +12,8 @@ const initialRecordForm = Immutable.fromJS({
 const InitialState = Immutable.fromJS({
   recordForm: initialRecordForm.toJS(),
   isRecording: false,
-  postureTypes: []
+  postureTypes: [],
+  isRecordingNewPart: false
 });
 
 const posture = handleActions({
@@ -42,6 +43,12 @@ const posture = handleActions({
   ),
   UPDATE_CURRENT_POSTURE: (state, { id }) => (
     state.set('currentPosture', id)
+  ),
+  UPDATE_NEW_PART_RECORD_STARTED: (state) => (
+    state.set('isRecordingNewPart', true)
+  ),
+  UPDATE_NEW_PART_RECORD_STOPED: (state) => (
+    state.set('isRecordingNewPart', false)
   )
 }, InitialState);
 

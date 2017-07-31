@@ -9,6 +9,7 @@ import {
   Alert
  } from 'react-native';
 
+import PosturePartRecordingPanel from '../../components/PosturePartRecordingPanel';
 import styles from './styles';
 import {
   updateSelectedRecordHeight,
@@ -37,6 +38,8 @@ class PostureRecord extends React.Component {
     this.handleStopButtonPress = this.handleStopButtonPress.bind(this);
     this.saveRecord = this.saveRecord.bind(this);
     this.cancelRecord = this.cancelRecord.bind(this);
+    this.handleStartNewPart = this.handleStartNewPart.bind(this);
+    this.handleSaveNewPart = this.handleSaveNewPart.bind(this);
   }
 
   componentWillMount() {
@@ -60,13 +63,13 @@ class PostureRecord extends React.Component {
       weight: parseFloat(this.props.weight),
       insoleSize: this.props.insoleSize,
       posture: this.props.postureType
-    });
+    }, 'dynamic_short');
   }
 
   stopRecording() {
     this.postureDataRecorder.stop();
 
-    Alert.alert('Posture Record', 'Save record?', [
+    Alert.alert(R.strings.APP_NAME, 'Save record?', [
       { text: 'Yes', onPress: this.saveRecord },
       { text: 'No', onPress: this.cancelRecord }
     ], {
@@ -88,7 +91,7 @@ class PostureRecord extends React.Component {
     if (isNaN(height)) {
       console.log(this.props.height);
       this.props.updateSelectedRecordHeight(this.props.height);
-      Alert.alert('Please enter numbers only');
+      Alert.alert(R.strings.APP_NAME, R.strings.NUMBERS_ONLY_WARNING);
     } else {
       this.props.updateSelectedRecordHeight(height);
     }
@@ -97,7 +100,7 @@ class PostureRecord extends React.Component {
   handleWeightChange(weight) {
     if (isNaN(weight)) {
       this.props.updateSelectedRecordWeight(this.props.weight);
-      Alert.alert('Please enter numbers only');
+      Alert.alert(R.strings.APP_NAME, R.strings.NUMBERS_ONLY_WARNING);
     } else {
       this.props.updateSelectedRecordWeight(weight);
     }
@@ -113,12 +116,20 @@ class PostureRecord extends React.Component {
 
   handleStartButtonPress() {
     this.props.startRecording();
-    this.startRecording();
+    //this.startRecording();
   }
 
   handleStopButtonPress() {
     this.props.stopRecording();
-    this.stopRecording();
+    //this.stopRecording();
+  }
+
+  handleStartNewPart() {
+
+  }
+
+  handleSaveNewPart() {
+    this.handleStopButtonPress();
   }
 
   render() {
@@ -210,6 +221,15 @@ class PostureRecord extends React.Component {
             </Text>
           </TouchableHighlight>
         </View>
+        {
+          this.props.isRecording?
+            <PosturePartRecordingPanel
+              onStartNewPart={() => this.handleStartNewPart()}
+              onSave={() => this.handleSaveNewPart()}
+              isOpen={this.props.isRecording}
+            />
+          : null
+        }
       </View>
     );
   }

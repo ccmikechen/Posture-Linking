@@ -37,6 +37,11 @@ class PostureMonitor extends React.Component {
 
   getCurrentPostureInfoById(id) {
     switch (id) {
+    case '1':
+      return {
+        image: R.images.postures.STANDING,
+        name: '躺著'
+      };
     case '2':
       return {
         image: R.images.postures.SITTING,
@@ -46,6 +51,11 @@ class PostureMonitor extends React.Component {
       return {
         image: R.images.postures.STANDING,
         name: '站著'
+      };
+    case '4':
+      return {
+        image: R.images.postures.STANDING,
+        name: '揮手'
       };
     case '5':
       return {
