@@ -14,7 +14,7 @@ class TriggerListScreen extends React.Component {
         {
           title:'close',
           id: 'close',
-          icon: R.images.CLOSE_ICON,
+          icon: R.images.CLOSE_ANDROID,
           buttonFontSize: 12
         }
     ]
