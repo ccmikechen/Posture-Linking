@@ -18,6 +18,8 @@ import {
   updateSelectedRecordPosture,
   startRecording,
   stopRecording,
+  startRecordingNewPart,
+  stopRecordingNewPart,
   loadPostureTypes,
   clearRecordForm
 } from '../../actions/postureActions';
@@ -39,7 +41,6 @@ class PostureRecord extends React.Component {
     this.saveRecord = this.saveRecord.bind(this);
     this.cancelRecord = this.cancelRecord.bind(this);
     this.handleStartNewPart = this.handleStartNewPart.bind(this);
-    this.handleSaveNewPart = this.handleSaveNewPart.bind(this);
   }
 
   componentWillMount() {
@@ -78,12 +79,15 @@ class PostureRecord extends React.Component {
   }
 
   saveRecord() {
-    this.postureDataRecorder.save();
-    console.log('saved');
+    this.postureDataRecorder.save(() => {
+      this.props.stopRecording();
+      console.log('saved');
+    });
   }
 
   cancelRecord() {
     this.postureDataRecorder.reset();
+    this.props.stopRecording();
     console.log('canceled');
   }
 
@@ -116,20 +120,18 @@ class PostureRecord extends React.Component {
 
   handleStartButtonPress() {
     this.props.startRecording();
-    //this.startRecording();
+    this.startRecording();
   }
 
   handleStopButtonPress() {
-    this.props.stopRecording();
-    //this.stopRecording();
+    this.stopRecording();
   }
 
   handleStartNewPart() {
-
-  }
-
-  handleSaveNewPart() {
-    this.handleStopButtonPress();
+    this.props.startRecordingNewPart();
+    this.postureDataRecorder.startNewPart(() => {
+      this.props.stopRecordingNewPart();
+    });
   }
 
   render() {
@@ -225,8 +227,9 @@ class PostureRecord extends React.Component {
           this.props.isRecording?
             <PosturePartRecordingPanel
               onStartNewPart={() => this.handleStartNewPart()}
-              onSave={() => this.handleSaveNewPart()}
+              onSave={() => this.handleStopButtonPress()}
               isOpen={this.props.isRecording}
+              isRecording={this.props.isRecordingNewPart}
             />
           : null
         }
@@ -241,6 +244,7 @@ export default connect((state) => ({
   insoleSize: state.getIn(['posture', 'recordForm', 'insoleSize']),
   postureType: state.getIn(['posture', 'recordForm', 'posture']),
   isRecording: state.getIn(['posture', 'isRecording']),
+  isRecordingNewPart: state.getIn(['posture', 'isRecordingNewPart']),
   postureTypes: state.getIn(['posture', 'postureTypes'])
 }), {
   updateSelectedRecordHeight,
@@ -249,6 +253,8 @@ export default connect((state) => ({
   updateSelectedRecordPosture,
   startRecording,
   stopRecording,
+  startRecordingNewPart,
+  stopRecordingNewPart,
   loadPostureTypes,
   clearRecordForm
 })(PostureRecord);

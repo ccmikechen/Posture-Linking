@@ -1,14 +1,15 @@
 import { getChannel } from '../api/channel';
 
 class PostureDataRecorder {
+
   constructor(dataEmitter) {
     this.isRecording = false;
     this.isStarted = false;
     this.isRecordingNewPart = false;
     this.sequenceNumber = 0;
     this.dataEmitter = dataEmitter;
+    this.allData = [];
     this.tempData = [];
-    this.tempSize = 0;
     this.mode = null;
 
     getChannel('posture:record').then(this.handleChannel.bind(this));
@@ -17,7 +18,6 @@ class PostureDataRecorder {
   handleChannel(channel) {
     this.channel = channel;
     this.channel.join();
-    console.log('joined channel');
 
     this.handleDataNotification = this.handleDataNotification.bind(this);
     this.dataEmitter.on('posture:notification', this.handleDataNotification);
@@ -32,21 +32,12 @@ class PostureDataRecorder {
         sequenceNumber: this.sequenceNumber
       };
 
-      switch (this.mode) {
-        case 'static':
-          this.channel.push('new_data', dataPackage);
-          break;
-        case 'dynamic_short':
-        case 'dynamic_long':
-          this.tempData.push(dataPackage);
-          this.tempSize++;
+      if (this.isRecordingNewPart) {
+        this.tempData.push(dataPackage);
 
-          if (this.checkPartEnd()) {
-            // Notify
-            this.tempSize = 0;
-            this.isRecordingNewPart = false;
-          }
-          break;
+        if (this.checkPartEnd()) {
+          this.stopNewPart();
+        }
       }
     }
   }
@@ -54,9 +45,11 @@ class PostureDataRecorder {
   checkPartEnd() {
     switch (this.mode) {
       case 'dynamic_short':
-        return this.tempSize >= 8;
+        return this.tempData.length >= 8;
       case 'dynamic_long':
-        return this.tempSize >= 16;
+        return this.tempData.length >= 16;
+      case 'static':
+        return this.tempData.length >= 80;
       default:
         return false;
     }
@@ -69,52 +62,71 @@ class PostureDataRecorder {
 
     switch (mode) {
       case 'dynamic_short':
-        this.mode = 'dynamic_short';
-        break;
       case 'dynamic_long':
-        this.mode = 'dynamic_long';
-        break;
       case 'static':
+        this.mode = mode;
+        break;
       default:
         this.mode = 'static';
+        break;
     }
 
+    this.allData = [];
     this.tempData = [];
     this.isStarted = true;
     this.isRecording = true;
     this.channel.push('start', config);
   }
 
-  startNewPart() {
-    if (this.mode == 'static') {
-      return false;
+  startNewPart(callback) {
+    if (!this.isRecording) {
+      callback('falied');
     }
-
+    this.tempData = [];
     this.isRecordingNewPart = true;
+    this.onNewPartFinishedCallback = callback;
   }
 
   stop() {
     this.isRecording = false;
   }
 
-  save() {
-    if (!this.isStarted) {
-      throw new Error('The recorder is not started');
+  stopNewPart() {
+    this.allData.push(this.tempData);
+    this.isRecordingNewPart = false;
+    if (this.onNewPartFinishedCallback) {
+      this.onNewPartFinishedCallback('successed');
     }
+  }
+
+  save(callback) {
+    if (!this.isStarted) {
+      callback('failed');
+    }
+
+    this.allData.forEach(dataList => {
+      dataList.forEach(data => {
+        this.channel.push('new_data', data);
+      });
+    });
+
     this.channel.push('save');
     this.reset();
+
+    callback();
   }
 
   reset() {
     this.sequenceNumber = 0;
     this.stop();
+    this.tempData = [];
+    this.allData = [];
     this.channel.push('stop');
     this.isStarted = false;
   }
 
   destroy() {
     this.channel.leave();
-    console.log('leaved channel');
   }
 }
 

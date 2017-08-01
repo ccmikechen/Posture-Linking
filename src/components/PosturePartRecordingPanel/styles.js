@@ -20,9 +20,14 @@ export default styles = StyleSheet.create({
     height: 200,
     width: 200,
     borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: 'blue',
     borderRadius: 100
+  },
+  startNewPartButtonEnabled: {
+    backgroundColor: 'blue',
+    borderColor: 'white'
+  },
+  startNewPartButtonUnabled: {
+    backgroundColor: 'lightgrey'
   },
   saveButtonContainer: {
     flex: 0.4,
@@ -32,8 +37,13 @@ export default styles = StyleSheet.create({
     height: 80,
     width: 250,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
+  },
+  saveButtonEnabled: {
     backgroundColor: 'lightgreen'
+  },
+  saveButtonUnabled: {
+    backgroundColor: 'lightgrey'
   },
   saveButtonText: {
     fontSize: 30,

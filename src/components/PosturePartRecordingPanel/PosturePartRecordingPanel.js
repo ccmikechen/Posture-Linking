@@ -57,10 +57,16 @@ class PosturePartRecordingPanel extends React.Component {
   }
 
   render() {
-    let { onStartNewPart, onSave, isOpen } = this.props;
+    let { onStartNewPart, onSave, isOpen, isRecording } = this.props;
     let animatedContainerStyle = {
       opacity: this.state.fadeOpacity
     };
+    let startNewPartButtonStyle = isRecording?
+      styles.startNewPartButtonUnabled :
+      styles.startNewPartButtonEnabled;
+    let saveButtonStyle = isRecording?
+      styles.saveButtonUnabled :
+      styles.saveButtonEnabled;
 
     return (
       <Animated.View
@@ -68,14 +74,14 @@ class PosturePartRecordingPanel extends React.Component {
       >
         <View style={styles.startNewPartButtonContainer}>
           <TouchableOpacity
-            style={styles.startNewPartButton}
-            onPress={onStartNewPart}
+            style={[styles.startNewPartButton, startNewPartButtonStyle]}
+            onPress={isRecording? null : onStartNewPart}
           />
         </View>
         <View style={styles.saveButtonContainer}>
           <TouchableOpacity
-            style={styles.saveButton}
-            onPress={onSave}
+            style={[styles.saveButton, saveButtonStyle]}
+            onPress={isRecording? null: onSave}
           >
             <Text style={styles.saveButtonText}>{R.strings.SAVE_BUTTON_TEXT}</Text>
           </TouchableOpacity>
