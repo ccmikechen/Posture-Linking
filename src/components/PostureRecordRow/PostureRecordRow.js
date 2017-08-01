@@ -11,9 +11,12 @@ import styles from './styles';
 
 import Checkbox from 'react-native-check-box';
 
-const PostureRecordRow = ({ data, onDelete, onStatusChange }) => {
+const PostureRecordRow = ({ data, onPress, onDelete, onStatusChange }) => {
   return(
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+    >
       <View style={styles.topContainer}>
         <View style={styles.nameContainer}>
           <Text style={styles.name}>
@@ -49,7 +52,7 @@ const PostureRecordRow = ({ data, onDelete, onStatusChange }) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

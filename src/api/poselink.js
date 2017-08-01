@@ -42,11 +42,19 @@ const parsePostureRecord = (data) => ({
 
 const parsePostureRecordData = (data) => ({
   sequenceNumber: data.sequence_number,
-  insole: data.insole,
   rightInsole: data.right_insole,
   leftInsole: data.left_insole,
   band: data.band
 });
+
+const chunkData = (chunkSize) => (data) => {
+  let chunkedData = [];
+
+  while (data.length >= chunkSize) {
+    chunkedData.push(data.splice(0, chunkSize));
+  }
+  return chunkedData;
+};
 
 export default {
   createSession: ({ username, password }) => (
@@ -190,5 +198,6 @@ export default {
       id
     }).then(response => response.data)
       .then(data => data.map(parsePostureRecordData))
+      .then(chunkData(8))
   )
 };

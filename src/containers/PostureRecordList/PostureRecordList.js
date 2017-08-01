@@ -14,19 +14,6 @@ import {
 
 class PostureRecordList extends React.Component {
 
-  state = {
-    dataList: [
-      {
-        postureName: 'Jumping',
-        isAvaiabled: true,
-        records: [
-          {}
-        ],
-        datetime: '2017/07/31 11:30:40'
-      }
-    ]
-  }
-
   constructor(props) {
     super(props);
 
@@ -35,6 +22,18 @@ class PostureRecordList extends React.Component {
 
   componentWillMount() {
     this.props.updatePostureRecords();
+  }
+
+  handleOnPress(id) {
+    return () => {
+      this.props.navigator.push({
+        screen: 'PostureRecordDataListScreen',
+        title: 'Record Data List',
+        passProps: {
+          id
+        }
+      });
+    };
   }
 
   handleDelete(id) {
@@ -46,9 +45,8 @@ class PostureRecordList extends React.Component {
   }
 
   renderRow({ item }) {
-    console.log('item', item);
     let data = {
-      postureName: item.posture.name,
+      postureName: R.strings.postureNames[item.posture.name],
       isAvaiabled: item.status == 'available',
       datetime: item.datetime,
       length: item.length,
@@ -59,6 +57,7 @@ class PostureRecordList extends React.Component {
       <PostureRecordRow
         style={styles.row}
         data={data}
+        onPress={this.handleOnPress(data.id)}
         onDelete={this.handleDelete}
         onStatusChange={this.handleStatusChange}
         key={data.id}
