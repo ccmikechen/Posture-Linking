@@ -36,7 +36,7 @@ export default styles = StyleSheet.create({
 		width: 200,
   },
   textArea:{
-  	fontSize:16
+  	fontSize: 16
   },
   textInput:{
   	height:100,

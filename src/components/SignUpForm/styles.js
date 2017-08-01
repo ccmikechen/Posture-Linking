@@ -55,8 +55,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center'
   },
   KeyboardContainer: {
-    flex: 1,
     backgroundColor: '#616161',
-    paddingTop: 120
   }
 });

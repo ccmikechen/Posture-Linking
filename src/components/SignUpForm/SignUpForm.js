@@ -3,11 +3,13 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 import styles from './styles';
 import { reduxForm, Field } from 'redux-form/immutable';
 import validate from './validate';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 const renderField = ({ input: { onChange, ...restInput }, isPassword, label, keyboardType, returnKeyType,  meta: { touched, error } }) => {
   if (touched && error) {
@@ -87,9 +89,10 @@ const SingUpForm = (props) => {
         label={R.strings.EMAIL} />
       <TouchableOpacity onPress={handleSubmit(onSubmit)}>
         <View style={styles.button}>
-           <Text style={styles.buttonText}>{R.strings.SIGNUP}</Text>
+          <Text style={styles.buttonText}>{R.strings.SIGNUP}</Text>
         </View>
       </TouchableOpacity>
+      {Platform.OS === 'ios'? <KeyboardSpacer/> : null}
     </View>
   );
 };
