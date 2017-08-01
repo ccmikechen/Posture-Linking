@@ -1,5 +1,6 @@
 import server from './server';
 import { AsyncStorage } from 'react-native';
+import dateFormat from 'dateformat';
 
 const parseCombination = (combination) => ({
   id: combination.id,
@@ -22,6 +23,29 @@ const parseUserServiceConfig = (config) => ({
   serviceId: config.service_id,
   id: config.id,
   config: config.config
+});
+
+const parseDatetime = (datetime) => (
+  dateFormat(new Date(datetime), 'yyyy/mm/dd HH:MM:ss')
+);
+
+const parsePostureRecord = (data) => ({
+  id: data.id,
+  weight: data.weight,
+  height: data.height,
+  insoleSize: data.insole_size,
+  posture: data.posture,
+  length: data.length,
+  datetime: parseDatetime(data.datetime),
+  status: data.status
+});
+
+const parsePostureRecordData = (data) => ({
+  sequenceNumber: data.sequence_number,
+  insole: data.insole,
+  rightInsole: data.right_insole,
+  leftInsole: data.left_insole,
+  band: data.band
 });
 
 export default {
@@ -155,5 +179,16 @@ export default {
   ),
   getLatestModel: (toFile) => (
     server.downloadFile('/posture/model', toFile)
+  ),
+  getPostureRecords: () => (
+    server.fetch('/posture/records')
+      .then(response => response.data)
+      .then(data => data.map(parsePostureRecord))
+  ),
+  getPostureRecordData: (id) => (
+    server.fetch('/posture/record_details', {
+      id
+    }).then(response => response.data)
+      .then(data => data.map(parsePostureRecordData))
   )
 };
