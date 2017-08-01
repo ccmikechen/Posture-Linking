@@ -26,6 +26,7 @@ class ServiceConnect extends React.Component {
     super(props);
     this.handleAuthorized = this.handleAuthorized.bind(this);
     this.handleFailedAuthorized = this.handleFailedAuthorized.bind(this);
+   
   };
 
   componentWillMount () {
@@ -61,20 +62,20 @@ class ServiceConnect extends React.Component {
     let buttonColor, buttonText, icon={};
 
     R.images.icon.forEach((data) => {
-      if(data.name ==  service.name){
+      if (data.name ==  service.name) {
         icon = data;
       }
     });
-    if(service.isConnected) {
+    if (service.isConnected) {
       buttonColor = '#e64055';
       buttonText = '認證解除';
       description = R.strings.SERVICE_DISCONNECT_DIRECTION;
-    }else {
+    } else {
       buttonColor = '#47cf95';
       buttonText = '認證授權';
       description = R.strings.SERVICE_CONNECT_DIRECTION;
     }
-
+   
     return(
       <View style={styles.content}>
         <View style={[styles.imgView, {backgroundColor: icon.color}]}>

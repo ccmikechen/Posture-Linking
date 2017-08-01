@@ -30,8 +30,10 @@ export default styles = StyleSheet.create({
   	height: 150
   },
   optionList:{
-  	height:120,
-  	width:250
+		left: -70,
+		top: -100,
+		height: 150,
+		width: 200,
   },
   textArea:{
   	fontSize:16

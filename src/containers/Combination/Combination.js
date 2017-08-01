@@ -80,7 +80,8 @@ class Combination extends React.Component {
       screen:'EditCombinationScreen',
       title: R.strings.EDIT_COMBINATION,
       passProps: {},
-      animated: false
+      animated: false,
+      backButtonHidden: true,
     });
   }
 

@@ -19,7 +19,8 @@ const InitialState = Immutable.fromJS({
   selectedEvent: [],
   isGettingEvents: false,
   isGettingEvent: false,
-  selectedOption:[],
+  selectedTriggerOption:[],
+  selectedActionOption:[],
   isGetTriggerConfig: false,
   isGetActionConfig: false,
   selectedCombinationId: ''
@@ -125,8 +126,11 @@ const combination = handleActions({
   IS_NOT_GETTING_EVENT: (state) => (
     state.set('isGettingEvent', false)
   ),
-  SELECT_OPTION: (state, { option }) => (
-    state.set('selectedOption', option)
+  SELECT_TRIGGER_OPTION: (state, { option }) => (
+    state.set('selectedTriggerOption', option)
+  ),
+  SELECT_ACTION_OPTION: (state, { option }) => (
+    state.set('selectedActionOption', option)
   ),
   IS_GETTING_TRIGGER_CONFIG: (state) => (
     state.set('isGetTriggerConfig', true)

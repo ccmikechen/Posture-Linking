@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 
 import styles from './styles';
@@ -17,6 +18,29 @@ class TriggerSelectSetting extends React.Component {
 
   constructor(props) {
     super(props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'close') {
+        Alert.alert(
+          'Posture Linking',
+          '您確定要關閉新增組合',
+          [
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.closeScreen()},
+          ],
+          { cancelable: false }
+        );
+      }
+    }
+  }
+
+  closeScreen() {
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
   }
 
   componentWillMount() {

@@ -53,5 +53,10 @@ export default styles = StyleSheet.create({
     color: R.colors.ERROR_TEXT,
     fontSize: 14,
     textAlign: 'center'
+  },
+  KeyboardContainer: {
+    flex: 1,
+    backgroundColor: '#616161',
+    paddingTop: 120
   }
 });

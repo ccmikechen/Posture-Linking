@@ -51,13 +51,13 @@ const loadBackgroundProcess = async () => {
 const startApp = async () => {
   return await loadBackgroundProcess().then(() => {
     startBleManager();
-    if (Platform.OS === 'ios') {
-      iconsLoaded.then(() => {
+    iconsLoaded.then(() => {
+      if (Platform.OS === 'ios') {
         startiOSMainApp();
-      });
-    } else {
-      startMainApp();
-    }
+      } else {
+        startMainApp();
+      }
+    });
   });
 };
 
