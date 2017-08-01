@@ -4,7 +4,8 @@ import {
   Text,
   Image,
   Animated,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Easing
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -38,86 +39,46 @@ class AnimatedButton extends React.Component {
   }
 
   componentDidMount() {
-    let friction=50, tension=4000, velocity=1000;
+    let duration=500, easing=Easing.bezier(0.5,-4,0.5,4);
     this.timer = Animated.sequence([
+      Animated.parallel(['progressSize1', 'progressSize2', 'progressSize3'].map(progressSize => {
+        return Animated.timing(this.state[progressSize], {
+            toValue: {x: this.state.size, y: 0.5},
+            duration: 1000
+        });
+      })),
       Animated.parallel([
         Animated.timing(
-          this.state.progressSize1,
-          {
-            toValue: {x: this.state.size, y: 0.5},
-            duration: 1000
-          }
-        ),
-        Animated.timing(
-          this.state.progressSize2,
-          {
-            toValue: {x: this.state.size, y: 0.5},
-            duration: 1000
-          }
-        ),
-        Animated.timing(
-          this.state.progressSize3,
-          {
-            toValue: {x: this.state.size, y: 0.5},
-            duration: 1000
-          }
-        )
-      ]),
-      Animated.parallel([
-        Animated.spring(
           this.state.progressSpringOuterSize,
           {
             toValue: this.state.outerSize+10,
-            friction: friction,
-            tension: tension,
-            velocity: velocity
+            duration: duration,
+            easing: easing
           }
         ),
-        Animated.spring(
+        Animated.timing(
           this.state.progressSpringMiddleSize,
           {
             toValue: this.state.middleSize+10,
-            friction: friction,
-            tension: tension,
-            velocity: velocity
+            duration: duration,
+            easing: easing
           }
         ),
-        Animated.spring(
+        Animated.timing(
           this.state.progressSpringSize,
           {
             toValue: this.state.size+10,
-            friction: friction,
-            tension: tension,
-            velocity: velocity
+            duration: duration,
+            easing: easing
           }
         ),
-        Animated.spring(
-          this.state.progressSize1,
-          {
+        Animated.parallel(['progressSize1', 'progressSize2', 'progressSize3'].map(progressSize => {
+          return Animated.timing(this.state[progressSize], {
             toValue: {x: this.state.size+10, y: 0.5},
-            friction: friction,
-            tension: tension,
-            velocity: velocity
-          }
-        ),
-        Animated.spring(
-          this.state.progressSize2,
-          {
-            toValue: {x: this.state.size+10, y: 0.5},
-            friction: friction,
-            tension: tension,
-            velocity: velocity
-          }
-        ),
-        Animated.spring(
-          this.state.progressSize3,
-          {
-            toValue: {x: this.state.size+10, y: 0.5},
-            friction: friction,
-            tension: tension,
-            velocity: velocity
-          }
-        )
+            duration: duration,
+            easing: easing
+          });
+        }))
       ])
     ]);
     this.animatedFinish = Animated.sequence([

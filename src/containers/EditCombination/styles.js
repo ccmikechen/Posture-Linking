@@ -52,8 +52,8 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   submit:{
-    tintColor: R.colors.SUBMIT,
-    height: 80,
-    width: 80
+    height: 90,
+    width: 90,
+    alignItems:'center'
   }
 });

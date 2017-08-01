@@ -51,14 +51,9 @@ export default styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'center'
   },
-  touch:{
+  submit:{
     height: 90,
     width: 90,
     alignItems:'center'
-  },
-  submit:{
-    tintColor: R.colors.SUBMIT,
-    height: 80,
-    width: 80
   }
 });
