@@ -9,16 +9,24 @@ import {
 import PostureRecordDataChart from '../PostureRecordDataChart';
 import styles from './styles';
 
-const parse3DDataToXYData = (dataList) => {
-  let count = 0;
+const parseBandAccDataToXYData = (dataList) => (
+  dataList.reduce((acc, data) => {
+    acc[0].values.push(data.band.acc.x);
+    acc[1].values.push(data.band.acc.y);
+    acc[2].values.push(data.band.acc.z);
 
-  return dataList.reduce((acc, data) => {
-    acc[0].push({ x: count, y: data.x });
-    acc[1].push({ x: count, y: data.y });
-    acc[2].push({ x: count, y: data.z });
-    count++;
-  }, [[], [], []])
-};
+    return acc;
+  }, [{
+    values: [],
+    label: 'x'
+  }, {
+    values: [],
+    label: 'y'
+  }, {
+    values: [],
+    label: 'z'
+  }])
+);
 
 const PostureRecordDataRow = ({ data, onPress }) => {
   return(
@@ -26,7 +34,7 @@ const PostureRecordDataRow = ({ data, onPress }) => {
       style={styles.container}
       onPress={onPress}>
       <PostureRecordDataChart
-        data={parse3DDataToXYData(data.band.acc)}
+        data={parseBandAccDataToXYData(data)}
       />
     </TouchableOpacity>
   );

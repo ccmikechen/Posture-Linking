@@ -5,6 +5,6 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     flexDirection: 'column',
-    height: 50
+    height: 100
   }
 });

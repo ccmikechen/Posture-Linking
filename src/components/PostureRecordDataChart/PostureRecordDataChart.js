@@ -1,71 +1,46 @@
 import React from 'react';
 import {
   View,
-  Text
+  Text,
+  processColor
 } from 'react-native';
 
 import styles from './styles';
 
-// import { SmoothLine } from 'react-native-pathjs-charts';
+import { LineChart } from 'react-native-charts-wrapper';
 
 const PostureRecordDataChart = ({ data }) => {
-  let options = {
-    width: 280,
-    height: 280,
-    color: '#2980B9',
-    margin: {
-      top: 20,
-      left: 45,
-      bottom: 25,
-      right: 20
+  let xAxis = {
+    axisLineColor: processColor('darkgray'),
+    axisLineWidth: 1.5,
+    gridDashedLine: {
+      lineLength: 10,
+      spaceLength: 10
     },
-    animate: {
-      type: 'delayed',
-      duration: 200
+    avoidFirstLastClipping: true,
+    position: 'BOTTOM'
+  };
+  let yAxis = {
+    left: {
+      drawGridLines: false
     },
-    axisX: {
-      showAxis: true,
-      showLines: true,
-      showLabels: true,
-      showTicks: true,
-      zeroAxis: false,
-      orient: 'bottom',
-      label: {
-        fontFamily: 'Arial',
-        fontSize: 14,
-        fontWeight: true,
-        fill: '#34495E'
-      }
-    },
-    axisY: {
-      showAxis: true,
-      showLines: true,
-      showLabels: true,
-      showTicks: true,
-      zeroAxis: false,
-      orient: 'left',
-      label: {
-        fontFamily: 'Arial',
-        fontSize: 14,
-        fontWeight: true,
-        fill: '#34495E'
-      }
+    right: {
+      enabled: false
     }
+  };
+  let chartData = {
+    dataSets: data
   };
 
   return (
     <View style={styles.container}>
-
-/*
-<SmoothLine
-  style={styles.chart}
-  data={data}
-  options={options}
-  xKey='x'
-  yKey='y'
-/>
-*/
-
+      <LineChart
+        style={styles.chart}
+        data={chartData}
+        xAxis={xAxis}
+        yAxis={yAxis}
+        legend={{enabled: false}}
+      />
     </View>
   );
 };
