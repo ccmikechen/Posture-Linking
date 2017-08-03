@@ -33,6 +33,7 @@ const strings = {
   EDIT_COMBINATION: '編輯組合',
   CLICK_THIS: '點擊這裡',
   AUTHORIZING : '認證授權',
+  MENU: '選單',
   services : {
     1 : '按鈕',
     2 : '定時',

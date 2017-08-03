@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LogoutIcon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
+import Cover from '../../components/Cover';
 
 import styles from './styles';
 import { logout, getUserInfo } from '../../actions/sessionActions';
@@ -33,16 +34,7 @@ class SideMenu extends React.Component {
     this.props.getUserInfo();
   }
 
-  closeDrawer() {
-    this.props.navigator.toggleDrawer({
-      side: 'left',
-      animated: true,
-      to: 'close'
-    });
-  }
-
   toScreen(screenProps) {
-    this.closeDrawer();
     this.props.navigator.push(screenProps);
   }
 
@@ -112,27 +104,17 @@ class SideMenu extends React.Component {
     return (
       <View  style={styles.container}>
         {this.props.isLoggingOut ? 
-         ( <View style={styles.cover}>
-            <ActivityIndicator
-              style={{marginTop:400}}
-              animating={true}
-              size='large'
-              color='#ffffff'
-            />
-          </View>
-         )
+         (<Cover />)
         : 
         <View style={{flex:1}}>
-
+          
           <View style={styles.userView} >
-
             <View style={styles.userInfo} >
               <View style={styles.userImg} >
                 <Icon name='person' size={70} color={R.colors.USER_IMG} />
               </View>
               <Text style={styles.username} >{user.username.substring(0,20)}</Text>
             </View>
-
             <View style={styles.logoutView} >
               <View style={styles.logoutEmpty} ></View>
               <View style={styles.logoutContent} >
@@ -142,7 +124,6 @@ class SideMenu extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
-
           </View>
 
 

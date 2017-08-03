@@ -63,11 +63,11 @@ export const logout = () => async (dispatch) => {
   await CombinationManager.unloadAllCombinations();
   await ServiceManager.clearAllService();
   await api.destroySession()
-  .then(response => {
-    dispatch({ type: UPDATE_UNAUTHENTICATED });
-    dispatch({ type: IS_NOT_LOGGING_OUT });
-    startLoginApp();
-  });
+    .then(response => {
+      dispatch({ type: UPDATE_UNAUTHENTICATED });
+      dispatch({ type: IS_NOT_LOGGING_OUT });
+      startLoginApp();
+    });
 };
 
 export const updateUsername = (username) => (dispatch) => {
@@ -89,7 +89,4 @@ export const getUserInfo = () => (dispatch) => {
     .then(data => (
       dispatch({ type: GET_USER_INFO, data })
     ))
-    .then(data => {
-      console.log(data)
-    });
 };
