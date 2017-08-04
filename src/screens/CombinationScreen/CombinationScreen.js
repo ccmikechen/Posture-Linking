@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler, Platform } from 'react-native';
+import { BackHandler, Platform, Dimensions } from 'react-native';
 
 import Combination from '../../containers/Combination';
 
@@ -86,15 +86,7 @@ class CombinationScreen extends React.Component {
           animationType: 'slide-up'
         });
       }
-      if (event.id == 'sideMenu') {
-        this.props.navigator.toggleDrawer({
-          side: 'left',
-          animated: true,
-          to: 'open'
-        });
-      }
     }
-
   }
 
   render() {

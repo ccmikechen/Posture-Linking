@@ -12,8 +12,8 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewIcon from 'react-native-vector-icons/MaterialIcons';
+import Dialog, { DialogButton } from 'react-native-md-dialog';
 
-import styles from './styles';
 import {
   updateCombinationList,
   notUpdateCombinationList,
@@ -24,7 +24,9 @@ import {
   selectCombinationId,
   refreshCombinationList
 } from '../../actions/combinationActions';
+import styles from './styles';
 import CombinationRow from '../../components/CombinationRow';
+import ShareDialog from '../../components/ShareDialog';
 
 class Combination extends React.Component {
   constructor(props) {
@@ -99,6 +101,10 @@ class Combination extends React.Component {
     }
   }
 
+  showDialog(data) {
+    this.refs.dialog.open();
+  }
+
   renderHiddenRow(combination) {
     let item = combination;
     if (combination.status === 2 ) {
@@ -106,7 +112,7 @@ class Combination extends React.Component {
     } else {
       return (
         <View style={styles.rowBack}>
-          <TouchableOpacity style={styles.touch} onPress = {() => {Alert.alert("目前尚未開放分享功能");}}>
+          <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item); }}>
             <Icon name='share-alt' size={40} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>
@@ -169,6 +175,20 @@ class Combination extends React.Component {
               color='grey'
             />
         }
+        <Dialog title='組合分享' ref='dialog' style={{height:150, alignItems: 'center'}} >
+          <View style={styles.buttonsContent} >
+            <TouchableOpacity style={styles.touchView} onPress={() => {alert(456);}} >
+              <View>
+                <Text style={styles.touchableText} >分享至Posture Linking社群</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.touchView} onPress={() => {alert(789);}} >
+              <View>
+                <Text style={styles.touchableText} >分享至其他社群</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </Dialog>
       </View>
     );
   }
