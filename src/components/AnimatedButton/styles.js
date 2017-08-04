@@ -9,19 +9,9 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   outerSizeRound: {
-    borderRadius: 9999,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    borderWidth: 0.1,
     opacity: 0.2
   },
   middleSizeRound: {
-    borderRadius: 9999,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    borderWidth: 0.1,
     opacity: 0.3
   },
   sizeRound: {
@@ -29,8 +19,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    borderWidth: 0.1,
-    opacity: 1
+    borderWidth: 0.1
   },
   pressInRound: {
     opacity: 0.5,

@@ -1,40 +1,27 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: R.colors.CONTAINER_BACKGROUND
-  },
   content:{
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   animatedButtonView:{
-    height: 250,
-    width: 300,
     alignItems: 'center',
-    margin: 15,
+    justifyContent: 'center',
     borderRadius: 20,
     backgroundColor: R.colors.BUTTONLIST_BACKGROUND
-  },
-  buttonText: {
-    fontSize: 30
-  },
-  viewButton:{
-    height:60,
-    width:300,
-    borderRadius:15,
-    backgroundColor: R.colors.BUTTON_UNDEFIND_BORDER,
-    flexDirection: 'row',
-    alignItems:'center',
-    justifyContent:'center',
-    marginTop: 15
   },
   noAuthorized:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: R.colors.CONTAINER_BACKGROUND,
+  },
+  authorized:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   imgTouch:{
     height: 200,
@@ -48,5 +35,30 @@ export default styles = StyleSheet.create({
   },
   description:{
     fontSize: 18
+  },
+  slider:{
+    marginBottom: 30
+  },
+  sliderContainer:{
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  minTouchable:{
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  minOuterButton:{
+    opacity: 0.2,
+    position: 'absolute'
+  },
+  minMiddleButton:{
+    opacity: 0.3,
+    position: 'absolute'
+  },
+  minButton:{
+    margin: 5,
+    borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
