@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text, Image } from 'react-native';
 
 import styles from './styles';
-import PostureDataEmitter from '../../ble/postureDevice';
+import PostureDevice from '../../ble/PostureDevice';
 import PostureRecognizer from '../../ble/PostureRecognizer';
 import {
   updateCurrentPosture
@@ -98,8 +98,8 @@ class PostureMonitor extends React.Component {
   }
 
   componentDidMount() {
-    this.postureDataEmitter = new PostureDataEmitter();
-    this.postureRecognizer = new PostureRecognizer(this.postureDataEmitter);
+    PostureDevice.start();
+    this.postureRecognizer = new PostureRecognizer();
     this.postureRecognizer.init().then(() => {
       this.postureRecognizer.addListener(this.handlePostureRecognition);
     });
@@ -107,7 +107,7 @@ class PostureMonitor extends React.Component {
 
   componentWillUnmount() {
     this.postureRecognizer.destroy();
-    this.postureDataEmitter.destroy();
+    PostureDevice.stop();
   }
 
   handlePostureRecognition({ result, name, id }) {

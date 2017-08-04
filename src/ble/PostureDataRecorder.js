@@ -1,13 +1,13 @@
 import { getChannel } from '../api/channel';
+import PostureDevice from './PostureDevice';
 
 class PostureDataRecorder {
 
-  constructor(dataEmitter) {
+  constructor() {
     this.isRecording = false;
     this.isStarted = false;
     this.isRecordingNewPart = false;
     this.sequenceNumber = 0;
-    this.dataEmitter = dataEmitter;
     this.allData = [];
     this.tempData = [];
     this.mode = null;
@@ -20,7 +20,8 @@ class PostureDataRecorder {
     this.channel.join();
 
     this.handleDataNotification = this.handleDataNotification.bind(this);
-    this.dataEmitter.on('posture:notification', this.handleDataNotification);
+    PostureDevice.on('posture:notification', this.handleDataNotification);
+    PostureDevice.start();
   }
 
   handleDataNotification(data) {
@@ -127,6 +128,8 @@ class PostureDataRecorder {
 
   destroy() {
     this.channel.leave();
+    PostureDevice.stop();
+    PostureDevice.removeListener('posture:notification', this.handleDataNotification);
   }
 }
 

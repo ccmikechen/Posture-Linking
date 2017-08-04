@@ -1,5 +1,6 @@
 import EventEmitter from 'events';
 import PostureDetector from '../modules/PostureDetector';
+import PostureDevice from './PostureDevice';
 import api from '../api/poselink';
 
 const DATA_COLS = 20;
@@ -8,14 +9,12 @@ const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
 
 class PostureRecognizer {
-  constructor(dataEmitter) {
+  constructor() {
     this.setPostures = this.setPostures.bind(this);
     this.predictPosture = this.predictPosture.bind(this);
     this.handlePredictResult = this.handlePredictResult.bind(this);
     this.handleDataNotification = this.handleDataNotification.bind(this);
     this.init = this.init.bind(this);
-
-    this.dataEmitter = dataEmitter;
   }
 
   async init() {
@@ -24,7 +23,8 @@ class PostureRecognizer {
     PostureDetector.reloadModel(postures.length, DATA_COLS, DATA_LIST_LENGTH);
     this.eventEmitter = new EventEmitter();
     this.dataList = [];
-    this.dataEmitter.on('posture:notification', this.handleDataNotification);
+    PostureDevice.on('posture:notification', this.handleDataNotification);
+    PostureDevice.start();
   }
 
   handleDataNotification(data) {
@@ -119,7 +119,8 @@ class PostureRecognizer {
 
   destroy() {
     this.removeAllListeners();
-    this.dataEmitter.removeListener('posture:notification', this.handleDataNotification);
+    PostureDevice.stop();
+    PostureDevice.removeListener('posture:notification', this.handleDataNotification);
   }
 }
 

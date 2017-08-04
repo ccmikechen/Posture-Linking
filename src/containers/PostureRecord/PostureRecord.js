@@ -24,7 +24,7 @@ import {
   clearRecordForm
 } from '../../actions/postureActions';
 
-import PostureDataEmitter from '../../ble/postureDevice';
+import PostureDevice from '../../ble/PostureDevice';
 import PostureDataRecorder from '../../ble/PostureDataRecorder';
 
 class PostureRecord extends React.Component {
@@ -48,13 +48,13 @@ class PostureRecord extends React.Component {
   }
 
   componentDidMount() {
-    this.postureDataEmitter = new PostureDataEmitter();
-    this.postureDataRecorder = new PostureDataRecorder(this.postureDataEmitter);
+    this.postureDataRecorder = new PostureDataRecorder();
+    PostureDevice.start();
   }
 
   componentWillUnmount() {
+    PostureDevice.stop();
     this.postureDataRecorder.destroy();
-    this.postureDataEmitter.destroy();
     this.props.clearRecordForm();
   }
 
