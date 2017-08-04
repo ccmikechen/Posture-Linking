@@ -9,6 +9,8 @@ import {
   updateCurrentPosture
 } from '../../actions/postureActions';
 
+import ServiceManager from '../../../lib/ServiceManager';
+
 const POSTURES = {
   '1': {
     image: R.images.postures.STANDING,
@@ -89,6 +91,9 @@ class PostureMonitor extends React.Component {
   constructor(props) {
     super(props);
 
+    this.currentPostureId = null;
+    this.postureTrigger = ServiceManager.getServiceByTypeName('trigger', 'posture');
+    this.postureOnActionEvent = this.postureTrigger.getEventByName('on action');
     this.handlePostureRecognition = this.handlePostureRecognition.bind(this);
   }
 
@@ -108,6 +113,12 @@ class PostureMonitor extends React.Component {
   handlePostureRecognition({ result, name, id }) {
     console.log('Result: ', result, name);
     this.props.updateCurrentPosture(id);
+
+    if ((this.currentPostureId != null) && (this.currentPostureId != id)) {
+      this.postureTrigger.trigger(this.postureOnActionEvent.id, { postureId: parseInt(id) });
+      console.log('trigger', parseInt(id));
+    }
+    this.currentPostureId = id;
   }
 
   getCurrentPostureInfoById(id) {

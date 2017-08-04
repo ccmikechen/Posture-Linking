@@ -176,9 +176,7 @@ export default {
   trigger: (eventId, payload) => (
     server.post('/trigger/trigger', {
       event_id: eventId,
-      payload: {
-        combination_id: payload.combinationId
-      }
+      payload
     })
   ),
   getPostures: () => (

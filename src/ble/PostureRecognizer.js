@@ -29,7 +29,6 @@ class PostureRecognizer {
 
   handleDataNotification(data) {
     let parsedData = this.parseDataToArray(data);
-    // console.log(data.band.acc);
 
     this.dataList.push(parsedData);
 

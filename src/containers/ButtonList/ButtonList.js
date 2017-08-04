@@ -30,6 +30,7 @@ class ButtonList extends React.Component {
     super(props);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.buttonTrigger = ServiceManager.getServiceByTypeName('trigger', 'button');
+    this.buttonOnClickEvent = this.buttonTrigger.getEventByName('on click');
     this.connectService = this.connectService.bind(this);
   }
 
@@ -40,7 +41,7 @@ class ButtonList extends React.Component {
 
   handleButtonPress(combinationId) {
     console.log(this, combinationId);
-    this.buttonTrigger.trigger({ combinationId });
+    this.buttonTrigger.trigger(this.buttonOnClickEvent.id, { combinationId });
   }
 
   shouldComponentUpdate() {
@@ -92,7 +93,7 @@ class ButtonList extends React.Component {
           this.buttonTrigger? (
             this.buttonTrigger.isConnected() == false?
             <View style= {styles.noAuthorized} >
-              <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}> 
+              <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}>
                 <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
                   <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
                   <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
