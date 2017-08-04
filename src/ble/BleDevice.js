@@ -7,6 +7,7 @@ import EventEmitter from 'events';
 import BleManager from 'react-native-ble-manager';
 
 import PostureDevice from './PostureDevice';
+import SmartBulbDevice from './SmartBulbDevice';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -18,6 +19,9 @@ const DEVICES = [
   }, {
     id: 'EC:84:B4:F9:07:64',
     type: 'posture'
+  }, {
+    id: '7C:66:9D:9E:2E:B9',
+    type: 'smartbulb'
   }
 ];
 
@@ -50,6 +54,10 @@ class BleDevice extends EventEmitter {
     switch (deviceInfo.type) {
       case 'posture':
         await PostureDevice.connect(deviceInfo.id);
+        return 'successed';
+        break;
+      case 'smartbulb':
+        await SmartBulbDevice.connect(deviceInfo.id);
         return 'successed';
         break;
       default:

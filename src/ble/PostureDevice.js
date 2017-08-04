@@ -1,3 +1,4 @@
+import { ToastAndroid } from 'react-native';
 import EventEmitter from 'events';
 import BleDevice from './BleDevice';
 
@@ -24,7 +25,7 @@ class PostureDevice extends EventEmitter {
 
   async connect(deviceId) {
     await BleManager.connect(deviceId);
-    console.log('Connected', deviceId);
+    ToastAndroid.show('Connected to band', ToastAndroid.SHORT);
 
     await BleManager.retrieveServices(deviceId);
 
