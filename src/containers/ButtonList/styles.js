@@ -43,6 +43,16 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  minRenderButtonView:{
+    height: 60,
+    width: 60,
+    borderRadius: 999,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 6,
+    marginRight: 6
+  },
   minTouchable:{
     alignItems: 'center',
     justifyContent: 'center'

@@ -99,19 +99,14 @@ class ButtonList extends React.Component {
     });
 
     return(
-      <View key={combination.id} style={{height: 60, width: 60, borderRadius: 999, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', marginLeft: 6, marginRight: 6}}>
+      <View key={combination.id} style={styles.minRenderButtonView}>
         <TouchableOpacity onPress={() => {
           this.refs.carousel.snapToItem(id);
         }} style={styles.minTouchable}>
           <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
-            <Image source={icon.icon} style={[
-              {
-                height: iconSize,
-                width: iconSize
-              }
-            ]} />
+            <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
           </View>
         </TouchableOpacity>
       </View>
