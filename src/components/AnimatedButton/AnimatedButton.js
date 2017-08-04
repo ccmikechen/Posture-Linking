@@ -13,16 +13,16 @@ import styles from './styles';
 
 class AnimatedButton extends React.Component {
   state = {
-    progressSize1: new Animated.ValueXY({x: this.props.size+200, y: 0}),
-    progressSize2: new Animated.ValueXY({x: this.props.size+125, y: 0}),
-    progressSize3: new Animated.ValueXY({x: this.props.size+50, y: 0}),
-    progressSpringOuterSize: new Animated.Value(this.props.size+30),
-    progressSpringMiddleSize: new Animated.Value(this.props.size+15),
+    progressSize1: new Animated.ValueXY({x: this.props.size * 1.9, y: 0}),
+    progressSize2: new Animated.ValueXY({x: this.props.size * 1.6, y: 0}),
+    progressSize3: new Animated.ValueXY({x: this.props.size * 1.3, y: 0}),
+    progressSpringOuterSize: new Animated.Value(this.props.size * 1.2),
+    progressSpringMiddleSize: new Animated.Value(this.props.size * 1.1),
     progressSpringSize: new Animated.Value(this.props.size),
     isPressIn: false,
     count: 0,
-    outerSize: this.props.size + 30,
-    middleSize: this.props.size + 15,
+    outerSize: this.props.size * 1.2,
+    middleSize: this.props.size * 1.1,
     size: this.props.size,
     checkIcon: R.images.ANIMATED_CHECK,
     checkIconOpacity: new Animated.Value(0),
@@ -39,7 +39,7 @@ class AnimatedButton extends React.Component {
   }
 
   componentDidMount() {
-    let duration=500, easing=Easing.bezier(0.5,-4,0.5,4);
+    let duration=400, easing=Easing.bezier(0.5,-4,0.5,4);
     this.timer = Animated.sequence([
       Animated.parallel(['progressSize1', 'progressSize2', 'progressSize3'].map(progressSize => {
         return Animated.timing(this.state[progressSize], {
@@ -51,7 +51,7 @@ class AnimatedButton extends React.Component {
         Animated.timing(
           this.state.progressSpringOuterSize,
           {
-            toValue: this.state.outerSize+10,
+            toValue: this.state.outerSize * 1.1,
             duration: duration,
             easing: easing
           }
@@ -59,7 +59,7 @@ class AnimatedButton extends React.Component {
         Animated.timing(
           this.state.progressSpringMiddleSize,
           {
-            toValue: this.state.middleSize+10,
+            toValue: this.state.middleSize * 1.1,
             duration: duration,
             easing: easing
           }
@@ -67,14 +67,14 @@ class AnimatedButton extends React.Component {
         Animated.timing(
           this.state.progressSpringSize,
           {
-            toValue: this.state.size+10,
+            toValue: this.state.size * 1.1,
             duration: duration,
             easing: easing
           }
         ),
         Animated.parallel(['progressSize1', 'progressSize2', 'progressSize3'].map(progressSize => {
           return Animated.timing(this.state[progressSize], {
-            toValue: {x: this.state.size+10, y: 0.5},
+            toValue: {x: this.state.size * 1.1, y: 0.5},
             duration: duration,
             easing: easing
           });
@@ -123,9 +123,9 @@ class AnimatedButton extends React.Component {
 
   handleButtonPressOut() {
     this.timer.reset();
-    this.state.progressSize1.setValue({x: this.state.size+200, y: 0});
-    this.state.progressSize2.setValue({x: this.state.size+125, y: 0});
-    this.state.progressSize3.setValue({x: this.state.size+50, y: 0});
+    this.state.progressSize1.setValue({x: this.state.size * 1.9, y: 0});
+    this.state.progressSize2.setValue({x: this.state.size * 1.6, y: 0});
+    this.state.progressSize3.setValue({x: this.state.size * 1.3, y: 0});
     this.state.progressSpringOuterSize.setValue(this.state.outerSize);
     this.state.progressSpringMiddleSize.setValue(this.state.middleSize);
     this.state.progressSpringSize.setValue(this.state.size);
@@ -140,9 +140,9 @@ class AnimatedButton extends React.Component {
     if (finished) {
       this.buttonOnCheck();
     }
-    this.state.progressSize1.setValue({x: this.state.size+200, y: 0});
-    this.state.progressSize2.setValue({x: this.state.size+125, y: 0});
-    this.state.progressSize3.setValue({x: this.state.size+50, y: 0});
+    this.state.progressSize1.setValue({x: this.state.size * 1.9, y: 0});
+    this.state.progressSize2.setValue({x: this.state.size * 1.6, y: 0});
+    this.state.progressSize3.setValue({x: this.state.size * 1.3, y: 0});
     this.state.progressSpringOuterSize.setValue(this.state.outerSize);
     this.state.progressSpringMiddleSize.setValue(this.state.middleSize);
     this.state.progressSpringSize.setValue(this.state.size);
@@ -177,7 +177,7 @@ class AnimatedButton extends React.Component {
       color,
       icon
     } = this.props;
-    let touchSize = this.props.size + 50;
+    let touchSize = this.props.size * 1.5;
     let containerStyle = isPressIn?
           styles.pressInRound : styles.pressOutRound;
 
@@ -229,6 +229,7 @@ class AnimatedButton extends React.Component {
             }
           ]}>
             <Animated.View style={[
+              styles.sizeRound,
               styles.outerSizeRound,
               {
                 backgroundColor: color,
@@ -238,6 +239,7 @@ class AnimatedButton extends React.Component {
               }
             ]} />
             <Animated.View style={[
+              styles.sizeRound,
               styles.middleSizeRound,
               {
                 backgroundColor: color,
