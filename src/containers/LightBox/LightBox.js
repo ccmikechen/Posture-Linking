@@ -24,7 +24,7 @@ class LightBox extends React.Component {
     };
 
     return (
-      <View style={{ backgroundColor:'white', height: 300, width: 300 }} >
+      <View style={{ backgroundColor:'white', height: 300, width: 300, borderRadius: 20 }} >
         <ShareDialog data={data} />
         <Button
           title= {'Close'}
