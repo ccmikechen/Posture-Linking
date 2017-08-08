@@ -9,6 +9,7 @@ import {
   Alert
  } from 'react-native';
 
+import PosturePartRecordingPanel from '../../components/PosturePartRecordingPanel';
 import styles from './styles';
 import {
   updateSelectedRecordHeight,
@@ -17,11 +18,13 @@ import {
   updateSelectedRecordPosture,
   startRecording,
   stopRecording,
+  startRecordingNewPart,
+  stopRecordingNewPart,
   loadPostureTypes,
   clearRecordForm
 } from '../../actions/postureActions';
 
-import PostureDataEmitter from '../../ble/postureDevice';
+import PostureDevice from '../../ble/PostureDevice';
 import PostureDataRecorder from '../../ble/PostureDataRecorder';
 
 class PostureRecord extends React.Component {
@@ -37,6 +40,7 @@ class PostureRecord extends React.Component {
     this.handleStopButtonPress = this.handleStopButtonPress.bind(this);
     this.saveRecord = this.saveRecord.bind(this);
     this.cancelRecord = this.cancelRecord.bind(this);
+    this.handleStartNewPart = this.handleStartNewPart.bind(this);
   }
 
   componentWillMount() {
@@ -44,13 +48,13 @@ class PostureRecord extends React.Component {
   }
 
   componentDidMount() {
-    this.postureDataEmitter = new PostureDataEmitter();
-    this.postureDataRecorder = new PostureDataRecorder(this.postureDataEmitter);
+    this.postureDataRecorder = new PostureDataRecorder();
+    PostureDevice.start();
   }
 
   componentWillUnmount() {
+    PostureDevice.stop();
     this.postureDataRecorder.destroy();
-    this.postureDataEmitter.destroy();
     this.props.clearRecordForm();
   }
 
@@ -60,13 +64,13 @@ class PostureRecord extends React.Component {
       weight: parseFloat(this.props.weight),
       insoleSize: this.props.insoleSize,
       posture: this.props.postureType
-    });
+    }, 'dynamic_short');
   }
 
   stopRecording() {
     this.postureDataRecorder.stop();
 
-    Alert.alert('Posture Record', 'Save record?', [
+    Alert.alert(R.strings.APP_NAME, 'Save record?', [
       { text: 'Yes', onPress: this.saveRecord },
       { text: 'No', onPress: this.cancelRecord }
     ], {
@@ -75,12 +79,15 @@ class PostureRecord extends React.Component {
   }
 
   saveRecord() {
-    this.postureDataRecorder.save();
-    console.log('saved');
+    this.postureDataRecorder.save(() => {
+      this.props.stopRecording();
+      console.log('saved');
+    });
   }
 
   cancelRecord() {
     this.postureDataRecorder.reset();
+    this.props.stopRecording();
     console.log('canceled');
   }
 
@@ -88,7 +95,7 @@ class PostureRecord extends React.Component {
     if (isNaN(height)) {
       console.log(this.props.height);
       this.props.updateSelectedRecordHeight(this.props.height);
-      Alert.alert('Please enter numbers only');
+      Alert.alert(R.strings.APP_NAME, R.strings.NUMBERS_ONLY_WARNING);
     } else {
       this.props.updateSelectedRecordHeight(height);
     }
@@ -97,7 +104,7 @@ class PostureRecord extends React.Component {
   handleWeightChange(weight) {
     if (isNaN(weight)) {
       this.props.updateSelectedRecordWeight(this.props.weight);
-      Alert.alert('Please enter numbers only');
+      Alert.alert(R.strings.APP_NAME, R.strings.NUMBERS_ONLY_WARNING);
     } else {
       this.props.updateSelectedRecordWeight(weight);
     }
@@ -117,8 +124,14 @@ class PostureRecord extends React.Component {
   }
 
   handleStopButtonPress() {
-    this.props.stopRecording();
     this.stopRecording();
+  }
+
+  handleStartNewPart() {
+    this.props.startRecordingNewPart();
+    this.postureDataRecorder.startNewPart(() => {
+      this.props.stopRecordingNewPart();
+    });
   }
 
   render() {
@@ -210,6 +223,16 @@ class PostureRecord extends React.Component {
             </Text>
           </TouchableHighlight>
         </View>
+        {
+          this.props.isRecording?
+            <PosturePartRecordingPanel
+              onStartNewPart={() => this.handleStartNewPart()}
+              onSave={() => this.handleStopButtonPress()}
+              isOpen={this.props.isRecording}
+              isRecording={this.props.isRecordingNewPart}
+            />
+          : null
+        }
       </View>
     );
   }
@@ -221,6 +244,7 @@ export default connect((state) => ({
   insoleSize: state.getIn(['posture', 'recordForm', 'insoleSize']),
   postureType: state.getIn(['posture', 'recordForm', 'posture']),
   isRecording: state.getIn(['posture', 'isRecording']),
+  isRecordingNewPart: state.getIn(['posture', 'isRecordingNewPart']),
   postureTypes: state.getIn(['posture', 'postureTypes'])
 }), {
   updateSelectedRecordHeight,
@@ -229,6 +253,8 @@ export default connect((state) => ({
   updateSelectedRecordPosture,
   startRecording,
   stopRecording,
+  startRecordingNewPart,
+  stopRecordingNewPart,
   loadPostureTypes,
   clearRecordForm
 })(PostureRecord);

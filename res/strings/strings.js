@@ -33,6 +33,8 @@ const strings = {
   IF_TEXT: 'IF ○○○',
   THEN_TEXT: 'THEN ○○',
   DETAILED_SETTING: 'Detailed settings',
+  NUMBERS_ONLY_WARNING: 'Please enter numbers only',
+  SAVE_BUTTON_TEXT: 'Save',
 
   services : {
     1 : 'Button',
@@ -111,6 +113,27 @@ const strings = {
       description : '"Capture the photo"',
       options: ['']
     }
+  },
+
+  postureNames: {
+    'lying down': '躺著',
+    'lying on front': '趴著',
+    'sitting': '坐著',
+    'shaking hand when sitting': '坐著揮手',
+    'claping hands when sitting': '坐著拍手',
+    'right step when sitting': '坐著踏右腳',
+    'left step when sitting': '坐著踏左腳',
+    'cross right leg': '翹右腳',
+    'cross left leg': '翹左腳',
+    'play computer': '打電腦',
+    'standing': '站著',
+    'shaking hand when standing': '站著揮手',
+    'jumping': '跳躍',
+    'claping hands when standing': '站著拍手',
+    'right step when standing': '站著踏右腳',
+    'left step when standing': '站著踏左腳',
+    'walking': '走路',
+    'running': '跑步'
   }
 };
 

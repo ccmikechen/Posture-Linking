@@ -1,9 +1,18 @@
+import { ToastAndroid } from 'react-native';
 import EventEmitter from 'events';
-import * as BleDevices from './bleDevices';
+import BleDevice from './BleDevice';
 
-class PostureDataEmitter extends EventEmitter {
+import Buffer from 'bops';
+import BleManager from 'react-native-ble-manager';
+
+const serviceId = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const characteristic = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+
+class PostureDevice extends EventEmitter {
+
   constructor() {
     super();
+
     this.handleNotification = this.handleNotification.bind(this);
     this.init();
   }
@@ -11,8 +20,39 @@ class PostureDataEmitter extends EventEmitter {
   init() {
     this.bandData = null;
     this.insoleData = null;
+    this.isConnected = false;
+  }
 
-    BleDevices.on('posture:notification', this.handleNotification);
+  async connect(deviceId) {
+    await BleManager.connect(deviceId);
+    ToastAndroid.show('Connected to band', ToastAndroid.SHORT);
+
+    await BleManager.retrieveServices(deviceId);
+
+    BleDevice.on('posture:notification', this.handleNotification);
+    this.deviceId = deviceId;
+    this.isConnected = true;
+  }
+
+  start() {
+    if (!this.isConnected) {
+      return false;
+    }
+
+    setTimeout(() => {
+      BleManager.startNotification(this.deviceId, serviceId, characteristic)
+      .then(() => {
+        console.log('Start Notification');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }, 1000);
+  }
+
+  stop() {
+    BleManager.stopNotification(this.deviceId, serviceId, characteristic)
+      .catch((e) => console.log(e));
   }
 
   handleNotification(value) {
@@ -31,12 +71,12 @@ class PostureDataEmitter extends EventEmitter {
 
   handleBandData(data) {
     this.bandData = {
-      acc: {
+      gyro: {
         x: this.parseBand3dData(data[1], data[2]),
         y: this.parseBand3dData(data[3], data[4]),
         z: this.parseBand3dData(data[5], data[6])
       },
-      gyro: {
+      acc: {
         x: this.parseBand3dData(data[7], data[8]),
         y: this.parseBand3dData(data[9], data[10]),
         z: this.parseBand3dData(data[11], data[12])
@@ -73,11 +113,13 @@ class PostureDataEmitter extends EventEmitter {
   }
 
   parseBand3dData(low, high) {
-    return ((high << 8) | (low & 0xFF)) / 0xF000;
+    let buf = Buffer.from([low, high]);
+    return Buffer.readInt16LE(buf) / 0x4000;
   }
 
   parseInsoleAccData(low, high) {
-    return ((high << 8) | (low & 0xFF)) / 0xF000;
+    let buf = Buffer.from([low, high]);
+    return Buffer.readInt16LE(buf) / 0x4000;
   }
 
   parseInsolePressureData(data) {
@@ -100,8 +142,8 @@ class PostureDataEmitter extends EventEmitter {
   }
 
   destroy() {
-    BleDevices.removeListener('posture:notification', this.handleNotification);
+    BleDevice.removeListener('posture:notification', this.handleNotification);
   }
 }
 
-export default PostureDataEmitter;
+export default new PostureDevice();

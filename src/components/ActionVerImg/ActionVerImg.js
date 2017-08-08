@@ -1,7 +1,11 @@
 import React from 'React';
 import { View, Image } from 'react-native';
 
-const ActionVerImg = ({ size=1, icon='', color= R.colors.PUZZLE_BACK }) => {
+const ActionVerImg = ({
+	size = 1,
+	icon = '',
+	color = R.colors.PUZZLE_BACK
+}) => {
 	size = size * 200;
 	let iconWidth=size*0.45, iconHeight=size*0.45, iconBottom=size*0.15;
 

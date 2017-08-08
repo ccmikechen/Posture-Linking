@@ -1,21 +1,20 @@
 import EventEmitter from 'events';
 import PostureDetector from '../modules/PostureDetector';
+import PostureDevice from './PostureDevice';
 import api from '../api/poselink';
 
-const DATA_COLS = 17;
+const DATA_COLS = 20;
 const DATA_LIST_LENGTH = 8;
 const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
 
 class PostureRecognizer {
-  constructor(dataEmitter) {
+  constructor() {
     this.setPostures = this.setPostures.bind(this);
     this.predictPosture = this.predictPosture.bind(this);
     this.handlePredictResult = this.handlePredictResult.bind(this);
     this.handleDataNotification = this.handleDataNotification.bind(this);
     this.init = this.init.bind(this);
-
-    this.dataEmitter = dataEmitter;
   }
 
   async init() {
@@ -24,11 +23,14 @@ class PostureRecognizer {
     PostureDetector.reloadModel(postures.length, DATA_COLS, DATA_LIST_LENGTH);
     this.eventEmitter = new EventEmitter();
     this.dataList = [];
-    this.dataEmitter.on('posture:notification', this.handleDataNotification);
+    PostureDevice.on('posture:notification', this.handleDataNotification);
+    PostureDevice.start();
   }
 
   handleDataNotification(data) {
-    this.dataList.push(this.parseDataToArray(data));
+    let parsedData = this.parseDataToArray(data);
+
+    this.dataList.push(parsedData);
 
     if (this.dataList.length + 1 > DATA_LIST_LENGTH + BATCH_GAP) {
       this.dataList = this.dataList.slice(BATCH_GAP, this.dataList.length);
@@ -53,7 +55,7 @@ class PostureRecognizer {
       ...this.normalizeAcc(data.insole.right),
       ...this.normalizePressure(data.insole.right),
       ...this.normalizeAcc(data.band.acc),
-//      ...this.normalizeAcc(data.band.gyro)
+      ...this.normalizeAcc(data.band.gyro)
     ];
 
     return normalizedData;
@@ -117,7 +119,8 @@ class PostureRecognizer {
 
   destroy() {
     this.removeAllListeners();
-    this.dataEmitter.removeListener('posture:notification', this.handleDataNotification);
+    PostureDevice.stop();
+    PostureDevice.removeListener('posture:notification', this.handleDataNotification);
   }
 }
 

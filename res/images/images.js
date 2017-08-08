@@ -29,10 +29,22 @@ const images = {
   VERTRIGGER: require('./puzzle/verTrigger.png'),
   VERACTION: require('./puzzle/verAction.png'),
   APP_ICON: require('./appLogo/posture-linking@64.png'),
+	
   postures: {
     SITTING: require('./posture/sitting.png'),
     STANDING: require('./posture/standing.png'),
-    JUMPING: require('./posture/jumping.png')
+		WALKING: require('./posture/walking.png'),
+    JUMPING: require('./posture/jumping.png'),
+		AKIMBO: require('./posture/akimbo.png'),
+		COMPUTER: require('./posture/computer.png'),
+		UPSTAIRS: require('./posture/upstairs.png'),
+		DOWNSTAIRS: require('./posture/downstairs.png'),
+		DRINK_WHEN_SITTING: require('./posture/drink_when_sitting.png'),
+		DUCK: require('./posture/duck.png'),
+		LEFT_LEG_CROSS: require('./posture/left_leg_cross.png'),
+		RIGHT_LEG_CROSS: require('./posture/right_leg_cross.png'),
+		PHONE_WHEN_SITTING: require('./posture/phone_when_sitting.png'),
+		PHONE_WHEN_STANDING: require('./posture/phone_when_standing.png')
   }
 };
 

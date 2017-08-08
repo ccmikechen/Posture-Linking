@@ -144,6 +144,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-charts-wrapper')
     compile project(':react-native-device-info')
     compile project(':react-native-fs')
     compile project(':react-native-push-notification')

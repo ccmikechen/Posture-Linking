@@ -9,6 +9,8 @@ export const UPDATE_RECORD_STOPED = 'UPDATE_RECORD_STOPED';
 export const UPDATE_POSTURE_TYPES = 'UPDATE_POSTURE_TYPES';
 export const CLEAR_SELECTED_RECORD_FORM = 'CLEAR_SELECTED_RECORD_FORM';
 export const UPDATE_CURRENT_POSTURE = 'UPDATE_CURRENT_POSTURE';
+export const UPDATE_NEW_PART_RECORD_STARTED = 'UPDATE_NEW_PART_RECORD_STARTED';
+export const UPDATE_NEW_PART_RECORD_STOPED = 'UPDATE_NEW_PART_RECORD_STOPED';
 
 export const updateSelectedRecordHeight = (value) => (dispatch) => {
   dispatch({ type: UPDATE_SELECTED_RECORD_HEIGHT, value });
@@ -36,9 +38,9 @@ export const stopRecording = () => (dispatch) => {
 
 export const loadPostureTypes = () => (dispatch) => {
   api.getPostures()
-  .then(postures => {
-    dispatch({ type: UPDATE_POSTURE_TYPES, postures });
-  });
+    .then(postures => {
+      dispatch({ type: UPDATE_POSTURE_TYPES, postures });
+    });
 };
 
 export const clearRecordForm = () => (dispatch) => {
@@ -47,4 +49,12 @@ export const clearRecordForm = () => (dispatch) => {
 
 export const updateCurrentPosture = (id) => (dispatch) => {
   dispatch({ type: UPDATE_CURRENT_POSTURE, id });
+};
+
+export const startRecordingNewPart = () => (dispatch) => {
+  dispatch({ type: UPDATE_NEW_PART_RECORD_STARTED });
+};
+
+export const stopRecordingNewPart = () => (dispatch) => {
+  dispatch({ type: UPDATE_NEW_PART_RECORD_STOPED });
 };

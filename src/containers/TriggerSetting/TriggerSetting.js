@@ -94,11 +94,11 @@ class TriggerSetting extends React.Component {
             onSelect={(value) => this.onSelectOption(value, option.name)}
             defaultText={this.defaultText}
            >
-            {option.options.map(ItemOption=>(
+            {option.options.map(item => (
               <Option
-                value={ItemOption.toString()}
-                key={ItemOption.toString()}>
-                  {ItemOption.toString()}
+                value={item.value}
+                key={item.value}>
+                  {item.name}
               </Option>
             ))}
           </Select>

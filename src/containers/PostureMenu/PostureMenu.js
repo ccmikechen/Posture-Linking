@@ -32,6 +32,12 @@ class PostureMenu extends React.Component {
         case 'update':
           this.updateModel();
           break;
+        case 'records':
+          this.props.navigator.push({
+            screen: 'PostureRecordListScreen',
+            title: 'Posture List'
+          });
+          break;
       }
     };
   }
@@ -61,6 +67,10 @@ class PostureMenu extends React.Component {
         <TestButton
           onPress={this.handleButtonPress('update')}
           text='update'
+        />
+        <TestButton
+          onPress={this.handleButtonPress('records')}
+          text='record list'
         />
       </View>
     );

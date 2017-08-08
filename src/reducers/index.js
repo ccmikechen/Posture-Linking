@@ -3,6 +3,7 @@ import session from './session';
 import ble from './ble';
 import combination from './combination';
 import posture from './posture';
+import postureRecord from './postureRecord';
 import service from './service';
 import { reducer as form } from 'redux-form/immutable'
 
@@ -11,6 +12,7 @@ const appReducer = combineReducers({
     ble,
     combination,
     posture,
+    postureRecord,
     service,
     form
 });
