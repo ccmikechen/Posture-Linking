@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
   logoText: {
     color: '#fca7c3',
     fontSize: 25,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   errorText: {
     color: '#e84f1e',
@@ -21,9 +21,4 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5
   },
-  KeyboardContainer: {
-    flex: 1,
-    backgroundColor: '#616161',
-    paddingTop: 120
-  }
 });

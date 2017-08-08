@@ -71,7 +71,7 @@ export const startiOSMainApp = () => {
     {
       label: R.strings.SERVICE_LIST_TITLE,
       screen: 'ServiceListScreen', 
-      icon: iconsMap['room-service'],
+      icon: iconsMap['widgets'],
       iconInsets: { 
         top: 3, 
         left: 0,
@@ -81,7 +81,7 @@ export const startiOSMainApp = () => {
       title: R.strings.SERVICE_LIST_TITLE,
     },
     {
-      label: '選單',
+      label: R.strings.MENU,
       screen: 'SideMenuScreen', 
       icon: iconsMap['menu'],
       iconInsets: { 
@@ -94,12 +94,11 @@ export const startiOSMainApp = () => {
     }
   ],
   tabsStyle: {
-    tabBarButtonColor: '#bbb', 
+    tabBarButtonColor: '#6c6869', 
+    tabBarLabelColor: '#6c6869',
     tabBarSelectedButtonColor: R.colors.NAVBAR_BACKGROUND,
+    tabBarSelectedLabelColor: R.colors.NAVBAR_BACKGROUND,
     tabBarBackgroundColor: R.colors.WHITE_TEXT
-  },
-  appStyle: {
-    orientation: 'portrait' 
   },
   passProps: {},
 });

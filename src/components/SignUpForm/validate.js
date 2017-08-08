@@ -1,34 +1,25 @@
 const validate = values => {
   const errors = {}
   if (!values.get('username')) {
-    errors.username = 'Required'
-  } else if (values.get('username').length > 15) {
-    errors.username = 'Must be 15 characters or less'
+    errors.username = '必填'
+  } else if (values.get('username').length > 15 || (values.get('username').length < 8)) {
+    errors.username = '最多15字元最少8字元'
   }
   if (!values.get('email')) {
-    errors.email = 'Required'
+    errors.email = '必填'
   } else if (!/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(values.get('email'))) {
-    errors.email = 'Invalid email address'
+    errors.email = 'Email格式錯誤'
   }
   if (!values.get('password')) {
-    errors.password = 'Required'
+    errors.password = '必填'
   } else if (values.get('password').length < 8) {
-    errors.password = 'Must be 8 characters or more'
+    errors.password = '需要8字元以上'
   }
   if (!values.get('confirmPassword')) {
-    errors.confirmPassword = 'Required'
+    errors.confirmPassword = '必填'
   } else if (values.get('confirmPassword') != values.get('password')) {
-    errors.confirmPassword = 'Password and Confirm Password are different'
+    errors.confirmPassword = '密碼與確認密碼不同'
   }
-  if (!values.get('nickname')) {
-    errors.nickname = 'Required'
-  } 
-  if (!values.get('firstname')) {
-    errors.firstname = 'Required'
-  } 
-  if (!values.get('lastname')) {
-    errors.lastname = 'Required'
-  } 
   return errors
 }
 

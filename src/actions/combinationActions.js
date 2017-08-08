@@ -28,7 +28,8 @@ export const IS_GETTING_EVENTS = 'IS_GETTING_EVENTS';
 export const IS_NOT_GETTING_EVENTS= 'IS_NOT_GETTING_EVENTS';
 export const IS_GETTING_EVENT = 'IS_GETTING_EVENT';
 export const IS_NOT_GETTING_EVENT = 'IS_NOT_GETTING_EVENT';
-export const SELECT_OPTION = 'SELECT_OPTION';
+export const SELECT_TRIGGER_OPTION = 'SELECT_TRIGGER_OPTION';
+export const SELECT_ACTION_OPTION = 'SELECT_ACTION_OPTION';
 export const IS_GETTING_TRIGGER_CONFIG = 'IS_GETTING_TRIGGER_CONFIG';
 export const IS_GETTING_ACTION_CONFIG = 'IS_GETTING_ACTION_CONFIG';
 export const IS_NOT_GETTING_TRIGGER_CONFIG = 'IS_NOT_GETTING_TRIGGER_CONFIG';
@@ -179,8 +180,12 @@ export const getEvent = (id) => (dispatch) => {
   dispatch({ type: IS_GETTING_EVENT });
 };
 
-export const setSelectedOption = (option) => (dispatch) => {
-  dispatch({ type: SELECT_OPTION, option });
+export const setSelectedTriggerOption = (option) => (dispatch) => {
+  dispatch({ type: SELECT_TRIGGER_OPTION, option });
+};
+
+export const setSelectedActionOption = (option) => (dispatch) => {
+  dispatch({ type: SELECT_ACTION_OPTION, option });
 };
 
 export const createCombination = (data) => (dispatch) => {

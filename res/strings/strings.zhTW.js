@@ -33,6 +33,7 @@ const strings = {
   EDIT_COMBINATION: '編輯組合',
   CLICK_THIS: '點擊這裡',
   AUTHORIZING : '認證授權',
+  MENU: '選單',
   NUMBERS_ONLY_WARNING: '請輸入數字',
   SAVE_BUTTON_TEXT: '儲存',
 

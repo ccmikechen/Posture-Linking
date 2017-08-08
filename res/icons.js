@@ -23,10 +23,11 @@ const icons = {
   // Use other Icon provider, see the logic at L39
   'facebook': [30, '#bbb', FontAwesome],
   'facebook--active': [30, '#fff', FontAwesome],
-  'extension': [30, '#bbb', MaterialIcons],
-  'touch-app': [30, '#bbb', MaterialIcons],
-  'room-service': [30, '#bbb', MaterialIcons],
-  'menu': [30, '#bbb', MaterialIcons]
+  'extension': [30, '#000', MaterialIcons],
+  'touch-app': [30, '#000', MaterialIcons],
+  'room-service': [30, '#000', MaterialIcons],
+  'menu': [30, '#000', MaterialIcons],
+  'widgets': [30, '#000', MaterialIcons]
 }
 
 const defaultIconProvider = Ionicons;

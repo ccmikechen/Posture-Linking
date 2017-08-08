@@ -50,12 +50,10 @@ export default styles = StyleSheet.create({
   logoutText:{
     fontSize: 14,
     color: R.colors.USER_TEXT,
-    marginLeft:5
+    marginLeft: 5
   },
-
-
   content:{
-  	flex:14,
+  	flex: 14,
   	flexDirection: 'column',
   	backgroundColor: R.colors.MENU_BACKGROUND
   },
@@ -78,15 +76,6 @@ export default styles = StyleSheet.create({
     backgroundColor: R.colors.MENU_BACKGROUND
   },
   versionText:{
-    fontSize:14
-	},
-	cover: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+    fontSize: 14
+	}
 });

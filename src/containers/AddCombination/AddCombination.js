@@ -171,7 +171,7 @@ class AddCombination extends React.Component {
           : 'Action';
 
     return (
-      <ScrollView style={styles.scrollView}>
+      <KeyboardAwareScrollView style={styles.scrollView}>
         <View style={styles.imgContent} >
           <View style={styles.triggerImg} >
             <TouchableOpacity onPress={this.handelTrigger.bind(this)} >
@@ -194,7 +194,7 @@ class AddCombination extends React.Component {
             this.renderOK() : null
           }
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
     );
   }

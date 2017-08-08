@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LogoutIcon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
+import Cover from '../../components/Cover';
 
 import styles from './styles';
 import { logout, getUserInfo } from '../../actions/sessionActions';
@@ -117,16 +118,9 @@ class SideMenu extends React.Component {
     let user = this.props.user;
     return (
       <View style={styles.container}>
-        {this.props.isLoggingOut? (
-          <View style={styles.cover}>
-            <ActivityIndicator
-              style={{marginTop:400}}
-              animating={true}
-              size='large'
-              color='#ffffff'
-            />
-          </View>
-        ) :
+        {this.props.isLoggingOut?
+          (<Cover />)
+        :
           <View style={{flex:1}}>
             <View style={styles.userView} >
               <View style={styles.userInfo} >

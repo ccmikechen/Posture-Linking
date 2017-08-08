@@ -5,23 +5,19 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 
 import styles from './styles';
 import {
   setActionConfig,
   getEvent,
-  setSelectedOption,
+  setSelectedActionOption,
   setDescription
 } from '../../actions/combinationActions';
 
-import DropDown, {
-  Select,
-  Option,
-  OptionList,
-} from 'react-native-selectme';
-
+import { Select, Option } from "react-native-chooser";
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
@@ -31,6 +27,30 @@ class ActionSetting extends React.Component {
   constructor(props) {
     super(props);
     this.config={};
+    this.defaultText = R.strings.SELECT_TIME;
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'close') {
+        Alert.alert(
+          'Posture Linking',
+          '您確定要關閉新增組合',
+          [
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.closeScreen()},
+          ],
+          { cancelable: false }
+        );
+      }
+    }
+  }
+
+  closeScreen() {
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
   }
 
   componentWillMount() {
@@ -56,7 +76,8 @@ class ActionSetting extends React.Component {
 
   onSelectOption(value, name) {
     this.config[name] = value;
-    this.props.setSelectedOption(value);
+    this.defaultText = value;
+    this.props.setSelectedActionOption(this.config);
   }
 
   renderOption(option, i) {
@@ -65,11 +86,9 @@ class ActionSetting extends React.Component {
         <Text style={styles.optionText}>{R.strings.events[this.props.selectedEvent.id].options[i]}</Text>
         <View style={styles.optionView}>
           <Select
-            width={250}
-            ref={`SELECT:${option.name}`}
-            optionListRef={this._getOptionList.bind(this)}
+            optionListStyle = {styles.optionList}
             onSelect={(value) => this.onSelectOption(value, option.name)}
-            defaultValue={R.strings.SELECT_TIME}
+            defaultText={this.defaultText}
            >
             {option.options.map(ItemOption=>(
               <Option 
@@ -79,7 +98,6 @@ class ActionSetting extends React.Component {
               </Option>
             ))}
           </Select>
-          <OptionList overlayStyles={styles.optionList} ref="OPTIONLIST"/>
         </View>
       </View>
     )
@@ -154,11 +172,11 @@ export default connect((state) => ({
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
   selectedEvent: state.getIn(['combination', 'selectedEvent']),
-  selectedOption: state.getIn(['combination', 'selectedOption'])
+  selectedActionOption: state.getIn(['combination', 'selectedOption'])
 }), {
   setActionConfig,
   getEvent,
-  setSelectedOption,
+  setSelectedActionOption,
   setDescription
 })(ActionSetting);
 

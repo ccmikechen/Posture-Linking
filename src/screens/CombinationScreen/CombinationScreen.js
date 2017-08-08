@@ -82,7 +82,8 @@ class CombinationScreen extends React.Component {
           screen:'AddCombinationScreen',
           title: R.strings.ADD_COMBINATION,
           passProps: {},
-          animated:true,
+          animated:false,
+          backButtonHidden: true,
           animationType: 'slide-up'
         });
       }
