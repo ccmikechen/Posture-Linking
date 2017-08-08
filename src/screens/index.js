@@ -23,6 +23,7 @@ import PostureDeviceScannerScreen from './PostureDeviceScannerScreen';
 import SideMenuScreen from './SideMenuScreen';
 import LoginScreen from './LoginScreen';
 import SignUpScreen from './SignUpScreen';
+import LightBoxScreen from './LightBoxScreen';
 
 export function registerScreens() {
   Navigation.registerComponent('HomeScreen', () => HomeScreen, store, Provider);
@@ -46,4 +47,5 @@ export function registerScreens() {
   Navigation.registerComponent('SideMenuScreen', () => SideMenuScreen, store, Provider);
   Navigation.registerComponent('LoginScreen', ()=> LoginScreen, store, Provider);
   Navigation.registerComponent('SignUpScreen', ()=> SignUpScreen, store, Provider);
+  Navigation.registerComponent('LightBoxScreen', ()=> LightBoxScreen, store, Provider);
 };

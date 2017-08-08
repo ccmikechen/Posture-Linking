@@ -49,11 +49,11 @@ class Combination extends React.Component {
 
   showAlert(combination) {
     Alert.alert(
-      '纰鸿獚',
-      '鎮ㄧ⒑瀹氳鍒櫎绲勫悎?',
+      '確認',
+      '您確定要刪除組合?',
       [
-        {text: '鍙栨秷', onPress: () => null},
-        {text: '纰哄畾', onPress: () => this.handleRemove(combination)},
+        {text: '取消', onPress: () => null},
+        {text: '確定', onPress: () => this.handleRemove(combination)},
       ],
       { cancelable: false }
     );
@@ -100,8 +100,15 @@ class Combination extends React.Component {
     }
   }
 
-  showDialog(data) {
-
+  showDialog(id) {
+    this.props.navigator.showLightBox({
+     screen: 'LightBoxScreen',
+     passProps: {onClose: () => {this.props.navigator.dismissLightBox();} },
+     style: {
+       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+       backgroundColor: "#00000090"
+     }
+    });
   }
 
   renderHiddenRow(combination) {
@@ -111,7 +118,7 @@ class Combination extends React.Component {
     } else {
       return (
         <View style={styles.rowBack}>
-          <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item); }}>
+          <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item.id); }}>
             <Icon name='share-alt' size={40} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>

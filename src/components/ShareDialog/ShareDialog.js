@@ -11,6 +11,7 @@ import ActionHorImg from '../ActionHorImg';
 
 const ShareDialog = ({ data, toPostureLinking, toOther }) => {
 
+
   let getImageSetting = (name) => {
     let temp = {};
     R.images.icon.forEach((data) => {
