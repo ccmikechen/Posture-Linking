@@ -6,7 +6,8 @@ import {
   Button,
   ListView,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import styles from './styles';
@@ -30,11 +31,23 @@ class ActionList extends React.Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'close') {
-        this.props.navigator.dismissModal({
-          animationType: 'slide-down'
-        });
+        Alert.alert(
+          'Posture Linking',
+          '您確定要關閉新增組合',
+          [
+            {text: '取消', onPress: () => null},
+            {text: '確定', onPress: () => this.closeScreen()},
+          ],
+          { cancelable: false }
+        );
       }
     }
+  }
+
+  closeScreen() {
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
   }
 
   handleOK(id) {

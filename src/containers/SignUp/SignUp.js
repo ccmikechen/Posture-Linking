@@ -41,18 +41,16 @@ class SignUp extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <KeyboardAwareScrollView style={styles.KeyboardContainer}>
-          <View style={styles.formContainer}>
-            <Text style={styles.logoText}>PostureLinking</Text>
-              {this.props.isSignUpFaild?
-                Object.keys(this.props.signUpError.errors).map((key) => {
-                  return this.renderError(key, this.props.signUpError.errors[key][0]);
-              })
-             : null}
-            <SignUpForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
+        <View style={styles.formContainer}>
+          <Text style={styles.logoText}>Posture Linking</Text>
+            {this.props.isSignUpFaild?
+              Object.keys(this.props.signUpError.errors).map((key) => {
+                return this.renderError(key, this.props.signUpError.errors[key][0]);
+            })
+            : null}
+          <SignUpForm onSubmit={this.onLogin} navigator={this.props.navigator}/>
         </View>
-        </KeyboardAwareScrollView>
-        {this.props.isSigningUp? <Cover /> : null}
+      {this.props.isSigningUp? <Cover /> : null}
       </View>
     );
   }

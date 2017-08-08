@@ -31,9 +31,7 @@ class ServiceList extends React.Component {
     this.props.navigator.push({
       screen: 'ServiceConnectScreen',
       title: '',
-      passProps: {},
-      navigatorStyle: {
-      }
+      animated: false
     });
   }
 

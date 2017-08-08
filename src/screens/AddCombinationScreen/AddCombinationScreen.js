@@ -8,7 +8,6 @@ class AddCombinationScreen extends React.Component {
       Platform.OS === 'ios' ?
         {
           title:'X',
-          icon: R.images.CLOSE_IOS,
           id: 'close'
         }
       :

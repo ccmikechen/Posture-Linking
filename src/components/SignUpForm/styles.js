@@ -18,6 +18,18 @@ export default styles = StyleSheet.create({
     width: 250,
     opacity: 0.8
   },
+  errorInput: {
+    marginTop: 10,
+    paddingLeft: 15,
+    borderColor: 'red',
+  	fontSize: 16,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 50,
+    width: 250,
+    opacity: 0.8
+  },
   inputContainer: {
     alignItems: 'center'
   },
@@ -39,6 +51,10 @@ export default styles = StyleSheet.create({
   },
   errorText: {
     color: R.colors.ERROR_TEXT,
-    fontSize:14
+    fontSize: 14,
+    textAlign: 'center'
+  },
+  KeyboardContainer: {
+    backgroundColor: '#616161',
   }
 });
