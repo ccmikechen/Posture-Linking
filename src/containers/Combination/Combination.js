@@ -12,7 +12,6 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewIcon from 'react-native-vector-icons/MaterialIcons';
-import Dialog, { DialogButton } from 'react-native-md-dialog';
 
 import {
   updateCombinationList,
@@ -102,7 +101,7 @@ class Combination extends React.Component {
   }
 
   showDialog(data) {
-    this.refs.dialog.open();
+
   }
 
   renderHiddenRow(combination) {
@@ -175,20 +174,7 @@ class Combination extends React.Component {
               color='grey'
             />
         }
-        <Dialog title='組合分享' ref='dialog' style={{height:150, alignItems: 'center'}} >
-          <View style={styles.buttonsContent} >
-            <TouchableOpacity style={styles.touchView} onPress={() => {alert(456);}} >
-              <View>
-                <Text style={styles.touchableText} >分享至Posture Linking社群</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.touchView} onPress={() => {alert(789);}} >
-              <View>
-                <Text style={styles.touchableText} >分享至其他社群</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </Dialog>
+        
       </View>
     );
   }
