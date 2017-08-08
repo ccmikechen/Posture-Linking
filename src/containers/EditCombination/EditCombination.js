@@ -11,6 +11,7 @@ import {
   ScrollView,
   Alert
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import styles from './styles';
 import {
@@ -127,11 +128,11 @@ class EditCombination extends React.Component {
             defaultValue = {this.combination.description}
             onChangeText = {(text) => this.props.setDescription(text)}
           />
-          <TouchableOpacity onPress={()=>this.showAlert()}>
-            <View style={styles.submitContent}>
-              <Image source={R.images.OK_ICON} style={styles.submit} />
-            </View>
-          </TouchableOpacity>
+          <View style={styles.submitContent}>
+            <TouchableOpacity style={styles.submit} onPress={()=>this.showAlert()}>
+              <Icon name='check-circle' size={90} color={R.colors.SETTING_SUBMIT} />
+            </TouchableOpacity>
+          </View>
         </View>
       );
     }else{

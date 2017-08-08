@@ -105,7 +105,7 @@ class AddCombination extends React.Component {
             onChangeText = {(text) => this.props.setDescription(text)}
           />
           <View style={styles.submitContent}>
-            <TouchableOpacity style={styles.touch} onPress={()=>this.showAlert()}>
+            <TouchableOpacity style={styles.submit} onPress={()=>this.showAlert()}>
               <Icon name='check-circle' size={90} color={R.colors.SETTING_SUBMIT} />
             </TouchableOpacity>
           </View>

@@ -39,5 +39,19 @@ export default styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: R.colors.NO_CONBINATION
+  },
+  buttonsContent:{
+    flex: 1,
+    borderRadius: 20
+  },
+  touchView:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderColor: '#DDD'
+  },
+  touchableText:{
+    color: '#FF7878'
   }
 });
