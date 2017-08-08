@@ -24,6 +24,7 @@ const colors = {
 
 //buttonlist
 	BUTTONLIST_BACKGROUND: 'white',
+	MINBUTTONLIST_BACKGROUND: 'white',
 
 //setting button
 	DISABLE_BUTTON: '#969696',

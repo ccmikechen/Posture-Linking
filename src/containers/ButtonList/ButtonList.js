@@ -73,14 +73,18 @@ class ButtonList extends React.Component {
     });
 
     return (
-      <View style={[styles.animatedButtonView, {width: itemWidth, height: slideHeight, paddingHorizontal: itemHorizontalMargin}]} key={combination.id} >
-        <AnimatedButton
-          size={150}
-          onPress={() => this.handleButtonPress(combination.id)}
-          color={icon.color}
-          icon={icon.icon}
-        />
-        <Text style={styles.description} >{description}</Text>
+      <View style={{width: itemWidth, height: slideHeight, paddingHorizontal: itemHorizontalMargin, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin, backgroundColor: 'lightgrey', borderRadius: 20, position: 'absolute', top: 10, left: 10}}></View>
+        <View style={{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin, backgroundColor: 'white', borderRadius: 20, position: 'absolute'}}></View>
+        <View style={[styles.animatedButtonView, {width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}]} key={combination.id} >
+          <AnimatedButton
+            size={150}
+            onPress={() => this.handleButtonPress(combination.id)}
+            color={icon.color}
+            icon={icon.icon}
+          />
+          <Text style={styles.description}>{description}</Text>
+        </View>
       </View>
     );
   }
@@ -99,22 +103,19 @@ class ButtonList extends React.Component {
     });
 
     return(
-      <View key={combination.id} style={{height: 60, width: 60, borderRadius: 999, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', marginLeft: 6, marginRight: 6}}>
-        <TouchableOpacity onPress={() => {
-          this.refs.carousel.snapToItem(id);
-        }} style={styles.minTouchable}>
+      <TouchableOpacity
+        onPress={() => {this.refs.carousel.snapToItem(id)}}
+        style={styles.minTouchable}
+        key={combination.id}
+      >
+        <View style={styles.minRenderButtonView}>
           <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
-            <Image source={icon.icon} style={[
-              {
-                height: iconSize,
-                width: iconSize
-              }
-            ]} />
+            <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
           </View>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     );
   }
 
@@ -159,6 +160,7 @@ class ButtonList extends React.Component {
                   inactiveSlideScale={0.9}
                   inactiveSlideOpacity={0.5}
                   snapOnAndroid={true}
+                  enableSnap={true}
                   onSnapToItem={item => this.setState({item: item})}
                   ref={'carousel'}
                 >

@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: R.colors.CONTAINER_BACKGROUND,
+    backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   authorized:{
     flex: 1,
@@ -42,6 +42,16 @@ export default styles = StyleSheet.create({
   sliderContainer:{
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  minRenderButtonView:{
+    height: 65,
+    width: 65,
+    borderRadius: 999,
+    backgroundColor: R.colors.MINBUTTONLIST_BACKGROUND,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 6,
+    marginRight: 6
   },
   minTouchable:{
     alignItems: 'center',
