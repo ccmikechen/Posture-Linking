@@ -37,11 +37,19 @@ class SmartBulbDevice extends EventEmitter {
   }
 
   async turnOn() {
+    if (!this.isConnected) {
+      return;
+    }
+
     await this._setToSwitchMode();
     await BleManager.write(this.deviceId, serviceId, switchCharacteristic, [0x3F], 1);
   }
 
   async turnOff() {
+    if (!this.isConnected) {
+      return;
+    }
+    
     await this._setToSwitchMode();
     await BleManager.write(this.deviceId, serviceId, switchCharacteristic, [0x00], 1);
   }
