@@ -3,23 +3,103 @@ import { connect } from 'react-redux';
 import { View, Text, Image } from 'react-native';
 
 import styles from './styles';
-import PostureDataEmitter from '../../ble/postureDevice';
+import PostureDevice from '../../ble/PostureDevice';
 import PostureRecognizer from '../../ble/PostureRecognizer';
 import {
   updateCurrentPosture
 } from '../../actions/postureActions';
+
+import ServiceManager from '../../../lib/ServiceManager';
+
+const POSTURES = {
+  '1': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['lying down']
+  },
+  '2': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['lying on front']
+  },
+  '3': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['sitting']
+  },
+  '4': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['shaking hand when sitting']
+  },
+  '5': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['claping hands when sitting']
+  },
+  '6': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['right step when sitting']
+  },
+  '7': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['left step when sitting']
+  },
+  '8': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['cross right leg']
+  },
+  '9': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['cross left leg']
+  },
+  '10': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['play computer']
+  },
+  '11': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['standing']
+  },
+  '12': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['shaking hand when standing']
+  },
+  '13': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['jumping']
+  },
+  '14': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['claping hands when standing']
+  },
+  '15': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['right step when standing']
+  },
+  '16': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['left step when standing']
+  },
+  '17': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['walking']
+  },
+  '18': {
+    image: R.images.postures.STANDING,
+    name: R.strings.postureNames['running']
+  }
+};
 
 class PostureMonitor extends React.Component {
 
   constructor(props) {
     super(props);
 
+    this.currentPostureId = null;
+    this.postureTrigger = ServiceManager.getServiceByTypeName('trigger', 'posture');
+    this.postureOnActionEvent = this.postureTrigger.getEventByName('on action');
     this.handlePostureRecognition = this.handlePostureRecognition.bind(this);
   }
 
   componentDidMount() {
-    this.postureDataEmitter = new PostureDataEmitter();
-    this.postureRecognizer = new PostureRecognizer(this.postureDataEmitter);
+    PostureDevice.start();
+    this.postureRecognizer = new PostureRecognizer();
     this.postureRecognizer.init().then(() => {
       this.postureRecognizer.addListener(this.handlePostureRecognition);
     });
@@ -27,37 +107,25 @@ class PostureMonitor extends React.Component {
 
   componentWillUnmount() {
     this.postureRecognizer.destroy();
-    this.postureDataEmitter.destroy();
+    PostureDevice.stop();
   }
 
   handlePostureRecognition({ result, name, id }) {
     console.log('Result: ', result, name);
     this.props.updateCurrentPosture(id);
+
+    if ((this.currentPostureId != null) && (this.currentPostureId != id)) {
+      this.postureTrigger.trigger(this.postureOnActionEvent.id, { postureId: parseInt(id) });
+      console.log('trigger', parseInt(id));
+    }
+    this.currentPostureId = id;
   }
 
   getCurrentPostureInfoById(id) {
-    switch (id) {
-    case '2':
-      return {
-        image: R.images.postures.SITTING,
-        name: '坐著'
-      };
-    case '3':
-      return {
-        image: R.images.postures.STANDING,
-        name: '站著'
-      };
-    case '5':
-      return {
-        image: R.images.postures.JUMPING,
-        name: '跳躍'
-      };
-    default:
-      return {
-        image: null,
-        name: '未知'
-      };
-    }
+    return POSTURES[id] || {
+      image: null,
+      name: '未知'
+    };
   }
 
   render() {

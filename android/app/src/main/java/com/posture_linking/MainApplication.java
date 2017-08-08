@@ -3,6 +3,7 @@ package com.posture_linking;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rnfs.RNFSPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
@@ -37,7 +38,8 @@ public class MainApplication extends NavigationApplication {
           new PostureDetectorPackage(),
           new RNFSPackage(),
           new RNDeviceInfo(),
-          new VectorIconsPackage()
+          new VectorIconsPackage(),
+          new MPAndroidChartPackage()
       );
   }
 

@@ -46,6 +46,8 @@ const loadBackgroundProcess = async () => {
 
   await initialSocket();
   console.log('Initialized socket');
+
+  CombinationManager.connectToSocket();
 };
 
 const startApp = async () => {

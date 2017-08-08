@@ -5,9 +5,7 @@ import {
   Text,
   ListView,
   RefreshControl,
-  TouchableOpacity,
-  NativeModules,
-  NativeEventEmitter
+  TouchableOpacity
 } from 'react-native';
 import styles from './styles';
 
@@ -17,36 +15,30 @@ import {
   stopBleScan
 } from '../../actions/bleActions';
 
-import BleManager from 'react-native-ble-manager';
-const BleManagerModule = NativeModules.BleManager;
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-import {
-  connectDevice
-} from '../../ble/bleDevices';
+import BleDevice from '../../ble/BleDevice';
 
 class ScanBle extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
+    this.handleDiscoverDevice = this.handleDiscoverDevice.bind(this);
     this.handleStopScan = this.handleStopScan.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.handleOnConnectPress = this.handleOnConnectPress.bind(this);
-    this.bleSubscriptions = [];
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
-    this.bleSubscriptions = [
-      bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral),
-      bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan)
-    ];
+    BleDevice.on('discoverDevice', this.handleDiscoverDevice);
+    BleDevice.on('stopScan', this.handleStopScan);
+
     this.startScan();
   }
 
   componentWillUnmount() {
-    this.clear();
+    BleDevice.removeListener('discoverDevice', this.handleDiscoverDevice);
+    BleDevice.removeListener('stopScan', this.handleStopScan);
   }
 
   onNavigatorEvent(event) {
@@ -63,15 +55,8 @@ class ScanBle extends React.Component {
     }
   }
 
-  clear() {
-    this.bleSubscriptions.forEach(subscription => {
-      subscription.remove();
-    });
-    this.bleSubscriptions = [];
-  }
-
-  handleDiscoverPeripheral(peripheral) {
-    this.props.addNewScannedDevice(peripheral);
+  handleDiscoverDevice(device) {
+    this.props.addNewScannedDevice(device);
   }
 
   handleStopScan() {
@@ -79,7 +64,7 @@ class ScanBle extends React.Component {
   }
 
   startScan() {
-    BleManager.scan([], 3, false).then((results) => {
+    BleDevice.startScan(2).then((results) => {
       this.props.startBleScan();
     });
   }
@@ -98,7 +83,7 @@ class ScanBle extends React.Component {
 
   handleOnConnectPress(device) {
     return () => {
-      connectDevice(device);
+      BleDevice.connect(device).then(result => console.log(result));
     };
   }
 
