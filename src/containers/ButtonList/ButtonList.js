@@ -74,10 +74,10 @@ class ButtonList extends React.Component {
     });
 
     return (
-      <View style={{width: itemWidth, height: slideHeight, paddingHorizontal: itemHorizontalMargin, alignItems: 'center', justifyContent: 'center'}}>
-        <View style={{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin, backgroundColor: 'lightgrey', borderRadius: 20, position: 'absolute', top: 10, left: 10}}></View>
-        <View style={{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin, backgroundColor: 'white', borderRadius: 20, position: 'absolute'}}></View>
-        <View style={[styles.animatedButtonView, {width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}]} key={combination.id} >
+      <View key={combination.id} style={[{width: itemWidth, height: slideHeight, paddingHorizontal: itemHorizontalMargin}, styles.animatedView]}>
+        <View style={[{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}, styles.animatedShadowView]}></View>
+        <View style={[{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}, styles.animatedBottomView]}></View>
+        <View style={[{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}, styles.animatedButtonView]}>
           <AnimatedButton
             size={150}
             onPress={() => this.handleButtonPress(combination.id)}

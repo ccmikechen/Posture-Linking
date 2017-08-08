@@ -6,6 +6,22 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
+  animatedView:{
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  animatedShadowView:{
+    backgroundColor: R.colors.SHADOW_BACKGROUND,
+    borderRadius: 20,
+    position: 'absolute',
+    top: 10,
+    left: 10
+  },
+  animatedBottomView:{
+    backgroundColor: R.colors.BOTTOM_BACKGROUND,
+    borderRadius: 20,
+    position: 'absolute'
+  },
   animatedButtonView:{
     alignItems: 'center',
     justifyContent: 'center',
