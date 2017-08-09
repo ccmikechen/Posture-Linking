@@ -41,6 +41,7 @@ class ButtonList extends React.Component {
     this.buttonTrigger = ServiceManager.getServiceByTypeName('trigger', 'button');
     this.buttonOnClickEvent = this.buttonTrigger.getEventByName('on click');
     this.connectService = this.connectService.bind(this);
+    this.goToAddCombination = this.goToAddCombination.bind(this);
     this.state = {
       item: 0
     }
@@ -131,6 +132,15 @@ class ButtonList extends React.Component {
     });
   }
 
+  goToAddCombination() {
+    this.props.navigator.showModal({
+      screen: 'AddCombinationScreen',
+      title: R.strings.ADD_COMBINATION,
+      passProps: {},
+      animated: false
+    });
+  }
+
   render() {
     let buttonData = [];
     this.props.combinations.forEach(combination => {
@@ -144,36 +154,44 @@ class ButtonList extends React.Component {
         {
           this.buttonTrigger? (
             this.buttonTrigger.isConnected() == false?
-            <View style= {styles.noAuthorized} >
-              <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}>
-                <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+              <View style= {styles.noAuthorized} >
+                <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}>
+                  <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
                   <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
                   <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
-              </TouchableOpacity>
-            </View>
-              :
-              <View style={styles.authorized}>
-                <Carousel
-                  sliderWidth={width}
-                  itemWidth={itemWidth}
-                  containerCustomStyle={styles.slider}
-                  contentContainerCustomStyle={styles.sliderContainer}
-                  inactiveSlideScale={0.9}
-                  inactiveSlideOpacity={0.5}
-                  snapOnAndroid={true}
-                  enableSnap={true}
-                  onSnapToItem={item => this.setState({item: item})}
-                  ref={'carousel'}
-                >
-                  {buttonData.map(combination => this.renderButton(combination))}
-                </Carousel>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                  {buttonData.map((combination, id) => this.minRenderButton(combination, id))}
-                </ScrollView>
+                </TouchableOpacity>
               </View>
+            :
+              buttonData.length === 0 ? (
+                <TouchableOpacity style={styles.imgTouch} onPress={() => this.goToAddCombination()}>
+                  <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+                  <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
+                  <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.authorized}>
+                  <Carousel
+                    sliderWidth={width}
+                    itemWidth={itemWidth}
+                    containerCustomStyle={styles.slider}
+                    contentContainerCustomStyle={styles.sliderContainer}
+                    inactiveSlideScale={0.9}
+                    inactiveSlideOpacity={0.5}
+                    snapOnAndroid={true}
+                    enableSnap={true}
+                    onSnapToItem={item => this.setState({item: item})}
+                    ref={'carousel'}
+                  >
+                    {buttonData.map(combination => this.renderButton(combination))}
+                  </Carousel>
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} onScroll={data => console.log(data)}>
+                    {buttonData.map((combination, id) => this.minRenderButton(combination, id))}
+                  </ScrollView>
+                </View>
+              )
           ) : null
-          }
-        </View>
+        }
+      </View>
     );
   }
 }

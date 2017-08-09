@@ -4,6 +4,7 @@ export default styles = StyleSheet.create({
   content:{
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   animatedView:{
@@ -18,7 +19,7 @@ export default styles = StyleSheet.create({
     left: 10
   },
   animatedBottomView:{
-    backgroundColor: R.colors.BOTTOM_BACKGROUND,
+    backgroundColor: R.colors.SHADOW_BACKGROUND,
     borderRadius: 20,
     position: 'absolute'
   },
@@ -34,20 +35,19 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
+  text:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: R.colors.NO_CONBINATION
+  },
   authorized:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   imgTouch:{
-    height: 200,
-    width: 155,
-    alignItems: 'center'
-  },
-  text:{
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: R.colors.NO_CONBINATION
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   description:{
     fontSize: 18
