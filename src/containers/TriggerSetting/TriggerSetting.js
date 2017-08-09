@@ -13,7 +13,8 @@ import styles from './styles';
 import {
   setTriggerConfig,
   getEvent,
-  setSelectedTriggerOption
+  setSelectedTriggerOption,
+  setDescription
 } from '../../actions/combinationActions';
 
 import { Select, Option } from "react-native-chooser";
@@ -136,6 +137,11 @@ class TriggerSetting extends React.Component {
       ...this.config,
       text: R.strings.events[this.props.selectedEvent.id].description
     };
+    let if_use = R.strings.IF_USE;
+    let then_use = R.strings.THEN_USE;
+    let triggerName = R.strings.services[this.props.triggerId];
+    let actionName =  R.strings.services[this.props.actionId];
+    this.props.setDescription(`${if_use}${triggerName}${then_use}${actionName}`);
 
     this.props.setTriggerConfig(data);
     this.props.navigator.popToRoot({
@@ -174,6 +180,7 @@ class TriggerSetting extends React.Component {
 
 export default connect((state) => ({
   triggerId: state.getIn(['combination', 'triggerId']),
+  actionId: state.getIn(['combination', 'actionId']),
   selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
   isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
   selectedEvent: state.getIn(['combination', 'selectedEvent']),
@@ -181,5 +188,6 @@ export default connect((state) => ({
 }), {
   setTriggerConfig,
   getEvent,
-  setSelectedTriggerOption
+  setSelectedTriggerOption,
+  setDescription
 })(TriggerSetting);

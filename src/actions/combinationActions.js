@@ -221,6 +221,13 @@ export const createCombination = (data) => (dispatch) => {
 
 export const updateCombination = (id, data) => (dispatch) => {
   return api.updateCombination(id, data)
+    .then(async () => {
+      await CombinationManager.unloadAllCombinations();
+      await ServiceManager.disconnectAllService();
+      await ServiceManager.loadServiceConfigs();
+      await CombinationManager.loadAllCombinations();
+      CombinationManager.applyCombinations();
+    })
     .then(() => {
       let combination = {
         id: id,
