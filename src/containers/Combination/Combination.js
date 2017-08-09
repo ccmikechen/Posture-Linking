@@ -49,11 +49,11 @@ class Combination extends React.Component {
 
   showAlert(combination) {
     Alert.alert(
-      '確認',
-      '您確定要刪除組合?',
+      'Posture Linking',
+      '鎮ㄧ⒑瀹氳鍒櫎绲勫悎鍡庯紵',
       [
-        {text: '取消', onPress: () => null},
-        {text: '確定', onPress: () => this.handleRemove(combination)},
+        {text: '纰哄畾', onPress: () => null},
+        {text: '鍙栨秷', onPress: () => this.handleRemove(combination)},
       ],
       { cancelable: false }
     );
