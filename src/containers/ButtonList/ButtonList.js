@@ -41,6 +41,7 @@ class ButtonList extends React.Component {
     this.buttonTrigger = ServiceManager.getServiceByTypeName('trigger', 'button');
     this.buttonOnClickEvent = this.buttonTrigger.getEventByName('on click');
     this.connectService = this.connectService.bind(this);
+    this.renderMessage = this.renderMessage.bind(this);
     this.state = {
       item: 0
     }
@@ -62,11 +63,19 @@ class ButtonList extends React.Component {
     return true;
   }
 
+  renderMessage(msg) {
+    if (msg.length > 20) {
+      return msg.substring(0, 17) + '...';
+    } else {
+      return msg;
+    }
+  }
+
   renderButton(combination) {
     let icon = {};
     let description = R.strings.events[combination.action.eventId].description;
     description += R.strings.events[combination.action.eventId].options;
-
+    let message = combination.action.config.message;
     R.images.icon.forEach((data) => {
       if(combination.action.name == data.name) {
         icon = data;
@@ -85,6 +94,7 @@ class ButtonList extends React.Component {
             icon={icon.icon}
           />
           <Text style={styles.description}>{description}</Text>
+          <Text style={styles.message}>{this.renderMessage(message)}</Text>
         </View>
       </View>
     );
