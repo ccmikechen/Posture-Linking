@@ -52,14 +52,15 @@ class Combination extends React.Component {
       'Posture Linking',
       '您確定要刪除組合嗎？',
       [
-        {text: '確定', onPress: () => null},
-        {text: '取消', onPress: () => this.handleRemove(combination)},
+        {text: '取消', onPress: () => null},
+        {text: '確定', onPress: () => this.handleRemove(combination)},
       ],
       { cancelable: false }
     );
   }
 
   handleRemove(combination) {
+    console.log(123)
     this.props.removeCombination(combination)
       .then(this.props.notUpdateCombinationList())
       .then(
@@ -101,10 +102,13 @@ class Combination extends React.Component {
     }
   }
 
-  showDialog(id) {
+  showDialog(item) {
     this.props.navigator.showLightBox({
-     screen: 'LightBoxScreen',
-     passProps: {onClose: () => {this.props.navigator.dismissLightBox();} },
+      screen: 'LightBoxScreen',
+      passProps: {
+        onClose: () => {this.props.navigator.dismissLightBox();},
+        item: item
+      },
      style: {
        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
        backgroundColor: "#00000090"
@@ -119,7 +123,7 @@ class Combination extends React.Component {
     } else {
       return (
         <View style={styles.rowBack}>
-          <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item.id); }}>
+          <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item); }}>
             <Icon name='share-alt' size={40} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>
