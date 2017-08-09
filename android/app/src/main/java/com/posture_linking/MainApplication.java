@@ -40,7 +40,8 @@ public class MainApplication extends NavigationApplication {
           new RNFSPackage(),
           new RNDeviceInfo(),
           new VectorIconsPackage(),
-          new MPAndroidChartPackage()
+          new MPAndroidChartPackage(),
+          new RNSharePackage()
       );
   }
 

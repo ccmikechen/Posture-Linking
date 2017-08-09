@@ -28,7 +28,7 @@ class LightBox extends React.Component {
       title: 'Posture Linking',
       message: `一起加入Posture Linking 『${this.props.item.description}』`,
       url: 'https:t21.bearlab.io/',
-      subject: 'Share Link'
+      subject: 'Posture Linking Share Combination'
     };
 
     Share.open(shareOptions).catch((err) => { err && console.log(err); });
