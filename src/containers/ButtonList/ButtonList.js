@@ -53,7 +53,6 @@ class ButtonList extends React.Component {
   }
 
   handleButtonPress(combinationId) {
-    console.log(this, combinationId);
     this.buttonTrigger.trigger(this.buttonOnClickEvent.id, { combinationId });
   }
 
