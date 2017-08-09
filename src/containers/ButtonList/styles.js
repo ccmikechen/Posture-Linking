@@ -60,8 +60,6 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   minRenderButtonView:{
-    height: 65,
-    width: 65,
     borderRadius: 999,
     backgroundColor: R.colors.MINBUTTONLIST_BACKGROUND,
     alignItems: 'center',

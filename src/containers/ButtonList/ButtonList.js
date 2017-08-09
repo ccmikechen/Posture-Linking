@@ -6,7 +6,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
-  ScrollView,
+  FlatList,
   Dimensions,
   Image
 } from 'react-native';
@@ -32,6 +32,7 @@ const slideHeight = height * 0.5;
 const slideWidth = Math.round( width * 0.75 );
 const itemHorizontalMargin = Math.round( width * 0.02 );
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
+const minButtonSize = 70;
 
 class ButtonList extends React.Component {
 
@@ -92,11 +93,11 @@ class ButtonList extends React.Component {
   }
 
   minRenderButton(combination, id) {
-    let icon = {}, size = 30, iconSize;
+    let icon = {}, size = minButtonSize * 0.5, iconSize;
 
-    if(this.state.item == id){
-      size = 50;
-    }
+     if(this.state.item == id){
+       size = minButtonSize * 0.75;
+     }
     iconSize = size * 0.8;
     R.images.icon.forEach((data) => {
       if(combination.action.name == data.name) {
@@ -106,11 +107,12 @@ class ButtonList extends React.Component {
 
     return(
       <TouchableOpacity
-        onPress={() => {this.refs.carousel.snapToItem(id)}}
+        onPress={() => {
+          this.refs.carousel.snapToItem(id);
+        }}
         style={styles.minTouchable}
-        key={combination.id}
       >
-        <View style={styles.minRenderButtonView}>
+        <View style={[{width: minButtonSize, height: minButtonSize}, styles.minRenderButtonView]}>
           <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
@@ -140,6 +142,8 @@ class ButtonList extends React.Component {
       animated: false
     });
   }
+
+  flatList;
 
   render() {
     let buttonData = [];
@@ -179,14 +183,24 @@ class ButtonList extends React.Component {
                     inactiveSlideOpacity={0.5}
                     snapOnAndroid={true}
                     enableSnap={true}
-                    onSnapToItem={item => this.setState({item: item})}
+                    onSnapToItem={item => {
+                      this.setState({item: item});
+                      this.flatList.scrollToIndex({viewPosition: 0.5, index: item});
+                    }}
                     ref={'carousel'}
                   >
                     {buttonData.map(combination => this.renderButton(combination))}
                   </Carousel>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} onScroll={data => console.log(data)}>
-                    {buttonData.map((combination, id) => this.minRenderButton(combination, id))}
-                  </ScrollView>
+                  <FlatList
+                    horizontal={true}
+                    renderItem={(item) => this.minRenderButton(item.item, item.index)}
+                    data={buttonData}
+                    ref={(flatList) => this.flatList = flatList}
+                    getItemLayout={(data, index) => (
+                      {length: minButtonSize, offset: minButtonSize * index, index: index}
+                    )}
+                    keyExtractor={(item, index) => index}
+                  />
                 </View>
               )
           ) : null
