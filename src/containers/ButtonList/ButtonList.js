@@ -6,7 +6,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
-  ScrollView,
+  FlatList,
   Dimensions,
   Image
 } from 'react-native';
@@ -32,6 +32,7 @@ const slideHeight = height * 0.5;
 const slideWidth = Math.round( width * 0.75 );
 const itemHorizontalMargin = Math.round( width * 0.02 );
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
+const minButtonSize = 70;
 
 class ButtonList extends React.Component {
 
@@ -42,6 +43,7 @@ class ButtonList extends React.Component {
     this.buttonOnClickEvent = this.buttonTrigger.getEventByName('on click');
     this.connectService = this.connectService.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
+    this.goToAddCombination = this.goToAddCombination.bind(this);
     this.state = {
       item: 0
     }
@@ -74,7 +76,12 @@ class ButtonList extends React.Component {
     let icon = {};
     let description = R.strings.events[combination.action.eventId].description;
     description += R.strings.events[combination.action.eventId].options;
-    let message = combination.action.config.message;
+    let message = '';
+    if (combination.action.config.message === undefined) {
+      message = '';
+    } else {
+      message += combination.action.config.message;
+    }
     R.images.icon.forEach((data) => {
       if(combination.action.name == data.name) {
         icon = data;
@@ -100,11 +107,11 @@ class ButtonList extends React.Component {
   }
 
   minRenderButton(combination, id) {
-    let icon = {}, size = 30, iconSize;
+    let icon = {}, size = minButtonSize * 0.5, iconSize;
 
-    if(this.state.item == id){
-      size = 50;
-    }
+     if(this.state.item == id){
+       size = minButtonSize * 0.75;
+     }
     iconSize = size * 0.8;
     R.images.icon.forEach((data) => {
       if(combination.action.name == data.name) {
@@ -114,11 +121,12 @@ class ButtonList extends React.Component {
 
     return(
       <TouchableOpacity
-        onPress={() => {this.refs.carousel.snapToItem(id)}}
+        onPress={() => {
+          this.refs.carousel.snapToItem(id);
+        }}
         style={styles.minTouchable}
-        key={combination.id}
       >
-        <View style={styles.minRenderButtonView}>
+        <View style={[{width: minButtonSize, height: minButtonSize}, styles.minRenderButtonView]}>
           <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
@@ -140,6 +148,17 @@ class ButtonList extends React.Component {
     });
   }
 
+  goToAddCombination() {
+    this.props.navigator.showModal({
+      screen: 'AddCombinationScreen',
+      title: R.strings.ADD_COMBINATION,
+      passProps: {},
+      animated: false
+    });
+  }
+
+  flatList;
+
   render() {
     let buttonData = [];
     this.props.combinations.forEach(combination => {
@@ -153,36 +172,54 @@ class ButtonList extends React.Component {
         {
           this.buttonTrigger? (
             this.buttonTrigger.isConnected() == false?
-            <View style= {styles.noAuthorized} >
-              <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}>
-                <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+              <View style= {styles.noAuthorized} >
+                <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}>
+                  <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
                   <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
                   <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
-              </TouchableOpacity>
-            </View>
-              :
-              <View style={styles.authorized}>
-                <Carousel
-                  sliderWidth={width}
-                  itemWidth={itemWidth}
-                  containerCustomStyle={styles.slider}
-                  contentContainerCustomStyle={styles.sliderContainer}
-                  inactiveSlideScale={0.9}
-                  inactiveSlideOpacity={0.5}
-                  snapOnAndroid={true}
-                  enableSnap={true}
-                  onSnapToItem={item => this.setState({item: item})}
-                  ref={'carousel'}
-                >
-                  {buttonData.map(combination => this.renderButton(combination))}
-                </Carousel>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                  {buttonData.map((combination, id) => this.minRenderButton(combination, id))}
-                </ScrollView>
+                </TouchableOpacity>
               </View>
+            :
+              buttonData.length === 0 ? (
+                <TouchableOpacity style={styles.imgTouch} onPress={() => this.goToAddCombination()}>
+                  <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+                  <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
+                  <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.authorized}>
+                  <Carousel
+                    sliderWidth={width}
+                    itemWidth={itemWidth}
+                    containerCustomStyle={styles.slider}
+                    contentContainerCustomStyle={styles.sliderContainer}
+                    inactiveSlideScale={0.9}
+                    inactiveSlideOpacity={0.5}
+                    snapOnAndroid={true}
+                    enableSnap={true}
+                    onSnapToItem={item => {
+                      this.setState({item: item});
+                      this.flatList.scrollToIndex({viewPosition: 0.5, index: item});
+                    }}
+                    ref={'carousel'}
+                  >
+                    {buttonData.map(combination => this.renderButton(combination))}
+                  </Carousel>
+                  <FlatList
+                    horizontal={true}
+                    renderItem={(item) => this.minRenderButton(item.item, item.index)}
+                    data={buttonData}
+                    ref={(flatList) => this.flatList = flatList}
+                    getItemLayout={(data, index) => (
+                      {length: minButtonSize, offset: minButtonSize * index, index: index}
+                    )}
+                    keyExtractor={(item, index) => index}
+                  />
+                </View>
+              )
           ) : null
-          }
-        </View>
+        }
+      </View>
     );
   }
 }

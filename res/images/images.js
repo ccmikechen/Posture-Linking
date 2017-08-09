@@ -20,7 +20,6 @@ const images = {
   CLOSE_ANDROID: require('./icon/close@64.png'),
   CLOSE_IOS: require('./icon/close@20.png'),
   MENU_IOS: require('./icon/menu@20.png'),
-
   ANIMATED_CHECK: require('./icon/check.png'),
   BLUETOOTH: require('./icon/blueTooth.png'),
   SEARCH: require('./icon/search.png'),
