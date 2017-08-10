@@ -63,13 +63,14 @@ export default styles = StyleSheet.create({
     borderRadius: 999,
     backgroundColor: R.colors.MINBUTTONLIST_BACKGROUND,
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  minTouchable: {
+    borderRadius: 999,
+    alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 6,
     marginRight: 6
-  },
-  minTouchable: {
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   minOuterButton: {
     opacity: 0.2,

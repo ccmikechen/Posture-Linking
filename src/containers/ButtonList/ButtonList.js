@@ -32,7 +32,8 @@ const slideHeight = height * 0.5;
 const slideWidth = Math.round( width * 0.75 );
 const itemHorizontalMargin = Math.round( width * 0.02 );
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
-const minButtonSize = 70;
+const minButtonTouchSize = 70;
+const minButtonSize = minButtonTouchSize * 0.9;
 
 class ButtonList extends React.Component {
 
@@ -124,8 +125,12 @@ class ButtonList extends React.Component {
         onPress={() => {
           this.refs.carousel.snapToItem(id);
         }}
-        style={styles.minTouchable}
+        style={[{width: minButtonTouchSize, height: minButtonTouchSize}, styles.minTouchable]}
       >
+        <View style={{width: minButtonSize*1.08, height: minButtonSize*1.06, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.04, position: 'absolute'}}></View>
+        <View style={{width: minButtonSize*1.06, height: minButtonSize*1.045, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.08, position: 'absolute'}}></View>
+        <View style={{width: minButtonSize*1.04, height: minButtonSize*1.03, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.12, position: 'absolute'}}></View>
+        <View style={{width: minButtonSize*1.02, height: minButtonSize*1.015, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.16, position: 'absolute'}}></View>
         <View style={[{width: minButtonSize, height: minButtonSize}, styles.minRenderButtonView]}>
           <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
           <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
@@ -188,33 +193,38 @@ class ButtonList extends React.Component {
                 </TouchableOpacity>
               ) : (
                 <View style={styles.authorized}>
-                  <Carousel
-                    sliderWidth={width}
-                    itemWidth={itemWidth}
-                    containerCustomStyle={styles.slider}
-                    contentContainerCustomStyle={styles.sliderContainer}
-                    inactiveSlideScale={0.9}
-                    inactiveSlideOpacity={0.5}
-                    snapOnAndroid={true}
-                    enableSnap={true}
-                    onSnapToItem={item => {
-                      this.setState({item: item});
-                      this.flatList.scrollToIndex({viewPosition: 0.5, index: item});
-                    }}
-                    ref={'carousel'}
-                  >
-                    {buttonData.map(combination => this.renderButton(combination))}
-                  </Carousel>
-                  <FlatList
-                    horizontal={true}
-                    renderItem={(item) => this.minRenderButton(item.item, item.index)}
-                    data={buttonData}
-                    ref={(flatList) => this.flatList = flatList}
-                    getItemLayout={(data, index) => (
-                      {length: minButtonSize, offset: minButtonSize * index, index: index}
-                    )}
-                    keyExtractor={(item, index) => index}
-                  />
+                  <View style={{flex: 16, alignItems: 'center', justifyContent: 'center'}}>
+                    <Carousel
+                      sliderWidth={width}
+                      itemWidth={itemWidth}
+                      containerCustomStyle={styles.slider}
+                      contentContainerCustomStyle={styles.sliderContainer}
+                      inactiveSlideScale={0.9}
+                      inactiveSlideOpacity={0.5}
+                      snapOnAndroid={true}
+                      enableSnap={true}
+                      onSnapToItem={item => {
+                        this.setState({item: item});
+                        this.flatList.scrollToIndex({viewPosition: 0.5, index: item});
+                      }}
+                      ref={'carousel'}
+                    >
+                      {buttonData.map(combination => this.renderButton(combination))}
+                    </Carousel>
+                  </View>
+                  <View style={{flex: 4, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FF5B5B'}}>
+                    <FlatList
+                      horizontal={true}
+                      renderItem={(item) => this.minRenderButton(item.item, item.index)}
+                      data={buttonData}
+                      ref={(flatList) => this.flatList = flatList}
+                      getItemLayout={(data, index) => (
+                        {length: minButtonTouchSize, offset: minButtonTouchSize * index, index: index}
+                      )}
+                      keyExtractor={(item, index) => index}
+                      contentContainerStyle={{alignItems: 'center', justifyContent: 'center',}}
+                    />
+                  </View>
                 </View>
               )
           ) : null
