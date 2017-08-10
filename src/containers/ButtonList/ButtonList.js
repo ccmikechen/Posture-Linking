@@ -23,6 +23,7 @@ import {
   selectService,
   getServiceList
 } from '../../actions/serviceActions';
+import Svg, { Rect, Defs, LinearGradient, Stop } from 'react-native-svg';
 
 import ServiceManager from '../../../lib/ServiceManager';
 
@@ -34,6 +35,7 @@ const itemHorizontalMargin = Math.round( width * 0.02 );
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 const minButtonTouchSize = 70;
 const minButtonSize = minButtonTouchSize * 0.9;
+const minButtonMenuHeight = height * 0.2;
 
 class ButtonList extends React.Component {
 
@@ -171,7 +173,6 @@ class ButtonList extends React.Component {
         buttonData.push(combination);
       }
     });
-
     return (
         <View style={styles.content} >
         {
@@ -212,7 +213,18 @@ class ButtonList extends React.Component {
                       {buttonData.map(combination => this.renderButton(combination))}
                     </Carousel>
                   </View>
-                  <View style={{flex: 4, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FF5B5B'}}>
+                  <View style={{flex: 4, alignItems: 'center', justifyContent: 'center'}}>
+                    <Svg width={width} height={minButtonMenuHeight} style={{position: 'absolute'}}>
+                      <Defs>
+                        <LinearGradient id='grad' x1='0' x2='0' y1='0' y2='180'>
+                          <Stop offset='2%' stopColor='black' stopOpacity='0.025' />
+                          <Stop offset='2.5%' stopColor='black' stopOpacity='0.05' />
+                          <Stop offset='3%' stopColor='black' stopOpacity='0.08' />
+                          <Stop offset='3.5%' stopColor='white' stopOpacity='1' />
+                        </LinearGradient>
+                      </Defs>
+                      <Rect x='0' y='0' width={width} height={minButtonMenuHeight} fill='url(#grad)' />
+                    </Svg>
                     <FlatList
                       horizontal={true}
                       renderItem={(item) => this.minRenderButton(item.item, item.index)}

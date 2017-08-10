@@ -22,6 +22,7 @@ import com.reactnativenavigation.NavigationApplication;
 import it.innove.BleManagerPackage;
 import com.rnfs.RNFSPackage;
 import com.posture_linking.modules.posture.PostureDetectorPackage;
+import com.horcrux.svg.SvgPackage;
 
 public class MainApplication extends NavigationApplication {
   @Override
@@ -41,7 +42,8 @@ public class MainApplication extends NavigationApplication {
           new RNDeviceInfo(),
           new VectorIconsPackage(),
           new MPAndroidChartPackage(),
-          new RNSharePackage()
+          new RNSharePackage(),
+          new SvgPackage()
       );
   }
 
