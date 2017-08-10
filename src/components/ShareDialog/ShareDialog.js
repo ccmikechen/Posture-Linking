@@ -9,7 +9,7 @@ import styles from './styles';
 import TriggerHorImg from '../TriggerHorImg';
 import ActionHorImg from '../ActionHorImg';
 
-const ShareDialog = ({ data, toPostureLinking, toOther }) => {
+const ShareDialog = ({ data, toPostureLinking, toOther, onClose }) => {
 
 
   let getImageSetting = (name) => {
@@ -59,6 +59,11 @@ const ShareDialog = ({ data, toPostureLinking, toOther }) => {
         <TouchableOpacity style={styles.touch} onPress={toOther} >
           <View>
             <Text style={styles.touchableText} >分享至其他社群</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.touch} onPress={onClose} >
+          <View>
+            <Text style={styles.touchableText} >取消</Text>
           </View>
         </TouchableOpacity>
       </View>

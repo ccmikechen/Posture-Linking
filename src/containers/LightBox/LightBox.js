@@ -17,6 +17,7 @@ class LightBox extends React.Component {
     super(props);
     this.toPostureLinking = this.toPostureLinking.bind(this);
     this.toOther = this.toOther.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   toPostureLinking() {
@@ -34,18 +35,21 @@ class LightBox extends React.Component {
     Share.open(shareOptions).catch((err) => { err && console.log(err); });
   }
 
+  onClose() {
+    this.props.navigator.dismissLightBox();
+  }
+
   render() {
     let scr = Dimensions.get('window');
     let data = this.props.item;
 
     return (
-      <View style={{ backgroundColor:'white', height: 300, width: 300 }} >
-        <ShareDialog data={data} toPostureLinking={this.toPostureLinking} toOther={this.toOther} />
-        <Button
-          title= {'Close'}
-          onPress= {() => {
-            this.props.onClose();
-          }}
+      <View style={styles.container} >
+        <ShareDialog
+          data={data}
+          toPostureLinking={this.toPostureLinking}
+          toOther={this.toOther}
+          onClose={this.onClose}
         />
       </View>
     );

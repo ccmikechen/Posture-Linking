@@ -8,7 +8,7 @@ class LightBoxScreen extends React.Component {
 
   render() {
     return (
-      <LightBox navigator={this.props.navigator} item={this.props.item} onClose={this.props.onClose} />
+      <LightBox navigator={this.props.navigator} item={this.props.item} />
     );
   }
 }
