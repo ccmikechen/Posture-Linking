@@ -23,7 +23,13 @@ import {
   selectService,
   getServiceList
 } from '../../actions/serviceActions';
-import Svg, { Rect, Defs, LinearGradient, Stop } from 'react-native-svg';
+import Svg, {
+  Rect,
+  Defs,
+  LinearGradient,
+  Stop,
+  Circle
+} from 'react-native-svg';
 
 import ServiceManager from '../../../lib/ServiceManager';
 
@@ -47,6 +53,7 @@ class ButtonList extends React.Component {
     this.connectService = this.connectService.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
     this.goToAddCombination = this.goToAddCombination.bind(this);
+    this.flatList;
     this.state = {
       item: 0
     }
@@ -110,10 +117,13 @@ class ButtonList extends React.Component {
   }
 
   minRenderButton(combination, id) {
-    let icon = {}, size = minButtonSize * 0.5, iconSize;
+    let icon = {}, size = minButtonSize * 0.8, iconSize;
+    let minButtonOuterTouchSize = minButtonSize+minButtonTouchSize*0.05;
+    let checkOpacity = 1, color = R.colors.MINBUTTON;
 
      if(this.state.item == id){
-       size = minButtonSize * 0.75;
+        size = minButtonSize * 0.6;
+        color = R.colors.ON_MINBUTTON;
      }
     iconSize = size * 0.8;
     R.images.icon.forEach((data) => {
@@ -129,16 +139,22 @@ class ButtonList extends React.Component {
         }}
         style={[{width: minButtonTouchSize, height: minButtonTouchSize}, styles.minTouchable]}
       >
-        <View style={{width: minButtonSize*1.08, height: minButtonSize*1.06, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.04, position: 'absolute'}}></View>
-        <View style={{width: minButtonSize*1.06, height: minButtonSize*1.045, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.08, position: 'absolute'}}></View>
-        <View style={{width: minButtonSize*1.04, height: minButtonSize*1.03, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.12, position: 'absolute'}}></View>
-        <View style={{width: minButtonSize*1.02, height: minButtonSize*1.015, backgroundColor: 'black', borderRadius: 999, alignItems: 'center', justifyContent: 'center', opacity: 0.16, position: 'absolute'}}></View>
-        <View style={[{width: minButtonSize, height: minButtonSize}, styles.minRenderButtonView]}>
-          <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
-          <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
-          <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
-            <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
-          </View>
+        <Svg width={minButtonOuterTouchSize} height={minButtonOuterTouchSize} style={styles.minOuterButton}>
+          <Defs>
+            <LinearGradient id='minOuterButton' x1='0' x2={minButtonOuterTouchSize} y1='0' y2={minButtonOuterTouchSize}>
+              <Stop offset='25%' stopColor={color[0]} stopOpacity={checkOpacity} />
+              <Stop offset='75%' stopColor={color[1]} stopOpacity={checkOpacity} />
+            </LinearGradient>
+            <LinearGradient id='minButton' x1='0' x2={minButtonOuterTouchSize} y1='0' y2={minButtonOuterTouchSize}>
+              <Stop offset='25%' stopColor={color[2]} stopOpacity={checkOpacity} />
+              <Stop offset='75%' stopColor={color[3]} stopOpacity={checkOpacity} />
+            </LinearGradient>
+          </Defs>
+          <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonOuterTouchSize/2} fill='url(#minOuterButton)' />
+          <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonSize/2} fill='url(#minButton)' />
+        </Svg>
+        <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
+          <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
         </View>
       </TouchableOpacity>
     );
@@ -163,8 +179,6 @@ class ButtonList extends React.Component {
       animated: false
     });
   }
-
-  flatList;
 
   render() {
     let buttonData = [];
@@ -194,7 +208,7 @@ class ButtonList extends React.Component {
                 </TouchableOpacity>
               ) : (
                 <View style={styles.authorized}>
-                  <View style={{flex: 16, alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={styles.topView}>
                     <Carousel
                       sliderWidth={width}
                       itemWidth={itemWidth}
@@ -213,14 +227,14 @@ class ButtonList extends React.Component {
                       {buttonData.map(combination => this.renderButton(combination))}
                     </Carousel>
                   </View>
-                  <View style={{flex: 4, alignItems: 'center', justifyContent: 'center'}}>
-                    <Svg width={width} height={minButtonMenuHeight} style={{position: 'absolute'}}>
+                  <View style={styles.bottomView}>
+                    <Svg width={width} height={minButtonMenuHeight} style={styles.bottomListView}>
                       <Defs>
                         <LinearGradient id='grad' x1='0' x2='0' y1='0' y2='180'>
-                          <Stop offset='2%' stopColor='black' stopOpacity='0.025' />
-                          <Stop offset='2.5%' stopColor='black' stopOpacity='0.05' />
-                          <Stop offset='3%' stopColor='black' stopOpacity='0.08' />
-                          <Stop offset='3.5%' stopColor='white' stopOpacity='1' />
+                          <Stop offset='2%' stopColor={R.colors.BOTTOM_VIEW[0]} stopOpacity='0.025' />
+                          <Stop offset='2.5%' stopColor={R.colors.BOTTOM_VIEW[1]} stopOpacity='0.05' />
+                          <Stop offset='3%' stopColor={R.colors.BOTTOM_VIEW[2]} stopOpacity='0.08' />
+                          <Stop offset='3.5%' stopColor={R.colors.BOTTOM_VIEW[3]} stopOpacity='1' />
                         </LinearGradient>
                       </Defs>
                       <Rect x='0' y='0' width={width} height={minButtonMenuHeight} fill='url(#grad)' />
@@ -234,7 +248,7 @@ class ButtonList extends React.Component {
                         {length: minButtonTouchSize, offset: minButtonTouchSize * index, index: index}
                       )}
                       keyExtractor={(item, index) => index}
-                      contentContainerStyle={{alignItems: 'center', justifyContent: 'center',}}
+                      contentContainerStyle={styles.flatList}
                     />
                   </View>
                 </View>

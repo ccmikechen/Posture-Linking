@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-  content: {
+  content:{
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,7 +29,7 @@ export default styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: R.colors.BUTTONLIST_BACKGROUND
   },
-  noAuthorized: {
+  noAuthorized:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -45,49 +45,55 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  topView:{
+    flex: 16,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  bottomView:{
+    flex: 4,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  bottomListView:{
+    position: 'absolute'
+  },
   imgTouch:{
     alignItems: 'center',
     justifyContent: 'center'
   },
-  description: {
+  description:{
     fontSize: 18
   },
   slider:{
     marginBottom: 30
   },
-  sliderContainer: {
+  sliderContainer:{
     alignItems: 'center',
     justifyContent: 'center'
   },
-  minRenderButtonView:{
-    borderRadius: 999,
-    backgroundColor: R.colors.MINBUTTONLIST_BACKGROUND,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  minTouchable: {
+  minTouchable:{
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 6,
     marginRight: 6
   },
-  minOuterButton: {
-    opacity: 0.2,
+  minOuterButton:{
     position: 'absolute'
   },
-  minMiddleButton: {
-    opacity: 0.3,
-    position: 'absolute'
-  },
-  minButton: {
+  minButton:{
     margin: 5,
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  message: {
+  message:{
     marginTop: 5,
     fontSize: 12
+  },
+  flatList:{
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
