@@ -157,8 +157,6 @@ class ButtonList extends React.Component {
     });
   }
 
-  flatList;
-
   render() {
     let buttonData = [];
     this.props.combinations.forEach(combination => {
