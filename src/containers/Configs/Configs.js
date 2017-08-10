@@ -159,7 +159,7 @@ class Configs extends React.Component {
   render() {
     return (
       <View>
-        {this.props.triggerId =='' ? this.renderNew() : this.props.actionId == '' ? this.renderTrggerSetting() : this.renderActionSetting()}
+        {this.props.isGetTriggerConfig === false ? this.renderNew() : this.props.isGetActionConfig === false ? this.renderTrggerSetting() : this.renderActionSetting()}
       </View>
     );
   }
