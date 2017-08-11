@@ -1,0 +1,6 @@
+framework module Pods_posture_linking {
+  umbrella header "Pods-posture_linking-umbrella.h"
+
+  export *
+  module * { export * }
+}
