@@ -99,6 +99,17 @@ class SideMenu extends React.Component {
     this.props.logout()
   }
 
+  renderOption({ item, title, icon }) {
+    return (
+      <TouchableOpacity onPress={this.handleButtonPress(item)}>
+          <View style={styles.items}>
+            <Icon name={icon} size={35} color={R.colors.ITEMS_ICON} />
+          <Text style={styles.itemsText}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     let user = this.props.user;
     return (
@@ -125,28 +136,33 @@ class SideMenu extends React.Component {
               </View>
             </View>
           </View>
-
-
           <View style={styles.content} >
-            <TouchableOpacity onPress={this.handleButtonPress('combination')}>
-              <View style={styles.items}>
-                <Icon name='extension' size={35} color={R.colors.ITEMS_ICON} />
-                <Text style={styles.itemsText}>{R.strings.COMBINATION_TITLE}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.handleButtonPress('buttonList')}>
-              <View style={styles.items}>
-                <Icon name='touch-app' size={35} color={R.colors.ITEMS_ICON} />
-                <Text style={styles.itemsText}>{R.strings.BUTTON_LIST_TITLE}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.handleButtonPress('serviceList')}>
-              <View style={styles.items}>
-                <Icon name='room-service' size={35} color={R.colors.ITEMS_ICON} />
-                <Text style={styles.itemsText}>{R.strings.SERVICE_LIST_TITLE}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+              {this.renderOption({
+                item: 'combination',
+                title: R.strings.COMBINATION_TITLE,
+                icon: 'extension'
+              })}
+              {this.renderOption({
+                item: 'buttonList',
+                title: R.strings.BUTTON_LIST_TITLE,
+                icon: 'touch-app'
+              })}
+              {this.renderOption({
+                item: 'serviceList',
+                title: R.strings.SERVICE_LIST_TITLE,
+                icon: 'room-service'
+              })}
+              {this.renderOption({
+                item: 'scan',
+                title: R.strings.SCAN_TITLE,
+                icon: 'extension'
+              })}
+              {this.renderOption({
+                item: 'posture',
+                title: R.strings.POSTURE_TITLE,
+                icon: 'extension'
+              })}
+            </View>
           <View style={styles.version}>
             <Text style={styles.versionText}>{R.strings.VERSION} {DeviceInfo.getVersion()}</Text>
           </View> 
