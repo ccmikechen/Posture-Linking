@@ -7,21 +7,14 @@ export default styles = StyleSheet.create({
   },
   imgContent:{
     flex: 1,
+    padding: 20,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  triggerImg:{
-    flex:1,
-    top: 5
-  },
-  actionImg:{
-    flex: 1,
-    bottom: 15
   },
   imgText:{
     fontSize: 24,
     fontWeight: 'bold',
-    marginLeft: 10,
+    margin: 15,
     color: R.colors.BUTTON_UNDEFIND_TEXT
   },
   content:{
@@ -33,7 +26,7 @@ export default styles = StyleSheet.create({
     marginLeft: 15,
     borderRadius: 15 
   },
-  viewButton:{
+  button:{
     height:60,
     borderWidth:3,
     borderRadius:15,

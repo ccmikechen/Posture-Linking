@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
   Alert
@@ -13,6 +14,8 @@ import {
   getEventList,
   setSelectedActionConfig
 } from '../../actions/combinationActions';
+import ServiceManager from '../../../lib/ServiceManager';
+import ActionVerImg from '../../components/ActionVerImg';
 
 class ActionSelectSetting extends React.Component {
 
@@ -59,21 +62,40 @@ class ActionSelectSetting extends React.Component {
     });
   }
 
+  getIcon(name) {
+    let temp={};
+    R.images.icon.forEach((data) => {
+      if(data.name == name){
+        temp = data;
+      }
+    });
+    return temp;
+  }
+
   renderAction(event) {
     return(
-      <View key={event.id} style={styles.viewKey}>
+      <View key={event.id} style={styles.content}>
         <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
           <View style={styles.button}>
-            <Text style={styles.text}>{R.strings.events[event.id].description}</Text>
+            <Text style={styles.buttonText}>{R.strings.events[event.id].description}</Text>
           </View>
         </TouchableOpacity>
       </View>
+      
     );
   };
 
   render() {
+    let actionName = this.props.actionId != ''?
+      ServiceManager.getServiceById(this.props.actionId).getName()
+      : 'Action';
+
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <View style={styles.imgContent} >
+          <ActionVerImg size={0.8} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
+          <Text style={styles.imgText} >{R.strings.services[this.props.actionId]}</Text>
+        </View>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
           this.renderAction(event)
@@ -85,7 +107,7 @@ class ActionSelectSetting extends React.Component {
               color='grey'
             />
         }
-      </View>
+      </ScrollView>
     );
   }
 }

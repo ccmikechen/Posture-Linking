@@ -16,7 +16,6 @@ import {
 } from '../../actions/combinationActions';
 import ServiceManager from '../../../lib/ServiceManager';
 import TriggerVerImg from '../../components/TriggerVerImg';
-import ActionVerImg from '../../components/ActionVerImg';
 
 class TriggerSelectSetting extends React.Component {
 
@@ -63,18 +62,6 @@ class TriggerSelectSetting extends React.Component {
     });
   }
 
-  renderTrigger(event) {
-    return (
-      <View key={event.id} style={styles.content}>
-        <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
-          <View style={styles.viewButton}>
-            <Text style={styles.buttonText}>{R.strings.events[event.id].description}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
   getIcon(name) {
     let temp={};
     R.images.icon.forEach((data) => {
@@ -85,6 +72,18 @@ class TriggerSelectSetting extends React.Component {
     return temp;
   }
 
+  renderTrigger(event) {
+    return (
+      <View key={event.id} style={styles.content}>
+        <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>{R.strings.events[event.id].description}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   render() {
     let triggerName = this.props.triggerId != ''?
           ServiceManager.getServiceById(this.props.triggerId).getName()
@@ -93,13 +92,8 @@ class TriggerSelectSetting extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.imgContent} >
-          <View style={styles.triggerImg} >
-            <TriggerVerImg size={0.8} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
-          </View>
-          <View style={styles.actionImg} >
-            <ActionVerImg size={0.8} />
-          </View>
-          {/*<Text style={styles.imgText} >{R.strings.services[this.props.triggerId]}</Text>*/}
+          <TriggerVerImg size={0.8} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+          <Text style={styles.imgText} >{R.strings.services[this.props.triggerId]}</Text>
         </View>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
