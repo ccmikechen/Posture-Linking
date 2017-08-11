@@ -117,7 +117,7 @@ class EditCombination extends React.Component {
   }
 
   renderOK(){
-    if(this.props.actionId !='' && this.props.triggerId !='') {
+    if (this.props.isGetTriggerConfig && this.props.isGetActionConfig) {
       return(
         <View style={styles.lastSection}>
           <Text style={styles.descriptionTitle}>組合描述</Text>
@@ -180,7 +180,7 @@ class EditCombination extends React.Component {
     let temp={};
 
     R.images.icon.forEach((data) => {
-      if(data.name == name){
+      if (data.name == name){
         temp = data;
       }
     });
@@ -188,10 +188,10 @@ class EditCombination extends React.Component {
   }
 
   render() {
-    let triggerName = this.props.triggerId != ''?
+    let triggerName = this.props.isGetTriggerConfig ?
           ServiceManager.getServiceById(this.props.triggerId).getName()
           : 'Trigger';
-    let actionName = this.props.actionId != ''?
+    let actionName = this.props.isGetActionConfig ?
           ServiceManager.getServiceById(this.props.actionId).getName()
           : 'Action';
 
