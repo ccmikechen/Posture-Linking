@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
   Alert
@@ -13,6 +14,9 @@ import {
   getEventList,
   setSelectedTriggerConfig
 } from '../../actions/combinationActions';
+import ServiceManager from '../../../lib/ServiceManager';
+import TriggerVerImg from '../../components/TriggerVerImg';
+import ActionVerImg from '../../components/ActionVerImg';
 
 class TriggerSelectSetting extends React.Component {
 
@@ -64,16 +68,39 @@ class TriggerSelectSetting extends React.Component {
       <View key={event.id} style={styles.content}>
         <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
           <View style={styles.viewButton}>
-            <Text style={styles.text}>{R.strings.events[event.id].description}</Text>
+            <Text style={styles.buttonText}>{R.strings.events[event.id].description}</Text>
           </View>
         </TouchableOpacity>
       </View>
     );
   };
 
+  getIcon(name) {
+    let temp={};
+    R.images.icon.forEach((data) => {
+      if(data.name == name){
+        temp = data;
+      }
+    });
+    return temp;
+  }
+
   render() {
+    let triggerName = this.props.triggerId != ''?
+          ServiceManager.getServiceById(this.props.triggerId).getName()
+          : 'Trigger';
+
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <View style={styles.imgContent} >
+          <View style={styles.triggerImg} >
+            <TriggerVerImg size={0.8} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+          </View>
+          <View style={styles.actionImg} >
+            <ActionVerImg size={0.8} />
+          </View>
+          {/*<Text style={styles.imgText} >{R.strings.services[this.props.triggerId]}</Text>*/}
+        </View>
         {this.props.isGettingEvents ? 
         this.props.eventList.map(event => (
          this.renderTrigger(event)
@@ -85,7 +112,7 @@ class TriggerSelectSetting extends React.Component {
           color='grey'
         />
         }
-      </View>
+      </ScrollView>
     );
   }
 }

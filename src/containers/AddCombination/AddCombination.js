@@ -151,9 +151,7 @@ class AddCombination extends React.Component {
   }
 
   getIcon(name) {
-
     let temp={};
-
     R.images.icon.forEach((data) => {
       if(data.name == name){
         temp = data;
