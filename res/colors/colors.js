@@ -27,6 +27,9 @@ const colors = {
 	MINBUTTONLIST_BACKGROUND: 'white',
 	SHADOW_BACKGROUND: 'lightgrey',
 	BOTTOM_BACKGROUND: 'white',
+	MINBUTTON: ['white', '#B7B7B7', '#D3D3D3', 'white'],
+	ON_MINBUTTON: ['#B7B7B7', 'white', 'white', '#D3D3D3'],
+	BOTTOM_VIEW: ['black', 'black', 'black', 'white'],
 
 //setting button
 	DISABLE_BUTTON: '#969696',

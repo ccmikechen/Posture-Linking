@@ -23,6 +23,13 @@ import {
   selectService,
   getServiceList
 } from '../../actions/serviceActions';
+import Svg, {
+  Rect,
+  Defs,
+  LinearGradient,
+  Stop,
+  Circle
+} from 'react-native-svg';
 
 import ServiceManager from '../../../lib/ServiceManager';
 
@@ -32,7 +39,9 @@ const slideHeight = height * 0.5;
 const slideWidth = Math.round( width * 0.75 );
 const itemHorizontalMargin = Math.round( width * 0.02 );
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
-const minButtonSize = 70;
+const minButtonTouchSize = 70;
+const minButtonSize = minButtonTouchSize * 0.9;
+const minButtonMenuHeight = height * 0.2;
 
 class ButtonList extends React.Component {
 
@@ -44,6 +53,7 @@ class ButtonList extends React.Component {
     this.connectService = this.connectService.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
     this.goToAddCombination = this.goToAddCombination.bind(this);
+    this.flatList;
     this.state = {
       item: 0
     }
@@ -107,10 +117,13 @@ class ButtonList extends React.Component {
   }
 
   minRenderButton(combination, id) {
-    let icon = {}, size = minButtonSize * 0.5, iconSize;
+    let icon = {}, size = minButtonSize * 0.8, iconSize;
+    let minButtonOuterTouchSize = minButtonSize+minButtonTouchSize*0.05;
+    let checkOpacity = 1, color = R.colors.MINBUTTON;
 
      if(this.state.item == id){
-       size = minButtonSize * 0.75;
+        size = minButtonSize * 0.6;
+        color = R.colors.ON_MINBUTTON;
      }
     iconSize = size * 0.8;
     R.images.icon.forEach((data) => {
@@ -124,14 +137,24 @@ class ButtonList extends React.Component {
         onPress={() => {
           this.refs.carousel.snapToItem(id);
         }}
-        style={styles.minTouchable}
+        style={[{width: minButtonTouchSize, height: minButtonTouchSize}, styles.minTouchable]}
       >
-        <View style={[{width: minButtonSize, height: minButtonSize}, styles.minRenderButtonView]}>
-          <View style={[{backgroundColor: icon.color, height: size*1.2, width: size*1.2}, styles.minButton, styles.minOuterButton]}></View>
-          <View style={[{backgroundColor: icon.color, height: size*1.1, width: size*1.1}, styles.minButton, styles.minMiddleButton]}></View>
-          <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
-            <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
-          </View>
+        <Svg width={minButtonOuterTouchSize} height={minButtonOuterTouchSize} style={styles.minOuterButton}>
+          <Defs>
+            <LinearGradient id='minOuterButton' x1='0' x2={minButtonOuterTouchSize} y1='0' y2={minButtonOuterTouchSize}>
+              <Stop offset='25%' stopColor={color[0]} stopOpacity={checkOpacity} />
+              <Stop offset='75%' stopColor={color[1]} stopOpacity={checkOpacity} />
+            </LinearGradient>
+            <LinearGradient id='minButton' x1='0' x2={minButtonOuterTouchSize} y1='0' y2={minButtonOuterTouchSize}>
+              <Stop offset='25%' stopColor={color[2]} stopOpacity={checkOpacity} />
+              <Stop offset='75%' stopColor={color[3]} stopOpacity={checkOpacity} />
+            </LinearGradient>
+          </Defs>
+          <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonOuterTouchSize/2} fill='url(#minOuterButton)' />
+          <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonSize/2} fill='url(#minButton)' />
+        </Svg>
+        <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
+          <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
         </View>
       </TouchableOpacity>
     );
@@ -164,7 +187,6 @@ class ButtonList extends React.Component {
         buttonData.push(combination);
       }
     });
-
     return (
         <View style={styles.content} >
         {
@@ -186,33 +208,49 @@ class ButtonList extends React.Component {
                 </TouchableOpacity>
               ) : (
                 <View style={styles.authorized}>
-                  <Carousel
-                    sliderWidth={width}
-                    itemWidth={itemWidth}
-                    containerCustomStyle={styles.slider}
-                    contentContainerCustomStyle={styles.sliderContainer}
-                    inactiveSlideScale={0.9}
-                    inactiveSlideOpacity={0.5}
-                    snapOnAndroid={true}
-                    enableSnap={true}
-                    onSnapToItem={item => {
-                      this.setState({item: item});
-                      this.flatList.scrollToIndex({viewPosition: 0.5, index: item});
-                    }}
-                    ref={'carousel'}
-                  >
-                    {buttonData.map(combination => this.renderButton(combination))}
-                  </Carousel>
-                  <FlatList
-                    horizontal={true}
-                    renderItem={(item) => this.minRenderButton(item.item, item.index)}
-                    data={buttonData}
-                    ref={(flatList) => this.flatList = flatList}
-                    getItemLayout={(data, index) => (
-                      {length: minButtonSize, offset: minButtonSize * index, index: index}
-                    )}
-                    keyExtractor={(item, index) => index}
-                  />
+                  <View style={styles.topView}>
+                    <Carousel
+                      sliderWidth={width}
+                      itemWidth={itemWidth}
+                      containerCustomStyle={styles.slider}
+                      contentContainerCustomStyle={styles.sliderContainer}
+                      inactiveSlideScale={0.9}
+                      inactiveSlideOpacity={0.5}
+                      snapOnAndroid={true}
+                      enableSnap={true}
+                      onSnapToItem={item => {
+                        this.setState({item: item});
+                        this.flatList.scrollToIndex({viewPosition: 0.5, index: item});
+                      }}
+                      ref={'carousel'}
+                    >
+                      {buttonData.map(combination => this.renderButton(combination))}
+                    </Carousel>
+                  </View>
+                  <View style={styles.bottomView}>
+                    <Svg width={width} height={minButtonMenuHeight} style={styles.bottomListView}>
+                      <Defs>
+                        <LinearGradient id='grad' x1='0' x2='0' y1='0' y2='180'>
+                          <Stop offset='2%' stopColor={R.colors.BOTTOM_VIEW[0]} stopOpacity='0.025' />
+                          <Stop offset='2.5%' stopColor={R.colors.BOTTOM_VIEW[1]} stopOpacity='0.05' />
+                          <Stop offset='3%' stopColor={R.colors.BOTTOM_VIEW[2]} stopOpacity='0.08' />
+                          <Stop offset='3.5%' stopColor={R.colors.BOTTOM_VIEW[3]} stopOpacity='1' />
+                        </LinearGradient>
+                      </Defs>
+                      <Rect x='0' y='0' width={width} height={minButtonMenuHeight} fill='url(#grad)' />
+                    </Svg>
+                    <FlatList
+                      horizontal={true}
+                      renderItem={(item) => this.minRenderButton(item.item, item.index)}
+                      data={buttonData}
+                      ref={(flatList) => this.flatList = flatList}
+                      getItemLayout={(data, index) => (
+                        {length: minButtonTouchSize, offset: minButtonTouchSize * index, index: index}
+                      )}
+                      keyExtractor={(item, index) => index}
+                      contentContainerStyle={styles.flatList}
+                    />
+                  </View>
                 </View>
               )
           ) : null
