@@ -91,7 +91,7 @@ class BleDevice extends EventEmitter {
     });
   };
 
-  async startScan(timeout) {
+  async startScan(timeout=0) {
     await BleManager.scan([], timeout, false);
   }
 
