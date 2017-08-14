@@ -27,7 +27,9 @@ class TriggerSetting extends React.Component {
   constructor(props) {
     super(props);
     this.config = {};
-    this.defaultText = R.strings.SELECT_TIME;
+    this.defaultText = {
+      time: this.props.triggerConfig.hasOwnProperty('time')? this.props.triggerConfig.time.toString() : R.strings.SELECT_TIME
+    };
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
@@ -55,6 +57,7 @@ class TriggerSetting extends React.Component {
 
   componentWillMount() {
     this.props.getEvent(this.props.selectedTriggerConfig);
+    this.props.triggerConfig.hasOwnProperty('time')? this.config['time'] = this.props.triggerConfig.time : null
   }
 
   renderSetting(event) {
@@ -81,7 +84,7 @@ class TriggerSetting extends React.Component {
 
   onSelectOption(value, name) {
     this.config[name] = value;
-    this.defaultText = value;
+    this.defaultText[name] = value.toString();
     this.props.setSelectedTriggerOption(this.config);
   }
 
@@ -93,7 +96,7 @@ class TriggerSetting extends React.Component {
           <Select
             optionListStyle = {styles.optionList}
             onSelect={(value) => this.onSelectOption(value, option.name)}
-            defaultText={this.defaultText}
+            defaultText={this.defaultText[option.name]}
            >
             {option.options.map(item => (
               <Option
@@ -184,7 +187,8 @@ export default connect((state) => ({
   selectedTriggerConfig: state.getIn(['combination', 'selectedTriggerConfig']),
   isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
   selectedEvent: state.getIn(['combination', 'selectedEvent']),
-  selectedTriggerOption: state.getIn(['combination', 'selectedOption'])
+  selectedTriggerOption: state.getIn(['combination', 'selectedOption']),
+  triggerConfig: state.getIn(['combination', 'triggerConfig'])
 }), {
   setTriggerConfig,
   getEvent,

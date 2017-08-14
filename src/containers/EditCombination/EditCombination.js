@@ -84,7 +84,7 @@ class EditCombination extends React.Component {
     this.props.setSelectedTriggerConfig(selectedCombination.trigger.eventId);
     this.props.setSelectedActionConfig(selectedCombination.action.eventId);
     let triggerConfig = {
-      ...selectedCombination.action.config,
+      ...selectedCombination.trigger.config,
       text: R.strings.events[selectedCombination.trigger.eventId].description
     };
     this.props.setTriggerConfig(triggerConfig);
