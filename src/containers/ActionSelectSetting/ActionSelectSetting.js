@@ -81,7 +81,6 @@ class ActionSelectSetting extends React.Component {
           </View>
         </TouchableOpacity>
       </View>
-      
     );
   };
 

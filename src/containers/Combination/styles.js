@@ -1,8 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const w = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   container:{
-    flex: 1, 
+    flex: 1,
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   rowBack: {
@@ -16,13 +18,8 @@ export default styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 5
   },
-  rowBackButton: {
-    height: 45,
-    width: 45,
-    marginRight: 13
-  },
   touch:{
-    marginRight: 20
+    marginRight: w.width*0.05
   },
   noCombination:{
     flex: 1,

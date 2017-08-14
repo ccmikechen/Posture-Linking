@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Alert,
   Text,
+  Dimensions,
   TouchableOpacity,
   RefreshControl
 } from 'react-native';
@@ -117,6 +118,7 @@ class Combination extends React.Component {
   }
 
   renderHiddenRow(combination) {
+    let w = Dimensions.get('window');
     let item = combination;
     if (combination.status === 2 ) {
       return null;
@@ -124,10 +126,10 @@ class Combination extends React.Component {
       return (
         <View style={styles.rowBack}>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item); }}>
-            <Icon name='share-alt' size={40} color= {R.colors.ROWBACK_BUTTON} />
+            <Icon name='share-alt' size={w.width/9} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>
-            <Icon name='trash' size={50} color= {R.colors.ROWBACK_BUTTON} />
+            <Icon name='trash' size={w.width/8} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
         </View>
       );
@@ -151,6 +153,8 @@ class Combination extends React.Component {
   }
 
   render() {
+    let w = Dimensions.get('window');
+
     return (
       <View style={styles.container}>
         {!this.props.isGettingCombinations ? (
@@ -164,8 +168,8 @@ class Combination extends React.Component {
             </View>
           :
             <SwipeListView
-              rightOpenValue = {-125}
-              stopRightSwipe = {-150}
+              rightOpenValue = {w.width/-3}
+              stopRightSwipe = {w.width/-2.8}
               stopLeftSwipe = {10}
               refreshControl={
                 <RefreshControl

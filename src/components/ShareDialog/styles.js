@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const w = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   content:{
@@ -15,16 +17,20 @@ export default styles = StyleSheet.create({
   combinationImg:{
     flexDirection: 'row',
     alignItems: 'center',
-    width: 145
+    width: w.width*0.49,
+    marginRight: 15
   },
   trigger:{
     flex: 1
   },
   action:{
     flex: 1,
-    right: 16.13
+    right: w.width*0.044
   },
   combinationText:{
+    fontSize: w.width*0.034,
+    width: w.width*0.65,
+    textAlign: 'center',
     fontWeight: 'bold'
   },
   buttonsContent:{
@@ -39,6 +45,7 @@ export default styles = StyleSheet.create({
     borderColor: '#DDD'
   },
   touchableText:{
+    fontSize: w.width*0.034,
     color: '#FF7878'
   }
 });

@@ -158,12 +158,12 @@ class SideMenu extends React.Component {
               {this.renderOption({
                 item: 'scan',
                 title: R.strings.SCAN_TITLE,
-                icon: 'extension'
+                icon: 'bluetooth-searching'
               })}
               {this.renderOption({
                 item: 'posture',
                 title: R.strings.POSTURE_TITLE,
-                icon: 'extension'
+                icon: 'directions-run'
               })}
             </View>
             <View style={styles.version}>

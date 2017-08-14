@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const w = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   rowFront: {
@@ -20,14 +22,15 @@ export default styles = StyleSheet.create({
   combinationImg:{
     flexDirection: 'row',
     alignItems: 'center',
-    width: 145
+    width: w.width*0.49,
+    marginRight: 15
   },
   trigger:{
     flex: 1
   },
   action:{
     flex: 1,
-    right: 16.13
+    right: w.width*0.0883
   },
   content:{
     flex: 4,
@@ -40,7 +43,7 @@ export default styles = StyleSheet.create({
   },
   text:{
     flex: 1,
-    fontSize: 14,
+    fontSize: w.width*0.04,
     fontWeight: 'bold'
   },
   switch:{

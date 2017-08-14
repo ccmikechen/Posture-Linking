@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  Dimensions,
   TouchableOpacity
 } from 'react-native';
 
@@ -10,8 +11,7 @@ import TriggerHorImg from '../TriggerHorImg';
 import ActionHorImg from '../ActionHorImg';
 
 const ShareDialog = ({ data, toPostureLinking, toOther, onClose }) => {
-
-
+  let w = Dimensions.get('window');
   let getImageSetting = (name) => {
     let temp = {};
     R.images.icon.forEach((data) => {
@@ -30,14 +30,14 @@ const ShareDialog = ({ data, toPostureLinking, toOther, onClose }) => {
             <TriggerHorImg
               icon= {getImageSetting(data.trigger.name).icon}
               color= {getImageSetting(data.trigger.name).color}
-              size= {0.8}
+              size= {w.width/350}
             />
           </View>
           <View style={styles.action}>
             <ActionHorImg
               icon= {getImageSetting(data.action.name).icon}
               color= {getImageSetting(data.action.name).color}
-              size= {0.8}
+              size= {w.width/350}
             />
           </View>
         </View>
