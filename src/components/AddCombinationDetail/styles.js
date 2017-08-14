@@ -45,5 +45,9 @@ export default styles = StyleSheet.create({
 	finishFontStyle: {
 		color: R.colors.BUTTON_TEXT,
 		fontSize: 20
+	},
+	configStyle: {
+		fontSize: 12,
+		color: R.colors.BUTTON_TEXT
 	}
 });

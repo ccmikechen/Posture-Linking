@@ -82,7 +82,8 @@ class Configs extends React.Component {
           <AddCombinationDetail
             text={this.props.triggerConfig.text}
             status={3}
-            onPress={()=>this.handleTriggerSetting()}
+            onPress={()=>this.handleSelectTriggerConfig()}
+            config={this.props.triggerConfig}
           />
           <AddCombinationDetail
             text={R.strings.THEN_TEXT}
@@ -114,6 +115,26 @@ class Configs extends React.Component {
     });
   }
 
+  handleSelectTriggerConfig() {
+    this.props.navigator.push({
+      screen: 'TriggerSettingScreen',
+      title: '',
+      passProps: {},
+      navigatorStyle: {
+      }
+    });
+  }
+
+  handleSelectActionConfig() {
+    this.props.navigator.push({
+      screen: 'ActionSettingScreen',
+      title: '',
+      passProps: {},
+      navigatorStyle: {
+      }
+    });
+  }
+
   renderActionSetting() {
     let trigger = ServiceManager.getServiceById(this.props.triggerId);
     let action = ServiceManager.getServiceById(this.props.actionId);
@@ -125,7 +146,8 @@ class Configs extends React.Component {
           <AddCombinationDetail
             text={this.props.triggerConfig.text}
             status={3}
-            onPress={()=>this.handleTriggerSetting()}
+            onPress={()=>this.handleSelectTriggerConfig()}
+            config={this.props.triggerConfig}
           />
           <Text style={styles.text}>{R.strings.services[action.id]}</Text>
           <AddCombinationDetail
@@ -142,13 +164,15 @@ class Configs extends React.Component {
           <AddCombinationDetail
             text={this.props.triggerConfig.text}
             status={3}
-            onPress={()=>this.handleTriggerSetting()}
+            onPress={()=>this.handleSelectTriggerConfig()}
+            config={this.props.triggerConfig}
           />
           <Text style={styles.text}>{R.strings.services[action.id]}</Text>
           <AddCombinationDetail
             text={this.props.actionConfig.text}
             status={3}
-            onPress={()=>this.handleActionSetting()}
+            onPress={()=>this.handleSelectActionConfig()}
+            config={this.props.actionConfig}
           />
         </View>
       );
@@ -171,5 +195,5 @@ export default connect((state) => ({
   triggerConfig: state.getIn(['combination', 'triggerConfig']),
   actionConfig: state.getIn(['combination', 'actionConfig']),
   isGetTriggerConfig: state.getIn(['combination', 'isGetTriggerConfig']),
-  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig'])
+  isGetActionConfig: state.getIn(['combination', 'isGetActionConfig']),
 }))(Configs);

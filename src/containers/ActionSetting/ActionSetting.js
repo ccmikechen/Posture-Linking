@@ -27,7 +27,10 @@ class ActionSetting extends React.Component {
   constructor(props) {
     super(props);
     this.config={};
-    this.defaultText = R.strings.SELECT_TIME;
+    this.defaultText = {
+      time: this.props.actionConfig.hasOwnProperty('time')? this.props.actionConfig.time.toString() : R.strings.SELECT_TIME,
+      message: this.props.actionConfig.hasOwnProperty('message')?  this.props.actionConfig.message : '',
+    };
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
@@ -55,6 +58,8 @@ class ActionSetting extends React.Component {
 
   componentWillMount() {
     this.props.getEvent(this.props.selectedActionConfig);
+    this.props.actionConfig.hasOwnProperty('time')? this.config['time'] = this.props.actionConfig.time : null
+    this.props.actionConfig.hasOwnProperty('message')? this.config['message'] = this.props.actionConfig.message : null
   }
 
   renderSetting(event) {
@@ -76,7 +81,7 @@ class ActionSetting extends React.Component {
 
   onSelectOption(value, name) {
     this.config[name] = value;
-    this.defaultText = value;
+    this.defaultText[name] = value.toString();
     this.props.setSelectedActionOption(this.config);
   }
 
@@ -88,7 +93,7 @@ class ActionSetting extends React.Component {
           <Select
             optionListStyle = {styles.optionList}
             onSelect={(value) => this.onSelectOption(value, option.name)}
-            defaultText={this.defaultText}
+            defaultText={this.defaultText[option.name]}
            >
             {option.options.map(ItemOption=>(
               <Option 
@@ -113,6 +118,7 @@ class ActionSetting extends React.Component {
           numberOfLines = {4}
           maxLength={200}
           autoCapitalize = {'none'}
+          defaultValue = {this.defaultText[option.name]}
           onChangeText = {(text) => this.onSelectOption(text, option.name)}
         />
       </View>
@@ -172,7 +178,8 @@ export default connect((state) => ({
   selectedActionConfig: state.getIn(['combination', 'selectedActionConfig']),
   isGettingEvent: state.getIn(['combination', 'isGettingEvent']),
   selectedEvent: state.getIn(['combination', 'selectedEvent']),
-  selectedActionOption: state.getIn(['combination', 'selectedOption'])
+  selectedActionOption: state.getIn(['combination', 'selectedOption']),
+  actionConfig: state.getIn(['combination', 'actionConfig'])
 }), {
   setActionConfig,
   getEvent,

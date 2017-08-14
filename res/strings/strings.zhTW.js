@@ -36,7 +36,7 @@ const strings = {
   MENU: '選單',
   NUMBERS_ONLY_WARNING: '請輸入數字',
   SAVE_BUTTON_TEXT: '儲存',
-
+  DEFAULT_MESSAGE: '請輸入通知時所顯示訊息',
   services : {
     1 : '按鈕',
     2 : '定時',
