@@ -13,7 +13,7 @@ import {
 import AnimatedButton from '../../components/AnimatedButton';
 import ViewIcon from 'react-native-vector-icons/MaterialIcons';
 import Carousel from 'react-native-snap-carousel';
-import styles, { width, itemWidth, minButtonTouchSize, minButtonSize, minButtonMenuHeight } from './styles';
+import styles, { width, itemWidth, slideHeight, minButtonTouchSize, minButtonSize, minButtonMenuHeight } from './styles';
 import {
   updateCombinationList
 } from '../../actions/combinationActions';
@@ -93,7 +93,7 @@ class ButtonList extends React.Component {
         <View style={[styles.animatedAllView, styles.animatedBottomView]}></View>
         <View style={[styles.animatedAllView, styles.animatedButtonView]}>
           <AnimatedButton
-            size={itemWidth * 0.5}
+            size={slideHeight * 0.5}
             onPress={() => this.handleButtonPress(combination.id)}
             color={icon.color}
             icon={icon.icon}
