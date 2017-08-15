@@ -129,14 +129,11 @@ class SideMenu extends React.Component {
                 </View>
                 <Text style={styles.username} >{user.username.substring(0,20)}</Text>
               </View>
-              <View style={styles.logoutView} >
-                <View style={styles.logoutEmpty} ></View>
-                <View style={styles.logoutContent} >
-                  <TouchableOpacity style={styles.logoutTouch} onPress={this.showLogoutAlert} >
-                    <LogoutIcon name= 'sign-out' size={23} color='white' />
-                    <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
-                  </TouchableOpacity>
-                </View>
+              <View style={styles.logoutContent} >
+                <TouchableOpacity style={styles.logoutTouch} onPress={this.showLogoutAlert} >
+                  <LogoutIcon name= 'sign-out' size={23} color='white' />
+                  <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.content} >

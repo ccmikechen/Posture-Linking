@@ -4,14 +4,12 @@ import {
   Text,
   Image,
   Switch,
-  Dimensions,
   TouchableOpacity
 } from 'react-native';
-import styles from './styles';
+import styles, { width, height } from './styles';
 import CombinationHorImg from '../CombinationHorImg';
 
 const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
-  let { width, height } = Dimensions.get('window');
   let opacity = 1;
   let switchValue = true;
   if(data.status == 0) {

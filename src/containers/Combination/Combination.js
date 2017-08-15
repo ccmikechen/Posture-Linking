@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
   Alert,
   Text,
-  Dimensions,
   TouchableOpacity,
   RefreshControl
 } from 'react-native';
@@ -24,7 +23,7 @@ import {
   selectCombinationId,
   refreshCombinationList
 } from '../../actions/combinationActions';
-import styles from './styles';
+import styles, { width, height } from './styles';
 import CombinationRow from '../../components/CombinationRow';
 import ShareDialog from '../../components/ShareDialog';
 
@@ -118,7 +117,6 @@ class Combination extends React.Component {
   }
 
   renderHiddenRow(combination) {
-    let { width } = Dimensions.get('window');
     let item = combination;
     if (combination.status === 2 ) {
       return null;
@@ -153,23 +151,21 @@ class Combination extends React.Component {
   }
 
   render() {
-    let w = Dimensions.get('window');
-
     return (
       <View style={styles.container}>
         {!this.props.isGettingCombinations ? (
           this.props.combinations.length === 0 ?
             <View style= {styles.noCombination} >
               <TouchableOpacity style={styles.imgTouch} onPress={this.goToAddCombination} >
-                <ViewIcon name= 'touch-app' size= {w.height*0.23} color= {R.colors.NO_CONBINATION} />
+                <ViewIcon name= 'touch-app' size= {height*0.23} color= {R.colors.NO_CONBINATION} />
                 <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
                 <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
               </TouchableOpacity>
             </View>
           :
             <SwipeListView
-              rightOpenValue = {w.width/-3}
-              stopRightSwipe = {w.width/-2.8}
+              rightOpenValue = {width/-3}
+              stopRightSwipe = {width/-2.8}
               stopLeftSwipe = {10}
               refreshControl={
                 <RefreshControl

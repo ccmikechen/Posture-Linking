@@ -29,21 +29,13 @@ export default styles = StyleSheet.create({
     color: R.colors.USER_TEXT,
     paddingLeft: 10
   },
-  logoutView:{
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingRight: 5
-  },
-  logoutEmpty:{
-    flex: 6
-  },
   logoutContent:{
-    flex: 2
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    padding: 15
   },
   logoutTouch:{
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center'
   },
