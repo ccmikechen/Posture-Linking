@@ -7,14 +7,13 @@ import {
   TouchableOpacity,
   Alert,
   FlatList,
-  Dimensions,
   Image
 } from 'react-native';
 
 import AnimatedButton from '../../components/AnimatedButton';
 import ViewIcon from 'react-native-vector-icons/MaterialIcons';
 import Carousel from 'react-native-snap-carousel';
-import styles from './styles';
+import styles, { width, itemWidth, minButtonTouchSize, minButtonSize, minButtonMenuHeight } from './styles';
 import {
   updateCombinationList
 } from '../../actions/combinationActions';
@@ -32,16 +31,6 @@ import Svg, {
 } from 'react-native-svg';
 
 import ServiceManager from '../../../lib/ServiceManager';
-
-const { width, height } = Dimensions.get('window');
-
-const slideHeight = height * 0.5;
-const slideWidth = Math.round( width * 0.75 );
-const itemHorizontalMargin = Math.round( width * 0.02 );
-const itemWidth = slideWidth + itemHorizontalMargin * 2;
-const minButtonTouchSize = 70;
-const minButtonSize = minButtonTouchSize * 0.9;
-const minButtonMenuHeight = height * 0.2;
 
 class ButtonList extends React.Component {
 
@@ -99,12 +88,12 @@ class ButtonList extends React.Component {
     });
 
     return (
-      <View key={combination.id} style={[{width: itemWidth, height: slideHeight, paddingHorizontal: itemHorizontalMargin}, styles.animatedView]}>
-        <View style={[{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}, styles.animatedShadowView]}></View>
-        <View style={[{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}, styles.animatedBottomView]}></View>
-        <View style={[{width: itemWidth-10, height: slideHeight-10, paddingHorizontal: itemHorizontalMargin}, styles.animatedButtonView]}>
+      <View key={combination.id} style={styles.animatedView}>
+        <View style={[styles.animatedAllView, styles.animatedShadowView]}></View>
+        <View style={[styles.animatedAllView, styles.animatedBottomView]}></View>
+        <View style={[styles.animatedAllView, styles.animatedButtonView]}>
           <AnimatedButton
-            size={150}
+            size={itemWidth * 0.5}
             onPress={() => this.handleButtonPress(combination.id)}
             color={icon.color}
             icon={icon.icon}
@@ -118,13 +107,13 @@ class ButtonList extends React.Component {
 
   minRenderButton(combination, id) {
     let icon = {}, size = minButtonSize * 0.8, iconSize;
-    let minButtonOuterTouchSize = minButtonSize+minButtonTouchSize*0.05;
+    let minButtonOuterTouchSize = minButtonSize + minButtonTouchSize * 0.05;
     let checkOpacity = 1, color = R.colors.MINBUTTON;
 
-     if(this.state.item == id){
+    if(this.state.item == id){
         size = minButtonSize * 0.6;
         color = R.colors.ON_MINBUTTON;
-     }
+    }
     iconSize = size * 0.8;
     R.images.icon.forEach((data) => {
       if(combination.action.name == data.name) {
@@ -137,7 +126,7 @@ class ButtonList extends React.Component {
         onPress={() => {
           this.refs.carousel.snapToItem(id);
         }}
-        style={[{width: minButtonTouchSize, height: minButtonTouchSize}, styles.minTouchable]}
+        style={styles.minTouchable}
       >
         <Svg width={minButtonOuterTouchSize} height={minButtonOuterTouchSize} style={styles.minOuterButton}>
           <Defs>
@@ -194,17 +183,17 @@ class ButtonList extends React.Component {
             this.buttonTrigger.isConnected() == false?
               <View style= {styles.noAuthorized} >
                 <TouchableOpacity style={styles.imgTouch} onPress={() => this.connectService()}>
-                  <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
-                  <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
-                  <Text style={styles.text} >{R.strings.AUTHORIZING}</Text>
+                  <ViewIcon name= 'touch-app' size= {width * 0.4} color= {R.colors.NO_CONBINATION} />
+                  <Text style={styles.text}>{R.strings.CLICK_THIS}</Text>
+                  <Text style={styles.text}>{R.strings.AUTHORIZING}</Text>
                 </TouchableOpacity>
               </View>
             :
               buttonData.length === 0 ? (
                 <TouchableOpacity style={styles.imgTouch} onPress={() => this.goToAddCombination()}>
-                  <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
-                  <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
-                  <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
+                  <ViewIcon name= 'touch-app' size= {width * 0.4} color= {R.colors.NO_CONBINATION} />
+                  <Text style={styles.text}>{R.strings.CLICK_THIS}</Text>
+                  <Text style={styles.text}>{R.strings.ADD_COMBINATION}</Text>
                 </TouchableOpacity>
               ) : (
                 <View style={styles.authorized}>
