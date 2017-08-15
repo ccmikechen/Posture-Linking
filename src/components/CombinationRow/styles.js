@@ -4,8 +4,9 @@ const w = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   rowFront: {
-    flex: 1,
+    height: w.height*0.16,
     backgroundColor: R.colors.COMBINATION_ROW,
+    justifyContent: 'center',
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 5,
@@ -13,43 +14,33 @@ export default styles = StyleSheet.create({
     marginRight: 10
   },
   combinationTouch:{
-    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   combination:{
-    flex: 3
-  },
-  combinationImg:{
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: w.width*0.49,
-    marginRight: 15
-  },
-  trigger:{
-    flex: 1
-  },
-  action:{
-    flex: 1,
-    right: w.width*0.0883
+    width: w.width*0.4,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   content:{
-    flex: 4,
-    flexDirection: 'column'
+    height: w.height*0.14,
+    width: w.width*0.52,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   name:{
-    flex: 4,
-    padding: 5,
-    marginTop: 8
+    marginTop: 8,
+    marginRight: 5
   },
   text:{
-    flex: 1,
-    fontSize: w.width*0.04,
+    fontSize: w.width*0.038,
     fontWeight: 'bold'
   },
   switch:{
-    flex: 2,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    padding: 5
+    marginBottom: 5,
+    marginRight: 5
   }
 });
