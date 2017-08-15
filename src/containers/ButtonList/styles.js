@@ -1,4 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+export const { width, height } = Dimensions.get('window');
+
+export const slideHeight = height * 0.5;
+export const slideWidth = Math.round( width * 0.75 );
+export const itemHorizontalMargin = Math.round( width * 0.02 );
+export const itemWidth = slideWidth + itemHorizontalMargin * 2;
+export const minButtonTouchSize = height * 0.12;
+export const minButtonSize = minButtonTouchSize * 0.9;
+export const minButtonMenuHeight = height * 0.2;
 
 export default styles = StyleSheet.create({
   content:{
@@ -9,24 +19,30 @@ export default styles = StyleSheet.create({
   },
   animatedView:{
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: itemWidth,
+    height: slideHeight,
+    paddingHorizontal: itemHorizontalMargin
   },
   animatedShadowView:{
     backgroundColor: R.colors.SHADOW_BACKGROUND,
-    borderRadius: 20,
     position: 'absolute',
     top: 10,
     left: 10
   },
+  animatedAllView:{
+    width: itemWidth - 10,
+    height: slideHeight - 10,
+    borderRadius: itemWidth * 0.1,
+    paddingHorizontal: itemHorizontalMargin
+  },
   animatedBottomView:{
     backgroundColor: R.colors.SHADOW_BACKGROUND,
-    borderRadius: 20,
     position: 'absolute'
   },
   animatedButtonView:{
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
     backgroundColor: R.colors.BUTTONLIST_BACKGROUND
   },
   noAuthorized:{
@@ -63,7 +79,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   description:{
-    fontSize: 18
+    fontSize: width * 0.05
   },
   slider:{
     marginBottom: 30
@@ -73,6 +89,8 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   minTouchable:{
+    width: minButtonTouchSize,
+    height: minButtonTouchSize,
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center',
@@ -90,7 +108,7 @@ export default styles = StyleSheet.create({
   },
   message:{
     marginTop: 5,
-    fontSize: 12
+    fontSize: width * 0.035
   },
   flatList:{
     alignItems: 'center',
