@@ -3,10 +3,11 @@ import { StyleSheet, Dimensions } from 'react-native';
 export const { width, height } = Dimensions.get('window');
 
 export const slideHeight = height * 0.5;
-export const slideWidth = Math.round( width * 0.75 );
-export const itemHorizontalMargin = Math.round( width * 0.02 );
+const slideWidth = Math.round( width * 0.75 );
+const itemHorizontalMargin = Math.round( width * 0.02 );
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
-export const minButtonTouchSize = height * 0.12;
+const minButtonTouchMargin = height * 0.01;
+export const minButtonTouchSize = height * 0.12 + minButtonTouchMargin;
 export const minButtonSize = minButtonTouchSize * 0.9;
 export const minButtonMenuHeight = height * 0.2;
 
@@ -27,12 +28,12 @@ export default styles = StyleSheet.create({
   animatedShadowView:{
     backgroundColor: R.colors.SHADOW_BACKGROUND,
     position: 'absolute',
-    top: 10,
-    left: 10
+    top: height * 0.02,
+    left: width * 0.03
   },
   animatedAllView:{
-    width: itemWidth - 10,
-    height: slideHeight - 10,
+    width: itemWidth - width * 0.03,
+    height: slideHeight - height * 0.02,
     borderRadius: itemWidth * 0.1,
     paddingHorizontal: itemHorizontalMargin
   },
@@ -52,7 +53,7 @@ export default styles = StyleSheet.create({
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   text:{
-    fontSize: 20,
+    fontSize: height * 0.035,
     fontWeight: 'bold',
     color: R.colors.NO_CONBINATION
   },
@@ -79,10 +80,10 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   description:{
-    fontSize: width * 0.05
+    fontSize: slideHeight * 0.06
   },
   slider:{
-    marginBottom: 30
+    marginBottom: height * 0.05
   },
   sliderContainer:{
     alignItems: 'center',
@@ -94,21 +95,21 @@ export default styles = StyleSheet.create({
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 6,
-    marginRight: 6
+    marginLeft: height * 0.01,
+    marginRight: height * 0.01
   },
   minOuterButton:{
     position: 'absolute'
   },
   minButton:{
-    margin: 5,
+    margin: minButtonTouchMargin,
     borderRadius: 999,
     alignItems: 'center',
     justifyContent: 'center'
   },
   message:{
-    marginTop: 5,
-    fontSize: width * 0.035
+    marginTop: height * 0.005,
+    fontSize: slideHeight * 0.05
   },
   flatList:{
     alignItems: 'center',
