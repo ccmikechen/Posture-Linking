@@ -1,31 +1,26 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const w = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   rowFront: {
-    height: w.height*0.16,
+    height: height*0.16,
     backgroundColor: R.colors.COMBINATION_ROW,
     justifyContent: 'center',
     borderRadius: 10,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10
+    marginTop: height*0.012,
+    marginBottom: height*0.01,
+    marginLeft: width*0.02,
+    marginRight: width*0.03
   },
   combinationTouch:{
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  combination:{
-    width: w.width*0.4,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   content:{
-    height: w.height*0.14,
-    width: w.width*0.52,
+    height: height*0.14,
+    width: width*0.52,
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
@@ -34,7 +29,7 @@ export default styles = StyleSheet.create({
     marginRight: 5
   },
   text:{
-    fontSize: w.width*0.038,
+    fontSize: width*0.038,
     fontWeight: 'bold'
   },
   switch:{

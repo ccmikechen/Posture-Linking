@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const w = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   container:{
@@ -14,12 +14,12 @@ export default styles = StyleSheet.create({
     justifyContent : 'flex-end',
     alignItems: 'center',
     borderRadius: 10,
-    marginTop: 10,
-    marginLeft: 15,
-    marginRight: 5
+    marginTop: height*0.02,
+    marginLeft: width*0.03,
+    marginRight: width*0.015
   },
   touch:{
-    marginRight: w.width*0.05
+    marginRight: width*0.05
   },
   noCombination:{
     flex: 1,
@@ -28,12 +28,13 @@ export default styles = StyleSheet.create({
     backgroundColor: R.colors.CONTAINER_BACKGROUND,
   },
   imgTouch:{
-    height: 200,
-    width: 155,
-    alignItems: 'center'
+    height: height*0.36,
+    width: height*0.23,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   text:{
-    fontSize: 16,
+    fontSize: width*0.06,
     fontWeight: 'bold',
     color: R.colors.NO_CONBINATION
   },

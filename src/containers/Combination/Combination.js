@@ -111,14 +111,14 @@ class Combination extends React.Component {
         item: item
       },
      style: {
-       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+       backgroundBlur: "dark",
        backgroundColor: "#00000090"
      }
     });
   }
 
   renderHiddenRow(combination) {
-    let w = Dimensions.get('window');
+    let { width } = Dimensions.get('window');
     let item = combination;
     if (combination.status === 2 ) {
       return null;
@@ -126,10 +126,10 @@ class Combination extends React.Component {
       return (
         <View style={styles.rowBack}>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item); }}>
-            <Icon name='share-alt' size={w.width/9} color= {R.colors.ROWBACK_BUTTON} />
+            <Icon name='share-alt' size={width/9} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>
-            <Icon name='trash' size={w.width/8} color= {R.colors.ROWBACK_BUTTON} />
+            <Icon name='trash' size={width/8} color= {R.colors.ROWBACK_BUTTON} />
           </TouchableOpacity>
         </View>
       );
@@ -161,7 +161,7 @@ class Combination extends React.Component {
           this.props.combinations.length === 0 ?
             <View style= {styles.noCombination} >
               <TouchableOpacity style={styles.imgTouch} onPress={this.goToAddCombination} >
-                <ViewIcon name= 'touch-app' size= {150} color= {R.colors.NO_CONBINATION} />
+                <ViewIcon name= 'touch-app' size= {w.height*0.23} color= {R.colors.NO_CONBINATION} />
                 <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
                 <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
               </TouchableOpacity>
