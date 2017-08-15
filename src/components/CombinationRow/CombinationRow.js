@@ -18,12 +18,12 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
     opacity = 0.6;
     switchValue = false;
   }
-
+  //w.width*0.0021
   return(
     <View style = {styles.rowFront}>
       <TouchableOpacity onPress = {onEdit} activeOpacity = {0.5} style={styles.combinationTouch}>
         <View style={styles.combination}>
-          <CombinationHorImg data={data} opacity={opacity} size={w.width*0.0021} />
+          <CombinationHorImg data={data} opacity={opacity} size={w.width*0.0021} /> 
         </View>
         <View style={styles.content}>
           <View style={[styles.name,{opacity: opacity}]}>

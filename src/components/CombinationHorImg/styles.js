@@ -1,12 +1,9 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-const w = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
   combinationImg:{
     flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 15
+    alignItems: 'center'
   },
   trigger:{
     flex: 1
