@@ -1,8 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+export const { width, height } = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
 	disabledStyle: {
-		height: 80,
+		height: height*0.11,
 		backgroundColor: R.colors.BUTTON_UNDEFIND_BACKGROUND,
 		borderColor: R.colors.BUTTON_DISABLED_BORDER,
 		alignItems: 'center',
@@ -14,10 +16,10 @@ export default styles = StyleSheet.create({
 	},
 	disabledFontStyle: {
 		color: R.colors.BUTTON_DISABLED_TEXT,
-		fontSize: 20
+		fontSize: height*0.03
 	},
 	undefindStyle: {
-		height: 80,
+		height: height*0.11,
 		backgroundColor: R.colors.BUTTON_UNDEFIND_BACKGROUND,
 		borderColor: R.colors.BUTTON_UNDEFIND_BORDER,
 		alignItems: 'center',
@@ -29,10 +31,10 @@ export default styles = StyleSheet.create({
 	},
 	undefindFontStyle: {
 		color: R.colors.BUTTON_UNDEFIND_TEXT,
-		fontSize: 20
+		fontSize: height*0.03
 	},
 	finishStyle: {
-		height: 80,
+		height: height*0.11,
 		backgroundColor: R.colors.BUTTON_BACKGROUND,
 		borderColor: R.colors.BUTTON_BORDER,
 		alignItems: 'center',
@@ -44,7 +46,7 @@ export default styles = StyleSheet.create({
 	},
 	finishFontStyle: {
 		color: R.colors.BUTTON_TEXT,
-		fontSize: 20
+		fontSize: height*0.027
 	},
 	configStyle: {
 		fontSize: 12,

@@ -1,59 +1,54 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+export const { width, height } = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   scrollView:{
-    flex:0.8 ,
     backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   imgContent:{
-    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    height: 300
+    justifyContent: 'center',
+    height: height*0.55,
   },
   triggerImg:{
-    flex:1,
-    top: 5
+    top: height*0.02,
   },
   actionImg:{
-    flex: 1,
-    bottom: 15
+    bottom: height*0.02,
   },
   settingConent:{
-    flex:1,
     backgroundColor:R.colors.SETTING_BACKGROUND,
-    padding:10,
-    marginBottom: 10,
-    marginRight: 15,
-    marginLeft: 15,
-    borderRadius: 15 
+    paddingLeft: width*0.06,
+    paddingRight: width*0.06,
+    paddingTop: height*0.03,
+    paddingBottom: height*0.03,
+    marginLeft: width*0.05,
+    marginRight: width*0.05,
+    marginBottom: height*0.02,
+    borderRadius: 15
   },
   lastSection:{
-    flex:1,
-    margin: 15
+    padding: 10
   },
   descriptionTitle:{
-    fontSize:16,
+    fontSize: height*0.03,
     fontWeight: 'bold',
-    height:40 
+    height: height*0.06
   },
   descriptionInput:{
     borderRadius: 5,
-    height: 50,
-    fontSize: 20,
+    height: height*0.07,
+    fontSize: height*0.025,
     borderColor: R.colors.INPUT_BORDER,
     borderWidth: 1,
-    paddingLeft: 10
+    paddingLeft: height*0.01
   },
   submitContent:{
-    marginTop: 20,
-    height: 100,
-    alignItems:'center',
+    marginTop: height*0.04,
+    height: height*0.12,
+    alignItems: 'center',
     justifyContent: 'center'
-  },
-  submit:{
-    height: 90,
-    width: 90,
-    alignItems:'center'
   }
 });
