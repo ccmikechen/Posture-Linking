@@ -61,7 +61,6 @@ class Combination extends React.Component {
   }
 
   handleRemove(combination) {
-    console.log(123)
     this.props.removeCombination(combination)
       .then(this.props.notUpdateCombinationList())
       .then(
