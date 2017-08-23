@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   View,
+  Text,
+  TouchableOpacity,
   Platform
 } from 'react-native';
 
@@ -72,6 +74,12 @@ class PostureMenu extends React.Component {
           onPress={this.handleButtonPress('records')}
           text='record list'
         />
+        <TouchableOpacity onPress={ this.handleButtonPress('records') }>
+          <View style={styles.finishStyle}>
+            <Text style={styles.finishFontStyle}> record list </Text>
+          </View>
+        </TouchableOpacity>
+
       </View>
     );
   }
