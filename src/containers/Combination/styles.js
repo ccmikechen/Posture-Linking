@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginTop: height*0.02,
-    marginLeft: width*0.03,
+    marginLeft: width*0.04,
     marginRight: width*0.015
   },
   touch:{

@@ -11,8 +11,7 @@ export default styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderRadius: 30,
 		borderWidth: 3,
-		margin: 5,
-		padding: 20
+		margin: 5
 	},
 	disabledFontStyle: {
 		color: R.colors.BUTTON_DISABLED_TEXT,
@@ -26,8 +25,7 @@ export default styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderRadius: 30,
 		borderWidth: 3,
-		margin: 5,
-		padding: 20
+		margin: 5
 	},
 	undefindFontStyle: {
 		color: R.colors.BUTTON_UNDEFIND_TEXT,
@@ -41,8 +39,7 @@ export default styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderRadius: 30,
 		borderWidth: 3,
-		margin: 5,
-		padding: 20
+		margin: 5
 	},
 	finishFontStyle: {
 		color: R.colors.BUTTON_TEXT,

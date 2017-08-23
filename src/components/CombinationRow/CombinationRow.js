@@ -20,9 +20,9 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   return(
     <View style = {styles.rowFront}>
       <TouchableOpacity onPress = {onEdit} activeOpacity = {0.5} style={styles.combinationTouch}>
-        <CombinationHorImg data={data} opacity={opacity} size={ width*0.0021 } /> 
+        <CombinationHorImg data={data} opacity={opacity} size={ height*0.0013 } /> 
         <View style={styles.content}>
-          <View style={[styles.name,{opacity: opacity}]}>
+          <View style={{opacity: opacity}}>
             <Text style={styles.text}>
               {
                 data.description.length > 20 ?

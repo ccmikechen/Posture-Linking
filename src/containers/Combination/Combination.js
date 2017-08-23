@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Alert,
   Text,
+  Dimensions,
   TouchableOpacity,
   RefreshControl
 } from 'react-native';
@@ -151,6 +152,10 @@ class Combination extends React.Component {
   }
 
   render() {
+    console.log('window width'+Dimensions.get('window').width);
+    console.log('window height'+Dimensions.get('window').height);
+    console.log('screen width'+Dimensions.get('screen').width);
+    console.log('screen height'+Dimensions.get('screen').height);
     return (
       <View style={styles.container}>
         {!this.props.isGettingCombinations ? (

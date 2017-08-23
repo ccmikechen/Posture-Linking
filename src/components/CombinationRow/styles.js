@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: height*0.012,
     marginBottom: height*0.01,
-    marginLeft: width*0.02,
+    marginLeft: width*0.03,
     marginRight: width*0.03
   },
   combinationTouch:{
@@ -22,20 +22,15 @@ export default styles = StyleSheet.create({
     height: height*0.14,
     width: width*0.52,
     flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  name:{
-    marginTop: 8,
-    marginRight: 5
+    marginRight: height*0.015
   },
   text:{
-    fontSize: width*0.038,
-    fontWeight: 'bold'
+    fontSize: R.sizes.FONT,
+    fontWeight: 'bold',
+    marginTop: height*0.02
   },
   switch:{
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginBottom: 5,
-    marginRight: 5
+    justifyContent: 'flex-end'
   }
 });
