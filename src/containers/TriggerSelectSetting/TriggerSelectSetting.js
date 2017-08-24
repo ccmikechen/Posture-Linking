@@ -17,6 +17,7 @@ import {
 import ServiceManager from '../../../lib/ServiceManager';
 import TriggerVerImg from '../../components/TriggerVerImg';
 import AddCombinationDetail from '../../components/AddCombinationDetail';
+import GradientButton from '../../components/GradientButton';
 
 class TriggerSelectSetting extends React.Component {
 
@@ -75,12 +76,8 @@ class TriggerSelectSetting extends React.Component {
 
   renderTrigger(event) {
     return (
-      <View key={event.id}>
-        <AddCombinationDetail
-          text={R.strings.events[event.id].description}
-          status={2}
-          onPress={() => this.handleSelectConfig(event.id)}
-        />
+      <View key={event.id} style={{alignItems: 'center', justifyContent: 'center'}}>
+        <GradientButton width={250} height={80} text={R.strings.events[event.id].description} color='red' onPress={() => this.handleSelectConfig(event.id)} />
       </View>
       
     );
