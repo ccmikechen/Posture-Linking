@@ -1,3 +1,4 @@
+
 const colors = {
 //navigationbar
 	NAVBAR_BACKGROUND: '#D10909',
@@ -31,7 +32,7 @@ const colors = {
 	ON_MINBUTTON: ['#B7B7B7', 'white', 'white', '#D3D3D3'],
 	BOTTOM_VIEW: ['black', 'black', 'black', 'white'],
 
-//setting button
+//config button
 	DISABLE_BUTTON: '#969696',
 
 	BUTTON_DISABLED_BORDER: '#B2B6B2',
@@ -44,6 +45,9 @@ const colors = {
 	BUTTON_DISABLED_TEXT: '#B2B6B2',
 	BUTTON_UNDEFIND_TEXT: '#FF7878',
 	BUTTON_TEXT: 'white',
+
+//GradientButton
+	BUTTON_POSTURE: '#D10909',
 
 //trigger,action setting
 	NO_SETTING_TEXT: '#499275',

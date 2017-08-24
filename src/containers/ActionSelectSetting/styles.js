@@ -29,5 +29,11 @@ export default styles = StyleSheet.create({
     marginRight: width*0.05,
     marginBottom: height*0.02,
     borderRadius: 15
+  },
+  button:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: R.sizes.HEIGHT*0.01,
+    marginBottom: R.sizes.HEIGHT*0.01
   }
 });

@@ -6,6 +6,7 @@ import {
   Platform
 } from 'react-native';
 
+import GradientButton from '../../components/GradientButton'
 import TestButton from '../../components/TestButton';
 import styles from './styles';
 import api from '../../api/poselink';
@@ -56,32 +57,48 @@ class PostureMenu extends React.Component {
       <View style={styles.container}>
         {
           Platform.OS === 'android'? (
-
-            <TouchableOpacity onPress={ this.handleButtonPress('monitor') }>
-              <View style={styles.finishStyle}>
-                <Text style={styles.finishFontStyle}> monitor </Text>
-              </View>
-            </TouchableOpacity>
+            <View style={styles.button}>
+              <GradientButton
+                onPress = { this.handleButtonPress('monitor') }
+                color = { R.colors.BUTTON_POSTURE }
+                text = 'monitor'
+                textSize = { R.sizes.BUTTON_FONT }
+                width = { R.sizes.WIDTH*0.8 }
+                height = { R.sizes.HEIGHT*0.1 }
+              />
+            </View>
           ) : null
         }
-        <TouchableOpacity onPress={ this.handleButtonPress('record') }>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}> record </Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={ this.handleButtonPress('update') }>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}> update </Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={ this.handleButtonPress('records') }>
-          <View style={styles.finishStyle}>
-            <Text style={styles.finishFontStyle}> record list </Text>
-          </View>
-        </TouchableOpacity>
-
+        <View style={styles.button}>
+          <GradientButton
+            onPress = { this.handleButtonPress('record') }
+            color = { R.colors.BUTTON_POSTURE }
+            text = 'record'
+            textSize = { R.sizes.BUTTON_FONT }
+            width = { R.sizes.WIDTH*0.8 }
+            height = { R.sizes.HEIGHT*0.1 }
+          />
+        </View>
+        <View style={styles.button}>
+          <GradientButton
+            onPress = { this.handleButtonPress('update') }
+            color = { R.colors.BUTTON_POSTURE }
+            text = 'update'
+            textSize = { R.sizes.BUTTON_FONT }
+            width = { R.sizes.WIDTH*0.8 }
+            height = { R.sizes.HEIGHT*0.1 }
+          />
+        </View>
+        <View style={styles.button}>
+          <GradientButton
+            onPress = { this.handleButtonPress('records') }
+            color = { R.colors.BUTTON_POSTURE }
+            text = 'record list'
+            textSize = { R.sizes.BUTTON_FONT }
+            width = { R.sizes.WIDTH*0.8 }
+            height = { R.sizes.HEIGHT*0.1 }
+          />
+        </View>
       </View>
     );
   }

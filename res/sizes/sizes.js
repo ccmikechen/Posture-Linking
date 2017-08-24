@@ -10,7 +10,7 @@ const sizes = {
 	TITLE_FONT: height*0.038,
 	DESCRIPTION_FONT: height*0.03,
 	TEXT_INPUT_FONT: height*0.025,
-	BUTTON_FONT: height*0.035
+	BUTTON_FONT: height*0.032
 };
 
 export default sizes;

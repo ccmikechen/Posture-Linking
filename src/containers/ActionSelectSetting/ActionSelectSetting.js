@@ -16,7 +16,7 @@ import {
 } from '../../actions/combinationActions';
 import ServiceManager from '../../../lib/ServiceManager';
 import ActionVerImg from '../../components/ActionVerImg';
-import AddCombinationDetail from '../../components/AddCombinationDetail';
+import GradientButton from '../../components/GradientButton';
 
 class ActionSelectSetting extends React.Component {
 
@@ -75,13 +75,14 @@ class ActionSelectSetting extends React.Component {
 
   renderAction(event) {
     return(
-      <View key={event.id}>
-
-        <AddCombinationDetail
-          text={R.strings.events[event.id].description}
-          status={2}
-          onPress={() => this.handleSelectConfig(event.id)}
-        />
+      <View key={event.id} style={styles.button}>
+        <GradientButton
+          width= {R.sizes.WIDTH*0.7}
+          height= { 70 }
+          text= { R.strings.events[event.id].description}
+          textSize = { R.sizes.BUTTON_FONT }
+          color= { R.colors.BUTTON_POSTURE }
+          onPress= {() => this.handleSelectConfig(event.id)} />
       </View>
     );
   };
