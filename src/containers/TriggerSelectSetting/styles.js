@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'center'
   },
   imgText:{
-    fontSize: height*0.04,
+    fontSize: R.sizes.TITLE_FONT,
     fontWeight: 'bold',
     margin: 15,
     color: R.colors.BUTTON_UNDEFIND_TEXT

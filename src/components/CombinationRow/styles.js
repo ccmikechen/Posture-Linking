@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
     marginRight: height*0.015
   },
   text:{
-    fontSize: R.sizes.FONT,
+    fontSize: R.sizes.COMBINATION_FONT,
     fontWeight: 'bold',
     marginTop: height*0.02
   },

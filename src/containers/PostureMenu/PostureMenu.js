@@ -56,24 +56,26 @@ class PostureMenu extends React.Component {
       <View style={styles.container}>
         {
           Platform.OS === 'android'? (
-            <TestButton
-              onPress={this.handleButtonPress('monitor')}
-              text='monitor'
-            />
+
+            <TouchableOpacity onPress={ this.handleButtonPress('monitor') }>
+              <View style={styles.finishStyle}>
+                <Text style={styles.finishFontStyle}> monitor </Text>
+              </View>
+            </TouchableOpacity>
           ) : null
         }
-        <TestButton
-          onPress={this.handleButtonPress('record')}
-          text='record'
-        />
-        <TestButton
-          onPress={this.handleButtonPress('update')}
-          text='update'
-        />
-        <TestButton
-          onPress={this.handleButtonPress('records')}
-          text='record list'
-        />
+        <TouchableOpacity onPress={ this.handleButtonPress('record') }>
+          <View style={styles.finishStyle}>
+            <Text style={styles.finishFontStyle}> record </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={ this.handleButtonPress('update') }>
+          <View style={styles.finishStyle}>
+            <Text style={styles.finishFontStyle}> update </Text>
+          </View>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={ this.handleButtonPress('records') }>
           <View style={styles.finishStyle}>
             <Text style={styles.finishFontStyle}> record list </Text>

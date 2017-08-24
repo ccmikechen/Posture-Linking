@@ -1,6 +1,7 @@
 import React from 'react';
-import ServiceList from '../../containers/ServiceList';
 import { Platform } from 'react-native';
+
+import ServiceList from '../../containers/ServiceList';
 
 class ServiceListScreen extends React.Component {
   constructor(props) {

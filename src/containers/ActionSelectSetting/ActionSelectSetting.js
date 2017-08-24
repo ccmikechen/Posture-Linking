@@ -9,13 +9,14 @@ import {
   Alert
 } from 'react-native';
 
-import styles from './styles';
+import styles, { height } from './styles';
 import {
   getEventList,
   setSelectedActionConfig
 } from '../../actions/combinationActions';
 import ServiceManager from '../../../lib/ServiceManager';
 import ActionVerImg from '../../components/ActionVerImg';
+import AddCombinationDetail from '../../components/AddCombinationDetail';
 
 class ActionSelectSetting extends React.Component {
 
@@ -74,12 +75,13 @@ class ActionSelectSetting extends React.Component {
 
   renderAction(event) {
     return(
-      <View key={event.id} style={styles.content}>
-        <TouchableOpacity onPress={()=> this.handleSelectConfig(event.id)}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>{R.strings.events[event.id].description}</Text>
-          </View>
-        </TouchableOpacity>
+      <View key={event.id}>
+
+        <AddCombinationDetail
+          text={R.strings.events[event.id].description}
+          status={2}
+          onPress={() => this.handleSelectConfig(event.id)}
+        />
       </View>
     );
   };
@@ -92,20 +94,22 @@ class ActionSelectSetting extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.imgContent} >
-          <ActionVerImg size={0.8} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
+          <ActionVerImg size={height*0.0015} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
           <Text style={styles.imgText} >{R.strings.services[this.props.actionId]}</Text>
         </View>
-        {this.props.isGettingEvents ? 
-        this.props.eventList.map(event => (
-          this.renderAction(event)
-        ))
-        :
-        <ActivityIndicator
-              animating={true}
-              size='large'
-              color='grey'
-            />
-        }
+        <View style={styles.settingConent}>
+          {this.props.isGettingEvents ? 
+          this.props.eventList.map(event => (
+            this.renderAction(event)
+          ))
+          :
+          <ActivityIndicator
+                animating={true}
+                size='large'
+                color='grey'
+              />
+          }
+        </View>
       </ScrollView>
     );
   }

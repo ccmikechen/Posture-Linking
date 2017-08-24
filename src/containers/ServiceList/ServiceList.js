@@ -14,7 +14,8 @@ import {
   selectService,
   isNotGettingServices
 } from '../../actions/serviceActions';
-import ServiceGrid from '../../components/ServiceGrid';
+import Grid from 'react-native-grid-component';
+import ServiceItem from '../../components/ServiceItem';
 
 class ServiceList extends React.Component {
 
@@ -50,10 +51,20 @@ class ServiceList extends React.Component {
               color='grey'
             />
          :
-          <ServiceGrid
-            serviceData={this.props.services}
-            onOKPress={(data) => this.handlePress(data)}
-            onConnectPress={(data) => this.handlePress(data)} />
+          <Grid
+            data={this.props.services}
+            itemsPerRow={3}
+            renderItem={(service) => 
+              <View key={service.id} >
+                <ServiceItem
+                  onOKPress={(data) => this.handlePress(data)}
+                  onConnectPress={(data) => this.handlePress(data)}
+                  service={service}
+                  size={R.sizes.HEIGHT*0.15}
+                />
+              </View>
+            }
+          />
         }
       </View>
     );

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Platform } from 'react-native';
+
 import PostureMenu from '../../containers/PostureMenu';
 
 class PostureScreen extends React.Component {
@@ -10,6 +12,29 @@ class PostureScreen extends React.Component {
       navBarButtonColor: R.colors.NAVBAR_BUTTON,
       statusBarColor: R.colors.STATUSBAR_BACKGROUND
     });
+  }
+
+  static navigatorButtons = {
+    leftButtons:[
+      Platform.OS === 'ios' ? 
+        {
+         
+        }
+      :
+        {
+          id: 'sideMenu'
+        }
+    ]
+  }
+
+  onNavigatorEvent(event) {
+    if (event.id == 'sideMenu') {
+      this.props.navigator.toggleDrawer({
+        side: 'left',
+        animated: true,
+        to: 'open'
+      });
+    }
   }
 
   render() {

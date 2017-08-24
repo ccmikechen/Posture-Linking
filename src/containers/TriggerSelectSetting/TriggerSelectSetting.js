@@ -88,8 +88,8 @@ class TriggerSelectSetting extends React.Component {
 
   render() {
     let triggerName = this.props.triggerId != ''?
-          ServiceManager.getServiceById(this.props.triggerId).getName()
-          : 'Trigger';
+      ServiceManager.getServiceById(this.props.triggerId).getName()
+      : 'Trigger';
 
     return (
       <ScrollView style={styles.container}>

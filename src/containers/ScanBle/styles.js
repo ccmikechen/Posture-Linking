@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgrey'
+    backgroundColor: R.colors.CONTAINER_BACKGROUND
   },
   listItem: {
     flex: 1,

@@ -1,4 +1,5 @@
 import React from 'react';
+import Grid from 'react-native-grid-component';
 import { connect } from 'react-redux';
 import {
   View,
@@ -16,7 +17,7 @@ import {
   setActionId,
 } from '../../actions/combinationActions';
 import { selectService } from '../../actions/serviceActions';
-import ServiceGrid from '../../components/ServiceGrid';
+import ServiceItem from '../../components/ServiceItem';
 
 class ActionList extends React.Component {
   constructor(props) {
@@ -74,10 +75,20 @@ class ActionList extends React.Component {
     return (
       <View style={styles.container}>
         {this.props.isGetActions ?
-          <ServiceGrid 
-            serviceData={this.props.actions}
-            onOKPress={(data) => this.handleOK(data.id)}
-            onConnectPress={(data) => this.handleConnect(data.id)} />
+          <Grid
+            data={this.props.actions}
+            itemsPerRow={3}
+            renderItem={(service) => 
+              <View key={service.id} >
+                <ServiceItem
+                  onOKPress={(data) => this.handleOK(data.id)}
+                  onConnectPress={(data) => this.handleConnect(data.id)}
+                  service={service}
+                  size={R.sizes.HEIGHT*0.15}
+                />
+              </View>
+            }
+          />
           :
             <ActivityIndicator
               animating={true}

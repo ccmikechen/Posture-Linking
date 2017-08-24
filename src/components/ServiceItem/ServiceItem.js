@@ -1,7 +1,7 @@
 import React from 'React';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
-const ServiceItem = ({ service, onConnectPress, onOKPress,size=100 }) => {
+const ServiceItem = ({ service, onConnectPress, onOKPress, size=100 }) => {
 	let item = {}, color = R.colors.DISABLE_BUTTON;
 	let handlePress = onConnectPress;
 	R.images.icon.forEach((data) => {
@@ -10,13 +10,12 @@ const ServiceItem = ({ service, onConnectPress, onOKPress,size=100 }) => {
 		}
 	});
 
-
 	if (service.isConnected) {
 		color = item.color;
 		handlePress = onOKPress;
 	}
 	return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity onPress={() => { handlePress(service) }}>
 			<View style={{
 				width: size,
 				height: size*1.15,
@@ -39,7 +38,7 @@ const ServiceItem = ({ service, onConnectPress, onOKPress,size=100 }) => {
 					<Image source={item.icon} style={{ width:size*0.6, height:size*0.6 }} />
 				}
 				</View>
-				<Text style={{ color: color, fontSize: size*0.12, fontWeight: 'bold', marginTop: 1.5}}>{R.strings.services[service.id]}</Text>
+				<Text style={{ color: color, fontSize: size*0.15, fontWeight: 'bold', marginTop: 1.5}}>{R.strings.services[service.id]}</Text>
 			</View>
 		</TouchableOpacity>
 	);

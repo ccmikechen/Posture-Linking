@@ -13,20 +13,22 @@ export default styles = StyleSheet.create({
   	flex:3
   },
   nameText:{
-  	fontSize:24
+  	fontSize: R.sizes.TITLE_FONT,
+    fontWeight: 'bold'
   },
   descriptionText:{
-  	fontSize:16,
-  	marginBottom:10
+  	fontSize: R.sizes.DESCRIPTION_FONT,
+  	marginBottom: 10
   },
   optionContent:{
   	flex:1
   },
   optionText:{
-  	fontSize:16
+  	fontSize: R.sizes.DESCRIPTION_FONT
   },
   optionView:{
   	flex:1,
+    marginTop: 5,
   	height: 150
   },
   optionList:{
@@ -36,15 +38,16 @@ export default styles = StyleSheet.create({
 		width: 200,
   },
   textArea:{
-  	fontSize: 16
+  	fontSize: R.sizes.DESCRIPTION_FONT
   },
   textInput:{
   	height:100,
+    marginTop: 5,
   	backgroundColor: R.colors.SETTING_BACKGROUND,
   	borderWidth:1,
   	borderRadius:5,
   	borderColor: R.colors.INPUT_BORDER,
-  	fontSize:16
+  	fontSize: R.sizes.TEXT_INPUT_FONT
   },
   emptyView:{
   	flex:1,
@@ -52,21 +55,21 @@ export default styles = StyleSheet.create({
   	alignItems:'center'
   },
   emptyText:{
-  	fontSize:20,
+  	fontSize: R.sizes.DESCRIPTION_FONT,
   	color: R.colors.NO_SETTING_TEXT
   },
   submit:{
   	alignItems: 'center',
-  	height: 60,
+  	height: R.sizes.HEIGHT*0.1,
   	borderRadius: 5,
   	backgroundColor: R.colors.SETTING_SUBMIT,
   	justifyContent: 'center',
-  	marginTop: 20,
-  	marginLeft: 20,
-  	marginRight: 20
+  	marginTop: R.sizes.HEIGHT*0.01,
+  	marginLeft: R.sizes.WIDTH*0.05,
+  	marginRight: R.sizes.WIDTH*0.05
   },
   submitText:{
-  	fontSize: 20,
+  	fontSize: R.sizes.BUTTON_FONT,
   	color: R.colors.BUTTON_TEXT,
   	textAlign: 'center'
   }

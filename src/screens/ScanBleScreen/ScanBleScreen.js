@@ -1,15 +1,31 @@
 import React from 'react';
+import { Platform } from 'react-native';
+
 import ScanBle from '../../containers/ScanBle';
 
 class ScanBleScreen extends React.Component {
   static navigatorButtons = {
-    leftButtons: [
-      {
-        title: 'back',
-        id: 'ScanBleScreen:back'
-      }
+    leftButtons:[
+      Platform.OS === 'ios' ? 
+        {
+         
+        }
+      :
+        {
+          id: 'sideMenu'
+        }
     ]
-  };
+  }
+
+  onNavigatorEvent(event) {
+    if (event.id == 'sideMenu') {
+      this.props.navigator.toggleDrawer({
+        side: 'left',
+        animated: true,
+        to: 'open'
+      });
+    }
+  }
 
   constructor(props) {
     super(props);

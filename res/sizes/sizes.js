@@ -5,7 +5,12 @@ const { width, height } = Dimensions.get('window');
 const sizes = {
 	WIDTH: width,
 	HEIGHT: height,
-	FONT: width * 0.038
+	COMBINATION_FONT: width * 0.038,
+
+	TITLE_FONT: height*0.038,
+	DESCRIPTION_FONT: height*0.03,
+	TEXT_INPUT_FONT: height*0.025,
+	BUTTON_FONT: height*0.035
 };
 
 export default sizes;
