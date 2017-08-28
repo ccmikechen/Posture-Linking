@@ -1,6 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
-
-export const { width, height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
   container:{
@@ -21,13 +19,13 @@ export default styles = StyleSheet.create({
   },
   settingConent:{
     backgroundColor:R.colors.SETTING_BACKGROUND,
-    paddingLeft: width*0.06,
-    paddingRight: width*0.06,
-    paddingTop: height*0.03,
-    paddingBottom: height*0.03,
-    marginLeft: width*0.05,
-    marginRight: width*0.05,
-    marginBottom: height*0.02,
+    paddingLeft: R.sizes.WIDTH*0.06,
+    paddingRight: R.sizes.WIDTH*0.06,
+    paddingTop: R.sizes.HEIGHT*0.03,
+    paddingBottom: R.sizes.HEIGHT*0.03,
+    marginLeft: R.sizes.WIDTH*0.05,
+    marginRight: R.sizes.WIDTH*0.05,
+    marginBottom: R.sizes.HEIGHT*0.02,
     borderRadius: 15
   },
   button:{

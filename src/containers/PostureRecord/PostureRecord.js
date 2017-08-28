@@ -214,21 +214,10 @@ class PostureRecord extends React.Component {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-
-{/*          <TouchableHighlight
-            style={[styles.button, buttonStyle]}
-            onPress={isRecording? this.handleStopButtonPress :
-                                  this.handleStartButtonPress}
-          >
-            <Text style={styles.buttonText}>
-              {isRecording? 'STOP' : 'START'}
-            </Text>
-          </TouchableHighlight>*/}
-
           <GradientButton
             onPress = {isRecording? this.handleStopButtonPress :
                                   this.handleStartButtonPress}
-            color = { R.colors.BUTTON_POSTURE }
+            color = { R.colors.START_BUTTON }
             text = {isRecording? 'STOP' : 'START'}
             textSize = { R.sizes.BUTTON_FONT }
             width = { R.sizes.WIDTH*0.8 }

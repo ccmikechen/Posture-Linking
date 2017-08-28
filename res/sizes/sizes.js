@@ -5,8 +5,17 @@ const { width, height } = Dimensions.get('window');
 const sizes = {
 	WIDTH: width,
 	HEIGHT: height,
+
+//combination
 	COMBINATION_FONT: width * 0.038,
 
+//sidemenu
+	USERNAME_FONT: height*0.03,
+	LOGOUT_FONT: height*0.023,
+	ITEM_FONT: height*0.027,
+	VERSION_FONT: height*0.02,
+
+//addcombination
 	TITLE_FONT: height*0.038,
 	DESCRIPTION_FONT: height*0.03,
 	TEXT_INPUT_FONT: height*0.025,

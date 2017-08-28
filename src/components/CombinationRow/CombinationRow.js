@@ -6,10 +6,10 @@ import {
   Switch,
   TouchableOpacity
 } from 'react-native';
-import styles, { width, height } from './styles';
+import styles from './styles';
 import CombinationHorImg from '../CombinationHorImg';
 
-const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
+const CombinationRow = ({data, onStatusChangeCallback, onEdit, imgSize}) => {
   let opacity = 1;
   let switchValue = true;
   if(data.status == 0) {
@@ -20,7 +20,7 @@ const CombinationRow = ({data, onStatusChangeCallback, onEdit}) => {
   return(
     <View style = {styles.rowFront}>
       <TouchableOpacity onPress = {onEdit} activeOpacity = {0.5} style={styles.combinationTouch}>
-        <CombinationHorImg data={data} opacity={opacity} size={ height*0.0013 } /> 
+        <CombinationHorImg data={data} opacity={opacity} size={imgSize} /> 
         <View style={styles.content}>
           <View style={{opacity: opacity}}>
             <Text style={styles.text}>

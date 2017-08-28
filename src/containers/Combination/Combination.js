@@ -24,14 +24,13 @@ import {
   selectCombinationId,
   refreshCombinationList
 } from '../../actions/combinationActions';
-import styles, { width, height } from './styles';
+import styles from './styles';
 import CombinationRow from '../../components/CombinationRow';
 import ShareDialog from '../../components/ShareDialog';
 
 class Combination extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleShowEdit = this.handleShowEdit.bind(this);
     this.goToAddCombination = this.goToAddCombination.bind(this);
@@ -97,6 +96,7 @@ class Combination extends React.Component {
           data={item}
           onEdit={() => this.handleShowEdit(combination.id)}
           onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
+          imgSize={R.sizes.HEIGHT*0.0013}
         />
       );
     }
@@ -124,10 +124,10 @@ class Combination extends React.Component {
       return (
         <View style={styles.rowBack}>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showDialog(item); }}>
-            <Icon name='share-alt' size={width/9} color= {R.colors.ROWBACK_BUTTON} />
+            <Icon name='share-alt' size={ R.sizes.WIDTH/9 } color= { R.colors.ROWBACK_BUTTON } />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touch} onPress = {() => { this.showAlert(item); }}>
-            <Icon name='trash' size={width/8} color= {R.colors.ROWBACK_BUTTON} />
+            <Icon name='trash' size={ R.sizes.WIDTH/8 } color= { R.colors.ROWBACK_BUTTON } />
           </TouchableOpacity>
         </View>
       );
@@ -151,26 +151,22 @@ class Combination extends React.Component {
   }
 
   render() {
-    console.log('window width'+Dimensions.get('window').width);
-    console.log('window height'+Dimensions.get('window').height);
-    console.log('screen width'+Dimensions.get('screen').width);
-    console.log('screen height'+Dimensions.get('screen').height);
     return (
       <View style={styles.container}>
         {!this.props.isGettingCombinations ? (
           this.props.combinations.length === 0 ?
             <View style= {styles.noCombination} >
               <TouchableOpacity style={styles.imgTouch} onPress={this.goToAddCombination} >
-                <ViewIcon name= 'touch-app' size= {height*0.23} color= {R.colors.NO_CONBINATION} />
+                <ViewIcon name= 'touch-app' size= {R.sizes.HEIGHT*0.23} color= {R.colors.NO_CONBINATION} />
                 <Text style={styles.text} >{R.strings.CLICK_THIS}</Text>
                 <Text style={styles.text} >{R.strings.ADD_COMBINATION}</Text>
               </TouchableOpacity>
             </View>
           :
             <SwipeListView
-              rightOpenValue = {width/-3}
-              stopRightSwipe = {width/-2.8}
-              stopLeftSwipe = {10}
+              rightOpenValue = { R.sizes.WIDTH*-0.3 }
+              stopRightSwipe = { R.sizes.WIDTH*-0.36 }
+              stopLeftSwipe = { 10 }
               refreshControl={
                 <RefreshControl
                   refreshing = {this.props.isGettingCombinations}

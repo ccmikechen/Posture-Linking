@@ -17,30 +17,31 @@ export default styles = StyleSheet.create({
   	flex: 3,
     flexDirection: 'column',
     alignItems: 'flex-start',
-  	paddingLeft: 5
+    marginLeft: R.sizes.WIDTH*0.06
   },
   userImg:{
     flex: 6,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   username:{
     flex: 2,
-    fontSize: 14,
-    color: R.colors.USER_TEXT,
-    paddingLeft: 10
+    fontSize: R.sizes.USERNAME_FONT,
+    color: R.colors.USER_TEXT
   },
   logoutContent:{
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    padding: 15
+    alignItems: 'flex-end'
   },
   logoutTouch:{
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+    marginBottom: 10
   },
   logoutText:{
-    fontSize: 14,
+    fontSize: R.sizes.LOGOUT_FONT,
     color: R.colors.USER_TEXT,
     marginLeft: 5
   },
@@ -52,22 +53,23 @@ export default styles = StyleSheet.create({
   items:{
   	flexDirection: 'row',
   	alignItems: 'center',
-  	height: 70,
+  	height: R.sizes.HEIGHT*0.1,
   	borderBottomWidth: 1,
   	borderBottomColor: R.colors.BORDER,
-  	paddingLeft: 20
+  	paddingLeft: R.sizes.WIDTH*0.06
   },
   itemsText:{
-  	marginLeft: 20,
-  	fontSize: 16
+  	marginLeft: R.sizes.WIDTH*0.06,
+  	fontSize: R.sizes.ITEM_FONT
   },
   version:{
     flex: 1,
     alignItems: 'flex-end',
-    paddingRight: 10,
+    justifyContent: 'flex-end',
+    paddingRight: 5,
     backgroundColor: R.colors.MENU_BACKGROUND
   },
   versionText:{
-    fontSize: 14
+    fontSize: R.sizes.VERSION_FONT
 	}
 });

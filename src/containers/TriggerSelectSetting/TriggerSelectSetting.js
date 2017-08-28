@@ -9,7 +9,7 @@ import {
   Alert
 } from 'react-native';
 
-import styles, { height } from './styles';
+import styles from './styles';
 import {
   getEventList,
   setSelectedTriggerConfig
@@ -95,7 +95,7 @@ class TriggerSelectSetting extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.imgContent} >
-          <TriggerVerImg size={height*0.0015} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+          <TriggerVerImg size={R.sizes.HEIGHT*0.0015} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
           <Text style={styles.imgText} >{R.strings.services[this.props.triggerId]}</Text>
         </View>
         <View style={styles.settingConent}>

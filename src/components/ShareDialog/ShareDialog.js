@@ -51,17 +51,17 @@ const ShareDialog = ({ data, toPostureLinking, toOther, onClose }) => {
         </Text>
       </View>
       <View style={styles.buttonsContent} >
-        <TouchableOpacity style={styles.touch} onPress={toPostureLinking} >
+        <TouchableOpacity style={styles.button} onPress={toPostureLinking} activeOpacity={1} >
           <View>
             <Text style={styles.touchableText} >分享至Posture Linking社群</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.touch} onPress={toOther} >
+        <TouchableOpacity style={styles.button} onPress={toOther} activeOpacity={1} >
           <View>
             <Text style={styles.touchableText} >分享至其他社群</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.touch} onPress={onClose} >
+        <TouchableOpacity style={styles.button} onPress={onClose} activeOpacity={1} >
           <View>
             <Text style={styles.touchableText} >取消</Text>
           </View>

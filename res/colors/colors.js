@@ -56,6 +56,9 @@ const colors = {
 	SUBMIT: '#59d059',
 	SETTING_SUBMIT: '#FF7878',
 
+//ponitor record
+	START_BUTTON: '#15D900',
+
   SCANNING_BACKGROUND: '#42B9F4',
   SCANNING_TIPS_BACKGROUND: '#e5fbfc',
   

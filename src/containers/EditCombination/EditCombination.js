@@ -130,7 +130,7 @@ class EditCombination extends React.Component {
           />
           <View style={styles.submitContent}>
             <TouchableOpacity style={styles.submit} onPress={()=>this.showAlert()}>
-              <Icon name='check-circle' size={90} color={R.colors.SETTING_SUBMIT} />
+              <Icon name='check-circle' size={R.sizes.HEIGHT*0.12} color={R.colors.SETTING_SUBMIT} />
             </TouchableOpacity>
           </View>
         </View>
@@ -200,16 +200,16 @@ class EditCombination extends React.Component {
         <View style={styles.imgContent} >
           <View style={styles.triggerImg} >
             <TouchableOpacity onPress={this.handelTrigger.bind(this)} >
-              <TriggerVerImg size={0.8} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+              <TriggerVerImg size={R.sizes.HEIGHT*0.0013} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
             </TouchableOpacity>
           </View>
           <View style={styles.actionImg} >
           {this.props.isGetTriggerConfig ?
             <TouchableOpacity onPress={this.handelAction.bind(this)} >
-              <ActionVerImg size={0.8} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
+              <ActionVerImg size={R.sizes.HEIGHT*0.0013} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
             </TouchableOpacity>
           :
-            <ActionVerImg size={0.8} />
+            <ActionVerImg size={R.sizes.HEIGHT*0.0013} />
           }
           </View>
         </View>

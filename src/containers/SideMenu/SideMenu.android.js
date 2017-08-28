@@ -11,9 +11,9 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LogoutIcon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
-import Cover from '../../components/Cover';
 
 import styles from './styles';
+import Cover from '../../components/Cover';
 import { logout, getUserInfo } from '../../actions/sessionActions';
 
 class SideMenu extends React.Component {
@@ -107,7 +107,7 @@ class SideMenu extends React.Component {
     return (
       <TouchableOpacity onPress={this.handleButtonPress(item)}>
           <View style={styles.items}>
-            <Icon name={icon} size={35} color={R.colors.ITEMS_ICON} />
+            <Icon name={icon} size={R.sizes.HEIGHT*0.06} color={R.colors.ITEMS_ICON} />
           <Text style={styles.itemsText}>{title}</Text>
         </View>
       </TouchableOpacity>
@@ -125,13 +125,13 @@ class SideMenu extends React.Component {
             <View style={styles.userView} >
               <View style={styles.userInfo} >
                 <View style={styles.userImg} >
-                  <Icon name='person' size={70} color={R.colors.USER_IMG} />
+                  <Icon name='person' size={R.sizes.HEIGHT*0.12} color={R.colors.USER_IMG} />
                 </View>
                 <Text style={styles.username} >{user.username.substring(0,20)}</Text>
               </View>
               <View style={styles.logoutContent} >
                 <TouchableOpacity style={styles.logoutTouch} onPress={this.showLogoutAlert} >
-                  <LogoutIcon name= 'sign-out' size={23} color='white' />
+                  <LogoutIcon name= 'sign-out' size={R.sizes.HEIGHT*0.04} color='white' />
                   <Text style={styles.logoutText} >{R.strings.LOGOUT}</Text>
                 </TouchableOpacity>
               </View>

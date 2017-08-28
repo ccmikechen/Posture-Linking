@@ -60,7 +60,7 @@ class PostureMenu extends React.Component {
               <GradientButton
                 onPress = { this.handleButtonPress('monitor') }
                 color = { R.colors.BUTTON_POSTURE }
-                text = 'monitor'
+                text = '監控'
                 textSize = { R.sizes.BUTTON_FONT }
                 width = { R.sizes.WIDTH*0.8 }
                 height = { R.sizes.HEIGHT*0.1 }
@@ -72,7 +72,7 @@ class PostureMenu extends React.Component {
           <GradientButton
             onPress = { this.handleButtonPress('record') }
             color = { R.colors.BUTTON_POSTURE }
-            text = 'record'
+            text = '錄製'
             textSize = { R.sizes.BUTTON_FONT }
             width = { R.sizes.WIDTH*0.8 }
             height = { R.sizes.HEIGHT*0.1 }
@@ -82,7 +82,7 @@ class PostureMenu extends React.Component {
           <GradientButton
             onPress = { this.handleButtonPress('update') }
             color = { R.colors.BUTTON_POSTURE }
-            text = 'update'
+            text = '更新'
             textSize = { R.sizes.BUTTON_FONT }
             width = { R.sizes.WIDTH*0.8 }
             height = { R.sizes.HEIGHT*0.1 }
@@ -92,7 +92,7 @@ class PostureMenu extends React.Component {
           <GradientButton
             onPress = { this.handleButtonPress('records') }
             color = { R.colors.BUTTON_POSTURE }
-            text = 'record list'
+            text = '紀錄'
             textSize = { R.sizes.BUTTON_FONT }
             width = { R.sizes.WIDTH*0.8 }
             height = { R.sizes.HEIGHT*0.1 }

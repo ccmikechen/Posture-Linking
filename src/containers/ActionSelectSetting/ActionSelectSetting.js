@@ -9,7 +9,7 @@ import {
   Alert
 } from 'react-native';
 
-import styles, { height } from './styles';
+import styles from './styles';
 import {
   getEventList,
   setSelectedActionConfig
@@ -95,7 +95,7 @@ class ActionSelectSetting extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.imgContent} >
-          <ActionVerImg size={height*0.0015} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
+          <ActionVerImg size={R.sizes.HEIGHT*0.0015} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
           <Text style={styles.imgText} >{R.strings.services[this.props.actionId]}</Text>
         </View>
         <View style={styles.settingConent}>

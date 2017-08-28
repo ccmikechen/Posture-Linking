@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import styles, { width, height } from './styles';
+import styles from './styles';
 import {
   setDescription,
   setActionId,
@@ -106,7 +106,7 @@ class AddCombination extends React.Component {
           />
           <View style={styles.submitContent}>
             <TouchableOpacity onPress={()=>this.showAlert()}>
-              <Icon name='check-circle' size={height*0.12} color={R.colors.SETTING_SUBMIT} />
+              <Icon name='check-circle' size={R.sizes.HEIGHT*0.12} color={R.colors.SETTING_SUBMIT} />
             </TouchableOpacity>
           </View>
         </View>
@@ -173,16 +173,16 @@ class AddCombination extends React.Component {
         <View style={styles.imgContent} >
           <View style={styles.triggerImg} >
             <TouchableOpacity onPress={this.handelTrigger.bind(this)} >
-              <TriggerVerImg size={height*0.0013} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
+              <TriggerVerImg size={R.sizes.HEIGHT*0.0013} icon={this.getIcon(triggerName).icon} color={this.getIcon(triggerName).color} />
             </TouchableOpacity>
           </View>
           <View style={styles.actionImg} >
           {this.props.isGetTriggerConfig ?
             <TouchableOpacity onPress={this.handelAction.bind(this)} >
-              <ActionVerImg size={height*0.0013} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
+              <ActionVerImg size={R.sizes.HEIGHT*0.0013} icon={this.getIcon(actionName).icon} color={this.getIcon(actionName).color} />
             </TouchableOpacity>
           :
-            <ActionVerImg size={height*0.0013} />
+            <ActionVerImg size={R.sizes.HEIGHT*0.0013} />
           }
           </View>
         </View>
