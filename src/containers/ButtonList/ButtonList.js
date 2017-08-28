@@ -108,11 +108,11 @@ class ButtonList extends React.Component {
   minRenderButton(combination, id) {
     let icon = {}, size = minButtonSize * 0.8, iconSize;
     let minButtonOuterTouchSize = minButtonSize + minButtonTouchSize * 0.05;
-    let checkOpacity = 1, color = R.colors.MINBUTTON;
+    let opacity = 0.8, onCheck = false;
 
     if(this.state.item == id){
-        size = minButtonSize * 0.6;
-        color = R.colors.ON_MINBUTTON;
+        opacity = 1;
+        onCheck = true;
     }
     iconSize = size * 0.8;
     R.images.icon.forEach((data) => {
@@ -128,21 +128,26 @@ class ButtonList extends React.Component {
         }}
         style={styles.minTouchable}
       >
-        <Svg width={minButtonOuterTouchSize} height={minButtonOuterTouchSize} style={styles.minOuterButton}>
+        <Svg width={minButtonOuterTouchSize} height={minButtonOuterTouchSize} style={[styles.minOuterButton, {opacity: opacity}]}>
           <Defs>
             <LinearGradient id='minOuterButton' x1='0' x2={minButtonOuterTouchSize} y1='0' y2={minButtonOuterTouchSize}>
-              <Stop offset='25%' stopColor={color[0]} stopOpacity={checkOpacity} />
-              <Stop offset='75%' stopColor={color[1]} stopOpacity={checkOpacity} />
+              <Stop offset='25%' stopColor={R.colors.MINBUTTON[0]} stopOpacity='0.4' />
+              <Stop offset='75%' stopColor={R.colors.MINBUTTON[1]} stopOpacity='1' />
             </LinearGradient>
-            <LinearGradient id='minButton' x1='0' x2={minButtonOuterTouchSize} y1='0' y2={minButtonOuterTouchSize}>
-              <Stop offset='25%' stopColor={color[2]} stopOpacity={checkOpacity} />
-              <Stop offset='75%' stopColor={color[3]} stopOpacity={checkOpacity} />
+            <LinearGradient id='minButton' x1='0' x2={minButtonSize} y1='0' y2={minButtonSize}>
+              <Stop offset='25%' stopColor={R.colors.MINBUTTON[2]} stopOpacity='1' />
+              <Stop offset='75%' stopColor={R.colors.MINBUTTON[3]} stopOpacity='1' />
             </LinearGradient>
           </Defs>
-          <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonOuterTouchSize/2} fill='url(#minOuterButton)' />
+          {
+            onCheck ?
+              <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonOuterTouchSize/2} fill={icon.color} />
+            :
+              <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonOuterTouchSize/2} fill='url(#minOuterButton)' />
+          }
           <Circle cx={minButtonOuterTouchSize/2} cy={minButtonOuterTouchSize/2} r={minButtonSize/2} fill='url(#minButton)' />
         </Svg>
-        <View style={[{backgroundColor: icon.color, height: size, width: size}, styles.minButton]}>
+        <View style={[{backgroundColor: icon.color, height: size, width: size, opacity: opacity}, styles.minButton]}>
           <Image source={icon.icon} style={{height: iconSize, width: iconSize}}/>
         </View>
       </TouchableOpacity>
