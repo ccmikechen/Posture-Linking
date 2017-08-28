@@ -4,6 +4,7 @@ export const { width, height } = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
   rowFront: {
+    flex: 1,
     height: height*0.16,
     backgroundColor: R.colors.COMBINATION_ROW,
     justifyContent: 'center',
@@ -14,13 +15,18 @@ export default styles = StyleSheet.create({
     marginRight: width*0.03
   },
   combinationTouch:{
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
+  img:{
+    flex: 5,
+    alignItems: 'center'
+  },
   content:{
+    flex: 6,
     height: height*0.14,
-    width: width*0.52,
     flexDirection: 'column',
     marginRight: height*0.015
   },
