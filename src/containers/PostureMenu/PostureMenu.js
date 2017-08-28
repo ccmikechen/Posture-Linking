@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import GradientButton from '../../components/GradientButton'
-import TestButton from '../../components/TestButton';
 import styles from './styles';
 import api from '../../api/poselink';
 

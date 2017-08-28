@@ -32,7 +32,8 @@ export default styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    padding: 50
+    padding: 50,
+    alignItems: 'center'
   },
   button: {
     flex: 1,
