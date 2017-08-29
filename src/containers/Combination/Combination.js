@@ -96,7 +96,7 @@ class Combination extends React.Component {
           data={item}
           onEdit={() => this.handleShowEdit(combination.id)}
           onStatusChangeCallback={(status)=>{this.handleStatusChange(item, status);}}
-          imgSize={R.sizes.HEIGHT*0.0013}
+          imgSize={R.sizes.WIDTH*0.002}
         />
       );
     }

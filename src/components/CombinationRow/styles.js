@@ -5,7 +5,8 @@ export const { width, height } = Dimensions.get('window');
 export default styles = StyleSheet.create({
   rowFront: {
     flex: 1,
-    height: height*0.16,
+    //height*0.16
+    height: height*0.165,
     backgroundColor: R.colors.COMBINATION_ROW,
     justifyContent: 'center',
     borderRadius: 10,
@@ -22,7 +23,7 @@ export default styles = StyleSheet.create({
   },
   img:{
     flex: 5,
-    alignItems: 'center'
+    alignItems: 'flex-end'
   },
   content:{
     flex: 6,
