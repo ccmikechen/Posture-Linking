@@ -55,7 +55,8 @@ class PostureRecognizer {
       ...this.normalizeAcc(data.insole.right),
       ...this.normalizePressure(data.insole.right),
       ...this.normalizeAcc(data.band.acc),
-      ...this.normalizeAcc(data.band.gyro)
+      ...this.normalizeAcc(data.band.gyro),
+      ...this.normalizeAcc(data.belt.acc)
     ];
 
     return normalizedData;

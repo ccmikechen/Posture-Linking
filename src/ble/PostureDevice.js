@@ -5,67 +5,109 @@ import BleDevice from './BleDevice';
 import Buffer from 'bops';
 import BleManager from 'react-native-ble-manager';
 
-const serviceId = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const characteristic = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const bandServiceId = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const bandCharacteristic = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const beltServiceId = '1810';
+const beltCharacteristic = '2a35';
+const helperServiceId = '180d';
+const helperCharacteristic = '2a39';
 
 class PostureDevice extends EventEmitter {
 
   constructor() {
     super();
 
-    this.handleNotification = this.handleNotification.bind(this);
+    this.handleBandNotification = this.handleBandNotification.bind(this);
+    this.handleBeltNotification = this.handleBeltNotification.bind(this);
     this.init();
   }
 
   init() {
     this.bandData = null;
     this.insoleData = null;
-    this.isConnected = false;
+    this.beltData = null;
+    this.isBandConnected = false;
+    this.isBeltConnected = false;
+    this._isStarting = false;
+    this.isStarted = false;
   }
 
-  async connect(deviceId) {
-    await BleManager.connect(deviceId);
-    ToastAndroid.show('Connected to band', ToastAndroid.SHORT);
+  async connect(deviceId, type) {
+    try {
+      await BleManager.connect(deviceId);
+      let services = await BleManager.retrieveServices(deviceId);
+      console.log(services);
 
-    await BleManager.retrieveServices(deviceId);
-
-    BleDevice.on('posture:notification', this.handleNotification);
-    this.deviceId = deviceId;
-    this.isConnected = true;
+      if (type == 'band') {
+        ToastAndroid.show('Connected to band', ToastAndroid.SHORT);
+        BleDevice.on('posture band:notification', this.handleBandNotification);
+        this.bandDeviceId = deviceId;
+        this.isBandConnected = true;
+      } else if (type == 'belt') {
+        ToastAndroid.show('Connected to belt', ToastAndroid.SHORT);
+        BleDevice.on('posture belt:notification', this.handleBeltNotification);
+        this.beltDeviceId = deviceId;
+        this.isBeltConnected = true;
+      }
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
   }
 
   start() {
-    if (!this.isConnected) {
+    if (!(this.isBandConnected && this.isBeltConnected)) {
       return false;
     }
+    if (this._isStarting) {
+      return false;
+    }
+    this._isStarting = true;
 
-    setTimeout(() => {
-      BleManager.startNotification(this.deviceId, serviceId, characteristic)
-      .then(() => {
-        console.log('Start Notification');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }, 1000);
+    setTimeout(this._startNotification.bind(this), 500);
+  }
+
+  async _startNotification() {
+    try {
+      await BleManager.startNotification( this.beltDeviceId, beltServiceId, beltCharacteristic, fake=true);
+      console.log('Start Belt Notification');
+
+      await BleManager.startNotification(this.bandDeviceId, bandServiceId, bandCharacteristic);
+      console.log('Start Band Notification');
+      this.isStarted = true;
+    } catch (e) {
+      console.log(e);
+    }
+    this._isStarting = false;
   }
 
   stop() {
-    BleManager.stopNotification(this.deviceId, serviceId, characteristic)
+    BleManager.stopNotification(this.bandDeviceId, bandServiceId, bandCharacteristic)
       .catch((e) => console.log(e));
+    BleManager.stopNotification(this.beltDeviceId, beltServiceId, beltCharacteristic, fake=true)
+      .catch((e) => console.log(e));
+      this.isStarted = false;
   }
 
-  handleNotification(value) {
-    this.handleRawData(value);
+  handleBandNotification(value) {
+    this.handleBandRawData(value);
   }
 
-  handleRawData(data) {
+  handleBeltNotification(value) {
+    this.handleBeltRawData(value);
+  }
+
+  handleBandRawData(data) {
     if (data.length == 20) {
       this.handleInsoleData(data);
     } else if (data.length == 19) {
       this.handleBandData(data);
     }
+    this.checkReceivedDataAndNotify();
+  }
 
+  handleBeltRawData(data) {
+    this.handleBeltData(data);
     this.checkReceivedDataAndNotify();
   }
 
@@ -112,6 +154,16 @@ class PostureDevice extends EventEmitter {
     };
   }
 
+  handleBeltData(data) {
+    this.beltData = {
+      acc: {
+        x: this.parseBeltAccData(data[0], data[1], data[2]),
+        y: this.parseBeltAccData(data[3], data[4], data[5]),
+        z: this.parseBeltAccData(data[6], data[7], data[8])
+      }
+    }
+  }
+
   parseBand3dData(low, high) {
     let buf = Buffer.from([low, high]);
     return Buffer.readInt16LE(buf) / 0x4000;
@@ -126,23 +178,32 @@ class PostureDevice extends EventEmitter {
     return data & 0xFF;
   }
 
+  parseBeltAccData(h1, h2, h3) {
+    let hex = String.fromCharCode(h1) + String.fromCharCode(h2) + String.fromCharCode(h3);
+
+    return (parseInt(hex, 16) - 2048) / 512;
+  }
+
   checkReceivedDataAndNotify() {
-    if (this.bandData && this.insoleData) {
+    if (this.bandData && this.insoleData && this.beltData) {
       this.notifyPostureData();
       this.bandData = null;
       this.insoleData = null;
+      this.beltData = null;
     }
   }
 
   notifyPostureData() {
     this.emit('posture:notification', {
       band: this.bandData,
-      insole: this.insoleData
+      insole: this.insoleData,
+      belt: this.beltData
     });
   }
 
   destroy() {
-    BleDevice.removeListener('posture:notification', this.handleNotification);
+    BleDevice.removeListener('posture band:notification', this.handleBandNotification);
+    BleDevice.removeListener('posture belt:notification', this.handleBeltNotification);
   }
 }
 
