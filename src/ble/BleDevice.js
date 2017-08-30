@@ -1,3 +1,4 @@
+
 import {
   NativeModules,
   NativeEventEmitter
@@ -15,10 +16,13 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const DEVICES = [
   {
     id: 'D7:B6:30:D8:36:4D',
-    type: 'posture'
+    type: 'posture band'
   }, {
     id: 'EC:84:B4:F9:07:64',
-    type: 'posture'
+    type: 'posture band'
+  }, {
+    id: '00:08:F4:00:03:66',
+    type: 'posture belt'
   }, {
     id: '7C:66:9D:9E:2E:B9',
     type: 'smartbulb'
@@ -37,11 +41,13 @@ class BleDevice extends EventEmitter {
     this.handleNotification = this.handleNotification.bind(this);
     this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
     this.handleStopScan = this.handleStopScan.bind(this);
+    this.handleDisconnectPeripheral = this.handleDisconnectPeripheral.bind(this);
 
     this.bleSubscriptions = [
       bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleNotification),
       bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral),
-      bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan)
+      bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan),
+      bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectPeripheral)
     ];
   }
 
@@ -52,8 +58,12 @@ class BleDevice extends EventEmitter {
     }
 
     switch (deviceInfo.type) {
-      case 'posture':
-        await PostureDevice.connect(deviceInfo.id);
+      case 'posture band':
+        await PostureDevice.connect(deviceInfo.id, 'band');
+        return 'successed';
+        break;
+      case 'posture belt':
+        await PostureDevice.connect(deviceInfo.id, 'belt');
         return 'successed';
         break;
       case 'smartbulb':
@@ -79,6 +89,10 @@ class BleDevice extends EventEmitter {
 
   handleStopScan() {
     this.emit('stopScan');
+  }
+
+  handleDisconnectPeripheral(peripheral) {
+    console.log('Disconnected', peripheral);
   }
 
   getDeviceInfo(deviceId) {
