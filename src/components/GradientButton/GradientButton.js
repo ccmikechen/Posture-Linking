@@ -45,7 +45,7 @@ const GradientButton = ({width, height, radius=30, color, gradient=0.7, gradient
 					strokeWidth={0}
 				/>
 			</Svg>
-			<Text style={{color: textColor, fontSize: textSize}}>{text}</Text>
+			<Text style={{color: textColor, backgroundColor: 'rgba(0, 0, 0, 0)', fontSize: textSize}}>{text}</Text>
 		</TouchableOpacity>
 	);
 };
