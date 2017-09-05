@@ -18,6 +18,7 @@ export default styles = StyleSheet.create({
     color: R.colors.BUTTON_UNDEFIND_TEXT
   },
   settingConent:{
+    alignItems: 'center',
     backgroundColor:R.colors.SETTING_BACKGROUND,
     paddingLeft: R.sizes.WIDTH*0.06,
     paddingRight: R.sizes.WIDTH*0.06,
@@ -28,10 +29,19 @@ export default styles = StyleSheet.create({
     marginBottom: R.sizes.HEIGHT*0.02,
     borderRadius: 15
   },
-  button:{
+  button: {
+    height: R.sizes.HEIGHT*0.12,
+    width: R.sizes.WIDTH*0.7,
+    backgroundColor: R.colors.BUTTON_BACKGROUND,
+    borderColor: R.colors.BUTTON_BORDER,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: R.sizes.HEIGHT*0.01,
-    marginBottom: R.sizes.HEIGHT*0.01
+    borderRadius: 30,
+    borderWidth: 3,
+    margin: 5
+  },
+  buttonText: {
+    color: R.colors.BUTTON_TEXT,
+    fontSize: R.sizes.BUTTON_FONT
   }
 });

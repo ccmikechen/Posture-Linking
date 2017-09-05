@@ -16,7 +16,6 @@ import {
 } from '../../actions/combinationActions';
 import ServiceManager from '../../../lib/ServiceManager';
 import TriggerVerImg from '../../components/TriggerVerImg';
-import GradientButton from '../../components/GradientButton';
 
 class TriggerSelectSetting extends React.Component {
 
@@ -75,15 +74,11 @@ class TriggerSelectSetting extends React.Component {
 
   renderTrigger(event) {
     return (
-      <View key={event.id} style={styles.button}>
-        <GradientButton
-          width= {R.sizes.WIDTH*0.7}
-          height= { 70 }
-          text= { R.strings.events[event.id].description}
-          textSize = { R.sizes.BUTTON_FONT }
-          color= { R.colors.BUTTON_POSTURE }
-          onPress= {() => this.handleSelectConfig(event.id)} />
-      </View>
+      <TouchableOpacity onPress={() => this.handleSelectConfig(event.id)} key={event.id} >
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>{ R.strings.events[event.id].description}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 

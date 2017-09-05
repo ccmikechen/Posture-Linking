@@ -5,12 +5,12 @@ import {
   Text,
   TextInput,
   Picker,
+  TouchableOpacity,
   TouchableHighlight,
   Alert
  } from 'react-native';
 
 import PosturePartRecordingPanel from '../../components/PosturePartRecordingPanel';
-import GradientButton from '../../components/GradientButton'
 import styles from './styles';
 import {
   updateSelectedRecordHeight,
@@ -214,16 +214,12 @@ class PostureRecord extends React.Component {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <GradientButton
-            onPress = {isRecording? this.handleStopButtonPress :
-                                  this.handleStartButtonPress}
-            color = { R.colors.START_BUTTON }
-            text = {isRecording? 'STOP' : 'START'}
-            textSize = { R.sizes.BUTTON_FONT }
-            width = { R.sizes.WIDTH*0.8 }
-            height = { R.sizes.HEIGHT*0.1 }
-          />
-
+          <TouchableOpacity onPress = {isRecording? this.handleStopButtonPress :
+                                  this.handleStartButtonPress} >
+            <View style={styles.newButton}>
+              <Text style={styles.newButtonText}>{isRecording? 'STOP' : 'START'}</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         {
           this.props.isRecording?
