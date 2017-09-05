@@ -1,13 +1,17 @@
-import React from 'react';
+  import React from 'react';
 import { connect } from 'react-redux';
 import {
   Text,
   View,
   TextInput,
+  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
   Alert
 } from 'react-native';
+import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import styles from './styles';
 import {
@@ -85,6 +89,7 @@ class TriggerSetting extends React.Component {
   onSelectOption(value, name) {
     this.config[name] = value;
     this.defaultText[name] = value.toString();
+    this.setState({time:value.toString()});
     this.props.setSelectedTriggerOption(this.config);
   }
 
@@ -93,19 +98,40 @@ class TriggerSetting extends React.Component {
       <View key={option.name} style={styles.optionContent}>
         <Text style={styles.optionText}>{R.strings.events[this.props.selectedEvent.id].options[i]}</Text>
         <View style={styles.optionView}>
-          <Select
-            optionListStyle = {styles.optionList}
-            onSelect={(value) => this.onSelectOption(value, option.name)}
-            defaultText={this.defaultText[option.name]}
-           >
-            {option.options.map(item => (
-              <Option
-                value={item.value}
-                key={item.value}>
-                  {item.name}
-              </Option>
-            ))}
-          </Select>
+          {Platform.OS === 'ios' ? 
+            <Select
+              optionListStyle = {styles.optionList}
+              onSelect={(value) => this.onSelectOption(value, option.name)}
+              defaultText={this.defaultText[option.name]}
+             >
+              {option.options.map(item => (
+                <Option
+                  value={item.value}
+                  key={item.value}>
+                    {item.name}
+                </Option>
+              ))}
+            </Select>
+          :
+          <MenuContext style={styles.menuContext} >
+            <Menu onSelect={(value) => this.onSelectOption(value, option.name)}>
+              <MenuTrigger style={styles.menuTrigger} >
+                <Text style={styles.menuText}>{this.defaultText[option.name]}</Text>
+                <Icon name='arrow-drop-down-circle' size={ R.sizes.HEIGHT*0.04 } color= { R.colors.ROWBACK_BUTTON } />
+              </MenuTrigger>
+              <MenuOptions 
+                optionsContainerStyle={{height: 120, width: R.sizes.WIDTH*0.65}}
+                renderOptionsContainer={(options) => <ScrollView>{options}</ScrollView>} 
+              >
+                {option.options.map(item => (
+                  <MenuOption value={item.value} key={item.value}>
+                    <Text>{item.name}</Text>
+                  </MenuOption>
+                ))}
+              </MenuOptions>
+            </Menu>
+          </MenuContext>
+          }
         </View>
       </View>
     )
