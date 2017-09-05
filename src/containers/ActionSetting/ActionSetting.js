@@ -20,7 +20,6 @@ import {
   setDescription
 } from '../../actions/combinationActions';
 
-import { Select, Option } from "react-native-chooser";
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
@@ -93,21 +92,6 @@ class ActionSetting extends React.Component {
       <View key={option.name} style={styles.optionContent}>
         <Text style={styles.optionText}>{R.strings.events[this.props.selectedEvent.id].options[i]}</Text>
         <View style={styles.optionView}>
-          {Platform.OS === 'ios' ? 
-            <Select
-              optionListStyle = {styles.optionList}
-              onSelect={(value) => this.onSelectOption(value, option.name)}
-              defaultText={this.defaultText[option.name]}
-             >
-              {option.options.map(ItemOption=>(
-                <Option 
-                  value={ItemOption.toString()}
-                  key={ItemOption.toString()}>
-                    {ItemOption.toString()}
-                </Option>
-              ))}
-            </Select>
-          :
             <MenuContext style={styles.menuContext} >
               <Menu onSelect={(value) => this.onSelectOption(value, option.name)}>
                 <MenuTrigger style={styles.menuTrigger} >
@@ -126,7 +110,6 @@ class ActionSetting extends React.Component {
                 </MenuOptions>
               </Menu>
             </MenuContext>
-          }
         </View>
       </View>
     )
