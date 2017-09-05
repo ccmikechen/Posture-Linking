@@ -21,7 +21,6 @@ import {
   setDescription
 } from '../../actions/combinationActions';
 
-import { Select, Option } from "react-native-chooser";
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
@@ -82,10 +81,6 @@ class TriggerSetting extends React.Component {
     });
   };
 
-  _getOptionList() {
-    return this.refs['OPTIONLIST'];
-  }
-
   onSelectOption(value, name) {
     this.config[name] = value;
     this.defaultText[name] = value.toString();
@@ -98,21 +93,6 @@ class TriggerSetting extends React.Component {
       <View key={option.name} style={styles.optionContent}>
         <Text style={styles.optionText}>{R.strings.events[this.props.selectedEvent.id].options[i]}</Text>
         <View style={styles.optionView}>
-          {Platform.OS === 'ios' ? 
-            <Select
-              optionListStyle = {styles.optionList}
-              onSelect={(value) => this.onSelectOption(value, option.name)}
-              defaultText={this.defaultText[option.name]}
-             >
-              {option.options.map(item => (
-                <Option
-                  value={item.value}
-                  key={item.value}>
-                    {item.name}
-                </Option>
-              ))}
-            </Select>
-          :
           <MenuContext style={styles.menuContext} >
             <Menu onSelect={(value) => this.onSelectOption(value, option.name)}>
               <MenuTrigger style={styles.menuTrigger} >
@@ -131,7 +111,6 @@ class TriggerSetting extends React.Component {
               </MenuOptions>
             </Menu>
           </MenuContext>
-          }
         </View>
       </View>
     )
