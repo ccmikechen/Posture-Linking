@@ -22,13 +22,13 @@ class PostureMenu extends React.Component {
         case 'monitor':
           this.props.navigator.push({
             screen: 'PostureMonitorScreen',
-            title: 'Ponitor Monitor'
+            title: 'Posture Monitor'
           });
           break;
         case 'record':
           this.props.navigator.push({
             screen: 'PostureRecordScreen',
-            title: 'Ponitor Record'
+            title: 'Posture Record'
           });
           break;
         case 'update':
