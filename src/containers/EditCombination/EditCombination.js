@@ -167,6 +167,7 @@ class EditCombination extends React.Component {
         config: this.props.actionConfig
       }
     };
+    console.log('data', data)
 
     this.props.updateCombination(this.combination.id, data)
     .then(
