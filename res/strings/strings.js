@@ -125,15 +125,15 @@ const strings = {
     'left step when sitting': '坐著踏左腳',
     'cross right leg': '翹右腳',
     'cross left leg': '翹左腳',
-    'play computer': '打電腦',
+    'play computer': '跌倒',
     'standing': '站著',
     'shaking hand when standing': '站著揮手',
     'jumping': '跳躍',
     'claping hands when standing': '站著拍手',
     'right step when standing': '站著踏右腳',
     'left step when standing': '站著踏左腳',
-    'walking': '走路',
-    'running': '跑步'
+    'walking': '站著',
+    'running': '蹲著'
   }
 };
 

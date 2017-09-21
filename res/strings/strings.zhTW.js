@@ -66,7 +66,7 @@ const strings = {
       options: ['訊息']
     },
     15: {
-      description : '當站立時',
+      description : '當目前動作為',
       options: []
     },
   //action

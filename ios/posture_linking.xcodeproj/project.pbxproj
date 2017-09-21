@@ -107,6 +107,7 @@
 		D8DAB13379424DB09BB730A2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052CE85FDF784827B5BCAFDB /* libRNVectorIcons.a */; };
 		F2599AE96AA74266B4FA56EE /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAFC496EC670474EB028F6C4 /* Foundation.ttf */; };
 		F52B8E29BD744775864E4DC8 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB997B42C6ED4814A5912503 /* Entypo.ttf */; };
+		00893F0154DC4C15A2B1A938 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC10D8D6D80F402CA758766F /* libTcpSockets.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -515,6 +516,8 @@
 		DC64069075CB416880FC8083 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		E1B7FC3E9B0D492C9830074B /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		F18CB86EE4794D5F89A777F0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		CEFB7C2408A54F2C9E3B162E /* TcpSockets.xcodeproj */ = {isa = PBXFileReference; name = "TcpSockets.xcodeproj"; path = "../node_modules/react-native-tcp/ios/TcpSockets.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AC10D8D6D80F402CA758766F /* libTcpSockets.a */ = {isa = PBXFileReference; name = "libTcpSockets.a"; path = "libTcpSockets.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -551,6 +554,7 @@
 				5122734BA6984167AF34E6A6 /* libRNShare.a in Frameworks */,
 				C3095110E560494A8DC290BF /* libRNSVG.a in Frameworks */,
 				984B7DAC4CD222F699F18CE3 /* Pods_posture_linking.framework in Frameworks */,
+				00893F0154DC4C15A2B1A938 /* libTcpSockets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,6 +954,7 @@
 				0427C051973B4AA49D3F6743 /* RNDeviceInfo.xcodeproj */,
 				DC64069075CB416880FC8083 /* RNShare.xcodeproj */,
 				37796E27F9264D6390945CDB /* RNSVG.xcodeproj */,
+				CEFB7C2408A54F2C9E3B162E /* TcpSockets.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1766,12 +1771,14 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 				);
 				INFOPLIST_FILE = posture_linkingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1799,12 +1806,14 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 				);
 				INFOPLIST_FILE = posture_linkingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1834,6 +1843,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 				);
 				INFOPLIST_FILE = posture_linking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1867,6 +1877,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 				);
 				INFOPLIST_FILE = posture_linking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1904,11 +1915,13 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 				);
 				INFOPLIST_FILE = "posture_linking-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1944,11 +1957,13 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 				);
 				INFOPLIST_FILE = "posture_linking-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1977,6 +1992,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.posture_linking-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2001,6 +2017,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.posture_linking-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

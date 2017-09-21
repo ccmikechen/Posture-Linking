@@ -69,11 +69,10 @@ class PostureDevice extends EventEmitter {
 
   async _startNotification() {
     try {
-      await BleManager.startNotification( this.beltDeviceId, beltServiceId, beltCharacteristic, fake=true);
-      console.log('Start Belt Notification');
-
       await BleManager.startNotification(this.bandDeviceId, bandServiceId, bandCharacteristic);
       console.log('Start Band Notification');
+      await BleManager.startNotification( this.beltDeviceId, beltServiceId, beltCharacteristic, fake=true);
+      console.log('Start Belt Notification');
       this.isStarted = true;
     } catch (e) {
       console.log(e);
@@ -91,10 +90,12 @@ class PostureDevice extends EventEmitter {
 
   handleBandNotification(value) {
     this.handleBandRawData(value);
+    //console.log('band', value);
   }
 
   handleBeltNotification(value) {
     this.handleBeltRawData(value);
+
   }
 
   handleBandRawData(data) {
@@ -103,11 +104,13 @@ class PostureDevice extends EventEmitter {
     } else if (data.length == 19) {
       this.handleBandData(data);
     }
+    console.log('band', this.bandData);
     this.checkReceivedDataAndNotify();
   }
 
   handleBeltRawData(data) {
     this.handleBeltData(data);
+    console.log('belt', this.beltData);
     this.checkReceivedDataAndNotify();
   }
 

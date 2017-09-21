@@ -3,6 +3,7 @@ package com.posture_linking;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.peel.react.TcpSocketsModule;
 import cl.json.RNSharePackage;
 import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -42,7 +43,8 @@ public class MainApplication extends NavigationApplication {
           new VectorIconsPackage(),
           new MPAndroidChartPackage(),
           new RNSharePackage(),
-          new SvgPackage()
+          new SvgPackage(),
+          new TcpSocketsModule()
       );
   }
 
