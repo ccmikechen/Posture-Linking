@@ -37,6 +37,18 @@ export default styles = StyleSheet.create({
 		height: 150,
 		width: 200,
   },
+  menuContext:{
+    width:R.sizes.WIDTH*0.65,
+    height: R.sizes.HEIGHT*0.06
+  },
+  menuTrigger:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1
+  },
+  menuText:{
+    height:R.sizes.HEIGHT*0.06
+  },
   textArea:{
   	fontSize: R.sizes.DESCRIPTION_FONT
   },

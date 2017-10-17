@@ -22,13 +22,13 @@ class PostureMenu extends React.Component {
         case 'monitor':
           this.props.navigator.push({
             screen: 'PostureMonitorScreen',
-            title: 'Ponitor Monitor'
+            title: 'Posture Monitor'
           });
           break;
         case 'record':
           this.props.navigator.push({
             screen: 'PostureRecordScreen',
-            title: 'Ponitor Record'
+            title: 'Posture Record'
           });
           break;
         case 'update':
@@ -56,48 +56,29 @@ class PostureMenu extends React.Component {
       <View style={styles.container}>
         {
           Platform.OS === 'android'? (
-            <View style={styles.button}>
-              <GradientButton
-                onPress = { this.handleButtonPress('monitor') }
-                color = { R.colors.BUTTON_POSTURE }
-                text = '監控'
-                textSize = { R.sizes.BUTTON_FONT }
-                width = { R.sizes.WIDTH*0.8 }
-                height = { R.sizes.HEIGHT*0.1 }
-              />
-            </View>
+            <TouchableOpacity onPress = { this.handleButtonPress('monitor') } >
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>監控</Text>
+              </View>
+            </TouchableOpacity>
           ) : null
         }
-        <View style={styles.button}>
-          <GradientButton
-            onPress = { this.handleButtonPress('record') }
-            color = { R.colors.BUTTON_POSTURE }
-            text = '錄製'
-            textSize = { R.sizes.BUTTON_FONT }
-            width = { R.sizes.WIDTH*0.8 }
-            height = { R.sizes.HEIGHT*0.1 }
-          />
-        </View>
-        <View style={styles.button}>
-          <GradientButton
-            onPress = { this.handleButtonPress('update') }
-            color = { R.colors.BUTTON_POSTURE }
-            text = '更新'
-            textSize = { R.sizes.BUTTON_FONT }
-            width = { R.sizes.WIDTH*0.8 }
-            height = { R.sizes.HEIGHT*0.1 }
-          />
-        </View>
-        <View style={styles.button}>
-          <GradientButton
-            onPress = { this.handleButtonPress('records') }
-            color = { R.colors.BUTTON_POSTURE }
-            text = '紀錄'
-            textSize = { R.sizes.BUTTON_FONT }
-            width = { R.sizes.WIDTH*0.8 }
-            height = { R.sizes.HEIGHT*0.1 }
-          />
-        </View>
+
+        <TouchableOpacity onPress = { this.handleButtonPress('record') } >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>錄製</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress = { this.handleButtonPress('update') } >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>更新</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress = { this.handleButtonPress('records') } >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>紀錄</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }

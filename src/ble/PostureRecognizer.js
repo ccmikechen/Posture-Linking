@@ -3,7 +3,7 @@ import PostureDetector from '../modules/PostureDetector';
 import PostureDevice from './PostureDevice';
 import api from '../api/poselink';
 
-const DATA_COLS = 20;
+const DATA_COLS = 17;
 const DATA_LIST_LENGTH = 8;
 const BATCH_GAP = 1;
 const RECOGNITION_EVENT_TITLE = 'posture:recognition';
@@ -11,6 +11,8 @@ const RECOGNITION_EVENT_TITLE = 'posture:recognition';
 class PostureRecognizer {
   constructor() {
     this.setPostures = this.setPostures.bind(this);
+    this.previousResult = null;
+    this.isCoolingDown = false;
     this.predictPosture = this.predictPosture.bind(this);
     this.handlePredictResult = this.handlePredictResult.bind(this);
     this.handleDataNotification = this.handleDataNotification.bind(this);
@@ -56,7 +58,7 @@ class PostureRecognizer {
       ...this.normalizePressure(data.insole.right),
       ...this.normalizeAcc(data.band.acc),
       //...this.normalizeAcc(data.band.gyro),
-      ...this.normalizeAcc(data.belt.acc)
+      //...this.normalizeAcc(data.belt.acc)
     ];
 
     return normalizedData;
@@ -67,6 +69,19 @@ class PostureRecognizer {
   }
 
   handlePredictResult(result, id) {
+    if (id == this.previousResult) {
+      return;
+    }
+    if (this.isCoolingDown) {
+      return;
+    }
+    this.previousResult = id;
+
+    this.isCoolingDown = true;
+    setTimeout(() => {
+      this.isCoolingDown = false;
+    }, 1000);
+    console.log('trigger');
     this.eventEmitter.emit(RECOGNITION_EVENT_TITLE, {
       result,
       id,
@@ -108,6 +123,7 @@ class PostureRecognizer {
 
   addListener(callback) {
     this.eventEmitter.on(RECOGNITION_EVENT_TITLE, callback);
+    console.log(this.eventEmitter);
   }
 
   removeListener(callback) {

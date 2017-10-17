@@ -132,7 +132,7 @@ const strings = {
     'claping hands when standing': '站著拍手',
     'right step when standing': '站著踏右腳',
     'left step when standing': '站著踏左腳',
-    'walking': '走路',
+    'walking': '站著',
     'running': '蹲著'
   }
 };

@@ -136,7 +136,7 @@ export default {
         event_id: data.action.eventId,
         config: data.action.config
       }
-    })
+    }).catch(error => console.log('update combination error', error))
   ),
   updateCombinationStatus: (id, status) => (
     server.patch(`/combination/status`, {

@@ -30,6 +30,7 @@
     "react-native-image-slider": "^1.1.5",
     "react-native-keyboard-aware-scroll-view": "^0.2.9",
     "react-native-keyboard-spacer": "^0.3.1",
+    "react-native-menu": "^0.23.0",
     "react-native-navigation": "^1.1.134",
     "react-native-push-notification": "^3.0.0",
     "react-native-scrollable-tab-view": "^0.6.6",

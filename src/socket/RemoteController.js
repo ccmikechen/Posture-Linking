@@ -3,7 +3,7 @@ import net from 'react-native-tcp';
 class RemoteController {
 
   constructor() {
-    this.ip = '192.168.1.9';
+    this.ip = '192.168.43.27';
     this.port = '7007';
     this.client = new net.Socket();
     console.log('client', this.client);

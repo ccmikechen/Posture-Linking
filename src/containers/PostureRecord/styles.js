@@ -50,5 +50,20 @@ export default styles = StyleSheet.create({
   buttonText: {
     fontSize: 50,
     color: 'white'
+  },
+  newButton: {
+    height: R.sizes.HEIGHT*0.12,
+    width: R.sizes.WIDTH*0.7,
+    backgroundColor: '#55FF55',
+    borderColor: R.colors.BUTTON_BORDER,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 30,
+    borderWidth: 3,
+    margin: 5
+  },
+  newButtonText: {
+    color: R.colors.BUTTON_TEXT,
+    fontSize: R.sizes.BUTTON_FONT
   }
 });

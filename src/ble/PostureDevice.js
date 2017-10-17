@@ -18,16 +18,13 @@ class PostureDevice extends EventEmitter {
     super();
 
     this.handleBandNotification = this.handleBandNotification.bind(this);
-    this.handleBeltNotification = this.handleBeltNotification.bind(this);
     this.init();
   }
 
   init() {
     this.bandData = null;
     this.insoleData = null;
-    this.beltData = null;
     this.isBandConnected = false;
-    this.isBeltConnected = false;
     this._isStarting = false;
     this.isStarted = false;
   }
@@ -43,11 +40,6 @@ class PostureDevice extends EventEmitter {
         BleDevice.on('posture band:notification', this.handleBandNotification);
         this.bandDeviceId = deviceId;
         this.isBandConnected = true;
-      } else if (type == 'belt') {
-        ToastAndroid.show('Connected to belt', ToastAndroid.SHORT);
-        BleDevice.on('posture belt:notification', this.handleBeltNotification);
-        this.beltDeviceId = deviceId;
-        this.isBeltConnected = true;
       }
     } catch (e) {
       console.log(e);
@@ -56,7 +48,7 @@ class PostureDevice extends EventEmitter {
   }
 
   start() {
-    if (!(this.isBandConnected && this.isBeltConnected)) {
+    if (!(this.isBandConnected)) {
       return false;
     }
     if (this._isStarting) {
@@ -71,8 +63,6 @@ class PostureDevice extends EventEmitter {
     try {
       await BleManager.startNotification(this.bandDeviceId, bandServiceId, bandCharacteristic);
       console.log('Start Band Notification');
-      await BleManager.startNotification( this.beltDeviceId, beltServiceId, beltCharacteristic, fake=true);
-      console.log('Start Belt Notification');
       this.isStarted = true;
     } catch (e) {
       console.log(e);
@@ -83,19 +73,12 @@ class PostureDevice extends EventEmitter {
   stop() {
     BleManager.stopNotification(this.bandDeviceId, bandServiceId, bandCharacteristic)
       .catch((e) => console.log(e));
-    BleManager.stopNotification(this.beltDeviceId, beltServiceId, beltCharacteristic, fake=true)
-      .catch((e) => console.log(e));
-      this.isStarted = false;
+    this.isStarted = false;
   }
 
   handleBandNotification(value) {
     this.handleBandRawData(value);
     //console.log('band', value);
-  }
-
-  handleBeltNotification(value) {
-    this.handleBeltRawData(value);
-
   }
 
   handleBandRawData(data) {
@@ -105,12 +88,6 @@ class PostureDevice extends EventEmitter {
       this.handleBandData(data);
     }
     console.log('band', this.bandData);
-    this.checkReceivedDataAndNotify();
-  }
-
-  handleBeltRawData(data) {
-    this.handleBeltData(data);
-    console.log('belt', this.beltData);
     this.checkReceivedDataAndNotify();
   }
 
@@ -206,7 +183,6 @@ class PostureDevice extends EventEmitter {
 
   destroy() {
     BleDevice.removeListener('posture band:notification', this.handleBandNotification);
-    BleDevice.removeListener('posture belt:notification', this.handleBeltNotification);
   }
 }
 
